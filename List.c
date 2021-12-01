@@ -18,9 +18,14 @@ struct List_t{
     FreeListElement destElement;
 };
 
-void nodeDestroy(List list,Node* newElem)
+void nodeDestroy(List list,Node* Elem)
 {
-
+    if(!Elem)
+    {
+        return;
+    }
+    list->destElement(Elem->element);
+    free(Elem);
 }
 
 Node* nodeCopy(List list, Node* node,int size)
@@ -37,6 +42,7 @@ Node* nodeCopy(List list, Node* node,int size)
         nodeDestroy(list,newElem);
         return NULL;
     }
+    return newElem;
 }
 
 List listCreate(CopyListElement copyElement, FreeListElement freeElement)
@@ -51,11 +57,6 @@ List listCreate(CopyListElement copyElement, FreeListElement freeElement)
     return new_list;
 }
 
-/**
-* @return
-* NULL if a NULL was sent or a memory allocation failed.
-* A List containing the same elements with same order as list otherwise.
-*/
 List listCopy(List list)
 {
     List cpList= malloc(sizeof(List));
@@ -65,6 +66,13 @@ List listCopy(List list)
     }
     cpList->destElement=list->destElement;
     cpList->cpElement=list->cpElement;
+    cpList->head= nodeCopy(list,list->head,1);
+    if(!cpList->head)
+    {
+        listDestroy(cpList);
+        return NULL;
+    }
+    return cpList;
 }
 
 /**
