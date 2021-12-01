@@ -18,6 +18,27 @@ struct List_t{
     FreeListElement destElement;
 };
 
+void nodeDestroy(List list,Node* newElem)
+{
+
+}
+
+Node* nodeCopy(List list, Node* node,int size)
+{
+    if(node==NULL)
+    {
+        return NULL;
+    }
+    Node *newElem= malloc(sizeof(Node));
+    newElem->element=list->cpElement(node->element);
+    newElem->next=nodeCopy(list,node->next,size+1);
+    if((!newElem->next)&&(size==list->size))
+    {
+        nodeDestroy(list,newElem);
+        return NULL;
+    }
+}
+
 List listCreate(CopyListElement copyElement, FreeListElement freeElement)
 {
     List new_list= malloc(sizeof(List));
@@ -44,8 +65,6 @@ List listCopy(List list)
     }
     cpList->destElement=list->destElement;
     cpList->cpElement=list->cpElement;
-    cpList->head=cpList->cpElement(list->head);
-
 }
 
 /**
