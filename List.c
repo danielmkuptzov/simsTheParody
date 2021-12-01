@@ -18,7 +18,8 @@ struct List_t{
     FreeListElement destElement;
 };
 
-void nodeDestroy(List list,Node* Elem)
+//elemnt destruction
+static void nodeDestroy(List list,Node* Elem)
 {
     if(!Elem)
     {
@@ -28,15 +29,25 @@ void nodeDestroy(List list,Node* Elem)
     free(Elem);
 }
 
-Node* nodeCopy(List list, Node* node,int size)
+static Node *createNode(CopyListElement copyElem,ListElement element)
+{
+    Node *newElem= malloc(sizeof(Node));
+    if(!newElem)
+    {
+        return NULL;
+    }
+    newElem->element=copyElem(element);
+    return newElem;
+}
+
+//recursive copy of element
+static Node* nodeCopy(List list, Node* node,int size)
 {
     if(node==NULL)
     {
         return NULL;
     }
-    Node *newElem= malloc(sizeof(Node));
-    newElem->element=list->cpElement(node->element);
-    newElem->next=nodeCopy(list,node->next,size+1);
+    Node *newElem= createNode(list->cpElement,node->element);
     if((!newElem->next)&&(size==list->size))
     {
         nodeDestroy(list,newElem);
@@ -59,6 +70,10 @@ List listCreate(CopyListElement copyElement, FreeListElement freeElement)
 
 List listCopy(List list)
 {
+    if(!list)
+    {
+        return NULL;
+    }
     List cpList= malloc(sizeof(List));
     if(!cpList)
     {
@@ -75,74 +90,59 @@ List listCopy(List list)
     return cpList;
 }
 
-/**
-* Returns the number of elements in a list
-*
-* @param list The target list which size is requested.
-* @return
-* -1 if a NULL pointer was sent.
-* Otherwise the number of elements in the list.
-*/
-int listGetSize(List list);
+int listGetSize(List list)
+{
+    if(!list)
+    {
+        return -1;
+    }
+    return list->size;
+}
 
-/**
-* Sets the internal iterator to the first element and retrieves it.
-*
-* The list has an internal iterator (also called current element) to allow
-* iteration over the list's elements. This function sets the iterator to point
-* to the first element in the list and return it.
-* Use this to start iteraing over the list, searching from the beginning of
-* the list and/or get the first element in the list.
-* (To continue iteration use listGetNext)
-* @code
-* void f(List list) {
-*   ListElement first = listGetFirst(list);
-*   printf("The first element is at address %x\n", first);
-* }
-* @endcode
-*
-* @param list The list for which to set the iterator and return the first
-* element.
-* @return
-* NULL is a NULL pointer was sent or the list is empty.
-* The first element of the list otherwise
-*/
-ListElement listGetFirst(List list);
+ListElement listGetFirst(List list)
+{
+    if(!list)
+    {
+        return NULL;
+    }
+    list->current=list->head;
+    return list->current->element;
+}
 
-/**
-* Advances the list's iterator to the next element and return it
-*
-* @param list The list for which to advance the iterator
-* @return
-* NULL if reached the end of the list, the iterator is at an invalid state or
-* a NULL sent as argument
-* The next element on the list in case of success
-*/
-ListElement listGetNext(List list);
+ListElement listGetNext(List list)
+{
+    if(!list)
+    {
+        return NULL;
+    }
+    list->current=list->current->next;
+    return list->current->element;
+}
 
-/**
-* Returns the current element (pointed by the iterator)
-*
-* @param list The list for which to get the iterator
-* @return
-* NULL if the iterator is at an invalid state or a NULL sent as argument
-* The current element on the list in case of success
-*/
-ListElement listGetCurrent(List list);
+ListElement listGetCurrent(List list)
+{
+    if(!list)
+    {
+        return NULL;
+    }
+    return list->current->element;
+}
 
-/**
-* Adds a new element to the list, the new element will be the first element.
-*
-* @param list The list for which to add an element in its start
-* @param element The element to insert. A copy of the element will be
-* inserted as supplied by the copying function which is stored in the list
-* @return
-* LIST_NULL_ARGUMENT if a NULL was sent as list
-* LIST_OUT_OF_MEMORY if an allocation failed (Meaning the function for copying
-* an element failed)
-* LIST_SUCCESS the element has been inserted successfully
-*/
-ListResult listInsertFirst(List list, ListElement element);
+ListResult listInsertFirst(List list, ListElement element)
+{
+    if(!list||!element)
+    {
+        return LIST_NULL_ARGUMENT;
+    }
+    Node *newElem=createNode(list->cpElement,element);
+    if(!newElem)
+    {
+        return LIST_OUT_OF_MEMORY;
+    }
+    newElem->next=list->head;
+    list->head=newElem;
+    return LIST_SUCCESS;
+}
 
 /**
 * Adds a new element to the list, the new element will be the last element
