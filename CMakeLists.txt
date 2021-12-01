@@ -3,8 +3,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 # Set <PROJNAME> to be your project name. We set C here as the target language.
-project( VERSION 3.0.0 LANGUAGES C)
-
+project(danielCity VERSION 0.1.0 LANGUAGES C)
 
 # If you want to see "under the hood" of CMake, uncomment this:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -16,8 +15,9 @@ set(MTM_FLAGS_RELEASE "${MTM_FLAGS_DEBUG} -DNDEBUG")
 # Set the flags for gcc
 set(CMAKE_C_FLAGS ${MTM_FLAGS_DEBUG})
 
+
 # Add the names of your source files here
-set(C_FILES house.h house.c AmountSet.c AmountSet.h List.c List.h Person.c Person.h)
+set(C_FILES AmountSet.c AmountSet.h List.c List.h Person.c Person.h set.c set.h)
 
 add_executable(danielCity ${C_FILES})
 # Add the names of your source files here
