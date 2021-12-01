@@ -3,7 +3,8 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 # Set <PROJNAME> to be your project name. We set C here as the target language.
-project( VERSION 0.1.0 LANGUAGES C)
+project( VERSION 3.0.0 LANGUAGES C)
+
 
 # If you want to see "under the hood" of CMake, uncomment this:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
