@@ -144,53 +144,70 @@ ListResult listInsertFirst(List list, ListElement element)
     return LIST_SUCCESS;
 }
 
-/**
-* Adds a new element to the list, the new element will be the last element
-*
-* @param list The list for which to add an element in its end
-* @param element The element to insert. A copy of the element will be
-* inserted as supplied by the copying function which is stored in the list
-* @return
-* LIST_NULL_ARGUMENT if a NULL was sent as list
-* LIST_OUT_OF_MEMORY if an allocation failed (Meaning the function for copying
-* an element failed)
-* LIST_SUCCESS the element has been inserted successfully
-*/
-ListResult listInsertLast(List list, ListElement element);
+ListResult listInsertLast(List list, ListElement element)
+{
+    if(!list||!element)
+    {
+        return LIST_NULL_ARGUMENT;
+    }
+    Node * newElem= createNode(list->cpElement,element);
+    if(!newElem)
+    {
+        return LIST_OUT_OF_MEMORY;
+    }
+    Node *tmp=list->head;
+    while (!tmp->next)
+    {
+        tmp=tmp->next;
+    }
+    tmp->next=newElem;
+    return LIST_SUCCESS;
+}
 
-/**
-* Adds a new element to the list, the new element will be place right before
-* the current element (As pointed by the inner iterator of the list)
-*
-* @param list The list for which to add an element before its current element
-* @param element The element to insert. A copy of the element will be
-* inserted as supplied by the copying function which is stored in the list
-* @return
-* LIST_NULL_ARGUMENT if a NULL was sent as list
-* LIST_INVALID_CURRENT if the list's iterator is in an invalid state (Does
-* not point to a legal element in the list)
-* LIST_OUT_OF_MEMORY if an allocation failed (Meaning the function for copying
-* an element failed)
-* LIST_SUCCESS the element has been inserted successfully
-*/
-ListResult listInsertBeforeCurrent(List list, ListElement element);
+ListResult listInsertBeforeCurrent(List list, ListElement element)
+{
+    if(!list||!element)
+    {
+        return LIST_NULL_ARGUMENT;
+    }
+    if(!list->current)
+    {
+        return LIST_INVALID_CURRENT;
+    }
+    Node *newElem= createNode(list->cpElement,element);
+    if(!newElem)
+    {
+        return LIST_OUT_OF_MEMORY;
+    }
+    Node *tmp=list->head;
+    while (tmp->next==list->current)
+    {
+        tmp=tmp->next;
+    }
+    newElem->next=list->current;
+    tmp->next=newElem;
+    return LIST_SUCCESS;
+}
 
-/**
-* Adds a new element to the list, the new element will be place right after
-* the current element (As pointed by the inner iterator be of the list)
-*
-* @param list The list for which to add an element after its current element
-* @param element The element to insert. A copy of the element will be
-* inserted as supplied by the copying function which is stored in the list
-* @return
-* LIST_NULL_ARGUMENT if a NULL was sent as list
-* LIST_INVALID_CURRENT if the list's iterator is in an invalid state (Does
-* not point to a legal element in the list)
-* LIST_OUT_OF_MEMORY if an allocation failed (Meaning the function for copying
-* an element failed)
-* LIST_SUCCESS the element has been inserted successfully
-*/
-ListResult listInsertAfterCurrent(List list, ListElement element);
+ListResult listInsertAfterCurrent(List list, ListElement element)
+{
+    if(!list||!element)
+    {
+        return LIST_NULL_ARGUMENT;
+    }
+    if(!list->current)
+    {
+        return LIST_INVALID_CURRENT;
+    }
+    Node *newElem= createNode(list->cpElement,element);
+    if(!newElem)
+    {
+        return LIST_OUT_OF_MEMORY;
+    }
+    newElem->next=list->current->next;
+    list->current->next=newElem;
+    return LIST_SUCCESS;
+}
 
 /**
 * Removes the currently pointed element of the list using the stored freeing
