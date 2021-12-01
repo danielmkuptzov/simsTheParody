@@ -19,13 +19,13 @@ struct List_t{
 };
 
 //elemnt destruction
-static void nodeDestroy(List list,Node* Elem)
+static void nodeDestroy(FreeListElement destFunc,Node* Elem)
 {
     if(!Elem)
     {
         return;
     }
-    list->destElement(Elem->element);
+    destFunc(Elem->element);
     free(Elem);
 }
 
@@ -50,7 +50,7 @@ static Node* nodeCopy(List list, Node* node,int size)
     Node *newElem= createNode(list->cpElement,node->element);
     if((!newElem->next)&&(size==list->size))
     {
-        nodeDestroy(list,newElem);
+        nodeDestroy(list->destElement,newElem);
         return NULL;
     }
     return newElem;
@@ -226,23 +226,37 @@ ListResult listRemoveCurrent(List list)
     }
     Node *toDestroy=list->current;
     tmp->next=list->current->next;
-    nodeDestroy(list->current);
+    nodeDestroy(list->destElement,list->current);
     return LIST_SUCCESS;
 }
 
-/**
-* @param list the target list to sort
-* @param compareElement A comparison function as defined in the type
-* CompareListElements. This function should return an integer indicating the
-* relation between two elements in the list
-*
-* @return
-* LIST_NULL_ARGUMENT if list or compareElement are NULL
-* LIST_OUT_OF_MEMORY if a memory allocation failed, the list will be intact
-* in this case.
-* LIST_SUCCESS if sorting completed successfully.
-*/
-ListResult listSort(List list, CompareListElements compareElement);
+static Node *nodeSwap(Node *first,Node *second,CompareListElements comparison)
+{
+    if(comparison(first,second)<0)
+    {
+        Node* tmp=second;
+        first->next=tmp->next;
+        tmp->next=first;
+        first=tmp;
+    }
+    return first;
+}
+
+ListResult listSort(List list, CompareListElements compareElement)
+{
+    if (!list||!compareElement)
+    {
+        return LIST_NULL_ARGUMENT;
+    }
+    list->head=nodeSwap(list->head,list->head->next,compareElement);
+    Node *tmp=list->head;
+    while(!tmp->next->next)
+    {
+        tmp->next=nodeSwap(tmp->next,tmp->next->next,compareElement);
+        tmp=tmp->next;
+    }
+    return LIST_SUCCESS;
+}
 
 /**
 * Creates a new filtered copy of a list.
