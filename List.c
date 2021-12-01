@@ -31,13 +31,6 @@ List listCreate(CopyListElement copyElement, FreeListElement freeElement)
 }
 
 /**
-* Creates a copy of target list.
-*
-* The new copy will contain all the elements from the source list in the same
-* order and will use the same functions as the original list for copying and
-* freeing elements.
-*
-* @param list The target list to copy
 * @return
 * NULL if a NULL was sent or a memory allocation failed.
 * A List containing the same elements with same order as list otherwise.
@@ -45,6 +38,13 @@ List listCreate(CopyListElement copyElement, FreeListElement freeElement)
 List listCopy(List list)
 {
     List cpList= malloc(sizeof(List));
+    if(!cpList)
+    {
+        return NULL;
+    }
+    cpList->destElement=list->destElement;
+    cpList->cpElement=list->cpElement;
+    cpList->head=cpList->cpElement(list->head);
 
 }
 
