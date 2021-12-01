@@ -209,35 +209,28 @@ ListResult listInsertAfterCurrent(List list, ListElement element)
     return LIST_SUCCESS;
 }
 
-/**
-* Removes the currently pointed element of the list using the stored freeing
-* function
-*
-* @param list The list for which the current element will be removed
-* @return
-* LIST_NULL_ARGUMENT if list is NULL
-* LIST_INVALID_CURRENT if the current pointer of the list is in invalid state
-* LIST_SUCCESS the current element was removed successfully
-*/
-ListResult listRemoveCurrent(List list);
+ListResult listRemoveCurrent(List list)
+{
+    if(!list)
+    {
+        return LIST_NULL_ARGUMENT;
+    }
+    if(!list->current)
+    {
+        return LIST_INVALID_CURRENT;
+    }
+    Node *tmp=list->head;
+    while (tmp->next==list->current)
+    {
+        tmp=tmp->next;
+    }
+    Node *toDestroy=list->current;
+    tmp->next=list->current->next;
+    nodeDestroy(list->current);
+    return LIST_SUCCESS;
+}
 
 /**
-* Sorts the list according to the given function.
-*
-* For example, the following code will sort a list of integers according to
-* their distance from 0.
-* @code
-* int closerToZero(ListElement num1, ListElement num2) {
-*   int distance1 = abs(*(int*)num1);
-*   int distance2 = abs(*(int*)num2);
-*   return distance1 - distance2;
-* }
-*
-* void sortInts(List listOfInts) {
-*   listSort(listOfInts, closerToZero);
-* }
-* @endcode
-*
 * @param list the target list to sort
 * @param compareElement A comparison function as defined in the type
 * CompareListElements. This function should return an integer indicating the
