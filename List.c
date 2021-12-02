@@ -56,6 +56,19 @@ static Node* nodeCopy(List list, Node* node,int size)
     return newElem;
 }
 
+//swapping nodes
+static Node *nodeSwap(Node *first,Node *second,CompareListElements comparison)
+{
+    if(comparison(first,second)<0)
+    {
+        Node* tmp=second;
+        first->next=tmp->next;
+        tmp->next=first;
+        first=tmp;
+    }
+    return first;
+}
+
 List listCreate(CopyListElement copyElement, FreeListElement freeElement)
 {
     List new_list= malloc(sizeof(List));
@@ -65,6 +78,7 @@ List listCreate(CopyListElement copyElement, FreeListElement freeElement)
     }
     new_list->cpElement=copyElement;
     new_list->destElement=freeElement;
+    new_list->size=0;
     return new_list;
 }
 
@@ -81,6 +95,7 @@ List listCopy(List list)
     }
     cpList->destElement=list->destElement;
     cpList->cpElement=list->cpElement;
+    cpList->size=list->size;
     cpList->head= nodeCopy(list,list->head,1);
     if(!cpList->head)
     {
@@ -141,6 +156,7 @@ ListResult listInsertFirst(List list, ListElement element)
     }
     newElem->next=list->head;
     list->head=newElem;
+    list->size++;
     return LIST_SUCCESS;
 }
 
@@ -161,6 +177,7 @@ ListResult listInsertLast(List list, ListElement element)
         tmp=tmp->next;
     }
     tmp->next=newElem;
+    list->size++;
     return LIST_SUCCESS;
 }
 
@@ -186,6 +203,7 @@ ListResult listInsertBeforeCurrent(List list, ListElement element)
     }
     newElem->next=list->current;
     tmp->next=newElem;
+    list->size++;
     return LIST_SUCCESS;
 }
 
@@ -206,6 +224,7 @@ ListResult listInsertAfterCurrent(List list, ListElement element)
     }
     newElem->next=list->current->next;
     list->current->next=newElem;
+    list->size++;
     return LIST_SUCCESS;
 }
 
@@ -227,20 +246,10 @@ ListResult listRemoveCurrent(List list)
     Node *toDestroy=list->current;
     tmp->next=list->current->next;
     nodeDestroy(list->destElement,list->current);
+    list->size--;
     return LIST_SUCCESS;
 }
 
-static Node *nodeSwap(Node *first,Node *second,CompareListElements comparison)
-{
-    if(comparison(first,second)<0)
-    {
-        Node* tmp=second;
-        first->next=tmp->next;
-        tmp->next=first;
-        first=tmp;
-    }
-    return first;
-}
 
 ListResult listSort(List list, CompareListElements compareElement)
 {
@@ -250,45 +259,43 @@ ListResult listSort(List list, CompareListElements compareElement)
     }
     list->head=nodeSwap(list->head,list->head->next,compareElement);
     Node *tmp=list->head;
-    while(!tmp->next->next)
+    for (int i =list->size; i >0; ++i)
     {
-        tmp->next=nodeSwap(tmp->next,tmp->next->next,compareElement);
-        tmp=tmp->next;
+        int j=0;
+        while(!tmp->next->next&&j!=i)
+        {
+            tmp->next=nodeSwap(tmp->next,tmp->next->next,compareElement);
+            tmp=tmp->next;
+        }
     }
     return LIST_SUCCESS;
 }
 
-/**
-* Creates a new filtered copy of a list.
-*
-* This creates a new list with only the elements for which the filtering
-* function returned true.
-*
-* For example, the following code creates a new list, given a list of strings
-* containing only the strings which are longer than 10 characters.
-* @code
-*
-* bool isLongerThan(ListElement string, ListFilterKey key) {
-*   return strlen(string) > *(int*)key;
-* }
-*
-* List createFilteredList(List listOfStrings) {
-*   int key = 10;
-*   return listFilter(listOfStrings, isLongerThan, &key);
-* }
-* @endcode
-*
-* @param list The list for which a filtered copy will be made
-* @param filterElement The function used for determining whether a given
-* element should be in the resulting list or not.
-* @param key Any extra values that need to be sent to the filtering function
-* when called
-* @return
-* NULL if list or filterElement are NULL or a memory allocation failed.
-* A List containing only elements from list which filterElement returned true
-* for.
-*/
-List listFilter(List list, FilterListElement filterElement, ListFilterKey key);
+List listFilter(List list, FilterListElement filterElement, ListFilterKey key)
+{
+    if(!list||!filterElement)
+    {
+        return NULL;
+    }
+    List filList= listCreate(list->cpElement,list->destElement);
+    if(!filList)
+    {
+        return NULL;
+    }
+    Node *tmp=list->head;
+    while (!tmp)
+    {
+        if(filterElement(tmp->element)==&key)
+        {
+            if(listInsertLast(filList,tmp->element)!=LIST_SUCCESS)
+            {
+                listDestroy(filList);
+                return NULL;
+            }
+        }
+    }
+    return filList;
+}
 
 /**
 * Removes all elements from target list.
