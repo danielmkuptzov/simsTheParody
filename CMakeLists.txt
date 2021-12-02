@@ -17,7 +17,7 @@ set(CMAKE_C_FLAGS ${MTM_FLAGS_DEBUG})
 
 
 # Add the names of your source files here
-set(C_FILES AmountSet.c AmountSet.h List.c List.h Person.c Person.h set.c set.h main_test_block.c)
+set(C_FILES set.c set.h main_test_block.c)
 
 add_executable(danielCity ${C_FILES})
 # Add the names of your source files here

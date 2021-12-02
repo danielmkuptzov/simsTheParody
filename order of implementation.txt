@@ -1,10 +1,97 @@
-1. list
-2. set
-3. person
-4. matamikya fixes
-5. house
-6. medbag
-7. kanyon
-8. hospital
-9. neighorhood
-10. city
+list
+
+set: list needed
+
+amountset: set needed
+
+date
+
+person:date and amountset needed
+
+matamikya fixes: list and amountset needed
+
+house : person, date and amountset needed
+
+kanyon: matamikya, date and amountset needed
+
+medBag: date and amountset needed
+
+hospital: medBag, date and amountset needed
+
+class: date, person and amountset needed
+
+school: date, class and amountset needed 
+
+neighorhood: date, house, hospital, kanyon and amountset needed  
+
+profesion: date, person and amountset needed
+
+facalty: date, person, profession and amountset needed
+
+university: date, facalty, profession, person and amountset needed
+
+city: date, university, neightborhood and amountset needed
+
+rank: date and amountset needed
+
+prank: date, rank and amountset needed
+
+pbox: date, neighborhood, prank and person needed
+
+pstation: date, city, pbox, prank and amountset needed
+
+region: date, pstation, city, university and amountset needed
+
+vehicles: date needed
+
+military rank:date and rank needed
+
+soldier: date, person and mrank needed
+
+squad: date, mrank, soldier and amountset needed
+
+section: date, mrank, squad, soldier and amountset needed
+
+barrac: date, mrank, home, section, squad, soldier and amountset needed
+
+platoon: date, mrank, vehicle, barrac, section, squad, soldier and amountset needed
+
+echelon: date, mrank, vehicle, platoon, barrac, section, squad, soldier and amountset needed
+
+base: date, city, mrank, vehicle, echelon, soldier, barrac and amountset needed
+
+mcompany: date, base, mrank, city, vehicle, echelon, soldier, barrac and amountset needed
+
+mbattalion: date, mcompany, mrank, base, city, vehicle, echelon, soldier, barrac and amountset needed
+
+regiment: date, soldier, mrank, city, vehicle, mbattalion and amountset needed
+
+brigade: date, soldier, mrank, city, vehicle, reginimet and amountset needed
+
+legion: date, soldier, mrank, region, city, vehicle, brigade and amountset needed
+
+corps: date, soldier, mrank, region, city, legion, vehicle and amountset needed
+
+army: date, soldier, mrank, region, city, corps, vehicle and amountset needed
+
+farm: person and amountset needed
+
+village: date, farm, person and amountset needed
+
+pcommand: date, pstation, region, pramk and amountset needed
+
+ministry: date, person and amountset needed
+
+state: date, region, city, ministry, village, mrank, army and amountset needed
+
+goverment: date, state, person, mrank, ministry and amountset needed
+
+armygrp: date, mrank, state, army and amountset needed
+
+continent: date, state, armygrp, mrank, goverment and amountset needed
+
+combatantcomm: date, continent, mrank, armygrp and amountset needed
+
+continentgov: date, continent, mrank, combatantcomm and amountset needed
+
+planet: date, continent, continentgov, mrank, combatcomm and amountset needed
