@@ -4,6 +4,7 @@
 
 #include "List.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct node_t{
     ListElement element;
@@ -297,22 +298,32 @@ List listFilter(List list, FilterListElement filterElement, ListFilterKey key)
     return filList;
 }
 
-/**
-* Removes all elements from target list.
-*
-* The elements are deallocated using the stored freeing function
-* @param list Target list to remove all element from
-* @return
-* LIST_NULL_ARGUMENT - if a NULL pointer was sent.
-* LIST_SUCCESS - Otherwise.
-*/
-ListResult listClear(List list);
+ListResult listClear(List list)
+{
+    if(!list)
+    {
+        return LIST_NULL_ARGUMENT;
+    }
+    Node *tmp=list->head;
+    while (list->head)
+    {
+        list->head=tmp->next;
+        nodeDestroy(list->destElement,tmp);
+        tmp=list->head;
+    }
+    return LIST_SUCCESS;
+}
 
-/**
-* listDestroy: Deallocates an existing list. Clears all elements by using the
-* stored free function.
-*
-* @param list Target list to be deallocated. If list is NULL nothing will be
-* done
-*/
-void listDestroy(List list);
+void listDestroy(List list)
+{
+    if(!list)
+    {
+        return;
+    }
+    if(listClear(list)==LIST_SUCCESS)
+    {
+        free(list);
+        return;
+    }
+    printf("operation failed");
+}
