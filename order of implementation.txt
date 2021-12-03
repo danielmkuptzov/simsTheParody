@@ -36,7 +36,7 @@ facalty: date, person, profession and amountset needed
 
 university: date, facalty, profession, person and amountset needed
 
-city: date, university, neightborhood and amountset needed
+goal for first project: city: date, university, neightborhood and amountset needed
 
 cityadmin: date, person, city and amountset needed
 
