@@ -38,6 +38,8 @@ university: date, facalty, profession, person and amountset needed
 
 city: date, university, neightborhood and amountset needed
 
+cityadmin: date, person, city and amountset needed
+
 rank: date and amountset needed
 
 wepon: date and amountset needed
@@ -52,7 +54,9 @@ pbox: date, wheponstation, neighborhood, prank and policeman needed
 
 pstation: date, city, pbox, prank, policeman, wepon and amountset needed
 
-region: date, pstation, city, university and amountset needed
+region: date, pstation, cityadmin, person and amountset needed
+
+regionadmin: date, region, person and amountset needed
 
 vehicles: date needed
 
@@ -94,7 +98,7 @@ pcommand: date, pstation, region, pramk and amountset needed
 
 ministry: date, person and amountset needed
 
-state: date, region, city, ministry, village, mrank, army and amountset needed
+state: date, regionadmin, ministry, village, mrank, army and amountset needed
 
 goverment: date, state, person, mrank, ministry and amountset needed
 
