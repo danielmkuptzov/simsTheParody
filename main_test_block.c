@@ -25,18 +25,26 @@ int main()
         printf("test 1 failed\n");
         return 0;
     }
-    for (int i = 0; i < 100; ++i)
-    {
-        int tmp= i;
-        int* ptmp= &tmp;
-        if(listInsertFirst(test,ptmp)==LIST_SUCCESS)
+    for (int i = 0; i < 100; ++i) {
+        int tmp = i;
+        int *ptmp = &tmp;
+        if(i%2==0)
         {
-            printf("failed at test 2\n");
-            listDestroy(test);
-            return 0;
+            if (listInsertFirst(test, ptmp) != LIST_SUCCESS) {
+                printf("failed at test 2\n");
+                listDestroy(test);
+                return 0;
+            }
         }
-        tmp=i+1;
-        if (listInsertLast(test,ptmp));
+        else
+        {
+            if (listInsertLast(test, ptmp) != LIST_SUCCESS)
+            {
+                printf("failed at test 2\n");
+                listDestroy(test);
+                return 0;
+            }
+        }
     }
     if(listSort(test,intCompare)!=LIST_SUCCESS)
     {
@@ -44,5 +52,4 @@ int main()
         listDestroy(test);
         return 0;
     }
-
 }
