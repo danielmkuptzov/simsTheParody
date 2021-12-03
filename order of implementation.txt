@@ -60,9 +60,9 @@ section: date, mrank, squad, soldier and amountset needed
 
 barrac: date, mrank, home, section, squad, soldier and amountset needed
 
-platoon: date, mrank, vehicle, barrac, section, squad, soldier and amountset needed
+platoon: date, mrank, vehicle, barrac, soldier and amountset needed
 
-echelon: date, mrank, vehicle, platoon, barrac, section, squad, soldier and amountset needed
+echelon: date, mrank, vehicle, platoon, soldier and amountset needed
 
 base: date, city, mrank, vehicle, echelon, soldier, barrac and amountset needed
 
@@ -76,9 +76,9 @@ brigade: date, soldier, mrank, city, vehicle, reginimet and amountset needed
 
 legion: date, soldier, mrank, region, city, vehicle, brigade and amountset needed
 
-corps: date, soldier, mrank, region, city, legion, vehicle and amountset needed
+corps: date, soldier, mrank, region, legion, vehicle and amountset needed
 
-army: date, soldier, mrank, region, city, corps, vehicle and amountset needed
+army: date, soldier, mrank, region, corps, vehicle and amountset needed
 
 farm: person and amountset needed
 
