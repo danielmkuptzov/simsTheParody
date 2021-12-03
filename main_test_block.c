@@ -52,4 +52,14 @@ int main()
         listDestroy(test);
         return 0;
     }
+    LIST_FOREACH(int*, iterator,test)
+    {
+        if(intCompare(iterator, listGetFirst(test))==0)
+        {
+            printf("first one is %d\n", *iterator);
+            continue;
+        }
+        printf("the current one is %d");
+    }
+    return 0;
 }
