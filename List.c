@@ -246,7 +246,7 @@ ListResult listRemoveCurrent(List list)
     }
     Node *toDestroy=list->current;
     tmp->next=list->current->next;
-    nodeDestroy(list->destElement,list->current);
+    nodeDestroy(list->destElement,toDestroy);
     list->size--;
     return LIST_SUCCESS;
 }
