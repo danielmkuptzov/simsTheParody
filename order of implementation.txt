@@ -40,11 +40,17 @@ city: date, university, neightborhood and amountset needed
 
 rank: date and amountset needed
 
+wepon: date and amountset needed
+
 prank: date, rank and amountset needed
 
-pbox: date, neighborhood, prank and person needed
+policeman: date, person, prank, wepon and amountset needed
 
-pstation: date, city, pbox, prank and amountset needed
+wheponstation: date, wepon and amountset needed
+
+pbox: date, wheponstation, neighborhood, prank and policeman needed
+
+pstation: date, city, pbox, prank, policeman, wepon and amountset needed
 
 region: date, pstation, city, university and amountset needed
 
@@ -52,13 +58,13 @@ vehicles: date needed
 
 military rank:date and rank needed
 
-soldier: date, person and mrank needed
+soldier: date, wepon, person and mrank needed
 
 squad: date, mrank, soldier and amountset needed
 
 section: date, mrank, squad, soldier and amountset needed
 
-barrac: date, mrank, home, section, squad, soldier and amountset needed
+barrac: date, weponstation, mrank, home, section, squad, soldier and amountset needed
 
 platoon: date, mrank, vehicle, barrac, soldier and amountset needed
 
