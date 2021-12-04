@@ -27,6 +27,7 @@
 *   				  compare function). Resets the internal iterator.
 *	 setClear		- Clears the contents of the set. Frees all the elements of
 *	 				  the set using the free function.
+*    setOrder       - Orders a set by the compearing function.
 * 	 SET_FOREACH	- A macro for iterating over the set's elements.
 */
 
@@ -162,6 +163,21 @@ SetElement setGetNext(Set set);
 * 	SET_SUCCESS the element has been inserted successfully
 */
 SetResult setAdd(Set set, SetElement element);
+
+
+/**
+* setOrder: orders the srt by a specific critiria given to identify the elements
+*
+* @param: set-
+*   the set we want to order. the order would be determined
+*   by the comparison function given by the user
+*
+* @return-
+* 	SET_NULL_ARGUMENT if a NULL was sent as set
+* 	SET_SUCCESS if the element was successfully removed.
+*/
+SetResult setOrder(Set set);
+
 
 /**
 * 	setRemove: Removes an element from the set. The element is found using the
