@@ -28,6 +28,8 @@
 *	 setClear		- Clears the contents of the set. Frees all the elements of
 *	 				  the set using the free function.
 *    setOrder       - Orders a set by the compearing function.
+*    setFilter               - Creates a copy of an existing list, filtered by
+*                              a boolean predicate
 * 	 SET_FOREACH	- A macro for iterating over the set's elements.
 */
 
@@ -61,6 +63,26 @@ typedef void(*freeSetElements)(SetElement);
 *		A negative integer if the second element is greater.
 */
 typedef int(*compareSetElements)(SetElement, SetElement);
+
+
+/**
+* Use this type to pass extra information needed by the filtering function
+* when calling listFilter. (See the example for a FilterListElement function)
+*/
+typedef void* SetFilterKey;
+
+/**
+* Function used for creating a filtered copy of a set.
+* A element is said to pass filtering if the function returns true
+* For example, the following function can be used to filter a list of strings
+* from short strings:
+* @code
+* bool isShorterThan(SetElement str, SetFilterKey length) {
+*   return strlen(str) < *(int*) length;
+* }
+* @endcode
+*/
+typedef bool(*FilterSetElement)(SetElement, SetFilterKey);
 
 /**
 * setCreate: Allocates a new empty set.
@@ -177,6 +199,38 @@ SetResult setAdd(Set set, SetElement element);
 * 	SET_SUCCESS if the element was successfully removed.
 */
 SetResult setOrder(Set set);
+
+/**
+* Creates a new filtered copy of a list.
+*
+* This creates a new list with only the elements for which the filtering
+* function returned true.
+*
+* For example, the following code creates a new list, given a list of strings
+* containing only the strings which are longer than 10 characters.
+* @code
+*
+* bool isLongerThan(SetElement string, SetFilterKey key) {
+*   return strlen(string) > *(int*)key;
+* }
+*
+* List createFilteredList(List listOfStrings) {
+*   int key = 10;
+*   return listFilter(listOfStrings, isLongerThan, &key);
+* }
+* @endcode
+*
+* @param set The set for which a filtered copy will be made
+* @param filterElement The function used for determining whether a given
+* element should be in the resulting list or not.
+* @param key Any extra values that need to be sent to the filtering function
+* when called
+* @return
+* NULL if set or filterElement are NULL or a memory allocation failed.
+* A Set containing only elements from list which filterElement returned true
+* for.
+*/
+Set setFilter(Set set, FilterSetElement filterElement, SetFilterKey key);
 
 
 /**
