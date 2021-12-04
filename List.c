@@ -9,7 +9,7 @@
 typedef struct node_t{
     ListElement element;
     struct node_t* next;
-}Node;
+} Node;
 
 struct List_t{
     Node *head;
@@ -54,6 +54,7 @@ static Node* nodeCopy(List list, Node* node,int size)
         return NULL;
     }
     Node *newElem= createNode(list->cpElement,node->element);
+    newElem->next= nodeCopy(list, node->next,size+1);
     if((!newElem->next)&&(size==list->size))
     {
         nodeDestroy(list->destElement,newElem);

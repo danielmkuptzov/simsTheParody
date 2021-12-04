@@ -48,9 +48,11 @@ prank: date, rank and amountset needed
 
 policeman: date, person, prank, wepon and amountset needed
 
-wheponstation: date, wepon and amountset needed
+weponshop: date, matamikya, wepon and amountset needed
 
-pbox: date, wheponstation, neighborhood, prank and policeman needed
+wheponry: date, weponshop and amountset needed
+
+pbox: date, wheponry, neighborhood, prank and policeman needed
 
 pstation: date, city, pbox, prank, policeman, wepon and amountset needed
 
