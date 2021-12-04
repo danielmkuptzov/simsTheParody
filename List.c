@@ -32,12 +32,17 @@ static void nodeDestroy(FreeListElement destFunc,Node* Elem)
 
 static Node *createNode(CopyListElement copyElem,ListElement element)
 {
-    Node *newElem= malloc(sizeof(Node));
+    Node *newElem=malloc(sizeof (Node));
     if(!newElem)
     {
         return NULL;
     }
     newElem->element=copyElem(element);
+    if(!newElem->element)
+    {
+        free(newElem);
+        return NULL;
+    }
     return newElem;
 }
 
