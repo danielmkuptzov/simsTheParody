@@ -6,7 +6,7 @@ amountset: set needed
 
 date
 
-product: dat and amountset needed
+product: date and amountset needed
 
 person:date, product and amountset needed
 
