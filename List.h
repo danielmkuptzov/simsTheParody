@@ -16,12 +16,7 @@
 *   listDestroy              - Deletes an existing list and frees all resources
 *   listCopy                 - Copies an existing list
 *   listGetSize              - Returns the size of a given list
-*   listInsertFirst          - Inserts an element in the beginning of the list
 *   listInsertLast           - Inserts an element in the end of the list
-*   listInsertBeforeCurrent  - Inserts an element right before the place of
-*                              internal iterator
-*   listInsertAfterCurrent   - Inserts an element right after the place of the
-*                              internal iterator
 *   listRemoveCurrent        - Removes the element pointed by the internal
 *                              iterator
 *   listGetCurrent           - Return the current element (pointed by the
@@ -204,20 +199,6 @@ ListElement listGetNext(List list);
 ListElement listGetCurrent(List list);
 
 /**
-* Adds a new element to the list, the new element will be the first element.
-*
-* @param list The list for which to add an element in its start
-* @param element The element to insert. A copy of the element will be
-* inserted as supplied by the copying function which is stored in the list
-* @return
-* LIST_NULL_ARGUMENT if a NULL was sent as list
-* LIST_OUT_OF_MEMORY if an allocation failed (Meaning the function for copying
-* an element failed)
-* LIST_SUCCESS the element has been inserted successfully
-*/
-ListResult listInsertFirst(List list, ListElement element);
-
-/**
 * Adds a new element to the list, the new element will be the last element
 *
 * @param list The list for which to add an element in its end
@@ -230,40 +211,6 @@ ListResult listInsertFirst(List list, ListElement element);
 * LIST_SUCCESS the element has been inserted successfully
 */
 ListResult listInsertLast(List list, ListElement element);
-
-/**
-* Adds a new element to the list, the new element will be place right before
-* the current element (As pointed by the inner iterator of the list)
-*
-* @param list The list for which to add an element before its current element
-* @param element The element to insert. A copy of the element will be
-* inserted as supplied by the copying function which is stored in the list
-* @return
-* LIST_NULL_ARGUMENT if a NULL was sent as list
-* LIST_INVALID_CURRENT if the list's iterator is in an invalid state (Does
-* not point to a legal element in the list)
-* LIST_OUT_OF_MEMORY if an allocation failed (Meaning the function for copying
-* an element failed)
-* LIST_SUCCESS the element has been inserted successfully
-*/
-ListResult listInsertBeforeCurrent(List list, ListElement element);
-
-/**
-* Adds a new element to the list, the new element will be place right after
-* the current element (As pointed by the inner iterator be of the list)
-*
-* @param list The list for which to add an element after its current element
-* @param element The element to insert. A copy of the element will be
-* inserted as supplied by the copying function which is stored in the list
-* @return
-* LIST_NULL_ARGUMENT if a NULL was sent as list
-* LIST_INVALID_CURRENT if the list's iterator is in an invalid state (Does
-* not point to a legal element in the list)
-* LIST_OUT_OF_MEMORY if an allocation failed (Meaning the function for copying
-* an element failed)
-* LIST_SUCCESS the element has been inserted successfully
-*/
-ListResult listInsertAfterCurrent(List list, ListElement element);
 
 /**
 * Removes the currently pointed element of the list using the stored freeing
