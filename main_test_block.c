@@ -36,17 +36,28 @@ int main()
         printf("test 1 failed\n");
         return 0;
     }
-
-    for (int i=0; i < 100; ++i)
+    int testarr[10]={2,4,3,5,8,7,6,1,9,10};
+    for (int i=0; i < 10; ++i)
     {
-        if (listInsertLast(test, &i) != LIST_SUCCESS)
+        if (listInsertLast(test, &testarr[i]) != LIST_SUCCESS)
         {
             printf("failed at test 2\n");
             listDestroy(test);
             return 0;
         }
     }
-    if(listGetSize(test)!=99)
+    int i=0;
+    LIST_FOREACH(int*,iter,test)
+    {
+        int* elemTest=listGetCurrent(test);
+        if(*elemTest!=testarr[i])
+        {
+            printf("whyyyyyyyyyyyyyyyyyyyyy");
+            listDestroy(test);
+        }
+        i++;
+    }
+    if(listGetSize(test)!=10)
     {
         printf("test 3 failed\n");
         listDestroy(test);

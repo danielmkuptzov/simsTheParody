@@ -33,7 +33,7 @@ static void nodeDestroy(FreeListElement destFunc,Node Elem)
 
 static Node createNode(CopyListElement copyElem,ListElement element)
 {
-    Node newElem= malloc(sizeof(*newElem));
+    Node newElem=malloc(sizeof(struct node_t));
     if(!newElem)
     {
         return NULL;
@@ -79,7 +79,7 @@ static void nodeSwap(Node first, CompareListElements comparison)
 
 List listCreate(CopyListElement copyElement, FreeListElement freeElement)
 {
-    List new_list= malloc(sizeof(*new_list));
+    List new_list= malloc(sizeof(struct List_t));
     if(!new_list)
     {
         return NULL;
@@ -96,7 +96,7 @@ List listCopy(List list)
     {
         return NULL;
     }
-    List cpList= malloc(sizeof(List));
+    List cpList= malloc(sizeof(struct List_t));
     if(!cpList)
     {
         return NULL;
@@ -139,6 +139,10 @@ ListElement listGetNext(List list)
         return NULL;
     }
     list->current=list->current->next;
+    if(!(list->current))
+    {
+        return NULL;
+    }
     return list->current->element;
 }
 
@@ -165,9 +169,11 @@ ListResult listInsertLast(List list, ListElement element)
     if(!(list->head))
     {
         list->head=newElem;
+        list->size++;
+        return LIST_SUCCESS;
     }
     Node tmp=list->head;
-    while (!tmp->next)
+    while (tmp->next)
     {
         tmp=tmp->next;
     }
