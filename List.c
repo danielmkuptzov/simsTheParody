@@ -212,13 +212,12 @@ ListResult listSort(List list, CompareListElements compareElement)
     {
         return LIST_NULL_ARGUMENT;
     }
-    for(int i=0; i<list->size;i++)
+    for(int i=0; i<list->size-1;i++)
     {
-        nodeSwap(list->head,compareElement);
         Node tmp=list->head;
         for (int j =0; j<list->size-i; j++)
         {
-            while(!tmp->next->next&&j!=i)
+            while(tmp->next->next)
             {
                 nodeSwap(tmp->next,compareElement);
                 tmp=tmp->next;
