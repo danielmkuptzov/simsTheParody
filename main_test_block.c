@@ -69,6 +69,16 @@ int main()
         listDestroy(test);
         return 0;
     }
+    i=0;
+    LIST_FOREACH(int*,order,test)
+    {
+        if(*order!=(i+1))
+        {
+            listDestroy(test);
+            return 0;
+        }
+        i++;
+    }
     if(listClear(test)!=LIST_SUCCESS)
     {
         printf("test 7 failed\n");

@@ -212,15 +212,17 @@ ListResult listSort(List list, CompareListElements compareElement)
     {
         return LIST_NULL_ARGUMENT;
     }
-    nodeSwap(list->head,compareElement);
-    Node tmp=list->head;
-    for (int i =list->size; i >0; ++i)
+    for(int i=0; i<list->size;i++)
     {
-        int j=0;
-        while(!tmp->next->next&&j!=i)
+        nodeSwap(list->head,compareElement);
+        Node tmp=list->head;
+        for (int j =0; j<list->size-i; j++)
         {
-            nodeSwap(tmp->next,compareElement);
-            tmp=tmp->next;
+            while(!tmp->next->next&&j!=i)
+            {
+                nodeSwap(tmp->next,compareElement);
+                tmp=tmp->next;
+            }
         }
     }
     return LIST_SUCCESS;
