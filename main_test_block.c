@@ -36,12 +36,10 @@ int main()
         printf("test 1 failed\n");
         return 0;
     }
-    int i=0;
-    int tmp;
-    int *ptmp = &tmp;
-    for (; i < 100; ++i) {
-        tmp = i;
-        if (listInsertLast(test, ptmp) != LIST_SUCCESS)
+
+    for (int i=0; i < 100; ++i)
+    {
+        if (listInsertLast(test, &i) != LIST_SUCCESS)
         {
             printf("failed at test 2\n");
             listDestroy(test);
