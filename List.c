@@ -56,7 +56,7 @@ static Node nodeCopy(List list, Node node,int size)
     }
     Node newElem= createNode(list->cpElement,node->element);
     newElem->next= nodeCopy(list, node->next,size+1);
-    if((!newElem->next)&&(size==list->size))
+    if((!newElem->next)&&(size!=list->size))
     {
         nodeDestroy(list->destElement,newElem);
         return NULL;
@@ -67,14 +67,12 @@ static Node nodeCopy(List list, Node node,int size)
 //swapping nodes
 static void nodeSwap(Node first, CompareListElements comparison)
 {
-    if(comparison(first,first->next)<0)
+    if(comparison(first->element,first->next->element)>0)
     {
-        Node tmp=first->next;
-        first->next=tmp->next;
-        tmp->next=first;
-        first=tmp;
+        ListElement tmp=first->element;
+        first->element=first->next->element;
+        first->next->element=tmp;
     }
-    return;
 }
 
 List listCreate(CopyListElement copyElement, FreeListElement freeElement)
@@ -212,14 +210,14 @@ ListResult listSort(List list, CompareListElements compareElement)
     {
         return LIST_NULL_ARGUMENT;
     }
-    for(int i=0; i<list->size-1;i++)
+    for(int i=0; i<list->size;i++)
     {
         Node tmp=list->head;
-        for (int j =0; j<list->size-i; j++)
+        for (int j =0; j<list->size-i-1; j++)
         {
             while(tmp->next->next)
             {
-                nodeSwap(tmp->next,compareElement);
+                nodeSwap(tmp,compareElement);
                 tmp=tmp->next;
             }
         }

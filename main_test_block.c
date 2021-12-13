@@ -10,7 +10,7 @@ void* intCopy(void* org)
 
 void intDest(void* org)
 {
-    free((int*)org);
+    org=NULL;
 }
 
 int intCompare(void* first, void* second)
@@ -79,12 +79,6 @@ int main()
         }
         i++;
     }
-    if(listClear(test)!=LIST_SUCCESS)
-    {
-        printf("test 7 failed\n");
-        listDestroy(test);
-        return 0;
-    }
     List liscp= listCopy(test);
     if(!liscp)
     {
@@ -92,8 +86,14 @@ int main()
         listDestroy(test);
         return 0;
     }
+    if(listClear(test)!=LIST_SUCCESS)
+    {
+        printf("test 7 failed\n");
+        listDestroy(test);
+        return 0;
+    }
     listDestroy(test);
-    int key=10;
+    int key=5;
     List filtered= listFilter(liscp,intFilter,&key);
     if(!filtered)
     {
