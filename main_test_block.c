@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "List.h"
 
 void* intCopy(void* org)
@@ -26,7 +27,6 @@ bool intFilter(void* data, void* power)
     }
     return false;
 }
-
 
 int main()
 {
