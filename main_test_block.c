@@ -86,6 +86,17 @@ int main()
         listDestroy(test);
         return 0;
     }
+    LIST_FOREACH(int*,iter,test)
+    {
+        if(*iter==9)
+        {
+            if(listRemoveCurrent(test)!=LIST_SUCCESS)
+            {
+                printf("fail");
+                listDestroy(test);
+            }
+        }
+    }
     if(listClear(test)!=LIST_SUCCESS)
     {
         printf("test 7 failed\n");

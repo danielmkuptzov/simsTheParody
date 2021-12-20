@@ -190,14 +190,23 @@ ListResult listRemoveCurrent(List list)
     {
         return LIST_INVALID_CURRENT;
     }
-    Node tmp=list->head;
-    while (tmp->next==list->current)
+    if(list->head==list->current)
     {
-        tmp=tmp->next;
+        Node todestroy=list->head;
+        list->head->next=todestroy->next;
+        todestroy->next=NULL;
+        nodeDestroy(list->destElement,todestroy);
     }
     Node toDestroy=list->current;
-    tmp->next=list->current->next;
-    list->current->next=NULL;
+    LIST_FOREACH(ListElement,iter,list)
+    {
+        if(list->current->next->element==toDestroy->element)
+        {
+            break;
+        }
+    }
+    list->current->next=toDestroy->next;
+    toDestroy->next=NULL;
     nodeDestroy(list->destElement,toDestroy);
     list->size--;
     return LIST_SUCCESS;
@@ -259,6 +268,7 @@ ListResult listClear(List list)
     }
     Node tmp=list->head;
     nodeDestroy(list->destElement,tmp);
+    list->size=0;
     return LIST_SUCCESS;
 }
 
