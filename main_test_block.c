@@ -19,9 +19,11 @@ int intCompare(void* first, void* second)
     return *(int*)first-*(int*)second;
 }
 
-bool intFilter(void* data, void* power)
+bool intFilter(void* data, void* limit)
 {
-    if(*(int*)data/10<=*(int*)power)
+    int* element=data;
+    int* key=limit;
+    if((*element)<(*key))
     {
         return true;
     }

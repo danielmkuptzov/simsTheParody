@@ -28,8 +28,8 @@
 *	 setClear		- Clears the contents of the set. Frees all the elements of
 *	 				  the set using the free function.
 *    setOrder       - Orders a set by the compearing function.
-*    setFilter               - Creates a copy of an existing list, filtered by
-*                              a boolean predicate
+*    setFilter      - Creates a copy of an existing list, filtered by
+*                     a boolean predicate
 * 	 SET_FOREACH	- A macro for iterating over the set's elements.
 */
 

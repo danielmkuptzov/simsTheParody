@@ -1,5 +1,3 @@
-list
-
 set: list needed
 
 amountset: set needed

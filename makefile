@@ -1,5 +1,5 @@
 CC=gcc
-OBJS=body.o list.o
+OBJS=body.o list.o set.o
 EXEC=danielCity
 DEBUG=#for debugging delete the line from the = to here -g
 CFLAGS=-std=c99 Wall- Werror- $(DEBUG)
@@ -8,3 +8,4 @@ $(EXEC) : $(OBJS)
 
 body.o: main_test_block.c List.h
 list.o: List.c List.h
+set.o: set.c set.h list.o

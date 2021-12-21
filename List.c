@@ -247,9 +247,9 @@ List listFilter(List list, FilterListElement filterElement, ListFilterKey key)
         return NULL;
     }
     Node tmp=list->head;
-    while (!tmp)
+    while (tmp)
     {
-        if(filterElement(tmp->element, &key))
+        if(filterElement(tmp->element, key))
         {
             if(listInsertLast(filList,tmp->element)!=LIST_SUCCESS)
             {
@@ -257,6 +257,7 @@ List listFilter(List list, FilterListElement filterElement, ListFilterKey key)
                 return NULL;
             }
         }
+        tmp=tmp->next;
     }
     return filList;
 }
