@@ -22,12 +22,7 @@ struct List_t{
 //elemnt destruction
 static void nodeDestroy(FreeListElement destFunc,Node Elem)
 {
-    if(!Elem)
-    {
-        return;
-    }
     destFunc(Elem->element);
-    nodeDestroy(destFunc,Elem->next);
     free(Elem);
 }
 
@@ -126,6 +121,10 @@ ListElement listGetFirst(List list)
     {
         return NULL;
     }
+    if(!(list->head))
+    {
+        return NULL;
+    }
     list->current=list->head;
     return list->current->element;
 }
@@ -190,12 +189,14 @@ ListResult listRemoveCurrent(List list)
     {
         return LIST_INVALID_CURRENT;
     }
-    if(list->head==list->current)
+    if(list->head->element==list->current->element)
     {
         Node todestroy=list->head;
-        list->head->next=todestroy->next;
+        list->head=todestroy->next;
         todestroy->next=NULL;
         nodeDestroy(list->destElement,todestroy);
+        list->size--;
+        return LIST_SUCCESS;
     }
     Node toDestroy=list->current;
     LIST_FOREACH(ListElement,iter,list)
@@ -266,9 +267,13 @@ ListResult listClear(List list)
     {
         return LIST_NULL_ARGUMENT;
     }
-    Node tmp=list->head;
-    nodeDestroy(list->destElement,tmp);
-    list->size=0;
+    while(listGetFirst(list))
+    {
+        if(listRemoveCurrent(list)!=LIST_SUCCESS)
+        {
+            return LIST_NULL_ARGUMENT;
+        }
+    }
     return LIST_SUCCESS;
 }
 
