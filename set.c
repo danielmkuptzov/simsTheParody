@@ -29,140 +29,132 @@ Set setCreate(copySetElements copyElement, freeSetElements freeElement, compareS
     return new;
 }
 
-/**
-* setCopy: Creates a copy of target set.
-*
-* @param set - Target set.
-* @return
-* 	NULL if a NULL was sent or a memory allocation failed.
-* 	A Set containing the same elements as set otherwise.
-*/
 Set setCopy(Set set)
 {
+    if(set)
+    {
+        return NULL;
+    }
+    Set copy= setCreate(NULL,
+                        NULL,set->setcomp);
+    if(!copy)
+    {
+        return NULL;
+    }
+    listDestroy(copy->elements);
+    copy->elements= listCopy(set->elements);
+    if(!(copy->elements))
+    {
+        setDestroy(copy);
+        return NULL;
+    }
+    copy->setcomp=set->setcomp;
+    return copy;
 }
 
-/**
-* setDestroy: Deallocates an existing set. Clears all elements by using the
-* stored free function.
-*
-* @param set - Target set to be deallocated. If set is NULL nothing will be
-* 		done
-*/
-void setDestroy(Set set);
+void setDestroy(Set set)
+{
+    if(!set)
+    {
+        return;
+    }
+    if(set->elements)
+    {
+        listDestroy(set->elements);
+    }
+    free(set);
+}
 
-/**
-* setGetSize: Returns the number of elements in a set
-* @param set - The set which size is requested
-* @return
-* 	-1 if a NULL pointer was sent.
-* 	Otherwise the number of elements in the set.
-*/
-int setGetSize(Set set);
+int setGetSize(Set set)
+{
+    return listGetSize(set->elements);
+}
 
-/**
-* setIsIn: Checks if an element exists in the set. The element will be
-* considered in the set if one of the elements in the set it determined equal
-* using the comparison function used to initialize the set.
-*
-* @param set - The set to search in
-* @param element - The element to look for. Will be compared using the
-* 		comparison function.
-* @return
-* 	false - if the input set is null, or if the element was not found.
-* 	true - if the element was found in the set.
-*/
-bool setIsIn(Set set, SetElement element);
+bool setIsIn(Set set, SetElement element)
+{
+    if((!set)||(!set->elements)||(!element))
+    {
+        return false;
+    }
+    LIST_FOREACH(SetElement,iter,set->elements)
+    {
+        if(set->setcomp(iter,element)==0)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
-/**
-*	setGetFirst: Sets the internal iterator (also called current element) to
-*	the first element in the set. The "first" element is the one having the
-*	lowest value as determined by the comparison function used to initialize the
-*	set.
-*	Use this to start iteraing over the set.
-*	Use (To continue iteration use setGetNext)
-*
-* @param set - The set for which to set the iterator and return the first
-* 		element.
-* @return
-* 	NULL if a NULL pointer was sent or the set is empty.
-* 	The first element of the set otherwise
-*/
-SetElement setGetFirst(Set set);
+SetElement setGetFirst(Set set)
+{
+    if(!set)
+    {
+        return NULL;
+    }
+    return listGetFirst(set->elements);
+}
 
-/**
-*	setGetNext: Advances the set iterator to the next element and returns it
-*	The next element is determined by the comparison function induced order.
-* @param set - The set for which to advance the iterator
-* @return
-* 	NULL if reached the end of the set, or the iterator is at an invalid state
-* 	or a NULL sent as argument
-* 	The next element on the set in case of success
-*/
-SetElement setGetNext(Set set);
+SetElement setGetNext(Set set)
+{
+    if(!set)
+    {
+        return NULL;
+    }
+    return listGetNext(set->elements);
+}
 
+SetResult setAdd(Set set, SetElement element)
+{
+    if(!set||!set->elements||!element)
+    {
+        return SET_NULL_ARGUMENT;
+    }
+    if(setIsIn(set,element))
+    {
+        return SET_ITEM_ALREADY_EXISTS;
+    }
+    ListResult resalt=listInsertLast(set->elements,element);
+    if(resalt==LIST_SUCCESS)
+    {
+        return SET_SUCCESS;
+    }
+    return SET_OUT_OF_MEMORY;
+}
 
-/**
-*	setAdd: Adds a new element to the set.
-*  Iterator's value is undefined after this operation.
-*
-* @param set - The set for which to add an element
-* @param element - The element to insert. A copy of the element will be
-* 		inserted as supplied by the copying function which is given at
-* 		initialization.
-* @return
-* 	SET_NULL_ARGUMENT if a NULL was sent as set
-* 	SET_OUT_OF_MEMORY if an allocation failed (Meaning the function for copying
-* 	an element failed)
-*  SET_ITEM_ALREADY_EXISTS if an equal item already exists in the set
-* 	SET_SUCCESS the element has been inserted successfully
-*/
-SetResult setAdd(Set set, SetElement element);
+SetResult setOrder(Set set)
+{
+    if(!set||!set->elements)
+    {
+        return SET_NULL_ARGUMENT;
+    }
+    if(listSort(set->elements,set->setcomp)==LIST_SUCCESS)
+    {
+        return SET_SUCCESS;
+    }
+    return SET_OUT_OF_MEMORY;
+}
 
-
-/**
-* setOrder: orders the srt by a specific critiria given to identify the elements
-*
-* @param: set-
-*   the set we want to order. the order would be determined
-*   by the comparison function given by the user
-*
-* @return-
-* 	SET_NULL_ARGUMENT if a NULL was sent as set
-* 	SET_SUCCESS if the element was successfully removed.
-*/
-SetResult setOrder(Set set);
-
-/**
-* Creates a new filtered copy of a list.
-*
-* This creates a new list with only the elements for which the filtering
-* function returned true.
-*
-* For example, the following code creates a new list, given a list of strings
-* containing only the strings which are longer than 10 characters.
-* @code
-*
-* bool isLongerThan(SetElement string, SetFilterKey key) {
-*   return strlen(string) > *(int*)key;
-* }
-*
-* List createFilteredList(List listOfStrings) {
-*   int key = 10;
-*   return listFilter(listOfStrings, isLongerThan, &key);
-* }
-* @endcode
-*
-* @param set The set for which a filtered copy will be made
-* @param filterElement The function used for determining whether a given
-* element should be in the resulting list or not.
-* @param key Any extra values that need to be sent to the filtering function
-* when called
-* @return
-* NULL if set or filterElement are NULL or a memory allocation failed.
-* A Set containing only elements from list which filterElement returned true
-* for.
-*/
-Set setFilter(Set set, FilterSetElement filterElement, SetFilterKey key);
+Set setFilter(Set set, FilterSetElement filterElement, SetFilterKey key)
+{
+    if(!set||!filterElement||!key)
+    {
+        return NULL;
+    }
+    Set filtered= setCreate(NULL,NULL,set->setcomp);
+    if(!filtered)
+    {
+        return NULL;
+    }
+    listDestroy(filtered->elements);
+    filtered->elements= listFilter(set->elements,filterElement,key);
+    if(!filtered->elements)
+    {
+        setDestroy(filtered);
+        return NULL;
+    }
+    return filtered;
+}
 
 
 /**

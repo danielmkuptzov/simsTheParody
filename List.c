@@ -284,10 +284,21 @@ void listDestroy(List list)
     {
         return;
     }
-    if(listClear(list)==LIST_SUCCESS)
+    if((list->head)&&listClear(list)==LIST_SUCCESS)
     {
         free(list);
         return;
     }
     printf("operation failed");
 }
+
+CopyListElement listGetCopy(List list)
+{
+    return list->cpElement;
+}
+
+FreeListElement listGetFree(List list)
+{
+    return list->destElement;
+}
+
