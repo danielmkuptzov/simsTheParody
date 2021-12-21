@@ -37,7 +37,9 @@ Set setCreate(copySetElements copyElement, freeSetElements freeElement, compareS
 * 	NULL if a NULL was sent or a memory allocation failed.
 * 	A Set containing the same elements as set otherwise.
 */
-Set setCopy(Set set);
+Set setCopy(Set set)
+{
+}
 
 /**
 * setDestroy: Deallocates an existing set. Clears all elements by using the

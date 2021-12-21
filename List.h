@@ -30,6 +30,8 @@
 *   listFilter               - Creates a copy of an existing list, filtered by
 *                              a boolean predicate
 *   listClear		      	  - Clears all the data from the list
+*   listGetCopy                -gives the copy function
+*   listGetFree               -gives the free function
 */
 
 /** Type for defining the list */
@@ -44,7 +46,7 @@ typedef enum ListResult_t {
 } ListResult;
 
 /** Element data type for list container */
-typedef void* ListElement;
+typedef void *ListElement;
 
 /**
 * Type of function for copying an element of the list.
@@ -88,7 +90,7 @@ typedef int(*CompareListElements)(ListElement, ListElement);
 * Use this type to pass extra information needed by the filtering function
 * when calling listFilter. (See the example for a FilterListElement function)
 */
-typedef void* ListFilterKey;
+typedef void *ListFilterKey;
 
 /**
 * Function used for creating a filtered copy of a list.
@@ -306,6 +308,10 @@ ListResult listClear(List list);
 */
 void listDestroy(List list);
 
+CopyListElement listGetCopy(List list);
+
+FreeListElement listGetFree(List list);
+
 /**
 * Macro for iterating over a list.
 *
@@ -326,9 +332,9 @@ void listDestroy(List list);
 * @param iterator The name of the variable to hold the next list element
 * @param list the list to iterate over
 */
-#define LIST_FOREACH(type,iterator,list) \
-	for(type iterator = listGetFirst(list) ; \
-		iterator ;\
-		iterator = listGetNext(list))
+#define LIST_FOREACH(type, iterator, list) \
+    for(type iterator = listGetFirst(list) ; \
+        iterator ;\
+        iterator = listGetNext(list))
 
 #endif /* LIST_H_ */
