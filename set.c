@@ -1,6 +1,7 @@
 //
 // Created by danie on 01/12/2021.
 //
+#include <stdlib.h>
 
 #include "set.h"
 #include "list.h"
@@ -9,20 +10,24 @@ struct Set_t{
     List  elements;
     compareSetElements setcomp;
 };
-/**
-* setCreate: Allocates a new empty set.
-*
-* @param copyElement - Function pointer to be used for copying elements into
-*  	the set or when copying the set.
-* @param freeElement - Function pointer to be used for removing elements from
-* 		the set
-* @param compareElements - Function pointer to be used for comparing elements
-* 		inside the set. Used to check if new elements already exist in the set.
-* @return
-* 	NULL - if one of the parameters is NULL or allocations failed.
-* 	A new Set in case of success.
-*/
-Set setCreate(copySetElements copyElement, freeSetElements freeElement, compareSetElements compareElements);
+
+
+Set setCreate(copySetElements copyElement, freeSetElements freeElement, compareSetElements compareElements)
+{
+    Set new= malloc(sizeof(struct Set_t));
+    if(!new)
+    {
+        return NULL;
+    }
+    new->elements= listCreate(copyElement, freeElement);
+    if(!(new->elements))
+    {
+        free(new);
+        return NULL;
+    }
+    new->setcomp=compareElements;
+    return new;
+}
 
 /**
 * setCopy: Creates a copy of target set.
