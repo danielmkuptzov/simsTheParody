@@ -1,7 +1,5 @@
-//
-// Created by danie on 01/12/2021.
-//
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "set.h"
 #include "list.h"
@@ -58,9 +56,9 @@ void setDestroy(Set set)
     {
         return;
     }
-    if(set->elements)
+    if(setClear(set)!=SET_SUCCESS)
     {
-        listDestroy(set->elements);
+        printf("error\n");
     }
     free(set);
 }
@@ -132,7 +130,7 @@ SetResult setOrder(Set set)
     {
         return SET_SUCCESS;
     }
-    return SET_OUT_OF_MEMORY;
+    return SET_ERROR;
 }
 
 Set setFilter(Set set, FilterSetElement filterElement, SetFilterKey key)
@@ -156,32 +154,36 @@ Set setFilter(Set set, FilterSetElement filterElement, SetFilterKey key)
     return filtered;
 }
 
+SetResult setRemove(Set set, SetElement element)
+{
+    if(!set||!element||!set->elements)
+    {
+        return SET_NULL_ARGUMENT;
+    }
+    if(!setIsIn(set,element))
+    {
+        return SET_ITEM_DOES_NOT_EXIST;
+    }
+    LIST_FOREACH(SetElement,iter,set->elements)
+    {
+        if(set->setcomp(iter,element)==0)
+        {
+            if(listRemoveCurrent(set->elements)==LIST_SUCCESS)
+            {
+                return SET_SUCCESS;
+            }
+            return SET_ERROR;
+        }
+    }
+    return SET_ERROR;
+}
 
-/**
-* 	setRemove: Removes an element from the set. The element is found using the
-* 	comparison function given at initialization. Once found, the element is
-* 	removed and deallocated using the free function supplied at initialzation.
-*  Iterator's value is undefined after this operation.
-*
-* @param set -
-* 	The set to remove the element from.
-* @param element
-* 	The element to remove from the set. The element will be freed using the
-* 	free function given at initialization.
-* @return
-* 	SET_NULL_ARGUMENT if a NULL was sent as set
-* 	SET_ITEM_DOES_NOT_EXIST if the element doesn't exist in the set
-* 	SET_SUCCESS if the element was successfully removed.
-*/
-SetResult setRemove(Set set, SetElement element);
-
-/**
-* setClear: Removes all elements from target set.
-* The elements are deallocated using the stored free function
-* @param set
-* 	Target set to remove all element from
-* @return
-* 	SET_NULL_ARGUMENT - if a NULL pointer was sent.
-* 	SET_SUCCESS - Otherwise.
-*/
-SetResult setClear(Set);
+SetResult setClear(Set set)
+{
+    listDestroy(set->elements);
+    if(set->elements)
+    {
+        return SET_ERROR;
+    }
+    return SET_SUCCESS;
+}
