@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "set.h"
+#include "AmountSet.h"
 
 void* intCopy(void* org)
 {

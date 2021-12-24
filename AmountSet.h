@@ -29,6 +29,7 @@
  *                        in the set, and returns it.
  *   asGetNext          - Advances the internal iterator to the next element
  *                        and returns it.
+ *   asCompeare         -compares between amount sets
  *   AS_FOREACH         - A macro for iterating over the set's elements
  */
 
@@ -42,7 +43,7 @@ typedef enum AmountSetResult_t {
     AS_NULL_ARGUMENT,
     AS_ITEM_ALREADY_EXISTS,
     AS_ITEM_DOES_NOT_EXIST,
-    AS_INSUFFICIENT_AMOUNT
+    AS_ERROR
 } AmountSetResult;
 
 /** Element data type for amount set container */
@@ -253,6 +254,12 @@ ASElement asGetFirst(AmountSet set);
  *     The next element on the set in case of success
  */
 ASElement asGetNext(AmountSet set);
+
+/**
+ * asCompare- compares between sets
+ * resalt- standart comparison
+ */
+int asCompare(AmountSet firstSet,AmountSet secondSet);
 
 /**
  * Macro for iterating over a set.
