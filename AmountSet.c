@@ -66,25 +66,31 @@ int asGetSize(AmountSet set)
 
 bool asContains(AmountSet set, ASElement element)
 {
+    if(!set||!element)
+    {
+        return false;
+    }
     return setIsIn(set->components,element);
 }
 
-/**
- * asRegister: Add a new element into the set.
- *
- * The element is added with an initial amount of 0.
- * Iterator's value is undefined after this operation.
- *
- * @param set - The target set to which the element is added.
- * @param element - The element to add.
- * @return
- *     AS_NULL_ARGUMENT - if a NULL argument was passed.
- *     AS_ITEM_ALREADY_EXISTS - if an equal element already exists in the set.
- *     AS_SUCCESS - if the element was added successfully.
- */
 AmountSetResult asRegister(AmountSet set, ASElement element)
 {
-    if(!)
+    if(!set||!element)
+    {
+        return AS_NULL_ARGUMENT;
+    }
+    if(setAdd(set->components,element)!=SET_SUCCESS)
+    {
+        return AS_ERROR;
+    }
+    if(asGetSize(set)>1)
+    {
+        if(setOrder(set->components)!=SET_SUCCESS)
+        {
+            return AS_ERROR;
+        }
+    }
+    return AS_SUCCESS;
 }
 
 /**
