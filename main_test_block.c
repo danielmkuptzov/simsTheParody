@@ -32,7 +32,7 @@ bool intFilter(void* data, void* limit)
 
 int main()
 {
-    Set test= setCreate(intCopy,intDest, intCompare);
+    AmountSet test= asCreate(intCopy,intDest, intCompare, 1);
     if(!test)
     {
         printf("test 1 failed\n");
@@ -41,95 +41,84 @@ int main()
     int testarr[10]={2,4,3,5,8,7,6,1,9,10};
     for (int i=0; i < 10; ++i)
     {
-        if (setAdd(test, &testarr[i]) != SET_SUCCESS)
+        if (asRegister(test, &testarr[i]) != AS_SUCCESS)
         {
             printf("failed at test 2\n");
-            setDestroy(test);
+            asDestroy(test);
             return 0;
         }
     }
     int i=0;
-    SET_FOREACH(int*,iter,test)
-    {
-        int* elemTest=setGetCurrent(test);
-        if(*elemTest!=testarr[i])
-        {
-            printf("whyyyyyyyyyyyyyyyyyyyyy");
-            setDestroy(test);
-        }
-        i++;
-    }
-    int j=5;
-    if(setAdd(test,&j)!=SET_ITEM_ALREADY_EXISTS)
-    {
-        printf("noooooooooooooooo");
-        setDestroy(test);
-        return 0;
-    }
-    if(setGetSize(test)!=10)
-    {
-        printf("test 3 failed\n");
-        setDestroy(test);
-        return 0;
-    }
-    if(setOrder(test)!=SET_SUCCESS)
-    {
-        printf("failed at test 4\n");
-        setDestroy(test);
-        return 0;
-    }
-    i=0;
-    SET_FOREACH(int*,order,test)
+    AS_FOREACH(int*,order,test)
     {
         if(*order!=(i+1))
         {
-            setDestroy(test);
+            asDestroy(test);
             return 0;
         }
         i++;
     }
-    Set liscp= setCopy(test);
+    int j=5;
+    if(asRegister(test,&j)!=AS_ITEM_ALREADY_EXISTS)
+    {
+        printf("noooooooooooooooo");
+        asDestroy(test);
+        return 0;
+    }
+    if(asGetSize(test)!=10)
+    {
+        printf("test 3 failed\n");
+        asDestroy(test);
+        return 0;
+    }
+    AmountSet liscp= asCopy(test);
     if(!liscp)
     {
         printf("test 8 failed\n");
-        setDestroy(test);
+        asDestroy(test);
+        return 0;
+    }
+    if(asCompare(test,liscp)!=0)
+    {
+        asDestroy(test);
+        asDestroy(liscp);
         return 0;
     }
     int k=9;
-    SET_FOREACH(int*,iter,test)
+    AS_FOREACH(int*,iter,test)
     {
         if(*iter==k)
         {
-            if(setRemove(test,&k)!=SET_SUCCESS)
+            if(asDelete(test,&k)!=AS_SUCCESS)
             {
-                printf("fail");
-                setDestroy(test);
+                asDestroy(test);
+                asDestroy(liscp);
                 return 0;
             }
         }
     }
-    if(setClear(test)!=SET_SUCCESS)
+    if(asClear(test)!=AS_SUCCESS)
     {
-        printf("test 7 failed\n");
-        setDestroy(test);
+        asDestroy(test);
+        asDestroy(liscp);
         return 0;
     }
-    setDestroy(test);
+    asDestroy(test);
     int key=5;
-    Set filtered= setFilter(liscp,intFilter,&key);
+    AmountSet filtered= asFilter(liscp,intFilter,&key);
     if(!filtered)
     {
         printf("test 9 failed\n");
-        setDestroy(liscp);
+        asDestroy(liscp);
         return 0;
     }
-    setDestroy(liscp);
-    if(setClear(filtered)!=SET_SUCCESS)
+    asDestroy(liscp);
+    if(asClear(filtered)!=AS_SUCCESS)
     {
         printf("final test failed\n");
-        setDestroy(filtered);
+        asDestroy(filtered);
         return 0;
     }
-    setDestroy(filtered);
+    asDestroy(filtered);
     return 0;
 }

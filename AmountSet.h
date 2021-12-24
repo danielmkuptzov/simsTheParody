@@ -228,6 +228,16 @@ ASElement asGetNext(AmountSet set);
 int asCompare(AmountSet firstSet,AmountSet secondSet);
 
 /**
+ * asGetCurrent- gives the current element
+ */
+ASElement asGetCurrent(AmountSet set);
+
+/**
+ * asFilter- filters the amount set by given critiria
+ */
+AmountSet asFilter(AmountSet set, FilterSetElement filter, AsFilterKey key);
+
+/**
  * Macro for iterating over a set.
  * Declares a new iterator for the loop.
  */

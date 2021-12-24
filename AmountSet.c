@@ -165,3 +165,32 @@ int asCompare(AmountSet firstSet,AmountSet secondSet)
     return 0;
 }
 
+ASElement asGetCurrent(AmountSet set)
+{
+    if(!set)
+    {
+        return NULL;
+    }
+    return setGetCurrent(set->components);
+}
+
+AmountSet asFilter(AmountSet set, FilterSetElement filter, AsFilterKey key)
+{
+    if(!set)
+    {
+        return NULL;
+    }
+    AmountSet asfil= asCreate(NULL,NULL,NULL,set->type);
+    if(!asfil)
+    {
+        return NULL;
+    }
+    setDestroy(asfil->components);
+    asfil->components= setFilter(set->components,filter,key);
+    if(!(asfil->components))
+    {
+        asDestroy(asfil);
+        return NULL;
+    }
+    return asfil;
+}
