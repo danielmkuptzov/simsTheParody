@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "List.h"
+#include "set.h"
 
 void* intCopy(void* org)
 {
@@ -32,7 +32,7 @@ bool intFilter(void* data, void* limit)
 
 int main()
 {
-    List test= listCreate(intCopy,intDest);
+    Set test= setCreate(intCopy,intDest, intCompare);
     if(!test)
     {
         printf("test 1 failed\n");
@@ -41,17 +41,17 @@ int main()
     int testarr[10]={2,4,3,5,8,7,6,1,9,10};
     for (int i=0; i < 10; ++i)
     {
-        if (listInsertLast(test, &testarr[i]) != LIST_SUCCESS)
+        if (setAdd(test, &testarr[i]) != SET_SUCCESS)
         {
             printf("failed at test 2\n");
-            listDestroy(test);
+            setDestroy(test);
             return 0;
         }
     }
     int i=0;
-    LIST_FOREACH(int*,iter,test)
+    SET_FOREACH(int*,iter,test)
     {
-        int* elemTest=listGetCurrent(test);
+        int* elemTest=setGetCurrent(test);
         if(*elemTest!=testarr[i])
         {
             printf("whyyyyyyyyyyyyyyyyyyyyy");

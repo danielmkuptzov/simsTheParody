@@ -263,6 +263,14 @@ SetResult setRemove(Set set, SetElement element);
 */
 SetResult setClear(Set);
 
+// gives the current element in set
+SetElement setGetCurrent(Set set);
+
+//getters
+copySetElements listGetCopy(Set set);
+
+freeSetElements listGetFree(Set set);
+
 /*!
 * Macro for iterating over a set.
 * Declares a new iterator for the loop.

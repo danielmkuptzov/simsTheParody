@@ -187,3 +187,9 @@ SetResult setClear(Set set)
     }
     return SET_SUCCESS;
 }
+
+SetElement setGetCurrent(Set set)
+{
+    return listGetCurrent(set->elements);
+}
+
