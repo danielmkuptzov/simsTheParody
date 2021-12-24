@@ -93,65 +93,75 @@ AmountSetResult asRegister(AmountSet set, ASElement element)
     return AS_SUCCESS;
 }
 
-/**
- * asDelete: Delete an element completely from the set.
- *
- * This is the opposite of asRegister. The element is deallocated using the
- * stored free function.
- * Iterator's value is undefined after this operation.
- *
- * @param set - The target set from which the element is deleted.
- * @param element - The element to delete.
- * @return
- *     AS_NULL_ARGUMENT - if a NULL argument was passed.
- *     AS_ITEM_DOES_NOT_EXIST - if the element doesn't exist in the set.
- *     AS_SUCCESS - if the element was deleted successfully.
- */
-AmountSetResult asDelete(AmountSet set, ASElement element);
+AmountSetResult asDelete(AmountSet set, ASElement element)
+{
+    if(!set||!element)
+    {
+        return AS_NULL_ARGUMENT;
+    }
+    if(setIsIn(set->components,element))
+    {
+        return AS_ITEM_DOES_NOT_EXIST;
+    }
+    if(setRemove(set->components,element)!=SET_SUCCESS)
+    {
+        return AS_ERROR;
+    }
+    return AS_SUCCESS;
+}
 
-/**
- * asClear: Deletes all elements from target set.
- *
- * The elements are deallocated using the stored free function.
- * Iterator's value is undefined after this operation.
- *
- * @param set - Target set to delete all elements from.
- * @return
- *     AS_NULL_ARGUMENT - if a NULL pointer was sent.
- *     AS_SUCCESS - Otherwise.
- */
-AmountSetResult asClear(AmountSet set);
+AmountSetResult asClear(AmountSet set)
+{
+    if(!set||!(set->components))
+    {
+        return AS_NULL_ARGUMENT;
+    }
+    setDestroy(set->components);
+    return AS_SUCCESS;
+}
 
-/**
- * asGetFirst: Sets the internal iterator (also called current element) to
- * the first  element in the set. The first element is the smallest element
- * of the set, according to the set's comparison function.
- * Use this to start iterating over the set.
- * To continue iteration use asGetNext.
- *
- * @param set - The set for which to set the iterator and return the first
- *     element.
- * @return
- *     NULL if a NULL pointer was sent or the set is empty.
- *     The first element of the set otherwise
- */
-ASElement asGetFirst(AmountSet set);
+ASElement asGetFirst(AmountSet set)
+{
+    if(!set)
+    {
+        return NULL;
+    }
+    return setGetFirst(set->components);
+}
 
-/**
- * asGetNext: Advances the set iterator to the next element and returns it.
- * The iteration is in ascending order on the set's elements, according to the
- * set's comparison function.
- *
- * @param set - The set for which to advance the iterator
- * @return
- *     NULL if reached the end of the set, or the iterator is at an invalid state
- *     or a NULL sent as argument
- *     The next element on the set in case of success
- */
-ASElement asGetNext(AmountSet set);
+ASElement asGetNext(AmountSet set)
+{
+    if(!set)
+    {
+        return NULL;
+    }
+    return setGetNext(set->components);
+}
 
-/**
- * asCompare- compares between sets
- * resalt- standart comparison
- */
-int asCompare(AmountSet firstSet,AmountSet secondSet);
+int asCompare(AmountSet firstSet,AmountSet secondSet)
+{
+    if(!firstSet||!secondSet)
+    {
+        return 0;
+    }
+    if(firstSet->type!=secondSet->type)
+    {
+        return firstSet->type-secondSet->type;
+    }
+    if(asGetSize(firstSet)!= asGetSize(secondSet))
+    {
+        return asGetSize(firstSet)- asGetSize(secondSet);
+    }
+    ASElement iterfir= setGetFirst(firstSet->components);
+    SET_FOREACH(ASElement, itersec, secondSet->components)
+    {
+        int diff=(setGetComp(firstSet->components))(iterfir,itersec);
+        if(diff!=0)
+        {
+            return diff;
+        }
+        iterfir= setGetNext(firstSet->components);
+    }
+    return 0;
+}
+
