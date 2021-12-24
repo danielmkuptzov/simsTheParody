@@ -267,9 +267,11 @@ SetResult setClear(Set);
 SetElement setGetCurrent(Set set);
 
 //getters
-copySetElements listGetCopy(Set set);
+copySetElements setGetCopy(Set set);
 
-freeSetElements listGetFree(Set set);
+freeSetElements setGetFree(Set set);
+
+compareSetElements setGetComp(Set set);
 
 /*!
 * Macro for iterating over a set.

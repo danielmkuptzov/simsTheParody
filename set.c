@@ -193,3 +193,17 @@ SetElement setGetCurrent(Set set)
     return listGetCurrent(set->elements);
 }
 
+copySetElements setGetCopy(Set set)
+{
+    return listGetCopy(set->elements);
+}
+
+freeSetElements setGetFree(Set set)
+{
+    return listGetFree(set->elements);
+}
+
+compareSetElements setGetComp(Set set)
+{
+    return set->setcomp;
+}
