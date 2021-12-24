@@ -294,11 +294,19 @@ void listDestroy(List list)
 
 CopyListElement listGetCopy(List list)
 {
+    if(!list)
+    {
+        return NULL;
+    }
     return list->cpElement;
 }
 
 FreeListElement listGetFree(List list)
 {
+    if(!list)
+    {
+        return NULL;
+    }
     return list->destElement;
 }
 

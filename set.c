@@ -65,6 +65,10 @@ void setDestroy(Set set)
 
 int setGetSize(Set set)
 {
+    if(!set)
+    {
+        return -1;
+    }
     return listGetSize(set->elements);
 }
 
@@ -180,26 +184,46 @@ SetResult setRemove(Set set, SetElement element)
 
 SetResult setClear(Set set)
 {
+    if(!set)
+    {
+        return SET_NULL_ARGUMENT;
+    }
     listDestroy(set->elements);
     return SET_SUCCESS;
 }
 
 SetElement setGetCurrent(Set set)
 {
+    if(!set)
+    {
+        return NULL;
+    }
     return listGetCurrent(set->elements);
 }
 
 copySetElements setGetCopy(Set set)
 {
+    if(!set)
+    {
+        return NULL;
+    }
     return listGetCopy(set->elements);
 }
 
 freeSetElements setGetFree(Set set)
 {
+    if(!set)
+    {
+        return NULL;
+    }
     return listGetFree(set->elements);
 }
 
 compareSetElements setGetComp(Set set)
 {
+    if(!set)
+    {
+        return NULL;
+    }
     return set->setcomp;
 }

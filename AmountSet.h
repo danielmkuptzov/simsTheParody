@@ -20,9 +20,7 @@
  *   asCopy             - Copies an existing set
  *   asGetSize          - Returns the size of the set
  *   asContains         - Checks if an element exists in the set
- *   asGetAmount         - Returns the amount of an element in the set
  *   asRegister         - Add a new element into the set
- *   asChangeAmount     - Increase or decrease the amount of an element in the set
  *   asDelete           - Delete an element completely from the set
  *   asClear            - Deletes all elements from target set
  *   asGetFirst         - Sets the internal iterator to the first element
@@ -30,6 +28,7 @@
  *   asGetNext          - Advances the internal iterator to the next element
  *                        and returns it.
  *   asCompeare         -compares between amount sets
+ *   asFilter           -filters the amountset according to the user
  *   AS_FOREACH         - A macro for iterating over the set's elements
  */
 
@@ -65,8 +64,28 @@ typedef void (*FreeASElement)(ASElement);
 typedef int (*CompareASElements)(ASElement, ASElement);
 
 /**
+* Use this type to pass extra information needed by the filtering function
+* when calling listFilter. (See the example for a FilterListElement function)
+*/
+typedef void* AsFilterKey;
+
+/**
+* Function used for creating a filtered copy of a set.
+* A element is said to pass filtering if the function returns true
+* For example, the following function can be used to filter a list of strings
+* from short strings:
+* @code
+* bool isShorterThan(SetElement str, SetFilterKey length) {
+*   return strlen(str) < *(int*) length;
+* }
+* @endcode
+*/
+typedef bool(*FilterSetElement)(ASElement, AsFilterKey);
+
+/**
  * asCreate: Allocates a new empty amount set.
  *
+ * @param type- the numerical importance of the type of the amount set
  * @param copyElement - Function pointer to be used for copying elements into
  *     the set or when copying the set.
  * @param freeElement - Function pointer to be used for removing data elements from
@@ -79,7 +98,8 @@ typedef int (*CompareASElements)(ASElement, ASElement);
  */
 AmountSet asCreate(CopyASElement copyElement,
                    FreeASElement freeElement,
-                   CompareASElements compareElements);
+                   CompareASElements compareElements,
+                   int type);
 
 /**
  * asDestroy: Deallocates an existing amount set. Clears all elements by using
@@ -130,34 +150,6 @@ int asGetSize(AmountSet set);
 bool asContains(AmountSet set, ASElement element);
 
 /**
- * asGetAmount: Returns the amount of an element in the set.
- *
- * The function returns an error code indicating wether the operation succeeded,
- * and in case of success also returns the element's amount via the outAmount
- * pointer.
- * Iterator's state is unchanged after this operation.
- *
- * @param set - The set which contains the element.
- * @param element - The element whose amount is requested.
- * @param outAmount - Pointer to the location where the amount is returned, in case
- *     of success. In case of failure, the contents of outAmount are unchanged.
- * @return
- *     AS_NULL_ARGUMENT - if a NULL argument was passed.
- *     AS_ITEM_DOES_NOT_EXIST - if the element doesn't exist in the set.
- *     AS_SUCCESS - if the amount was returned successfully.
- *
- * For example, to print the amount of the first item in the set:
- * @code
- * double firstAmount;
- * ASElement first = asGetFirst(set);
- * if (asGetAmount(set, first, &firstAmount) == AS_SUCCESS) {
- *     printf("First amount: %f\n", firstAmount);
- * }
- * @endcode
- */
-AmountSetResult asGetAmount(AmountSet set, ASElement element, double *outAmount);
-
-/**
  * asRegister: Add a new element into the set.
  *
  * The element is added with an initial amount of 0.
@@ -171,32 +163,6 @@ AmountSetResult asGetAmount(AmountSet set, ASElement element, double *outAmount)
  *     AS_SUCCESS - if the element was added successfully.
  */
 AmountSetResult asRegister(AmountSet set, ASElement element);
-
-/**
- * asChangeAmount: Increase or decrease the amount of an element in the set.
- *
- * Iterator's state is unchanged after this operation.
- *
- * @param set - The target set containing the element.
- * @param element - The element whose amount is increased.
- * @param amount - How much to change the element's amount. A positive value
- *     increases element's amount, while a negative value decreases it. A value
- *     of 0 means don't change it.
- * @return
- *     AS_NULL_ARGUMENT - if a NULL argument was passed.
- *     AS_ITEM_DOES_NOT_EXIST - if the element doesn't exist in the set.
- *     AS_INSUFFICIENT_AMOUNT - if amount is negative and the element's amount
- *         in the set is less than the amount that needs to be decreased (i.e.,
- *         if the change will result in a negative amount for the element in the
- *         set.)
- *     AS_SUCCESS - if the element's amount was changed successfully.
- *
- * @note parameter amount doesn't affect the return value. Even if amount is 0,
- *     still AS_ITEM_DOES_NOT_EXIST is returned if element doesn't exist in set,
- *     and AS_SUCCESS is returned if element exists in set (assuming set is not
- *     NULL).
- */
-AmountSetResult asChangeAmount(AmountSet set, ASElement element, const double amount);
 
 /**
  * asDelete: Delete an element completely from the set.
