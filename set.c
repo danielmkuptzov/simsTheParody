@@ -29,7 +29,7 @@ Set setCreate(copySetElements copyElement, freeSetElements freeElement, compareS
 
 Set setCopy(Set set)
 {
-    if(set)
+    if(!set)
     {
         return NULL;
     }
@@ -181,10 +181,6 @@ SetResult setRemove(Set set, SetElement element)
 SetResult setClear(Set set)
 {
     listDestroy(set->elements);
-    if(set->elements)
-    {
-        return SET_ERROR;
-    }
     return SET_SUCCESS;
 }
 
