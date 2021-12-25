@@ -196,3 +196,24 @@ AmountSet asFilter(AmountSet set, FilterASElement filter, AsFilterKey key)
     }
     return asfil;
 }
+
+/**
+ *   asValid- checks the fact that the amount set is ok
+ *   @param set- the set we need to check vlidity
+ *
+ *   @return
+ *   true- valid
+ *   false- otherwise
+ */
+bool asValid(AmountSet set)
+{
+    if(!set)
+    {
+        return false;
+    }
+    if(set->type<1)
+    {
+        return false;
+    }
+    return true;
+}

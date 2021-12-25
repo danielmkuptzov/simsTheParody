@@ -29,6 +29,7 @@
  *                        and returns it.
  *   asCompeare         -compares between amount sets
  *   asFilter           -filters the amountset according to the user
+ *   asValid            - checks the validity of the set
  *   AS_FOREACH         - A macro for iterating over the set's elements
  */
 
@@ -246,13 +247,26 @@ ASElement asGetCurrent(AmountSet set);
 
 /**
  * asFilter- filters the amount set by given critiria
+ *
+ * @param set- the set we filter
+ * @param filter- the filter function
+ * @param key- the key we filter
+ *
+ * @return
+ * NULL- failed allocation or null parameters
+ * amount set otherwise
  */
 AmountSet asFilter(AmountSet set, FilterASElement filter, AsFilterKey key);
 
 /**
  *   asValid- checks the fact that the amount set is ok
+ *   @param set- the set we need to check vlidity
+ *
+ *   @return
+ *   true- valid
+ *   false- otherwise
  */
-AmountSetResult asValid(AmountSet set);
+bool asValid(AmountSet set);
 
 /**
  * Macro for iterating over a set.
