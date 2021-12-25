@@ -1,14 +1,13 @@
 //
 // Created by danie on 25/12/2021.
 //
+#include <stdlib.h>
+
 #include "Date.h"
 
 
 #define MIN_DAY 1
-#define INVALID_MONTH 0
-#define MONTH_NUM 12
-#define DAYS_IN_YEAR 365
-#define MONTH_STR_LEN 4
+#define DAYS_IN_YEAR 365.25
 
 typedef enum months{ JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC} Months;
 
@@ -31,7 +30,31 @@ struct Date_t{
  * NULL- if the requirement don't mach the enter
  * date- otherwise
  */
-Date dateCreate(int day, int month, int year);
+Date dateCreate(int day, int month, int year)
+{
+    if(year<0)
+    {
+        return NULL;
+    }
+    if(month<JAN||month>DEC)
+    {
+        return NULL;
+    }
+    //don't forget to add the leap year
+    if(day<MIN_DAY||day>dayInMonth[month])
+    {
+        return NULL;
+    }
+    Date new= malloc(sizeof(struct Date_t));
+    if(!new)
+    {
+        return NULL;
+    }
+    new->day=day;
+    new->month=month-1;
+    new->year=year;
+    return new;
+}
 
 
 /**

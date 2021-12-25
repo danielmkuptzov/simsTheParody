@@ -6,13 +6,15 @@ person:date, product and amountset needed
 
 shopProd: date, product and amountset needed
 
-order: amountset needed
-
-matamikya:date, product, order and amountset needed
+order:date, product and amountset needed
 
 apartment: date, product, person and amountset needed
 
+floor: date, product, person, apartment and amountset needed
+
 house: date, apartment, product, person, date and amountset needed
+
+matamikya:date, product, order and amountset needed
 
 kanyon:date, product, matamikya, date and amountset needed
 
