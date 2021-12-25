@@ -15,6 +15,8 @@
  * The date is calculated by the gregorian calendar (sorry, but this is the standart date).
  * For all functions the date standart is kept in check by the validity program.
  *
+ * @important- please use to initialise the system the function dateInitialiser
+ *
  * The following functions are available:
  *   dateCreate         - Creates a new date (in the calendar)
  *   dateDestroy        - Deletes an existing date and frees all resources
@@ -28,9 +30,11 @@
  *   dateGenerate       -for standartisation in creating objects
  *   dateAdvance        -moves the date a day forward
  *   intDateAdvance     -moves a user requested amount the day
- *   leapYearChecker    -finds if the year is a leap year
+ *   dateInitialiser    -create a point of referance to calculate
  */
 typedef struct Date_t *Date;
+
+typedef enum months{ JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC} Months;
 
 typedef enum DateErorCode_t{
     DATE_ERROR,
@@ -95,7 +99,7 @@ int dateDifference(Date date1, Date date2);
  * @param month- the month you wish to convert
  * @return month's order
  */
-int monthToInt(char* month);
+int monthToInt(Months month);
 
 /**
  *   dateToDays         -Calculates the number of days since 01/01/0000
@@ -153,13 +157,9 @@ DateErorCode dateAdvance(Date date);
 DateErorCode intDateAdvance(Date date, int advance);
 
 /**
- * leapYearChecker    -finds if the year is a leap year
- * @param date
- * @return
- * false- not a leap year or null argument
- * true- leap year
+ * dateInitialiser    -create a point of referance to calculate
  */
-bool leapYearChecker(Date date);
+void dateInitialiser();
 
 
 #endif //DATE_H

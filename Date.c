@@ -7,9 +7,11 @@
 
 
 #define MIN_DAY 1
-#define DAYS_IN_YEAR 365.25
 
-typedef enum months{ JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC} Months;
+typedef struct ReferenceDate_t{
+    Date initialisationDate;
+    int times;
+}*date;
 
 static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
                                  30, 31, 30, 31};
@@ -20,16 +22,30 @@ struct Date_t{
     int year;
 };
 
-/**
- *  dateCreate         - Creates a new date (in the calendar)
- * @param day- the day in the month (of course positive and according to the month)
- * @param month- month you want (if you enter febuary please check which year)
- * @param year-  the year we want to enter (we have positive years so deal whith this)
- * @return
- *
- * NULL- if the requirement don't mach the enter
- * date- otherwise
- */
+//first thing to implement
+static bool leapYearChecker(int year);
+
+static void yearFixer(int year)
+{
+    if(leapYearChecker(year))
+    {
+        dayInMonth[FEB]=29;
+        return;
+    }
+    dayInMonth[FEB]=28;
+}
+
+static int yearCalculator(int year)
+{
+    yearFixer(year);
+    int sum=0;
+    for(Months i=JAN; i<=DEC; i++)
+    {
+        sum=dayInMonth[i];
+    }
+    return sum;
+}
+
 Date dateCreate(int day, int month, int year)
 {
     if(year<0)
@@ -40,7 +56,10 @@ Date dateCreate(int day, int month, int year)
     {
         return NULL;
     }
-    //don't forget to add the leap year
+    if(leapYearChecker(year))
+    {
+        dayInMonth[FEB]=29;
+    }
     if(day<MIN_DAY||day>dayInMonth[month])
     {
         return NULL;
@@ -56,50 +75,51 @@ Date dateCreate(int day, int month, int year)
     return new;
 }
 
+void dateDestroy(Date date)
+{
+    if(!date)
+    {
+        return;
+    }
+    free(date);
+}
 
-/**
- * dateDestroy        - Deletes an existing date and frees all resources
- * @param date- the date we whish to destroy
- */
-void dateDestroy(Date date);
 
+Date dateCopy(Date date)
+{
+    if(!date)
+    {
+        return NULL;
+    }
+    return dateCreate(date->day,date->month,date->year);
+}
 
-/**
- * dateCopy           - Copies an existing date
- * @param date - the date we wish to copy
- * @return
- * NULL- for wrong format or null argument
- * date- otherwise
- */
-Date dateCopy(Date date);
+bool dateEquals(Date date1, Date date2)
+{
+    if(!date1||!date2||dateCompeare(date1,date2)!=0)
+    {
+        return false;
+    }
+    return true;
+}
 
-/**
- * dateEquals         -checks if the dates are the same
- * @param date1 -the date we check
- * @param date2 - the date we check
- * @return
- * true- the same dates
- * false- otherwise
- */
-bool dateEquals(Date date1, Date date2);
+int dateDifference(Date date1, Date date2)
+{
+    if(date1->year!=date2->year)
+    {
+        return date1->year-date2->year;
+    }
+    if(date1->month!=date2->month)
+    {
+        return date1->month-date2->month;
+    }
+    return date1->day-date2->day;
+}
 
-/**
- *   dateDifference     -Returns the number of days between the dates
- * @param date1 same as the function above
- * @param date2 same as function above
- * @return
- * 0 if equals
- * positive- date 1 greater than date2
- * negative- the option that left
- */
-int dateDifference(Date date1, Date date2);
-
-/**
- * monthToInt         -Translates a month string to an integer
- * @param month- the month you wish to convert
- * @return month's order
- */
-int monthToInt(char* month);
+int monthToInt(Months month)
+{
+    return dayInMonth[month];
+}
 
 /**
  *   dateToDays         -Calculates the number of days since 01/01/0000
@@ -157,10 +177,6 @@ DateErorCode dateAdvance(Date date);
 DateErorCode intDateAdvance(Date date, int advance);
 
 /**
- * leapYearChecker    -finds if the year is a leap year
- * @param date
- * @return
- * false- not a leap year or null argument
- * true- leap year
+ * dateInitialiser    -create a point of referance to calculate
  */
-bool leapYearChecker(Date date);
+void dateInitialiser();
