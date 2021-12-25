@@ -1,5 +1,3 @@
-amountset: set needed
-
 date
 
 product: date and amountset needed

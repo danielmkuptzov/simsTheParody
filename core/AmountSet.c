@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "AmountSet.h"
+#include "../AmountSet.h"
 #include "set.h"
 
 struct AmountSet_t{
@@ -79,9 +79,9 @@ AmountSetResult asRegister(AmountSet set, ASElement element)
     {
         return AS_NULL_ARGUMENT;
     }
-    if(setAdd(set->components,element)!=SET_SUCCESS)
+    if(setAdd(set->components,element)==SET_ITEM_ALREADY_EXISTS)
     {
-        return AS_ERROR;
+        return AS_ITEM_ALREADY_EXISTS;
     }
     if(asGetSize(set)>1)
     {
@@ -99,7 +99,7 @@ AmountSetResult asDelete(AmountSet set, ASElement element)
     {
         return AS_NULL_ARGUMENT;
     }
-    if(setIsIn(set->components,element))
+    if(!setIsIn(set->components,element))
     {
         return AS_ITEM_DOES_NOT_EXIST;
     }
@@ -116,7 +116,9 @@ AmountSetResult asClear(AmountSet set)
     {
         return AS_NULL_ARGUMENT;
     }
-    setDestroy(set->components);
+    Set toDestroy=set->components;
+    set->components=NULL;
+    setDestroy(toDestroy);
     return AS_SUCCESS;
 }
 
@@ -174,7 +176,7 @@ ASElement asGetCurrent(AmountSet set)
     return setGetCurrent(set->components);
 }
 
-AmountSet asFilter(AmountSet set, FilterSetElement filter, AsFilterKey key)
+AmountSet asFilter(AmountSet set, FilterASElement filter, AsFilterKey key)
 {
     if(!set)
     {

@@ -188,7 +188,9 @@ SetResult setClear(Set set)
     {
         return SET_NULL_ARGUMENT;
     }
-    listDestroy(set->elements);
+    List toDestroy=set->elements;
+    set->elements=NULL;
+    listDestroy(toDestroy);
     return SET_SUCCESS;
 }
 

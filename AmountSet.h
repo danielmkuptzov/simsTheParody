@@ -80,7 +80,7 @@ typedef void* AsFilterKey;
 * }
 * @endcode
 */
-typedef bool(*FilterSetElement)(ASElement, AsFilterKey);
+typedef bool(*FilterASElement)(ASElement, AsFilterKey);
 
 /**
  * asCreate: Allocates a new empty amount set.
@@ -235,7 +235,7 @@ ASElement asGetCurrent(AmountSet set);
 /**
  * asFilter- filters the amount set by given critiria
  */
-AmountSet asFilter(AmountSet set, FilterSetElement filter, AsFilterKey key);
+AmountSet asFilter(AmountSet set, FilterASElement filter, AsFilterKey key);
 
 /**
  * Macro for iterating over a set.
