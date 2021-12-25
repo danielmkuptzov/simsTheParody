@@ -223,12 +223,24 @@ ASElement asGetNext(AmountSet set);
 
 /**
  * asCompare- compares between sets
- * resalt- standart comparison
+ * @param firstSet- amount set to cmpeare
+ * @param secondSet- amount set to cmpeare
+ *
+ * @return three options:
+ * positive- the first one is greater
+ * negative- the second one is greater
+ *
  */
 int asCompare(AmountSet firstSet,AmountSet secondSet);
 
 /**
  * asGetCurrent- gives the current element
+ *
+ * @param set- the set from which we take the current
+ *
+ * @return
+ * NULL- IF THE SET IS PROBLEMATIC
+ * pointer to the element othervise
  */
 ASElement asGetCurrent(AmountSet set);
 
@@ -236,6 +248,11 @@ ASElement asGetCurrent(AmountSet set);
  * asFilter- filters the amount set by given critiria
  */
 AmountSet asFilter(AmountSet set, FilterASElement filter, AsFilterKey key);
+
+/**
+ *   asValid- checks the fact that the amount set is ok
+ */
+AmountSetResult asValid(AmountSet set);
 
 /**
  * Macro for iterating over a set.
