@@ -34,7 +34,7 @@
  */
 typedef struct Date_t *Date;
 
-typedef enum months{ JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC} Months;
+typedef enum months{ JAN=1,FEB=2,MAR=3,APR=4,MAY=5,JUN=6,JUL=7,AUG=8,SEP=9,OCT=10,NOV=11,DEC=12} Months;
 
 typedef enum DateErorCode_t{
     DATE_ERROR,

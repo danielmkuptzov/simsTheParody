@@ -140,7 +140,7 @@ int main()
             return 0;
         }
     }
-    if(asCompare(liscp,dataSet)!=1)
+    if(asCompare(dataSet,liscp)!=1)
     {
         return 0;
     }
@@ -152,5 +152,6 @@ int main()
         return 0;
     }
     asDestroy(filtered);
+    asDestroy(dataSet);
     return 0;
 }

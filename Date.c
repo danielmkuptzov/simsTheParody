@@ -72,10 +72,7 @@ Date dateCreate(int day, int month, int year)
     {
         return NULL;
     }
-    if(leapYearChecker(year))
-    {
-        dayInMonth[FEB]=29;
-    }
+    yearFixer(year);
     if(day<MIN_DAY||day>dayInMonth[month])
     {
         return NULL;
@@ -86,7 +83,7 @@ Date dateCreate(int day, int month, int year)
         return NULL;
     }
     new->day=day;
-    new->month=month-1;
+    new->month=month;
     new->year=year;
     return new;
 }
@@ -186,7 +183,7 @@ int dateCompeare(Date date1, Date date2)
 Date dateGenerate()
 {
     first->times++;
-    Date toSend=first->initialisationDate;
+    Date toSend= dateCopy(first->initialisationDate);
     if(dateAdvance(first->initialisationDate)==DATE_SUCSESS)
     {
         return toSend;
