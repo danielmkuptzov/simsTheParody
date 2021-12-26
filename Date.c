@@ -11,7 +11,9 @@
 typedef struct ReferenceDate_t{
     Date initialisationDate;
     int times;
-}*date;
+}*Refdate;
+
+Refdate first;
 
 static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
                                  30, 31, 30, 31};
@@ -22,8 +24,22 @@ struct Date_t{
     int year;
 };
 
-//first thing to implement
-static bool leapYearChecker(int year);
+static bool leapYearChecker(int year)
+{
+    if(year%4==0)
+    {
+        if(year%100==0)
+        {
+            if(year%400==0)
+            {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
 
 static void yearFixer(int year)
 {
@@ -84,10 +100,9 @@ void dateDestroy(Date date)
     free(date);
 }
 
-
 Date dateCopy(Date date)
 {
-    if(!date)
+    if(!dateIsValid(date))
     {
         return NULL;
     }
@@ -96,7 +111,7 @@ Date dateCopy(Date date)
 
 bool dateEquals(Date date1, Date date2)
 {
-    if(!date1||!date2||dateCompeare(date1,date2)!=0)
+    if(!dateIsValid(date1)||!dateIsValid(date2)||dateCompeare(date1,date2)!=0)
     {
         return false;
     }
@@ -118,40 +133,68 @@ int dateDifference(Date date1, Date date2)
 
 int monthToInt(Months month)
 {
+    if(month<JAN||month>DEC)
+    {
+        return -1;
+    }
     return dayInMonth[month];
 }
 
-/**
- *   dateToDays         -Calculates the number of days since 01/01/0000
- * @param date- the date we need to convert
- * @return
- * -1 if the date was in the wrong format
- * oterwise a positive number
- */
-int dateToDays(Date date);
+int dateToDays(Date date)
+{
+    if(!dateIsValid(date))
+    {
+        return -1;
+    }
+    int days=0;
+    for (int i = 0; i < date->year; ++i)
+    {
+        days+= yearCalculator(i);
+    }
+    yearFixer(date->year);
+    for (int i = 0; i < date->month; ++i)
+    {
+        days+=dayInMonth[i];
+    }
+    days+=date->day;
+    return days;
+}
 
-/**
- *    dateIsValid        -Checks if the date has valid values
- * @param date the date we need to check the validity of
- * @return
- * false- null argument or illegal date
- * true- oterwise
- */
-bool dateIsValid(Date date);
+bool dateIsValid(Date date)
+{
+    if(!date)
+    {
+        return false;
+    }
+    if(date->year<0)
+    {
+        return false;
+    }
+    yearFixer(date->year);
+    if(date->day<MIN_DAY||date->day>dayInMonth[date->month])
+    {
+        return false;
+    }
+    return true;
+}
 
-/**
- *    dateCompare        -compeares between dates
- * @param date1
- * @param date2
- * @return standart comparison returns
- */
-int dateCompeare(Date date1, Date date2);
+int dateCompeare(Date date1, Date date2)
+{
+    return dateToDays(date1)- dateToDays(date2);
+}
 
 /**
  *    dateGenerate       -for standartisation in creating objects
- * @return date generated according to the
+ * @return date generated according to the standart
  */
-Date dateGenerate();
+Date dateGenerate()
+{
+    if(first->times==0)
+    {
+        return first->initialisationDate;
+    }
+
+}
 
 /**
  *   dateAdvance        -moves the date a day forward
