@@ -1,7 +1,3 @@
-//
-// Created by danie on 25/12/2021.
-//
-
 #ifndef DATE_H
 #define DATE_H
 #include <stdio.h>
