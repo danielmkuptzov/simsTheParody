@@ -2,8 +2,10 @@
 // Created by danie on 26/12/2021.
 //
 
-#ifndef DANIELCITY_PRODUCT_H
-#define DANIELCITY_PRODUCT_H
+#ifndef PRODUCT_H
+#define PRODUCT_H
+
+#include "outerCore.h"
 
 /**
  * Product adt
@@ -83,19 +85,7 @@ typedef enum ProductAmountType_t {
 typedef struct product_t *Product;
 
 /**
- * productCreate            - Creates a new product
- *   productDestroy           - Deletes an existing product and frees all resources
- *   productCopy              - Copies an existing product
- *   productEquals            -checks if the products are the same
- *   productGetId             -for serching purposes
- *   productGetType           -gives the type of the product
- *   productGetComponent      -givesThe components of the product
- *   productAddComponent      -for adding to components
- *   productRemoveComponent   -for removing component
- *   productGetAdditionalData -for seeing the additional data
- *   productSetAdditionalData -for changing the additional data
- *   productGetName           -for getting the name of the product
- *   productSetName           -for name change
+ *   productCreate            - Creates a new product
  * @param id non negative number
  * @param name empty manes or NULL wouldn't be tolareted. for simple use use "john dou", "nanashi", "ploni".
  *            Also, we don't differ from capital letters to non-capital
@@ -107,6 +97,30 @@ typedef struct product_t *Product;
  *         product othrwise
  */
 Product productCreate(int id, char* name, ProductAmountType type,
-                      CopyProductData copyData, FreeData freeFunc);
+                      CopyProductData copyData, FreeData freeFunc, Date dateCre);
 
+/**
+ *   productDestroy           - Deletes an existing product and frees all resources
+ * @param product the product we wish to destroy
+ */
+void productDestroy(Product product);
+
+/**
+ *   productCopy              - Copies an existing product
+ *   productEquals            -checks if the products are the same
+ *   productGetId             -for serching purposes
+ *   productGetType           -gives the type of the product
+ *   productGetComponent      -givesThe components of the product
+ *   productAddComponent      -for adding to components
+ *   productRemoveComponent   -for removing component
+ *   productGetAdditionalData -for seeing the additional data
+ *   productSetAdditionalData -for changing the additional data
+ *   productGetName           -for getting the name of the product
+ *   productSetName           -for name change
+ * @param product the product we need to copy
+ * @return
+ *  NULL- if there is a problem in the product
+ *  product otherwise
+ */
+Product productCopy(Product product);
 #endif //DANIELCITY_PRODUCT_H
