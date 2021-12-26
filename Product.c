@@ -1,97 +1,199 @@
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "Product.h"
+
+static char* stringDup(char* str)
+{
+    char* copy = malloc(strlen(str) + 1);
+    return copy ? strcpy(copy, str) : NULL;
+}
+
 
 // Product struct - represents a product in MatamIkya
 struct product_t {
-    unsigned int id;
+    Date creationDate;
+    int id;
     char* name;
     double amount;
-    MtmProductData custom_data;
-    MatamikyaAmountType amount_type;
-    double profit;
-    MtmCopyData copyData;
-    MtmFreeData freeData;
-    MtmGetProductPrice productPrice;
+    ProductData data;
+    ProductAmountType amount_type;
+    CopyProductData copyData;
+    FreeData freeData;
+    AmountSet components;
 };
 
-
-static char* stringCopy(const char* str)
+Product productCreate(ProductIdGenerator id, char* name, ProductAmountType type,
+                      CopyProductData copyData, FreeData freeFunc, Date dateCre,
+                      CopyProductComponent copyComp, FreeProductComponent freeComp,
+                      ProductCompCmp compCmp, ProductData data)
 {
-    int length = strlen(str);
-    char *out = malloc((length + 1) * sizeof(char));
-    if (out == NULL)
+    Product new= malloc(sizeof(struct product_t));
+    if(!new)
     {
         return NULL;
     }
-    for(int i = 0; i < length; i++)
+    new->copyData=copyData;
+    new->data=new->copyData(data);
+    if(!new->data)
     {
-        out[i] = str[i];
+        free(new);
+        return NULL;
     }
-    out[length] = '\0';
-    return out;
+    new->components= asCreate(copyComp,freeComp, compCmp);
+    if(!new->components)
+    {
+        freeFunc(new->data);
+        free(new);
+        return NULL;
+    }
+    new->creationDate=dateGenerate();
+    if(!new->creationDate)
+    {
+        asDestroy(new->components);
+        freeFunc(new->data);
+        free(new);
+        return NULL;
+    }
+    new->freeData=freeFunc;
+    return new;
 }
 
-// Copy function for product.
-// Input: Product src_product - source product from which a copy will be created.
-// Output: Product - copy_product, a product with the same fields as the source product.
-ListElement copyProduct(ListElement src_product)
+void productDestroy(Product product)
 {
-    if(src_product == NULL)
-    {
-        return NULL;
-    }
-    Product copy_product = (Product)malloc(sizeof(*copy_product));
-    if(copy_product == NULL)
-    {
-        return NULL;
-    }
-    copy_product->custom_data = (((Product)src_product))->copyData((((Product)src_product))->custom_data);
-    if(copy_product->custom_data == NULL)
-    {
-        free(copy_product);
-        return NULL;
-    }
-    copy_product->name = stringCopy(((Product)src_product)->name); //
-    if(copy_product->name == NULL)
-    {
-        ((Product)src_product)->freeData(copy_product->custom_data);
-        free(copy_product);
-        return NULL;
-    }
-    copy_product->id = ((Product)src_product)->id;
-    copy_product->amount = ((Product)src_product)->amount;
-    copy_product->amount_type = ((Product)src_product)->amount_type;
-    copy_product->profit = ((Product)src_product)->profit;
-    copy_product->freeData = ((Product)src_product)->freeData;
-    copy_product->copyData = ((Product)src_product)->copyData;
-    copy_product->productPrice = ((Product)src_product)->productPrice;
-    return copy_product;
+    product->freeData(product->data);
+    asDestroy(product->components);
+    free(product->name);
+    dateDestroy(product->creationDate);
+    free(product);
 }
 
-
-// Free function of Product, deallocates all memory of product struct.
-// Input: Product product_to_delete - product we want to deallocate.
-// Output: None.
-void freeProduct(ListElement product_to_delete)
+Product productCopy(Product product)
 {
-    if(product_to_delete == NULL)
+    if(!product)
     {
-        return;
+        return NULL;
     }
-    (((Product)product_to_delete)->freeData((MtmProductData)((Product)product_to_delete)->custom_data));
-    free(((Product)product_to_delete)->name);
-    free(product_to_delete);
-    return;
+    Product copy=productCreate(product->id,product->name,product->amount_type,
+                         product->copyData,product->freeData,product->creationDate,
+                         NULL,NULL,NULL,product->data);
+    if(!copy)
+    {
+        return NULL;
+    }
+    asDestroy(copy->components);
+    copy->components= asCopy(product->components);
+    if(!copy->components)
+    {
+        productDestroy(copy);
+        return NULL;
+    }
+    return copy;
 }
 
-// Compare function for product, returns >0 if id2 is greater than id1, ==0 if id2 is equal to id1
-// and <0 if id2 is less than id1.
-int compareProduct(ListElement product1, ListElement product2)
+/**
+ *   productEquals            -checks if the products are the same
+ * @param first
+ * @param secont
+ * @return
+ * 0- same
+ * positive-  first> second
+ * negative-  second> first
+ */
+int productEquals(Product first, Product secont)
 {
-    if(!product1 || !product2)
-    {
-        return 0;
-    }
-    return ((Product)product1)->id - ((Product)product2)->id;
 }
+
+/**
+ *   productGetId             -for serching purposes
+ * @param product
+ * @return
+ * -1 if the imput is problematic
+ * id otherwise
+ */
+const int productGetId(Product product);
+
+/**
+ *   productGetType           -gives the type of the product
+ * @param product
+ * @return
+ * the amount type
+ */
+const ProductAmountType productGetType(Product product);
+
+/**
+ *   productGetComponent      -givesThe components of the product
+ * @param product   -the place where we serch
+ * @return
+ * NULL- if the product doesn't have a components or wrong format
+ * amount set othewise
+ */
+AmountSet productGetComponent(Product product);
+
+/**
+ *   productAddComponent      -for adding to components
+ * @param product -the place we wish to add to
+ * @param component -the component we want to add
+ * @return
+ *   PRODUCT_ERROR -  unknown error
+ *   PRODUCT_COMPONENT_ALREADY_EXIST -the component already exist
+ *   PRODUCT_WRONG_FORMAT -wrong arguments entered
+ *   PRODUCT_SUCSESS -the addition was sucssesful
+ */
+ProductErrorCode productAddComponent(Product product, ProductComp component);
+
+/**
+ *   productRemoveComponent   -for removing component
+ * @param product -the place we need to clean
+ * @param component -the element we remove
+ * @return
+ *   PRODUCT_ERROR -unknown error
+ *   PRODUCT_COMPONENT_DOES_NOT_EXIST -the element wasn't found
+ *   PRODUCT_WRONG_FORMAT- wrong inpud data
+ *   PRODUCT_SUCSESS- the process was sucssesful
+ */
+ProductErrorCode productRemoveComponent(Product product, ProductComp component);
+
+/**
+ *   productGetAdditionalData -for seeing the additional data
+ * @param product -the product we want to get the additional information
+ * @return
+ */
+const ProductData productGetAdditionalData(Product product);
+
+/**
+ *   productSetAdditionalData -for changing the additional data
+ * @param product -the product we want to change
+ * @param data - the data we want to enter
+ * @return
+ *   PRODUCT_ERROR -for every error
+ *   PRODUCT_WRONG_FORMAT- null arguments
+ *   PRODUCT_SUCSESS -the process was sucssesful
+ */
+ProductErrorCode productSetAdditionalData(Product product, ProductData data);
+
+/**
+ *   productGetName           -for getting the name of the product
+ * @param product- the product we need the name of
+ * @return
+ * NULL -wrong format or problems
+ * name otherwise
+ */
+const char*  productGetName(Product product);
+
+/**
+ *   productAmountChecker     -testing function to determine if the amount is legal to the product
+ * @param type -the type of the product
+ * @param amount -the amount in question
+ * @return
+ *   PRODUCT_ERROR -problems that didn't covered in the description
+ *   PRODUCT_WRONG_AMOUNT -the amount was wrong
+ *   PRODUCT_WRONG_FORMAT -the type or the amount was illegal
+ *   PRODUCT_SUCSESS -the amount is ok
+ *
+ */
+ProductErrorCode productAmountChecker(ProductAmountType type, double amount);
+
 

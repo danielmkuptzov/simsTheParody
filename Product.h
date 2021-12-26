@@ -30,7 +30,7 @@
  *   productGetAdditionalData -for seeing the additional data
  *   productSetAdditionalData -for changing the additional data
  *   productGetName           -for getting the name of the product
- *   productSetName           -for name change
+ *   productAmountChecker     -testing function to determine if the amount is legal to the product
  */
 
 /** Type for additional custom data of a product */
@@ -61,6 +61,36 @@ typedef void (*FreeData)(ProductData);
  */
 typedef int (*ProductDataCmp)(ProductData,ProductData);
 
+/**
+ * for easy addition of new components we have this
+ */
+typedef void* ProductComp;
+
+/**
+ * Type of function for copying a product's components.
+ *
+ * Such a function receives a ProductComp, creates a new ProductComp
+ * object, and returns a pointer to the new object. If the function fails for
+ * any reason, it returns NULL.
+ */
+typedef ProductData (*CopyProductComponent)(ProductComp);
+
+/**
+ * Type of function for freeing a product's components.
+ *
+ * Such a function receives a ProductComp object and frees it. The
+ * ProductComp can be NULL, in which case the function does nothing.
+ */
+typedef void (*FreeProductComponent)(ProductComp);
+
+/**
+ * type of function to compeare ProductComp
+ *
+ * Such a function receives two ProductComp objects and compeares between them. The
+ * ProductComp can't be NULL, we cant compeare whith NULL.
+ */
+typedef int (*ProductCompCmp)(ProductComp,ProductComp);
+
 /** Type for specifying what is a valid amount for a product.
  * For a INTEGER_AMOUNT product, a valid amount is an amount which is
  * within 0.001 of an integer. For example, 8.001 or 7.999 are considered a valid amount
@@ -80,6 +110,23 @@ typedef enum ProductAmountType_t {
 } ProductAmountType;
 
 /**
+ * product error codes
+ */
+typedef enum ProductErrorCode_t{
+    PRODUCT_ERROR,
+    PRODUCT_WRONG_AMOUNT,
+    PRODUCT_COMPONENT_ALREADY_EXIST,
+    PRODUCT_COMPONENT_DOES_NOT_EXIST,
+    PRODUCT_WRONG_FORMAT,
+    PRODUCT_SUCSESS
+} ProductErrorCode;
+
+/**
+ * for generating id to the product
+ */
+ typedef int (*ProductIdGenerator)();
+
+/**
  * the product type, use whith care
  */
 typedef struct product_t *Product;
@@ -89,15 +136,14 @@ typedef struct product_t *Product;
  * @param id non negative number
  * @param name empty manes or NULL wouldn't be tolareted. for simple use use "john dou", "nanashi", "ploni".
  *            Also, we don't differ from capital letters to non-capital
- * @param type  -see the explenation above
- * @param copyData -see the explenation above
- * @param freeFunc -see the explenation above
  * @return
  *         Null- if the requirement don't match
  *         product othrwise
  */
-Product productCreate(int id, char* name, ProductAmountType type,
-                      CopyProductData copyData, FreeData freeFunc, Date dateCre);
+Product productCreate(ProductIdGenerator id, char* name, ProductAmountType type,
+                      CopyProductData copyData, FreeData freeFunc, Date dateCre,
+                      CopyProductComponent copyComp, FreeProductComponent freeComp,
+                      ProductCompCmp compCmp, ProductData data);
 
 /**
  *   productDestroy           - Deletes an existing product and frees all resources
@@ -116,20 +162,103 @@ Product productCopy(Product product);
 
 /**
  *   productEquals            -checks if the products are the same
- *   productGetId             -for serching purposes
- *   productGetType           -gives the type of the product
- *   productGetComponent      -givesThe components of the product
- *   productAddComponent      -for adding to components
- *   productRemoveComponent   -for removing component
- *   productGetAdditionalData -for seeing the additional data
- *   productSetAdditionalData -for changing the additional data
- *   productGetName           -for getting the name of the product
- *   productSetName           -for name change
  * @param first
  * @param secont
  * @return
+ * 0- same
+ * positive-  first> second
+ * negative-  second> first
  */
-bool productEquals(Product first, Product secont);
+int productEquals(Product first, Product secont);
 
+/**
+ *   productGetId             -for serching purposes
+ * @param product
+ * @return
+ * -1 if the imput is problematic
+ * id otherwise
+ */
+const int productGetId(Product product);
+
+/**
+ *   productGetType           -gives the type of the product
+ * @param product
+ * @return
+ * the amount type
+ */
+const ProductAmountType productGetType(Product product);
+
+/**
+ *   productGetComponent      -givesThe components of the product
+ * @param product   -the place where we serch
+ * @return
+ * NULL- if the product doesn't have a components or wrong format
+ * amount set othewise
+ */
+AmountSet productGetComponent(Product product);
+
+/**
+ *   productAddComponent      -for adding to components
+ * @param product -the place we wish to add to
+ * @param component -the component we want to add
+ * @return
+ *   PRODUCT_ERROR -  unknown error
+ *   PRODUCT_COMPONENT_ALREADY_EXIST -the component already exist
+ *   PRODUCT_WRONG_FORMAT -wrong arguments entered
+ *   PRODUCT_SUCSESS -the addition was sucssesful
+ */
+ProductErrorCode productAddComponent(Product product, ProductComp component);
+
+/**
+ *   productRemoveComponent   -for removing component
+ * @param product -the place we need to clean
+ * @param component -the element we remove
+ * @return
+ *   PRODUCT_ERROR -unknown error
+ *   PRODUCT_COMPONENT_DOES_NOT_EXIST -the element wasn't found
+ *   PRODUCT_WRONG_FORMAT- wrong inpud data
+ *   PRODUCT_SUCSESS- the process was sucssesful
+ */
+ProductErrorCode productRemoveComponent(Product product, ProductComp component);
+
+/**
+ *   productGetAdditionalData -for seeing the additional data
+ * @param product -the product we want to get the additional information
+ * @return
+ */
+const ProductData productGetAdditionalData(Product product);
+
+/**
+ *   productSetAdditionalData -for changing the additional data
+ * @param product -the product we want to change
+ * @param data - the data we want to enter
+ * @return
+ *   PRODUCT_ERROR -for every error
+ *   PRODUCT_WRONG_FORMAT- null arguments
+ *   PRODUCT_SUCSESS -the process was sucssesful
+ */
+ProductErrorCode productSetAdditionalData(Product product, ProductData data);
+
+/**
+ *   productGetName           -for getting the name of the product
+ * @param product- the product we need the name of
+ * @return
+ * NULL -wrong format or problems
+ * name otherwise
+ */
+const char*  productGetName(Product product);
+
+/**
+ *   productAmountChecker     -testing function to determine if the amount is legal to the product
+ * @param type -the type of the product
+ * @param amount -the amount in question
+ * @return
+ *   PRODUCT_ERROR -problems that didn't covered in the description
+ *   PRODUCT_WRONG_AMOUNT -the amount was wrong
+ *   PRODUCT_WRONG_FORMAT -the type or the amount was illegal
+ *   PRODUCT_SUCSESS -the amount is ok
+ *
+ */
+ProductErrorCode productAmountChecker(ProductAmountType type, double amount);
 
 #endif //DANIELCITY_PRODUCT_H

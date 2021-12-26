@@ -269,6 +269,28 @@ AmountSet asFilter(AmountSet set, FilterASElement filter, AsFilterKey key);
 bool asValid(AmountSet set);
 
 /**
+ * asGetCopy- gives the copy function
+ * @param set
+ * @return
+ */
+CopyASElement asGetCopy(AmountSet set);
+
+/**
+ * asGetFree -get the free function
+ * @param set
+ * @return
+ */
+FreeASElement asGetFree(AmountSet set);
+
+/**
+ * asGetCompeare- compeare function getter
+ * @param set
+ * @return
+ */
+CompareASElements asGetCompeare(AmountSet set);
+
+
+/**
  * Macro for iterating over a set.
  * Declares a new iterator for the loop.
  */
