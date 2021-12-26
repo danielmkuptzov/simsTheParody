@@ -107,6 +107,14 @@ void productDestroy(Product product);
 
 /**
  *   productCopy              - Copies an existing product
+ * @param product the product we need to copy
+ * @return
+ *  NULL- if there is a problem in the product
+ *  product otherwise
+ */
+Product productCopy(Product product);
+
+/**
  *   productEquals            -checks if the products are the same
  *   productGetId             -for serching purposes
  *   productGetType           -gives the type of the product
@@ -117,10 +125,11 @@ void productDestroy(Product product);
  *   productSetAdditionalData -for changing the additional data
  *   productGetName           -for getting the name of the product
  *   productSetName           -for name change
- * @param product the product we need to copy
+ * @param first
+ * @param secont
  * @return
- *  NULL- if there is a problem in the product
- *  product otherwise
  */
-Product productCopy(Product product);
+bool productEquals(Product first, Product secont);
+
+
 #endif //DANIELCITY_PRODUCT_H
