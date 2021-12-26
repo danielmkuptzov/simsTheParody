@@ -183,43 +183,70 @@ int dateCompeare(Date date1, Date date2)
     return dateToDays(date1)- dateToDays(date2);
 }
 
-/**
- *    dateGenerate       -for standartisation in creating objects
- * @return date generated according to the standart
- */
 Date dateGenerate()
 {
     if(first->times==0)
     {
+        first->times++;
+        Date toSend=first->initialisationDate;
+        if(dateAdvance(first->initialisationDate)==DATE_SUCSESS)
+        {
+            return toSend;
+        }
+        return NULL;
+    }
+    if(dateAdvance(first->initialisationDate)==DATE_SUCSESS)
+    {
+        first->times++;
         return first->initialisationDate;
     }
-
+    return NULL;
 }
 
-/**
- *   dateAdvance        -moves the date a day forward
- * @param date the date we wish to advance
- * @return
- * DATE_ERROR- null argument was send
- * WRONG_MONTH- wrong format
- * NEGATIVE_YEAR- wrong format
- * DATE_SUCSESS- the date is one day forward
- */
-DateErorCode dateAdvance(Date date);
+DateErorCode dateAdvance(Date date)
+{
+    if(!dateIsValid(date))
+    {
+        return DATE_ERROR;
+    }
+    yearFixer(date->year);
+    if(date->day==dayInMonth[date->month])
+    {
+        if(date->month==DEC)
+        {
+            date->year++;
+            date->month=JAN;
+            date->day=1;
+            return DATE_SUCSESS;
+        }
+        date->month++;
+        date->day=1;
+        return DATE_SUCSESS;
+    }
+    date->day++;
+    return DATE_SUCSESS;
+}
 
-/**
- * intDateAdvance     -moves a user requested amount the day
- * @param date the date we need to advance
- * @param advance the amount of days needed
- * @return
- * DATE_ERROR- null argument or negative days
- * WRONG_MONTH- wrong format
- * NEGATIVE_YEAR- wrong format
- * DATE_SUCSESS- the operation ended sucsessfuly
- */
-DateErorCode intDateAdvance(Date date, int advance);
+DateErorCode intDateAdvance(Date date, int advance)
+{
+    if(!dateIsValid(date))
+    {
+        return WRONG_MONTH;
+    }
+    Date tmpDade= dateCopy(date);
+    for(int i=0; i<advance; i++)
+    {
+        if(dateAdvance(tmpDade)!=DATE_SUCSESS)
+        {
+            return DATE_ERROR;
+        }
+    }
+    date= dateCopy(tmpDade);
+    return DATE_SUCSESS;
+}
 
-/**
- * dateInitialiser    -create a point of referance to calculate
- */
-void dateInitialiser();
+void dateInitialiser()
+{
+    first->initialisationDate= dateCreate(1,1,0);
+    first->times=0;
+}
