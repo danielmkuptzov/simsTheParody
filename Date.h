@@ -23,12 +23,50 @@
  *   dateToDays         -Calculates the number of days since 01/01/0000
  *   dateIsValid        -Checks if the date has valid values
  *   dateCompare        -compeares between dates
- *   dateGenerate       -for standartisation in creating objects
+ *   dateGenerate       -for standartisation in creating objects (could be according to a specific date)
  *   dateAdvance        -moves the date a day forward
  *   intDateAdvance     -moves a user requested amount the day
  *   dateInitialiser    -create a point of referance to calculate
  */
+
+/**
+ * for our users who can't convert to the standart we give you the option to standart the date
+ * according to your preaferance
+ */
+typedef void* ReferanceDate;
+
+/**
+ * for copy purposes
+ */
+typedef ReferanceDate(*CopyRefDate)(ReferanceDate);
+
+/**
+ * for destruction purposes
+ */
+typedef void (*FreeRefDate)(ReferanceDate);
+
+/**
+ * comparison function
+ */
+typedef int(*CopmRefDate)(ReferanceDate,ReferanceDate);
+
+
+/**
+ * advancement function
+ */
+typedef void(*RefDateAdvance)(ReferanceDate);
+
+/**
+ * year difference calculator for standatisation
+ */
+typedef int (*DifferenceCalculator)();
+
 typedef struct Date_t *Date;
+
+/**
+ * gives the first day according to the new format
+ */
+typedef Date(*YearOneGiver)();
 
 typedef enum months{ JAN=1,FEB=2,MAR=3,APR=4,MAY=5,JUN=6,JUL=7,AUG=8,SEP=9,OCT=10,NOV=11,DEC=12} Months;
 
@@ -44,13 +82,20 @@ typedef enum DateErorCode_t{
  *  dateCreate         - Creates a new date (in the calendar)
  * @param day- the day in the month (of course positive and according to the month)
  * @param month- month you want (if you enter febuary please check which year)
- * @param year-  the year we want to enter (we have positive years so deal whith this)
+ * @param year-  the year we want to enter
+ * @param copyFunc- for the new date standart
+ * @param freeFunc- same as the copy
+ * @param compFunc- comparison
+ * @param advanceFunc- the ++ operator
  * @return
  *
  * NULL- if the requirement don't mach the enter
  * date- otherwise
  */
-Date dateCreate(int day, int month, int year);
+Date dateCreate(int day, int month, int year,
+                CopyRefDate copyFunc, FreeRefDate freeFunc,
+                CopmRefDate compFunc, RefDateAdvance advanceFunc,
+                DifferenceCalculator diffFunc, ReferanceDate refDate);
 
 
 /**
@@ -154,8 +199,14 @@ DateErorCode intDateAdvance(Date date, int advance);
 
 /**
  * dateInitialiser    -create a point of referance to calculate
+ * @param copyFunc- for the calendar we syncronise with
+ * @param freeFunc- for the calendar we syncronise with
+ * @param compFunc- comparison (for cheking that we didn't mess up)
+ * @param advanceFunc- the ++ operator
  */
-void dateInitialiser();
+void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
+                     CopmRefDate compFunc, RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
+                     ReferanceDate date, YearOneGiver dayOne);
 
 
 #endif //DATE_H

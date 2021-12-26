@@ -22,6 +22,12 @@ struct Date_t{
     int day;
     Months month;
     int year;
+    ReferanceDate outerDate;
+    CopyRefDate copyFunc;
+    FreeRefDate freeRefDate;
+    CopmRefDate copmRefDate;
+    RefDateAdvance refDateAdvance;
+    DifferenceCalculator diffFunc;
 };
 
 static bool leapYearChecker(int year)
@@ -62,13 +68,13 @@ static int yearCalculator(int year)
     return sum;
 }
 
-Date dateCreate(int day, int month, int year)
+Date dateCreate(int day, int month, int year,
+                CopyRefDate copyFunc, FreeRefDate freeFunc,
+                CopmRefDate compFunc, RefDateAdvance advanceFunc,
+                DifferenceCalculator diffFunc,ReferanceDate refDate)
 {
-    if(year<0)
-    {
-        return NULL;
-    }
-    if(month<JAN||month>DEC)
+    if(month<JAN||month>DEC||year<diffFunc()||!copyFunc||!freeFunc||
+    !compFunc||!advanceFunc||!diffFunc)
     {
         return NULL;
     }
@@ -82,6 +88,17 @@ Date dateCreate(int day, int month, int year)
     {
         return NULL;
     }
+    new->copyFunc=copyFunc;
+    new->outerDate=new->copyFunc(refDate);
+    if(!new->outerDate)
+    {
+        free(new);
+        return NULL;
+    }
+    new->freeRefDate=freeFunc;
+    new->copmRefDate=compFunc;
+    new->refDateAdvance=advanceFunc;
+    new->diffFunc=diffFunc;
     new->day=day;
     new->month=month;
     new->year=year;
@@ -94,6 +111,10 @@ void dateDestroy(Date date)
     {
         return;
     }
+    if(date->outerDate)
+    {
+        date->freeRefDate(date->outerDate);
+    }
     free(date);
 }
 
@@ -103,7 +124,9 @@ Date dateCopy(Date date)
     {
         return NULL;
     }
-    return dateCreate(date->day,date->month,date->year);
+    return dateCreate(date->day,date->month,date->year,date->copyFunc,
+                      date->freeRefDate,date->copmRefDate,date->refDateAdvance,
+                      date->diffFunc,date->outerDate);
 }
 
 bool dateEquals(Date date1, Date date2)
@@ -163,7 +186,7 @@ bool dateIsValid(Date date)
     {
         return false;
     }
-    if(date->year<0)
+    if(date->year<date->diffFunc())
     {
         return false;
     }
@@ -197,6 +220,7 @@ DateErorCode dateAdvance(Date date)
     {
         return DATE_ERROR;
     }
+    date->refDateAdvance(date->outerDate);
     yearFixer(date->year);
     if(date->day==dayInMonth[date->month])
     {
@@ -233,9 +257,12 @@ DateErorCode intDateAdvance(Date date, int advance)
     return DATE_SUCSESS;
 }
 
-void dateInitialiser()
+void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
+                     CopmRefDate compFunc, RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
+                     ReferanceDate date, YearOneGiver dayOne)
 {
     first= malloc(sizeof(struct Date_t));
-    first->initialisationDate= dateCreate(1,1,0);
+    first->initialisationDate= dateCreate(dayOne()->day,dayOne()->month,dayOne()->year,
+                                          copyFunc,freeFunc,compFunc,advanceFunc,diffFunc,date);
     first->times=0;
 }
