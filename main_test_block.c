@@ -1,7 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+//teh files we are testing
 #include "AmountSet.h"
+#include "Date.h"
+
+void* dateCp(void *date)
+{
+    return dateCopy(date);
+}
+
+void freeDate(void* date)
+{
+    dateDestroy(date);
+}
+
+int datecomp(void* date1, void* date2)
+{
+    return dateCompeare(date1, date2);
+}
+
 
 void* intCopy(void* org)
 {
@@ -110,6 +129,19 @@ int main()
     {
         printf("test 9 failed\n");
         asDestroy(liscp);
+        return 0;
+    }
+    AmountSet dataSet= asCreate(dateCp,freeDate,datecomp,2);
+    dateInitialiser();
+    for(i=0; i<10; i++)
+    {
+        if(asRegister(dataSet, dateGenerate())!=AS_SUCCESS)
+        {
+            return 0;
+        }
+    }
+    if(asCompare(liscp,dataSet)!=1)
+    {
         return 0;
     }
     asDestroy(liscp);

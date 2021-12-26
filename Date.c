@@ -185,20 +185,11 @@ int dateCompeare(Date date1, Date date2)
 
 Date dateGenerate()
 {
-    if(first->times==0)
-    {
-        first->times++;
-        Date toSend=first->initialisationDate;
-        if(dateAdvance(first->initialisationDate)==DATE_SUCSESS)
-        {
-            return toSend;
-        }
-        return NULL;
-    }
+    first->times++;
+    Date toSend=first->initialisationDate;
     if(dateAdvance(first->initialisationDate)==DATE_SUCSESS)
     {
-        first->times++;
-        return first->initialisationDate;
+        return toSend;
     }
     return NULL;
 }
@@ -247,6 +238,7 @@ DateErorCode intDateAdvance(Date date, int advance)
 
 void dateInitialiser()
 {
+    first= malloc(sizeof(struct Date_t));
     first->initialisationDate= dateCreate(1,1,0);
     first->times=0;
 }
