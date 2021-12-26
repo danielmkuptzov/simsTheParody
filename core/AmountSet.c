@@ -237,3 +237,12 @@ CompareASElements asGetCompeare(AmountSet set)
     }
     return setGetComp(set->components);
 }
+
+int asGetType(AmountSet set)
+{
+    if(!set)
+    {
+        return -1;
+    }
+    return set->type;
+}

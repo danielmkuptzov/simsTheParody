@@ -289,6 +289,10 @@ FreeASElement asGetFree(AmountSet set);
  */
 CompareASElements asGetCompeare(AmountSet set);
 
+/**
+ * asGetType- give the type of the amountSet
+ */
+int asGetType(AmountSet set);
 
 /**
  * Macro for iterating over a set.

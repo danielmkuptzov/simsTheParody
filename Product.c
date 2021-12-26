@@ -5,12 +5,39 @@
 
 #include "Product.h"
 
+#define CAP_MIN 'A'
+#define CAP_MAX 'Z'
+#define LOW_MIN 'a'
+#define LOW_MAX 'z'
+
 static char* stringDup(char* str)
 {
     char* copy = malloc(strlen(str) + 1);
     return copy ? strcpy(copy, str) : NULL;
 }
 
+static char *casingFix(bool upperCase, char *fixstring)
+{
+    if(!(upperCase)&&((fixstring[0]>=CAP_MIN)&&(fixstring[0]<=CAP_MAX)))
+    {
+        fixstring[0]=fixstring[0]-CAP_MIN+LOW_MIN;
+    }
+    if(upperCase&&((fixstring[0]>=LOW_MIN)&&(fixstring[0]<=LOW_MAX)))
+    {
+        fixstring[0]=fixstring[0]-LOW_MIN+CAP_MIN;
+    }
+    return fixstring;
+}
+
+static int nameComparison(char* first, char*second)
+{
+    if(((first[0]>=CAP_MIN)&&(first[0]<=CAP_MAX))||((second[0]>=CAP_MIN)&&(second[0]<=CAP_MAX)))
+    {
+        char* mainName=   casingFix(true,stringDup(first));
+        char* secondName= casingFix(true,stringDup(first));
+    }
+
+}
 
 // Product struct - represents a product in MatamIkya
 struct product_t {
@@ -25,10 +52,10 @@ struct product_t {
     AmountSet components;
 };
 
-Product productCreate(ProductIdGenerator id, char* name, ProductAmountType type,
+Product productCreate(int id, char* name, ProductAmountType type,
                       CopyProductData copyData, FreeData freeFunc, Date dateCre,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
-                      ProductCompCmp compCmp, ProductData data)
+                      ProductCompCmp compCmp, ProductData data, int CompType)
 {
     Product new= malloc(sizeof(struct product_t));
     if(!new)
@@ -42,14 +69,14 @@ Product productCreate(ProductIdGenerator id, char* name, ProductAmountType type,
         free(new);
         return NULL;
     }
-    new->components= asCreate(copyComp,freeComp, compCmp);
+    new->components= asCreate(copyComp,freeComp, compCmp,CompType);
     if(!new->components)
     {
         freeFunc(new->data);
         free(new);
         return NULL;
     }
-    new->creationDate=dateGenerate();
+    new->creationDate= dateCopy(dateCre);
     if(!new->creationDate)
     {
         asDestroy(new->components);
@@ -78,7 +105,8 @@ Product productCopy(Product product)
     }
     Product copy=productCreate(product->id,product->name,product->amount_type,
                          product->copyData,product->freeData,product->creationDate,
-                         NULL,NULL,NULL,product->data);
+                         NULL,NULL,NULL,product->data,
+                         asGetType(product->components));
     if(!copy)
     {
         return NULL;

@@ -140,10 +140,10 @@ typedef struct product_t *Product;
  *         Null- if the requirement don't match
  *         product othrwise
  */
-Product productCreate(ProductIdGenerator id, char* name, ProductAmountType type,
+Product productCreate(int id, char* name, ProductAmountType type,
                       CopyProductData copyData, FreeData freeFunc, Date dateCre,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
-                      ProductCompCmp compCmp, ProductData data);
+                      ProductCompCmp compCmp, ProductData data,int  CompType);
 
 /**
  *   productDestroy           - Deletes an existing product and frees all resources
