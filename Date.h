@@ -8,10 +8,10 @@
  * Date adt
  *
  * Implements a date variable type.
- * The date is calculated by the gregorian calendar (sorry, but this is the standart date).
- * For all functions the date standart is kept in check by the validity program.
+ * The date is calculated by the gregorian calendar (sorry, but this is the standard date).
+ * For all functions the date standard is kept in check by the validity program.
  *
- * @important- please use to initialise the system the function dateInitialiser
+ * @important- please use to initialize the system the function dateInitialiser
  *
  * The following functions are available:
  *   dateCreate         - Creates a new date (in the calendar)
@@ -22,15 +22,15 @@
  *   monthToInt         -Translates a month string to an integer
  *   dateToDays         -Calculates the number of days since 01/01/0000
  *   dateIsValid        -Checks if the date has valid values
- *   dateCompare        -compeares between dates
- *   dateGenerate       -for standartisation in creating objects (could be according to a specific date)
+ *   dateCompare        -compares between dates
+ *   dateGenerate       -for standardisation in creating objects (could be according to a specific date)
  *   dateAdvance        -moves the date a day forward
  *   intDateAdvance     -moves a user requested amount the day
  *   dateInitialiser    -create a point of referance to calculate
  */
 
 /**
- * for our users who can't convert to the standart we give you the option to standart the date
+ * for our users who can't convert to the standard we give you the option to standard the date
  * according to your preaferance
  */
 typedef void* ReferanceDate;
