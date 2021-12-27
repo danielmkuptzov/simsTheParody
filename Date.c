@@ -86,11 +86,14 @@ Date dateCreate(int day, int month, int year,
         return NULL;
     }
     new->copyFunc=copyFunc;
-    new->outerDate=new->copyFunc(refDate);
-    if(!new->outerDate)
+    if(new->copyFunc)
     {
-        free(new);
-        return NULL;
+        new->outerDate=new->copyFunc(refDate);
+        if(!new->outerDate)
+        {
+            free(new);
+            return NULL;
+        }
     }
     new->freeRefDate=freeFunc;
     new->copmRefDate=compFunc;
@@ -108,7 +111,7 @@ void dateDestroy(Date date)
     {
         return;
     }
-    if(date->outerDate)
+    if(date->freeRefDate&&date->outerDate)
     {
         date->freeRefDate(date->outerDate);
     }
