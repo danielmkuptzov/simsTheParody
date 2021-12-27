@@ -51,17 +51,17 @@ static void yearFixer(int year)
 {
     if(leapYearChecker(year))
     {
-        dayInMonth[FEB]=29;
+        dayInMonth[monthToInt(FEB)-1]=29;
         return;
     }
-    dayInMonth[FEB]=28;
+    dayInMonth[monthToInt(FEB)-1]=28;
 }
 
 static int yearCalculator(int year)
 {
     yearFixer(year);
     int sum=0;
-    for(Months i=JAN; i<=DEC; i++)
+    for(Months i=monthToInt(JAN); i<=monthToInt(DEC); i++)
     {
         sum=dayInMonth[i];
     }
@@ -79,7 +79,7 @@ Date dateCreate(int day, int month, int year,
         return NULL;
     }
     yearFixer(year);
-    if(day<MIN_DAY||day>dayInMonth[month])
+    if(day<MIN_DAY||day>dayInMonth[monthToInt(month)-1])
     {
         return NULL;
     }
@@ -157,7 +157,54 @@ int monthToInt(Months month)
     {
         return -1;
     }
-    return dayInMonth[month];
+    if(month==JAN)
+    {
+        return 1;
+    }
+    else if(month==FEB)
+    {
+        return 2;
+    }
+    else if(month==MAR)
+    {
+        return 3;
+    }
+    else if(month== APR)
+    {
+        return 4;
+    }
+    else if(month== MAY)
+    {
+        return 5;
+    }
+    else if(month== JUN)
+    {
+        return 6;
+    }
+    else if(month== JUL)
+    {
+        return 7;
+    }
+    else if(month== AUG)
+    {
+        return 8;
+    }
+    else if(month== SEP)
+    {
+        return 9;
+    }
+    else if(month==OCT)
+    {
+        return 10;
+    }
+    else if(month== NOV)
+    {
+        return 11;
+    }
+    else
+    {
+        return 12;
+    }
 }
 
 int dateToDays(Date date)
@@ -172,7 +219,7 @@ int dateToDays(Date date)
         days+= yearCalculator(i);
     }
     yearFixer(date->year);
-    for (int i = 0; i < date->month; ++i)
+    for (int i = 0; i < monthToInt(date->month); ++i)
     {
         days+=dayInMonth[i];
     }
@@ -191,7 +238,7 @@ bool dateIsValid(Date date)
         return false;
     }
     yearFixer(date->year);
-    if(date->day<MIN_DAY||date->day>dayInMonth[date->month])
+    if(date->day<MIN_DAY||date->day>dayInMonth[monthToInt(date->month)-1])
     {
         return false;
     }
@@ -222,7 +269,7 @@ DateErorCode dateAdvance(Date date)
     }
     date->refDateAdvance(date->outerDate);
     yearFixer(date->year);
-    if(date->day==dayInMonth[date->month])
+    if(date->day==dayInMonth[monthToInt(date->month)])
     {
         if(date->month==DEC)
         {

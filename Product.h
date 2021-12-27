@@ -31,6 +31,7 @@
  *   productSetAdditionalData -for changing the additional data
  *   productGetName           -for getting the name of the product
  *   productAmountChecker     -testing function to determine if the amount is legal to the product
+ *   productComponentFilter   -for filtering purposes
  */
 
 /** Type for additional custom data of a product */
@@ -90,6 +91,25 @@ typedef void (*FreeProductComponent)(ProductComp);
  * ProductComp can't be NULL, we cant compeare whith NULL.
  */
 typedef int (*ProductCompCmp)(ProductComp,ProductComp);
+
+/**
+* Use this type to pass extra information needed by the filtering function
+* when calling listFilter. (See the example for a FilterListElement function)
+*/
+typedef void* ComponentFilterKey;
+
+/**
+* Function used for creating a filtered copy of a set.
+* A element is said to pass filtering if the function returns true
+* For example, the following function can be used to filter a list of strings
+* from short strings:
+* @code
+* bool isShorterThan(SetElement str, SetFilterKey length) {
+*   return strlen(str) < *(int*) length;
+* }
+* @endcode
+*/
+typedef bool(*FilterComponent)(ProductComp,ComponentFilterKey);
 
 /** Type for specifying what is a valid amount for a product.
  * For a INTEGER_AMOUNT product, a valid amount is an amount which is
@@ -195,7 +215,7 @@ const ProductAmountType productGetType(Product product);
  * NULL- if the product doesn't have a components or wrong format
  * amount set othewise
  */
-AmountSet productGetComponent(Product product);
+const AmountSet productGetComponent(Product product);
 
 /**
  *   productAddComponent      -for adding to components
@@ -257,8 +277,16 @@ const char*  productGetName(Product product);
  *   PRODUCT_WRONG_AMOUNT -the amount was wrong
  *   PRODUCT_WRONG_FORMAT -the type or the amount was illegal
  *   PRODUCT_SUCSESS -the amount is ok
- *
  */
 ProductErrorCode productAmountChecker(ProductAmountType type, double amount);
 
+/**
+ * productComponentFilter   -for filtering purposes
+ * @param filterFunc
+ * @param key
+ * @return
+ *   NULL- if the filtering or the component were problematic
+ *   amountset elsewise
+ */
+AmountSet productComponentFilter(FilterComponent filterFunc, ComponentFilterKey key);
 #endif //DANIELCITY_PRODUCT_H

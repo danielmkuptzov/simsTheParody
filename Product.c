@@ -9,6 +9,7 @@
 #define CAP_MAX 'Z'
 #define LOW_MIN 'a'
 #define LOW_MAX 'z'
+#define DECA 10
 
 static char* stringDup(char* str)
 {
@@ -31,12 +32,22 @@ static char *casingFix(bool upperCase, char *fixstring)
 
 static int nameComparison(char* first, char*second)
 {
+    char* mainName=NULL;
+    char* secondName=NULL;
     if(((first[0]>=CAP_MIN)&&(first[0]<=CAP_MAX))||((second[0]>=CAP_MIN)&&(second[0]<=CAP_MAX)))
     {
-        char* mainName=   casingFix(true,stringDup(first));
-        char* secondName= casingFix(true,stringDup(first));
+        mainName=   casingFix(true,stringDup(first));
+        secondName= casingFix(true,stringDup(first));
     }
-
+    else
+    {
+        mainName=   casingFix(false,stringDup(first));
+        secondName= casingFix(false,stringDup(first));
+    }
+    int diff= strcmp(mainName,secondName);
+    free(mainName);
+    free(secondName);
+    return diff;
 }
 
 // Product struct - represents a product in MatamIkya
@@ -121,95 +132,106 @@ Product productCopy(Product product)
     return copy;
 }
 
-/**
- *   productEquals            -checks if the products are the same
- * @param first
- * @param secont
- * @return
- * 0- same
- * positive-  first> second
- * negative-  second> first
- */
 int productEquals(Product first, Product secont)
 {
+    if(nameComparison(first->name,secont->name)==0)
+    {
+        return 0;
+    }
+    return first->id-secont->id;
 }
 
-/**
- *   productGetId             -for serching purposes
- * @param product
- * @return
- * -1 if the imput is problematic
- * id otherwise
- */
-const int productGetId(Product product);
+const int productGetId(Product product)
+{
+    if(!product)
+    {
+        return -1;
+    }
+    return product->id;
+}
 
-/**
- *   productGetType           -gives the type of the product
- * @param product
- * @return
- * the amount type
- */
-const ProductAmountType productGetType(Product product);
+const ProductAmountType productGetType(Product product)
+{
+    return product->amount_type;
+}
 
-/**
- *   productGetComponent      -givesThe components of the product
- * @param product   -the place where we serch
- * @return
- * NULL- if the product doesn't have a components or wrong format
- * amount set othewise
- */
-AmountSet productGetComponent(Product product);
+const AmountSet productGetComponent(Product product)
+{
+    if(!product)
+    {
+        return NULL;
+    }
+    return product->components;
+}
 
-/**
- *   productAddComponent      -for adding to components
- * @param product -the place we wish to add to
- * @param component -the component we want to add
- * @return
- *   PRODUCT_ERROR -  unknown error
- *   PRODUCT_COMPONENT_ALREADY_EXIST -the component already exist
- *   PRODUCT_WRONG_FORMAT -wrong arguments entered
- *   PRODUCT_SUCSESS -the addition was sucssesful
- */
-ProductErrorCode productAddComponent(Product product, ProductComp component);
+ProductErrorCode productAddComponent(Product product, ProductComp component)
+{
+    if(!product||!component)
+    {
+        return PRODUCT_WRONG_FORMAT;
+    }
+    AmountSetResult resalt=asRegister(product->components,component);
+    if(resalt==AS_ITEM_ALREADY_EXISTS)
+    {
+        return PRODUCT_COMPONENT_ALREADY_EXIST;
+    }
+    if(resalt==AS_SUCCESS)
+    {
+        return PRODUCT_SUCSESS;
+    }
+    return PRODUCT_ERROR;
+}
 
-/**
- *   productRemoveComponent   -for removing component
- * @param product -the place we need to clean
- * @param component -the element we remove
- * @return
- *   PRODUCT_ERROR -unknown error
- *   PRODUCT_COMPONENT_DOES_NOT_EXIST -the element wasn't found
- *   PRODUCT_WRONG_FORMAT- wrong inpud data
- *   PRODUCT_SUCSESS- the process was sucssesful
- */
-ProductErrorCode productRemoveComponent(Product product, ProductComp component);
+ProductErrorCode productRemoveComponent(Product product, ProductComp component)
+{
+    if(!product||!component)
+    {
+        return PRODUCT_WRONG_FORMAT;
+    }
+    AmountSetResult resalt= asDelete(product->components,component);
+    if(resalt==AS_ITEM_DOES_NOT_EXIST)
+    {
+        return PRODUCT_COMPONENT_DOES_NOT_EXIST;
+    }
+    if(resalt==AS_SUCCESS)
+    {
+        return PRODUCT_SUCSESS;
+    }
+    return PRODUCT_ERROR;
+}
 
-/**
- *   productGetAdditionalData -for seeing the additional data
- * @param product -the product we want to get the additional information
- * @return
- */
-const ProductData productGetAdditionalData(Product product);
+const ProductData productGetAdditionalData(Product product)
+{
+    if(!product)
+    {
+        return NULL;
+    }
+    return product->data;
+}
 
-/**
- *   productSetAdditionalData -for changing the additional data
- * @param product -the product we want to change
- * @param data - the data we want to enter
- * @return
- *   PRODUCT_ERROR -for every error
- *   PRODUCT_WRONG_FORMAT- null arguments
- *   PRODUCT_SUCSESS -the process was sucssesful
- */
-ProductErrorCode productSetAdditionalData(Product product, ProductData data);
+ProductErrorCode productSetAdditionalData(Product product, ProductData data)
+{
+    if(!product||!data||product->copyData)
+    {
+        return PRODUCT_WRONG_FORMAT;
+    }
+    ProductData tmpData=product->copyData(data);
+    if(!tmpData)
+    {
+        return PRODUCT_ERROR;
+    }
+    product->data=tmpData;
+    return PRODUCT_SUCSESS;
+}
 
-/**
- *   productGetName           -for getting the name of the product
- * @param product- the product we need the name of
- * @return
- * NULL -wrong format or problems
- * name otherwise
- */
-const char*  productGetName(Product product);
+const char*  productGetName(Product product)
+{
+    if(!product)
+    {
+        return NULL;
+    }
+    return product->name;
+}
 
 /**
  *   productAmountChecker     -testing function to determine if the amount is legal to the product
@@ -222,6 +244,23 @@ const char*  productGetName(Product product);
  *   PRODUCT_SUCSESS -the amount is ok
  *
  */
-ProductErrorCode productAmountChecker(ProductAmountType type, double amount);
+ProductErrorCode productAmountChecker(ProductAmountType type, double amount)
+{
+    double left=DECA*amount - ((int)(DECA*amount);
+    if((left>0.0&&left<0.9&&((type==INTEGER_AMOUNT)||(left>0.5&&left<0.4&&type==HALF_INTEGER_AMOUNT))))
+    {
+        return PRODUCT_WRONG_AMOUNT;
+    }
+
+}
 
 
+/**
+ * productComponentFilter   -for filtering purposes
+ * @param filterFunc
+ * @param key
+ * @return
+ *   NULL- if the filtering or the component were problematic
+ *   amountset elsewise
+ */
+AmountSet productComponentFilter(FilterComponent filterFunc, ComponentFilterKey key);
