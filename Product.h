@@ -288,5 +288,5 @@ ProductErrorCode productAmountChecker(ProductAmountType type, double amount);
  *   NULL- if the filtering or the component were problematic
  *   amountset elsewise
  */
-AmountSet productComponentFilter(FilterComponent filterFunc, ComponentFilterKey key);
+AmountSet productComponentFilter(Product product, FilterComponent filterFunc, ComponentFilterKey key);
 #endif //DANIELCITY_PRODUCT_H

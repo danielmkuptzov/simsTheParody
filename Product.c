@@ -1,5 +1,3 @@
-
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -234,7 +232,8 @@ const char*  productGetName(Product product)
 }
 
 /**
- *   productAmountChecker     -testing function to determine if the amount is legal to the product
+ *  @important- implement this after creating the rational adt
+ *  productAmountChecker     -testing function to determine if the amount is legal to the product
  * @param type -the type of the product
  * @param amount -the amount in question
  * @return
@@ -246,20 +245,15 @@ const char*  productGetName(Product product)
  */
 ProductErrorCode productAmountChecker(ProductAmountType type, double amount)
 {
-    double left=DECA*amount - ((int)(DECA*amount);
-    if((left>0.0&&left<0.9&&((type==INTEGER_AMOUNT)||(left>0.5&&left<0.4&&type==HALF_INTEGER_AMOUNT))))
-    {
-        return PRODUCT_WRONG_AMOUNT;
-    }
+    return PRODUCT_SUCSESS;
 }
 
+AmountSet productComponentFilter(Product product, FilterComponent filterFunc, ComponentFilterKey key)
+{
+   if(!product||!product->components||!filterFunc||!key)
+   {
+       return NULL;
+   }
+   return asFilter(product->components,filterFunc, key);
+}
 
-/**
- * productComponentFilter   -for filtering purposes
- * @param filterFunc
- * @param key
- * @return
- *   NULL- if the filtering or the component were problematic
- *   amountset elsewise
- */
-AmountSet productComponentFilter(FilterComponent filterFunc, ComponentFilterKey key);

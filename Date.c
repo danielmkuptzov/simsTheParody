@@ -326,7 +326,9 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                      ReferanceDate date, YearOneGiver dayOne)
 {
     first= malloc(sizeof(struct Date_t));
-    first->initialisationDate= dateCreate(dayOne()->day,dayOne()->month,dayOne()->year,
+    Date dateOne=dayOne();
+    first->initialisationDate= dateCreate(dateOne->day,dateOne->month,dateOne->year,
                                           copyFunc,freeFunc,compFunc,advanceFunc,diffFunc,date);
+    dateDestroy(dateOne);
     first->times=0;
 }
