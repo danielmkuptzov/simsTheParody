@@ -247,6 +247,10 @@ bool dateIsValid(Date date)
 
 int dateCompeare(Date date1, Date date2)
 {
+    if(dateDifference(date1,date2)==0||date1->diffFunc(date1->outerDate,date2->outerDate)==0)
+    {
+        return 0;
+    }
     return dateToDays(date1)- dateToDays(date2);
 }
 
@@ -286,11 +290,11 @@ DateErorCode dateAdvance(Date date)
     return DATE_SUCSESS;
 }
 
-DateErorCode intDateReturn(Date date, int back)
+static void intDateReturn(Date date, int back)
 {
     if(!dateIsValid(date))
     {
-        return WRONG_MONTH;
+        return;
     }
     Date tmpDate= dateCopy(date);
     for (int i = 0; i < back; ++i)
@@ -318,15 +322,18 @@ DateErorCode intDateReturn(Date date, int back)
     date->year=tmpDate->year;
     date->month=tmpDate->month;
     date->day=tmpDate->day;
-    return DATE_SUCSESS;
 }
 
 void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                      CopmRefDate compFunc, RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
-                     ReferanceDate date, YearOneGiver dayOne)
+                     ReferanceDate date)
 {
     first= malloc(sizeof(struct Date_t));
-    Date dateOne=dayOne();
+    Date dateOne= dateCreate(1,1,0);
+    if(intDateReturn(dateOne,diffFunc())!=DATE_SUCSESS)
+    {
+        return;
+    }
     first->initialisationDate= dateCreate(dateOne->day,dateOne->month,dateOne->year,
                                           copyFunc,freeFunc,compFunc,advanceFunc,diffFunc,date);
     dateDestroy(dateOne);

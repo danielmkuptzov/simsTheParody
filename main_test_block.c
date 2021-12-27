@@ -49,13 +49,26 @@ bool intFilter(void* data, void* limit)
     return false;
 }
 
+void intAdvance(void* org)
+{
+    (*(int*)org)++;
+}
+
+int diffCulc()
+{
+   return 3;
+}
+
+
+
 int main()
 {
-    AmountSet dateSet= asCreate(dateCp,freeDate,datecomp,2);
-    dateInitialiser(intCopy,intDest,intCompare,,,,);
+    int j=0;
+    AmountSet dateSet= asCreate(dateCp,freeDate,datecomp,1);
+    dateInitialiser(intCopy,intDest,intCompare,intAdvance,diffCulc,&j);
     for(int i=0; i<10; i++)
     {
-        if(asRegister(dataSet, dateGenerate())!=AS_SUCCESS)
+        if(asRegister(dateSet, dateGenerate())!=AS_SUCCESS)
         {
             return 0;
         }

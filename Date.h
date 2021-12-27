@@ -25,7 +25,6 @@
  *   dateCompare        -compares between dates
  *   dateGenerate       -for standardisation in creating objects (could be according to a specific date)
  *   dateAdvance        -moves the date a day forward
- *   intDateAdvance     -moves a user requested amount the day
  *   dateInitialiser    -create a point of referance to calculate
  */
 
@@ -48,7 +47,7 @@ typedef void (*FreeRefDate)(ReferanceDate);
 /**
  * comparison function
  */
-typedef int(*CopmRefDate)(ReferanceDate,ReferanceDate);
+typedef int (*CopmRefDate)(ReferanceDate,ReferanceDate);
 
 
 /**
@@ -62,11 +61,6 @@ typedef void(*RefDateAdvance)(ReferanceDate);
 typedef int (*DifferenceCalculator)();
 
 typedef struct Date_t *Date;
-
-/**
- * gives the first day according to the new format
- */
-typedef Date(*YearOneGiver)();
 
 typedef enum months{ JAN=1,FEB=2,MAR=3,APR=4,MAY=5,JUN=6,JUL=7,AUG=8,SEP=9,OCT=10,NOV=11,DEC=12} Months;
 
@@ -186,18 +180,6 @@ Date dateGenerate();
 DateErorCode dateAdvance(Date date);
 
 /**
- * intDateAdvance     -moves a user requested amount the day backwards
- * @param date the date we need to advance
- * @param advance the amount of days needed. (positive amount)
- * @return
- * DATE_ERROR- null argument or positive days
- * WRONG_MONTH- wrong format
- * NEGATIVE_YEAR- wrong format
- * DATE_SUCSESS- the operation ended sucsessfuly
- */
-DateErorCode intDateReturn(Date date, int back);
-
-/**
  * dateInitialiser    -create a point of referance to calculate
  * @param copyFunc- for the calendar we syncronise with
  * @param freeFunc- for the calendar we syncronise with
@@ -206,7 +188,7 @@ DateErorCode intDateReturn(Date date, int back);
  */
 void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                      CopmRefDate compFunc, RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
-                     ReferanceDate date, YearOneGiver dayOne);
+                     ReferanceDate date);
 
 
 #endif //DATE_H
