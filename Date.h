@@ -14,18 +14,13 @@
  * @important- please use to initialize the system the function dateInitialiser
  *
  * The following functions are available:
- *   dateCreate         - Creates a new date (in the calendar)
+ *   dateInitialiser    -create a point of referance to calculate
+ *   dateGenerate       -for standartisation in creating objects
  *   dateDestroy        - Deletes an existing date and frees all resources
  *   dateCopy           - Copies an existing date
- *   dateEquals         -checks if the dates are the same
- *   dateDifference     -Returns the number of days between the dates
- *   monthToInt         -Translates a month string to an integer
- *   dateToDays         -Calculates the number of days since 01/01/0000
- *   dateIsValid        -Checks if the date has valid values
- *   dateCompare        -compares between dates
- *   dateGenerate       -for standardisation in creating objects (could be according to a specific date)
- *   dateAdvance        -moves the date a day forward
- *   dateInitialiser    -create a point of referance to calculate
+ *   dateToDays         -Calculates the number of days since initialisation Date
+ *   dateCompare        -compeares between dates
+ *
  */
 
 /**
@@ -44,11 +39,6 @@ typedef ReferanceDate(*CopyRefDate)(ReferanceDate);
  */
 typedef void (*FreeRefDate)(ReferanceDate);
 
-/**
- * comparison function
- */
-typedef int (*CopmRefDate)(ReferanceDate,ReferanceDate);
-
 
 /**
  * advancement function
@@ -59,6 +49,11 @@ typedef void(*RefDateAdvance)(ReferanceDate);
  * year difference calculator for standatisation
  */
 typedef int (*DifferenceCalculator)();
+
+/**
+ * function for moving the clock back
+ */
+typedef int (*DayOne)();
 
 typedef struct Date_t *Date;
 
@@ -71,36 +66,31 @@ typedef enum DateErorCode_t{
     DATE_SUCSESS
 }DateErorCode;
 
-
 /**
- *  dateCreate         - Creates a new date (in the calendar)
- * @param day- the day in the month (of course positive and according to the month)
- * @param month- month you want (if you enter febuary please check which year)
- * @param year-  the year we want to enter
- * @param copyFunc- for the new date standart
- * @param freeFunc- same as the copy
- * @param compFunc- comparison
+ *   dateInitialiser    -create a point of referance to calculate
+ * @param copyFunc- for the calendar we syncronise with
+ * @param freeFunc- for the calendar we syncronise with
+ * @param compFunc- comparison (for cheking that we didn't mess up)
  * @param advanceFunc- the ++ operator
- * @return
- *
- * NULL- if the requirement don't mach the enter
- * date- otherwise
  */
-Date dateCreate(int day, int month, int year,
-                CopyRefDate copyFunc, FreeRefDate freeFunc,
-                CopmRefDate compFunc, RefDateAdvance advanceFunc,
-                DifferenceCalculator diffFunc, ReferanceDate refDate);
-
+void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
+                     RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
+                     ReferanceDate date, DayOne firstDay);
 
 /**
- * dateDestroy        - Deletes an existing date and frees all resources
+ *   dateGenerate       -for standartisation in creating objects
+ * @return date generated according to the
+ */
+Date dateGenerate();
+
+/**
+ *   dateDestroy        - Deletes an existing date and frees all resources
  * @param date- the date we whish to destroy
  */
 void dateDestroy(Date date);
 
-
 /**
- * dateCopy           - Copies an existing date
+ *   dateCopy           - Copies an existing date
  * @param date - the date we wish to copy
  * @return
  * NULL- for wrong format or null argument
@@ -109,35 +99,7 @@ void dateDestroy(Date date);
 Date dateCopy(Date date);
 
 /**
- * dateEquals         -checks if the dates are the same
- * @param date1 -the date we check
- * @param date2 - the date we check
- * @return
- * true- the same dates
- * false- otherwise
- */
-bool dateEquals(Date date1, Date date2);
-
-/**
- *   dateDifference     -Returns the number of days between the dates
- * @param date1 same as the function above
- * @param date2 same as function above
- * @return
- * 0 if equals
- * positive- date 1 greater than date2
- * negative- the option that left
- */
-int dateDifference(Date date1, Date date2);
-
-/**
- * monthToInt         -Translates a month string to an integer
- * @param month- the month you wish to convert
- * @return month's order
- */
-int monthToInt(Months month);
-
-/**
- *   dateToDays         -Calculates the number of days since 01/01/0000
+ *   dateToDays         -Calculates the number of days since initialisation Date
  * @param date- the date we need to convert
  * @return
  * -1 if the date was in the wrong format
@@ -146,50 +108,12 @@ int monthToInt(Months month);
 int dateToDays(Date date);
 
 /**
- *    dateIsValid        -Checks if the date has valid values
- * @param date the date we need to check the validity of
- * @return
- * false- null argument or illegal date
- * true- oterwise
- */
-bool dateIsValid(Date date);
-
-/**
  *    dateCompare        -compeares between dates
  * @param date1
  * @param date2
  * @return standart comparison returns
  */
 int dateCompeare(Date date1, Date date2);
-
-/**
- *    dateGenerate       -for standartisation in creating objects
- * @return date generated according to the
- */
-Date dateGenerate();
-
-/**
- *   dateAdvance        -moves the date a day forward
- * @param date the date we wish to advance
- * @return
- * DATE_ERROR- null argument was send
- * WRONG_MONTH- wrong format
- * NEGATIVE_YEAR- wrong format
- * DATE_SUCSESS- the date is one day forward
- */
-DateErorCode dateAdvance(Date date);
-
-/**
- * dateInitialiser    -create a point of referance to calculate
- * @param copyFunc- for the calendar we syncronise with
- * @param freeFunc- for the calendar we syncronise with
- * @param compFunc- comparison (for cheking that we didn't mess up)
- * @param advanceFunc- the ++ operator
- */
-void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
-                     CopmRefDate compFunc, RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
-                     ReferanceDate date);
-
 
 #endif //DATE_H
 

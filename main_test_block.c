@@ -73,18 +73,5 @@ int main()
             return 0;
         }
     }
-    if(asCompare(dataSet,liscp)!=1)
-    {
-        return 0;
-    }
-    asDestroy(liscp);
-    if(asClear(filtered)!=AS_SUCCESS)
-    {
-        printf("final test failed\n");
-        asDestroy(filtered);
-        return 0;
-    }
-    asDestroy(filtered);
-    asDestroy(dataSet);
     return 0;
 }
