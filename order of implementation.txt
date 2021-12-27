@@ -1,34 +1,36 @@
-product: date and amountset needed
+product: date and amountset needed (to add rational)
 
-person:date, product and amountset needed
+Rational
 
-shopProd: date, product and amountset needed
+person:date, product, Rational and amountset needed
 
-order:date, product and amountset needed
+shopProd: date, product, Rational and amountset needed
 
-apartment: date, product, person and amountset needed
+order:date, product, Rational and amountset needed
 
-floor: date, product, person, apartment and amountset needed
+apartment: date, product, person, Rational and amountset needed
 
-house: date, apartment, product, person, date and amountset needed
+floor: date, product, person, apartment, Rational and amountset needed
 
-matamikya:date, product, order and amountset needed
+house: date, apartment, product, person, date, Rational and amountset needed
 
-kanyon:date, product, matamikya, date and amountset needed
+matamikya:date, product, order, Rational and amountset needed
 
-street: date, product, kanyon, house, person and amountset needed
+kanyon:date, product, matamikya, date, Rational and amountset needed
+
+street: date, product, kanyon, house, person, Rational and amountset needed
 
 medBag: date and amountset needed
 
 hospital: medBag, date and amountset needed
 
-cityqur: date, product, hospital, streed and amountset needed
+cityqur: date, product, hospital, streed, Rational and amountset needed
 
 class: date, person and amountset needed
 
 school: date, class and amountset needed 
 
-neighorhood: date, product, cityqur, school and amountset needed
+neighorhood: date, product, cityqur, school, Rational and amountset needed
 
 profesion: date, person and amountset needed
 
@@ -36,9 +38,9 @@ facalty: date, person, profession and amountset needed
 
 university: date, facalty, profession, person and amountset needed
 
-goal for first project: city: date, product, university, neightborhood and amountset needed
+goal for first project: city: date, product, university, neightborhood, Rational and amountset needed
 
-cityadmin: date, product, person, city and amountset needed
+cityadmin: date, product, person, city, Rational and amountset needed
 
 rank: date and amountset needed
 
@@ -56,9 +58,9 @@ pbox: date, wheponry, neighborhood, prank and policeman needed
 
 pstation: date, city, pbox, prank, policeman, wepon and amountset needed
 
-region: date, product, pstation, cityadmin, person and amountset needed
+region: date, product, pstation, cityadmin, person, Rational and amountset needed
 
-regionadmin: date, product, region, person and amountset needed
+regionadmin: date, product, region, person, Rational and amountset needed
 
 vehicles: date needed
 
@@ -92,42 +94,42 @@ corps: date, soldier, mrank, region, legion, vehicle and amountset needed
 
 army: date, soldier, mrank, region, corps, vehicle and amountset needed
 
-farm: person, product and amountset needed
+farm: person, product, Rational and amountset needed
 
-village: date, product, farm, person and amountset needed
+village: date, product, Rational, farm, person and amountset needed
 
 pcommand: date, pstation, region, pramk and amountset needed
 
-ministry: date, product, person and amountset needed
+ministry: date, product, person, Rational and amountset needed
 
-state: date, product, regionadmin, ministry, village, mrank, army, person and amountset needed
+state: date, product, regionadmin, ministry, village, mrank, army, person, Rational and amountset needed
 
-goverment: date, product, state, person, mrank, ministry and amountset needed
+goverment: date, product, state, person, mrank, ministry, Rational and amountset needed
 
 policehq: date, prank, pcommand, state and amountset needed
 
-stateregion: date, product, policehq, government, person and amountset needed
+stateregion: date, product, policehq, government, person, Rational and amountset needed
 
 armygrp: date, mrank, state, army and amountset needed
 
-statereggov: date,product, stateregion, armygrp, person and amountset needed
+statereggov: date,product, stateregion, armygrp, person, Rational and amountset needed
 
-continent: date, product, statereggov, person and amountset needed
+continent: date, product, statereggov, person, Rational and amountset needed
 
 combatantcomm: date, continent, mrank, armygrp and amountset needed
 
-continentgov: date, product, continent, mrank, combatantcomm and amountset needed
+continentgov: date, product, continent, mrank, combatantcomm, Rational and amountset needed
 
-planet: date, product, continent, continentgov, mrank, combatcomm and amountset needed
+planet: date, product, continent, continentgov, mrank, combatcomm, Rational and amountset needed
 
 baccount: date and amountset needed
 
 bank: date, person, baccount and amountset needed
 
-planatarygov: date, planet, bank, person and amountset needed
+planatarygov: date, planet, bank, person, product, Rational and amountset needed
 
-factoryblo: date, product, person and amountset needed
+factoryblo: date, product, person, Rational and amountset needed
 
-factory: date,product, factoryblo, person and amountset needed
+factory: date,product, factoryblo, person, Rational and amountset needed
 
 system: date, planet, person, factory, bank and amountset needed
