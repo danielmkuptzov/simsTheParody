@@ -188,7 +188,7 @@ DateErorCode dateAdvance(Date date);
 /**
  * intDateAdvance     -moves a user requested amount the day backwards
  * @param date the date we need to advance
- * @param advance the amount of days needed. (negative amount)
+ * @param advance the amount of days needed. (positive amount)
  * @return
  * DATE_ERROR- null argument or positive days
  * WRONG_MONTH- wrong format

@@ -251,7 +251,6 @@ ProductErrorCode productAmountChecker(ProductAmountType type, double amount)
     {
         return PRODUCT_WRONG_AMOUNT;
     }
-
 }
 
 

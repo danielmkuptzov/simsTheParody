@@ -290,24 +290,27 @@ DateErorCode intDateReturn(Date date, int back)
         return WRONG_MONTH;
     }
     Date tmpDate= dateCopy(date);
-    if(tmpDate->day==1)
+    for (int i = 0; i < back; ++i)
     {
-        if(tmpDate->month==JAN)
+        if(tmpDate->day==1)
         {
-            tmpDate->year--;
-            tmpDate->month=DEC;
-            tmpDate->day=dayInMonth[monthToInt(DEC)-1];
+            if(tmpDate->month==JAN)
+            {
+                tmpDate->year--;
+                tmpDate->month=DEC;
+                tmpDate->day=dayInMonth[monthToInt(DEC)-1];
+            }
+            else
+            {
+                yearFixer(tmpDate->year);
+                tmpDate->month= monthToInt(tmpDate->month)-1;
+                tmpDate->day=dayInMonth[monthToInt(tmpDate->month)-1];
+            }
         }
         else
         {
-            yearFixer(tmpDate->year);
-            tmpDate->month= monthToInt(tmpDate->month)-1;
-            tmpDate->day=dayInMonth[monthToInt(tmpDate->month)-1];
+            tmpDate->day--;
         }
-    }
-    else
-    {
-        tmpDate->day--;
     }
     date->year=tmpDate->year;
     date->month=tmpDate->month;
