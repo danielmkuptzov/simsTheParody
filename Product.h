@@ -30,7 +30,6 @@
  *   productGetAdditionalData -for seeing the additional data
  *   productSetAdditionalData -for changing the additional data
  *   productGetName           -for getting the name of the product
- *   productAmountChecker     -testing function to determine if the amount is legal to the product
  *   productComponentFilter   -for filtering purposes
  */
 
@@ -134,7 +133,6 @@ typedef enum ProductAmountType_t {
  */
 typedef enum ProductErrorCode_t{
     PRODUCT_ERROR,
-    PRODUCT_WRONG_AMOUNT,
     PRODUCT_COMPONENT_ALREADY_EXIST,
     PRODUCT_COMPONENT_DOES_NOT_EXIST,
     PRODUCT_WRONG_FORMAT,
@@ -267,18 +265,6 @@ ProductErrorCode productSetAdditionalData(Product product, ProductData data);
  * name otherwise
  */
 const char*  productGetName(Product product);
-
-/**
- *   productAmountChecker     -testing function to determine if the amount is legal to the product
- * @param type -the type of the product
- * @param amount -the amount in question
- * @return
- *   PRODUCT_ERROR -problems that didn't covered in the description
- *   PRODUCT_WRONG_AMOUNT -the amount was wrong
- *   PRODUCT_WRONG_FORMAT -the type or the amount was illegal
- *   PRODUCT_SUCSESS -the amount is ok
- */
-ProductErrorCode productAmountChecker(ProductAmountType type, double amount);
 
 /**
  * productComponentFilter   -for filtering purposes

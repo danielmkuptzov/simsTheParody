@@ -7,7 +7,6 @@
 #define CAP_MAX 'Z'
 #define LOW_MIN 'a'
 #define LOW_MAX 'z'
-#define DECA 10
 
 static char* stringDup(char* str)
 {
@@ -229,23 +228,6 @@ const char*  productGetName(Product product)
         return NULL;
     }
     return product->name;
-}
-
-/**
- *  @important- implement this after creating the rational adt
- *  productAmountChecker     -testing function to determine if the amount is legal to the product
- * @param type -the type of the product
- * @param amount -the amount in question
- * @return
- *   PRODUCT_ERROR -problems that didn't covered in the description
- *   PRODUCT_WRONG_AMOUNT -the amount was wrong
- *   PRODUCT_WRONG_FORMAT -the type or the amount was illegal
- *   PRODUCT_SUCSESS -the amount is ok
- *
- */
-ProductErrorCode productAmountChecker(ProductAmountType type, double amount)
-{
-    return PRODUCT_SUCSESS;
 }
 
 AmountSet productComponentFilter(Product product, FilterComponent filterFunc, ComponentFilterKey key)
