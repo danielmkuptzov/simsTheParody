@@ -1,6 +1,3 @@
-//
-// Created by danie on 25/12/2021.
-//
 #include <stdlib.h>
 
 #include "Date.h"
@@ -286,21 +283,35 @@ DateErorCode dateAdvance(Date date)
     return DATE_SUCSESS;
 }
 
-DateErorCode intDateAdvance(Date date, int advance)
+DateErorCode intDateReturn(Date date, int back)
 {
     if(!dateIsValid(date))
     {
         return WRONG_MONTH;
     }
-    Date tmpDade= dateCopy(date);
-    for(int i=0; i<advance; i++)
+    Date tmpDate= dateCopy(date);
+    if(tmpDate->day==1)
     {
-        if(dateAdvance(tmpDade)!=DATE_SUCSESS)
+        if(tmpDate->month==JAN)
         {
-            return DATE_ERROR;
+            tmpDate->year--;
+            tmpDate->month=DEC;
+            tmpDate->day=dayInMonth[monthToInt(DEC)-1];
+        }
+        else
+        {
+            yearFixer(tmpDate->year);
+            tmpDate->month= monthToInt(tmpDate->month)-1;
+            tmpDate->day=dayInMonth[monthToInt(tmpDate->month)-1];
         }
     }
-    date= dateCopy(tmpDade);
+    else
+    {
+        tmpDate->day--;
+    }
+    date->year=tmpDate->year;
+    date->month=tmpDate->month;
+    date->day=tmpDate->day;
     return DATE_SUCSESS;
 }
 

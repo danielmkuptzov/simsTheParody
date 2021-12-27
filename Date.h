@@ -186,16 +186,16 @@ Date dateGenerate();
 DateErorCode dateAdvance(Date date);
 
 /**
- * intDateAdvance     -moves a user requested amount the day
+ * intDateAdvance     -moves a user requested amount the day backwards
  * @param date the date we need to advance
- * @param advance the amount of days needed
+ * @param advance the amount of days needed. (negative amount)
  * @return
- * DATE_ERROR- null argument or negative days
+ * DATE_ERROR- null argument or positive days
  * WRONG_MONTH- wrong format
  * NEGATIVE_YEAR- wrong format
  * DATE_SUCSESS- the operation ended sucsessfuly
  */
-DateErorCode intDateAdvance(Date date, int advance);
+DateErorCode intDateReturn(Date date, int back);
 
 /**
  * dateInitialiser    -create a point of referance to calculate
