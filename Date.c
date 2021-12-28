@@ -261,7 +261,7 @@ static int dateDifference(Date date1, Date date2)
     return date1->day-date2->day;
 }
 
-int dateToDays(Date date)
+static int dateToDays(Date date)
 {
     int days=0;
     for (int i = 0; i < date->year; ++i)

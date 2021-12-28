@@ -18,7 +18,6 @@
  *   dateGenerate       -for standartisation in creating objects
  *   dateDestroy        - Deletes an existing date and frees all resources
  *   dateCopy           - Copies an existing date
- *   dateToDays         -Calculates the number of days since initialisation Date
  *   dateCompare        -compeares between dates
  *
  */
@@ -88,15 +87,6 @@ void dateDestroy(Date date);
  * date- otherwise
  */
 Date dateCopy(Date date);
-
-/**
- *   dateToDays         -Calculates the number of days since initialisation Date
- * @param date- the date we need to convert
- * @return
- * -1 if the date was in the wrong format
- * oterwise a positive number
- */
-int dateToDays(Date date);
 
 /**
  *    dateCompare        -compeares between dates
