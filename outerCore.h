@@ -15,28 +15,25 @@
  * type 2 is the date adt. as explained in the previous type, the initialiser supplied as it is.
  *
  * The following functions are available:
+ *   coreBeginner       -the function that you use to begin the date function
  *   coreCreate         -Creates the unit.
  *   coreDestroy        -Deletes an existing unit and frees all resources
  *   coreCopy           -Copies an existing unit
  *   coreCompeare       -compares between amount sets
  *   coreValid          -checks the validity of the unit
  *   coreAddition       -adds two units together
+ *   coreDestroyer      -use it to end the code
  */
 
 /**
  * functions that need to be used seperetly:
- *   dateInitialiser      -create a point of referance to calculate
- *   dateCleanInitializer -destroys the initialization date @you @better @don't @forget @to @do @it
- *                         @after @finnish
  *   dateGenerate         -for standartisation in creating objects
  *   asCreate             - Creates a new empty set
  *   asGetSize            - Returns the size of the set
  *   asContains           - Checks if an element exists in the set
  *   asRegister           - Add a new element into the set
  *   asDelete             - Delete an element completely from the set
- *   asClear              - Deletes all elements from target set
  *   asFilter             -filters the amountset according to the user
- *   AS_FOREACH           - A macro for iterating over the set's elements
  */
 
 /**
