@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "../AmountSet.h"
+#include "../../AmountSet.h"
 #include "set.h"
 
 struct AmountSet_t{

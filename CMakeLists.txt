@@ -15,10 +15,10 @@ set(MTM_FLAGS_RELEASE "${MTM_FLAGS_DEBUG} -DNDEBUG")
 # Set the flags for gcc
 set(CMAKE_C_FLAGS ${MTM_FLAGS_DEBUG})
 
-set(COREPROJ core/AmountSet.c core/List.h core/List.c core/set.h core/set.c)
+set(COREPROJ outerCore/core/AmountSet.c outerCore/core/List.h outerCore/core/List.c outerCore/core/set.h outerCore/core/set.c)
 
 # Add the names of your source files here
-set(C_FILES main_test_block.c AmountSet.h ${COREPROJ} Date.c Date.h Product.c Product.h outerCore.c outerCore.h)
+set(C_FILES main_test_block.c AmountSet.h ${COREPROJ} outerCore/Date.c outerCore/Date.h outerCore/Product.c Product.h outerCore/outerCore.c outerCore.h)
 
 add_executable(danielCity ${C_FILES})
 # Add the names of your source files here

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "Product.h"
+#include "../Product.h"
 
 #define CAP_MIN 'A'
 #define CAP_MAX 'Z'

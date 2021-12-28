@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "set.h"
-#include "list.h"
+#include "List.h"
 
 struct Set_t{
     List  elements;

@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "outerCore.h"
+#include "../outerCore.h"
 
 struct CoreUnit_t{
     int type;
@@ -92,19 +92,51 @@ int coreCompeare(void* first, void* second)
     }
 }
 
-/**
- *   coreValid           -checks the validity of the unit
- * @param unit
- * @return
- */
-bool coreValid(void* unit);
+bool coreValid(void* unit)
+{
+    if(!unit)
+    {
+        return false;
+    }
+    if(((CoreUnit)unit)->type==1&& asValid(((CoreUnit)unit)->element)==false)
+    {
+        return false;
+    }
+    if(((CoreUnit)unit)->type==2&& dateValid(((CoreUnit)unit)->element))
+    {
+        return false;
+    }
+    return true;
+}
 
-/**
- * coreAddition       -adds two units together
- * @param unit1
- * @param unit2
- * @return
- * NULL -if the units are different or null
- * core unit otherwise
- */
-CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2);
+CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2)
+{
+    if(!unit1||!unit2||((CoreUnit)unit1)->type!=((CoreUnit)unit2)->type)
+    {
+        return NULL;
+    }
+    CoreUnit sum= coreCreate(((CoreUnit)unit1)->type,NULL);
+    if(!sum)
+    {
+        return NULL;
+    }
+    if(sum->type==1)
+    {
+        sum->element= asUnite(((CoreUnit)unit1)->element,((CoreUnit)unit2)->element);
+        if(!sum->element)
+        {
+            coreDestroy(sum);
+            return NULL;
+        }
+    }
+    else
+    {
+        sum->element= dateSum(((CoreUnit)unit1)->element,((CoreUnit)unit2)->element);
+        if(!sum->element)
+        {
+            coreDestroy(sum);
+            return NULL;
+        }
+    }
+    return sum;
+}
