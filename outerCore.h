@@ -6,7 +6,7 @@
 #define OUTERCORE_H
 
 #include "outerCore/Date.h"
-#include "AmountSet.h"
+#include "outerCore/AmountSet.h"
 
 /**
  * Outer core switch unit

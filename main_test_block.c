@@ -3,8 +3,7 @@
 #include <string.h>
 
 //teh files we are testing
-#include "AmountSet.h"
-#include "outerCore/Date.h"
+#include "outerCore.h"
 #include "Product.h"
 void* dateCp(void *date)
 {
