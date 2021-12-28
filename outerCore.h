@@ -32,7 +32,10 @@
 typedef enum {
     CORE_ERROR,
     CORE_MEMORY_PROBLEM,
-    CORE_NULL_ARGUMENT
+    CORE_NULL_ARGUMENT,
+    CORE_ADDITION_FAILED,
+    CORE_ELEMENT_EXIST,
+    CORE_ELEMENT_DOES_NOT_EXIST
 }OuterCoreErrors;
 
 /**
@@ -117,13 +120,7 @@ void* coreCopy(void* orgUnit);
 int coreCompeare(void* first, void* second);
 
 /**
- * coreAddition       -adds two units together
- *   coreInsert         -adds to the core (only works with set)
- *   coreRemove         -removes an element (only works with sets)
- *   coreFilter         -filters core according to a criteria (only works with sets)
- *   coreFind           -finds specific element(only works with sets)
- *   coreSize           -returns the size of the element (for date will return -1)
- *   coreDestroyer      -use it to end the code
+ *   coreAddition       -adds two units together
  * @param unit1
  * @param unit2
  * @return
@@ -132,5 +129,17 @@ int coreCompeare(void* first, void* second);
  */
 CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2);
 
-
+/**
+ *   coreInsert         -adds to the core (only works with set)
+ *   coreRemove         -removes an element (only works with sets)
+ *   coreFilter         -filters core according to a criteria (only works with sets)
+ *   coreFind           -finds specific element(only works with sets)
+ *   coreSize           -returns the size of the element (for date will return -1)
+ *   coreDestroyer      -use it to end the code
+ * @param core
+ * @param element
+ * @return
+ * CORE_ERROR,CORE_MEMORY_PROBLEM,CORE_NULL_ARGUMENT,CORE_ADDITION_FAILED,CORE_ELEMENT_EXIST,CORE_ELEMENT_DOES_NOT_EXIST
+ */
+OuterCoreErrors coreInsert(void* core, void* element);
 #endif //OUTERCORE_H
