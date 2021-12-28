@@ -20,7 +20,8 @@ int datecomp(void* date1, void* date2)
 }
 void* intCopy(void* org)
 {
-    int *copy=(int*)org;
+    int *copy= malloc(sizeof (int*));
+    *copy=*(int*)org;
     return copy;
 }
 void intDest(void* org)
@@ -29,7 +30,9 @@ void intDest(void* org)
 }
 int intCompare(void* first, void* second)
 {
-    return *(int*)first-*(int*)second;
+    int* one=first;
+    int* two=second;
+    return one-two;
 }
 bool intFilter(void* data, void* limit)
 {
@@ -78,12 +81,11 @@ int main()
                                    intCopy,intDest,intCompare,&j,2);
     for(int i=0; i<10; i++)
     {
-        if(productAddComponent(product,))
+        if(productAddComponent(product,&i)!=PRODUCT_SUCSESS)
         {
             return 0;
         }
-        productDestroy(product);
     }
-
+    productDestroy(product);
     return 0;
 }

@@ -200,7 +200,6 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                             copyFunc,freeFunc,advanceFunc,diffFunc,date);
     intDateReturn(dateOne,firstDay());
     first->initialisationDate=dateOne;
-    dateDestroy(dateOne);
     first->times=0;
 }
 

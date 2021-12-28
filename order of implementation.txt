@@ -1,4 +1,4 @@
-product: date and amountset needed (to add rational)
+outercore: date and amount set needed
 
 Rational
 
