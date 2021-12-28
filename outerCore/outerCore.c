@@ -1,6 +1,8 @@
 #include <stdlib.h>
 
 #include "../outerCore.h"
+#include "Date.h"
+#include "AmountSet.h"
 
 struct CoreUnit_t{
     int type;

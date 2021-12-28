@@ -6,6 +6,8 @@
 #define PRODUCT_H
 
 #include "outerCore.h"
+#include "outerCore/AmountSet.h"
+#include "outerCore/Date.h"
 
 /**
  * Product adt

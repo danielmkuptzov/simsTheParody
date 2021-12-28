@@ -5,9 +5,6 @@
 #ifndef OUTERCORE_H
 #define OUTERCORE_H
 
-#include "outerCore/Date.h"
-#include "outerCore/AmountSet.h"
-
 /**
  * Outer core switch unit
  *
@@ -38,11 +35,6 @@
  *   asRegister           - Add a new element into the set
  *   asDelete             - Delete an element completely from the set
  *   asClear              - Deletes all elements from target set
- *   asGetFirst           - Sets the internal iterator to the first element
- *                        in the set, and returns it.
- *   asGetNext            - Advances the internal iterator to the next element
- *                         and returns it.
- *   asCompeare           -compares between amount sets
  *   asFilter             -filters the amountset according to the user
  *   AS_FOREACH           - A macro for iterating over the set's elements
  */
@@ -55,12 +47,13 @@ typedef struct CoreUnit_t* CoreUnit;
 /**
  *   coreCreate         -Creates the unit.
  * @param type as we explained prevoiously, this way we overcome the void* problem
- * @param element -the elment itself, note that we whould check the coralation between type and number
+ * @param element -the array of pointers to the functions you wish to send
+ * @param size- the amount of the elements you send
  * @return
  * NULL -if the elemement was null or wasn't same as stated in the type
  * coreUnit otherwise
  */
-CoreUnit coreCreate(int type, void* element);
+CoreUnit coreCreate(int type, void* element, int size);
 
 /**
  *   coreDestroy        -Deletes an existing unit and frees all resources
