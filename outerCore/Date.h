@@ -21,7 +21,6 @@
  *   dateCompare          -compeares between dates
  *   dateCleanInitializer -destroys the initialization date
  *   dateSum              -adds two dates
- *   dateValid            -checks date validity
  */
 
 /**
@@ -112,14 +111,6 @@ void dateCleanInitializer();
  * date- othewise
  */
 Date dateSum(Date date1, Date date2);
-
-/**
- * unitAddition       -adds two units together
- * @param date
- * @return
- * NULL -if the argument was null or problematic
- */
-bool dateValid(Date date);
 
 #endif //DATE_H
 

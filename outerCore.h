@@ -4,6 +4,7 @@
 
 #ifndef OUTERCORE_H
 #define OUTERCORE_H
+#include <stdbool.h>
 
 /**
  * Outer core switch unit
@@ -20,26 +21,63 @@
  *   coreDestroy        -Deletes an existing unit and frees all resources
  *   coreCopy           -Copies an existing unit
  *   coreCompeare       -compares between amount sets
- *   coreValid          -checks the validity of the unit
  *   coreAddition       -adds two units together
+ *   coreInsert         -adds to the core (only works with set)
+ *   coreRemove         -removes an element (only works with sets)
+ *   coreFilter         -filters core according to a criteria (only works with sets)
+ *   coreFind           -finds specific element(only works with sets)
+ *   coreSize           -returns the size of the element (for date will return -1)
  *   coreDestroyer      -use it to end the code
  */
+typedef enum {
+    CORE_ERROR,
+    CORE_MEMORY_PROBLEM,
+    CORE_NULL_ARGUMENT
+}OuterCoreErrors;
 
 /**
- * functions that need to be used seperetly:
- *   dateGenerate         -for standartisation in creating objects
- *   asCreate             - Creates a new empty set
- *   asGetSize            - Returns the size of the set
- *   asContains           - Checks if an element exists in the set
- *   asRegister           - Add a new element into the set
- *   asDelete             - Delete an element completely from the set
- *   asFilter             -filters the amountset according to the user
+ * for our users who can't convert to the standard we give you the option to standard the date
+ * according to your preaferance
  */
+typedef void* ReferanceDate;
+
+/**
+ * for copy purposes
+ */
+typedef ReferanceDate(*CopyRefDate)(ReferanceDate);
+
+/**
+ * for destruction purposes
+ */
+typedef void (*FreeRefDate)(ReferanceDate);
+
+
+/**
+ * advancement function
+ */
+typedef void(*RefDateAdvance)(ReferanceDate);
+
+/**
+ * year difference calculator for standatisation
+ */
+typedef int (*DifferenceCalculator)();
+
+/**
+ * function for moving the clock back
+ */
+typedef int (*DayOne)();
 
 /**
  * the core unit
  */
 typedef struct CoreUnit_t* CoreUnit;
+
+/**
+ * coreBeginner       -the function that you use to begin the date function
+ */
+void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
+                  RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
+                  ReferanceDate date, DayOne firstDay);
 
 /**
  *   coreCreate         -Creates the unit.
@@ -79,14 +117,13 @@ void* coreCopy(void* orgUnit);
 int coreCompeare(void* first, void* second);
 
 /**
- *   coreValid           -checks the validity of the unit
- * @param unit
- * @return
- */
-bool coreValid(void* unit);
-
-/**
  * coreAddition       -adds two units together
+ *   coreInsert         -adds to the core (only works with set)
+ *   coreRemove         -removes an element (only works with sets)
+ *   coreFilter         -filters core according to a criteria (only works with sets)
+ *   coreFind           -finds specific element(only works with sets)
+ *   coreSize           -returns the size of the element (for date will return -1)
+ *   coreDestroyer      -use it to end the code
  * @param unit1
  * @param unit2
  * @return
@@ -94,5 +131,6 @@ bool coreValid(void* unit);
  * core unit otherwise
  */
 CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2);
+
 
 #endif //OUTERCORE_H

@@ -29,7 +29,6 @@
  *                        and returns it.
  *   asCompeare         -compares between amount sets
  *   asFilter           -filters the amountset according to the user
- *   asValid            - checks the validity of the set
  *   asUnite            -unites two sets to one new
  *   AS_FOREACH         - A macro for iterating over the set's elements
  */
@@ -258,16 +257,6 @@ ASElement asGetCurrent(AmountSet set);
  * amount set otherwise
  */
 AmountSet asFilter(AmountSet set, FilterASElement filter, AsFilterKey key);
-
-/**
- *   asValid- checks the fact that the amount set is ok
- *   @param set- the set we need to check vlidity
- *
- *   @return
- *   true- valid
- *   false- otherwise
- */
-bool asValid(AmountSet set);
 
 /**
  * asGetCopy- gives the copy function

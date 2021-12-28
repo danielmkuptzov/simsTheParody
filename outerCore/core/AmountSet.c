@@ -197,20 +197,6 @@ AmountSet asFilter(AmountSet set, FilterASElement filter, AsFilterKey key)
     return asfil;
 }
 
-bool asValid(AmountSet set)
-{
-    if(!set)
-    {
-        return false;
-    }
-    if(set->type<1)
-    {
-        return false;
-    }
-    return true;
-}
-
-
 CopyASElement asGetCopy(AmountSet set)
 {
     if(!set)

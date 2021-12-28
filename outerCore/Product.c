@@ -2,6 +2,8 @@
 #include <string.h>
 
 #include "../Product.h"
+#include "AmountSet.h"
+#include "Date.h"
 
 #define CAP_MIN 'A'
 #define CAP_MAX 'Z'
@@ -61,7 +63,7 @@ struct product_t {
 };
 
 Product productCreate(int id, char* name, ProductAmountType type,
-                      CopyProductData copyData, FreeData freeFunc, Date dateCre,
+                      CopyProductData copyData, FreeData freeFunc,void* dateCre,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
                       ProductCompCmp compCmp, ProductData data, int CompType)
 {
@@ -84,7 +86,7 @@ Product productCreate(int id, char* name, ProductAmountType type,
         free(new);
         return NULL;
     }
-    new->creationDate= dateCopy(dateCre);
+    new->creationDate= dateCopy((Date)dateCre);
     if(!new->creationDate)
     {
         asDestroy(new->components);
@@ -152,7 +154,7 @@ const ProductAmountType productGetType(Product product)
     return product->amount_type;
 }
 
-const AmountSet productGetComponent(Product product)
+const void* productGetComponent(Product product)
 {
     if(!product)
     {
@@ -230,7 +232,7 @@ const char*  productGetName(Product product)
     return product->name;
 }
 
-AmountSet productComponentFilter(Product product, FilterComponent filterFunc, ComponentFilterKey key)
+void* productComponentFilter(Product product, FilterComponent filterFunc, ComponentFilterKey key)
 {
    if(!product||!product->components||!filterFunc||!key)
    {

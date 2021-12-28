@@ -4,10 +4,9 @@
 
 #ifndef PRODUCT_H
 #define PRODUCT_H
+#include <stdbool.h>
 
 #include "outerCore.h"
-#include "outerCore/AmountSet.h"
-#include "outerCore/Date.h"
 
 /**
  * Product adt
@@ -113,7 +112,7 @@ typedef void* ComponentFilterKey;
 * }
 * @endcode
 */
-typedef bool(*FilterComponent)(ProductComp,ComponentFilterKey);
+typedef bool (*FilterComponent) (ProductComp,ComponentFilterKey);
 
 /** Type for specifying what is a valid amount for a product.
  * For a INTEGER_AMOUNT product, a valid amount is an amount which is
@@ -164,7 +163,7 @@ typedef struct product_t *Product;
  *         product othrwise
  */
 Product productCreate(int id, char* name, ProductAmountType type,
-                      CopyProductData copyData, FreeData freeFunc, Date dateCre,
+                      CopyProductData copyData, FreeData freeFunc,void* dateCre,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
                       ProductCompCmp compCmp, ProductData data,int  CompType);
 
@@ -218,7 +217,7 @@ const ProductAmountType productGetType(Product product);
  * NULL- if the product doesn't have a components or wrong format
  * amount set othewise
  */
-const AmountSet productGetComponent(Product product);
+const void* productGetComponent(Product product);
 
 /**
  *   productAddComponent      -for adding to components
@@ -279,7 +278,7 @@ const char*  productGetName(Product product);
  *   NULL- if the filtering or the component were problematic
  *   amountset elsewise
  */
-AmountSet productComponentFilter(Product product, FilterComponent filterFunc, ComponentFilterKey key);
+void* productComponentFilter(Product product, FilterComponent filterFunc, ComponentFilterKey key);
 
 /**
  *  productUnite             -if the products have the same caracteristics but different components unites them
