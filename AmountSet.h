@@ -30,6 +30,7 @@
  *   asCompeare         -compares between amount sets
  *   asFilter           -filters the amountset according to the user
  *   asValid            - checks the validity of the set
+ *   asUnite            -unites two sets to one new
  *   AS_FOREACH         - A macro for iterating over the set's elements
  */
 
@@ -293,6 +294,16 @@ CompareASElements asGetCompeare(AmountSet set);
  * asGetType- give the type of the amountSet
  */
 int asGetType(AmountSet set);
+
+/**
+ * asUnite            -unites two sets to one new
+ * @param set1
+ * @param set2
+ * @return
+ * NULL -f the sets are: NULL, empty, or problematic
+ * amount set othewise
+ */
+AmountSet  asUnite(AmountSet set1, AmountSet set2);
 
 /**
  * Macro for iterating over a set.

@@ -20,29 +20,31 @@
  * The following functions are available:
  *   coreCreate         -Creates the unit.
  *   coreDestroy        -Deletes an existing unit and frees all resources
- *   unitCopy           -Copies an existing unit
- *   unitCompeare       -compares between amount sets
- *   unitValid           -checks the validity of the unit
+ *   coreCopy           -Copies an existing unit
+ *   coreCompeare       -compares between amount sets
+ *   coreValid          -checks the validity of the unit
+ *   coreAddition       -adds two units together
  */
 
 /**
  * functions that need to be used seperetly:
- *   dateInitialiser    -create a point of referance to calculate
- *   dateGenerate       -for standartisation in creating objects
- *   asCreate           - Creates a new empty set
- *   asGetSize          - Returns the size of the set
- *   asContains         - Checks if an element exists in the set
- *   asRegister         - Add a new element into the set
- *   asDelete           - Delete an element completely from the set
- *   asClear            - Deletes all elements from target set
- *   asGetFirst         - Sets the internal iterator to the first element
+ *   dateInitialiser      -create a point of referance to calculate
+ *   dateCleanInitializer -destroys the initialization date @you @better @don't @forget @to @do @it
+ *                         @after @finnish
+ *   dateGenerate         -for standartisation in creating objects
+ *   asCreate             - Creates a new empty set
+ *   asGetSize            - Returns the size of the set
+ *   asContains           - Checks if an element exists in the set
+ *   asRegister           - Add a new element into the set
+ *   asDelete             - Delete an element completely from the set
+ *   asClear              - Deletes all elements from target set
+ *   asGetFirst           - Sets the internal iterator to the first element
  *                        in the set, and returns it.
- *   asGetNext          - Advances the internal iterator to the next element
- *                        and returns it.
- *   asCompeare         -compares between amount sets
- *   asFilter           -filters the amountset according to the user
- *   asValid            - checks the validity of the set
- *   AS_FOREACH         - A macro for iterating over the set's elements
+ *   asGetNext            - Advances the internal iterator to the next element
+ *                         and returns it.
+ *   asCompeare           -compares between amount sets
+ *   asFilter             -filters the amountset according to the user
+ *   AS_FOREACH           - A macro for iterating over the set's elements
  */
 
 /**
@@ -67,13 +69,13 @@ CoreUnit coreCreate(int type, void* element);
 void coreDestroy(void* unit);
 
 /**
- *   unitCopy           -Copies an existing unit
+ *   coreCopy           -Copies an existing unit
  * @param orgUnit
  * @return
  * NULL -problems with the input
  * core unit othewise
  */
-void* unitCopy(void* orgUnit);
+void* coreCopy(void* orgUnit);
 
 /**
  *   unitCompeare       -compares between amount sets
@@ -84,14 +86,23 @@ void* unitCopy(void* orgUnit);
  * positive- first> second
  * negative- second> first
  */
-int unitCompeare(void* first, void* second);
+int coreCompeare(void* first, void* second);
 
 /**
- *   unitValid           -checks the validity of the unit
+ *   coreValid           -checks the validity of the unit
  * @param unit
  * @return
  */
-bool unitValid(void* unit);
+bool coreValid(void* unit);
 
+/**
+ * coreAddition       -adds two units together
+ * @param unit1
+ * @param unit2
+ * @return
+ * NULL -if the units are different or null
+ * core unit otherwise
+ */
+CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2);
 
 #endif //OUTERCORE_H

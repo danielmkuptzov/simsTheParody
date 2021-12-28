@@ -246,3 +246,36 @@ int asGetType(AmountSet set)
     }
     return set->type;
 }
+
+AmountSet  asUnite(AmountSet set1, AmountSet set2)
+{
+    if(!set1||!set2|| asGetSize(set1)==0|| asGetSize(set2)==0||
+            asGetType(set1)!= asGetType(set2))
+    {
+        return NULL;
+    }
+    AmountSet sum= asCreate(asGetCopy(set1),
+                            asGetFree(set2),asGetCompeare(set1),set1->type);
+    if(!sum)
+    {
+        return NULL;
+    }
+    AS_FOREACH(ASElement,iter, set1)
+    {
+        if(asRegister(sum,iter)!=AS_SUCCESS)
+        {
+            asDestroy(sum);
+            return NULL;
+        }
+    }
+    AS_FOREACH(ASElement,iter, set2)
+    {
+        if(asRegister(sum,iter)!=AS_SUCCESS)
+        {
+            asDestroy(sum);
+            return NULL;
+        }
+    }
+    return sum;
+}
+

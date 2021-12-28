@@ -14,12 +14,14 @@
  * @important- please use to initialize the system the function dateInitialiser
  *
  * The following functions are available:
- *   dateInitialiser    -create a point of referance to calculate
- *   dateGenerate       -for standartisation in creating objects
- *   dateDestroy        - Deletes an existing date and frees all resources
- *   dateCopy           - Copies an existing date
- *   dateCompare        -compeares between dates
- *
+ *   dateInitialiser      -create a point of referance to calculate
+ *   dateGenerate         -for standartisation in creating objects
+ *   dateDestroy          -Deletes an existing date and frees all resources
+ *   dateCopy             -Copies an existing date
+ *   dateCompare          -compeares between dates
+ *   dateCleanInitializer -destroys the initialization date
+ *   dateSum              -adds two dates
+ *   dateValid            -checks date validity
  */
 
 /**
@@ -95,6 +97,29 @@ Date dateCopy(Date date);
  * @return standart comparison returns
  */
 int dateCompeare(Date date1, Date date2);
+
+/**
+ *   dateCleanInitializer -destroys the initialization date
+ */
+void dateCleanInitializer();
+
+/**
+ * dateSum              -adds two dates
+ * @param date1
+ * @param date2
+ * @return
+ * NULL -null arguments or problematic dates
+ * date- othewise
+ */
+Date dateSum(Date date1, Date date2);
+
+/**
+ * unitAddition       -adds two units together
+ * @param date
+ * @return
+ * NULL -if the argument was null or problematic
+ */
+bool dateValid(Date date);
 
 #endif //DATE_H
 

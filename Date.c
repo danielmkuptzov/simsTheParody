@@ -293,3 +293,40 @@ Date dateGenerate()
     dateAdvance(first->initialisationDate);
     return toSend;
 }
+
+void dateCleanInitializer()
+{
+    dateDestroy(first->initialisationDate);
+    free(first);
+}
+
+Date dateSum(Date date1, Date date2)
+{
+    if(!date1||!date2)
+    {
+        return NULL;
+    }
+    Date sum= dateCopy(date1);
+    for(int i=0; i< dateToDays(date2);i++)
+    {
+        dateAdvance(sum);
+    }
+    return sum;
+}
+
+bool dateValid(Date date)
+{
+    if(!date)
+    {
+        return false;
+    }
+    if(date->year<date->diffFunc())
+    {
+        return false;
+    }
+    if(date->day<1)
+    {
+        return false;
+    }
+    return true;
+}
