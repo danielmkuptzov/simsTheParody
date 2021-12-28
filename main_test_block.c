@@ -55,19 +55,6 @@ int refDate()
 {
     return 3;
 }
-void* pseudoCopy(void* pseudoObject)
-{
-    Product product=pseudoObject;
-    return productCopy(product);
-}
-void pseudoDestroy(void* pseudoObject)
-{
-    productDestroy(pseudoObject);
-}
-int pseudoComp(void *first, void* second)
-{
-    return productEquals(first,second);
-}
 
 int main()
 {
@@ -78,13 +65,33 @@ int main()
     Product product= productCreate(1,"apple",HALF_INTEGER_AMOUNT,
                                    intCopy,intDest,tmp,
                                    intCopy,intDest,intCompare,&j,2);
+    dateDestroy(tmp);
     for(int i=0; i<10; i++)
     {
-        if(productAddComponent(product,&i)!=PRODUCT_SUCSESS)
+        Date tmpDate=dateGenerate();
+        CoreUnit unit=coreCreate(2,tmpDate);
+        if(productAddComponent(product,unit)!=PRODUCT_SUCSESS)
         {
             return 0;
         }
+        coreDestroy(unit);
+    }
+    Date tmp2=dateGenerate();
+    Product product2= productCreate(1,"apple",HALF_INTEGER_AMOUNT,
+                                   intCopy,intDest,tmp2,
+                                   intCopy,intDest,intCompare,&j,2);
+    dateDestroy(tmp);
+    for(int i=0; i<10; i++)
+    {
+        Date tmpDate=dateGenerate();
+        CoreUnit unit=coreCreate(2,tmpDate);
+        if(productAddComponent(product2,unit)!=PRODUCT_SUCSESS)
+        {
+            return 0;
+        }
+        coreDestroy(unit);
     }
     productDestroy(product);
+    dateCleanInitializer();
     return 0;
 }

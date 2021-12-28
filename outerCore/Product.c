@@ -239,3 +239,34 @@ AmountSet productComponentFilter(Product product, FilterComponent filterFunc, Co
    return asFilter(product->components,filterFunc, key);
 }
 
+/**
+ *  productUnite             -if the products have the same caracteristics but different components unites them
+ * @param product1
+ * @param product2
+ * @return
+ * NULL -null arguments of different products
+ * product- elsewise
+ */
+Product productUnite(Product product1, Product product2)
+{
+    if(!product1||!product2|| productEquals(product1,product2)!=0)
+    {
+        return NULL;
+    }
+    Product sum= productCreate(product1->id,product1->name,product1->amount_type,product1->copyData,
+                               product1->freeData,product1->creationDate,asGetCopy(product1->components),
+                               asGetFree(product1->components),asGetCompeare(product1->components),product1->data,
+                               asGetType(product1->components));
+    if(!sum)
+    {
+        return NULL;
+    }
+    sum->components= asUnite(product1->components,product2->components);
+    if(!sum->components)
+    {
+        productDestroy(sum);
+        return NULL;
+    }
+    return sum;
+}
+

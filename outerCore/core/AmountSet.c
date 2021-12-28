@@ -270,7 +270,8 @@ AmountSet  asUnite(AmountSet set1, AmountSet set2)
     }
     AS_FOREACH(ASElement,iter, set2)
     {
-        if(asRegister(sum,iter)!=AS_SUCCESS)
+        AmountSetResult resalt=asRegister(sum,iter);
+        if(resalt!=AS_SUCCESS&&resalt!=AS_ITEM_ALREADY_EXISTS)
         {
             asDestroy(sum);
             return NULL;

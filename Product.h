@@ -31,6 +31,9 @@
  *   productSetAdditionalData -for changing the additional data
  *   productGetName           -for getting the name of the product
  *   productComponentFilter   -for filtering purposes
+ *   productUnite             -if the products have the same caracteristics but different components unites them
+ *   productGetFirst          -gives the first component in the list
+ *   productGetNext           -brings the next one
  */
 
 /** Type for additional custom data of a product */
@@ -275,4 +278,42 @@ const char*  productGetName(Product product);
  *   amountset elsewise
  */
 AmountSet productComponentFilter(Product product, FilterComponent filterFunc, ComponentFilterKey key);
+
+/**
+ *  productUnite             -if the products have the same caracteristics but different components unites them
+ * @param product1
+ * @param product2
+ * @return
+ * NULL -null arguments or different products
+ * product- elsewise
+ */
+Product productUnite(Product product1, Product product2);
+
+/**
+ *    productGetFirst          -gives the first component in the list
+ * @param product
+ * @return
+ * NULL -for any problem that might accure
+ * product component otherwise
+ */
+ProductComp productGetFirst(Product product);
+
+/**
+ *    productGetNext           -brings the next one
+ * @param product
+ * @return
+ * NULL -end of elements or other problems
+ * product component otherwise
+ */
+ProductComp productGetNext(Product product);
+
+/**
+ * Macro for iterating over a product.
+ * Declares a new iterator for the loop.
+ */
+#define PRODUCT_FOREACH(iterator, product)          \
+    for(ProductComp iterator = productGetFirst(product) ; \
+        iterator ;                               \
+        iterator = productGetNext(product))
+
 #endif //DANIELCITY_PRODUCT_H
