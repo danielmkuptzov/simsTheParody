@@ -70,6 +70,46 @@ typedef int (*DifferenceCalculator)();
  */
 typedef int (*DayOne)();
 
+
+/**
+ * for set use
+ */
+typedef void* COREElement;
+
+/** Type of function for copying an element of the set */
+typedef COREElement(*CopyCOREElement)(COREElement);
+
+/** Type of function for deallocating an element of the set */
+typedef void (*FreeCOREElement)(COREElement);
+
+/**
+ * Type of function used by the set to identify equal set elements.
+ * This function should return:
+ *     A positive integer if the first element is greater;
+ *     0 if they're equal;
+ *     A negative integer if the second element is greater.
+ */
+typedef int (*CompareCOREElements)(COREElement ,COREElement);
+
+/**
+* Use this type to pass extra information needed by the filtering function
+* when calling listFilter. (See the example for a FilterListElement function)
+*/
+typedef void* CoreFilterKey;
+
+/**
+* Function used for creating a filtered copy of a set.
+* A element is said to pass filtering if the function returns true
+* For example, the following function can be used to filter a list of strings
+* from short strings:
+* @code
+* bool isShorterThan(SetElement str, SetFilterKey length) {
+*   return strlen(str) < *(int*) length;
+* }
+* @endcode
+*/
+typedef bool(*FilterCOREElement)(COREElement, COREElement);
+
 /**
  * the core unit
  */
@@ -91,7 +131,8 @@ void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
  * NULL -if the elemement was null or wasn't same as stated in the type
  * coreUnit otherwise
  */
-CoreUnit coreCreate(int type, void* element, int size);
+CoreUnit coreCreate(int type, CopyCOREElement copyfunc, FreeCOREElement freefunc,
+                    CompareCOREElements compfunc, int asType);
 
 /**
  *   coreDestroy        -Deletes an existing unit and frees all resources
@@ -131,15 +172,62 @@ CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2);
 
 /**
  *   coreInsert         -adds to the core (only works with set)
- *   coreRemove         -removes an element (only works with sets)
- *   coreFilter         -filters core according to a criteria (only works with sets)
- *   coreFind           -finds specific element(only works with sets)
- *   coreSize           -returns the size of the element (for date will return -1)
- *   coreDestroyer      -use it to end the code
  * @param core
  * @param element
  * @return
- * CORE_ERROR,CORE_MEMORY_PROBLEM,CORE_NULL_ARGUMENT,CORE_ADDITION_FAILED,CORE_ELEMENT_EXIST,CORE_ELEMENT_DOES_NOT_EXIST
+ * CORE_ERROR          -the operation failed
+ * CORE_MEMORY_PROBLEM -memory acsess problems
+ * CORE_NULL_ARGUMENT  -the arguments were nulll
+ * CORE_ELEMENT_EXIST  -the addition is impossible
  */
-OuterCoreErrors coreInsert(void* core, void* element);
+OuterCoreErrors coreInsert(CoreUnit core,COREElement element);
+
+/**
+ *   coreRemove         -removes an element (only works with sets)
+ * @param core
+ * @param element
+ * @return
+ * CORE_ERROR          -the operation failed
+ * CORE_MEMORY_PROBLEM -memory acsess problems
+ * CORE_NULL_ARGUMENT  -the arguments were nulll
+ * CORE_ELEMENT_DOES_NOT_EXIST  -the removle is impossible
+ */
+OuterCoreErrors coreRemove(CoreUnit core, COREElement element);
+
+/**
+ *   coreFilter         -filters core according to a criteria (only works with sets)
+ * @param core
+ * @param filter
+ * @param key
+ * @return
+ * NULL -if any problem accures
+ * core unit otherwise
+ */
+CoreUnit coreFilter(void* core, FilterCOREElement filter, CoreFilterKey key);
+
+/**
+ *   coreFind           -finds specific element(only works with sets)
+ * @param unit
+ * @param element
+ * @return
+ * NULL -if there is any problem with the elements of input
+ * core element otherwise
+ */
+COREElement coreFind(CoreUnit unit, COREElement element);
+
+/**
+ *   coreSize           -returns the size of the element (for date will return -1)
+ * @param unit
+ * @return
+ * -2 null argument
+ * -1 this is a date
+ * 0 and higher- the set size
+ */
+int coreSize(CoreUnit unit);
+
+/**
+ *   coreDestroyer      -use it to end the code
+ */
+void coreDestroyer();
+
 #endif //OUTERCORE_H
