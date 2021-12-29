@@ -77,12 +77,13 @@ void* coreCopy(void* orgUnit)
     {
         return NULL;
     }
-    CoreUnit copy= malloc(sizeof(struct CoreUnit_t));
+    CoreUnit copy= coreCreate(1,NULL,NULL,NULL,1);
     if(!copy)
     {
         return NULL;
     }
     copy->type=((CoreUnit)orgUnit)->type;
+    asDestroy((AmountSet)copy->element);
     if(copy->type==1)
     {
         AmountSet toCopy=((CoreUnit)orgUnit)->element;
@@ -129,12 +130,13 @@ CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2)
     {
         return NULL;
     }
-    CoreUnit sum= malloc(sizeof(struct CoreUnit_t));
+    CoreUnit sum= coreCreate(1, NULL,NULL,NULL,1);
     if(!sum)
     {
         return NULL;
     }
     sum->type=((CoreUnit)unit1)->type;
+    asDestroy((AmountSet)sum->element);
     if(sum->type==1)
     {
         sum->element= asUnite(((CoreUnit)unit1)->element,((CoreUnit)unit2)->element);
@@ -178,28 +180,52 @@ OuterCoreErrors coreInsert(CoreUnit core,COREElement element)
     return CORE_SUCSESS;
 }
 
-/**
- *   coreRemove         -removes an element (only works with sets)
- * @param core
- * @param element
- * @return
- * CORE_ERROR          -the operation failed
- * CORE_MEMORY_PROBLEM -memory acsess problems
- * CORE_NULL_ARGUMENT  -the arguments were nulll
- * CORE_ELEMENT_DOES_NOT_EXIST  -the removle is impossible
- */
-OuterCoreErrors coreRemove(CoreUnit core, COREElement element);
+OuterCoreErrors coreRemove(CoreUnit core, COREElement element)
+{
+    if(!core||!element)
+    {
+        return CORE_NULL_ARGUMENT;
+    }
+    if(core->type!=1)
+    {
+        return CORE_ERROR;
+    }
+    AmountSetResult resalt= asDelete((AmountSet)(core->element),element);
+    if(resalt==AS_NULL_ARGUMENT)
+    {
+        return CORE_NULL_ARGUMENT;
+    }
+    if(resalt==AS_ITEM_DOES_NOT_EXIST)
+    {
+        return CORE_ELEMENT_DOES_NOT_EXIST;
+    }
+    return CORE_SUCSESS;
+}
 
-/**
- *   coreFilter         -filters core according to a criteria (only works with sets)
- * @param core
- * @param filter
- * @param key
- * @return
- * NULL -if any problem accures
- * core unit otherwise
- */
-CoreUnit coreFilter(void* core, FilterCOREElement filter, CoreFilterKey key);
+CoreUnit coreFilter(CoreUnit core, FilterCOREElement filter, CoreFilterKey key)
+{
+    if(!core||!filter||!key)
+    {
+        return NULL;
+    }
+    if(core->type!=1)
+    {
+        return NULL;
+    }
+    CoreUnit filtered= coreCreate(1,NULL,NULL,NULL,1);
+    if(!filtered)
+    {
+        return NULL;
+    }
+    asDestroy((AmountSet)core->element);
+    core->element= asFilter((AmountSet)core->element,filter,key);
+    if(!filtered->element)
+    {
+        coreDestroy(filtered);
+        return NULL;
+    }
+    return filtered;
+}
 
 /**
  *   coreFind           -finds specific element(only works with sets)
