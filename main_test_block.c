@@ -59,17 +59,16 @@ int refDate()
 int main()
 {
     int j=7;
-    dateInitialiser(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
+    coreBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
     j=0;
-    Date tmp=dateGenerate();
+    CoreUnit tmp= coreCreate(2,NULL,NULL,NULL,1);
     Product product= productCreate(1,"apple",HALF_INTEGER_AMOUNT,
-                                   intCopy,intDest,tmp,
+                                   intCopy,intDest, coreGetElement(tmp),
                                    intCopy,intDest,intCompare,&j,2);
-    dateDestroy(tmp);
+    coreDestroy(tmp);
     for(int i=0; i<10; i++)
     {
-        Date tmpDate=dateGenerate();
-        CoreUnit unit=coreCreate(2,tmpDate);
+        CoreUnit unit=coreCreate(2,);
         if(productAddComponent(product,unit)!=PRODUCT_SUCSESS)
         {
             return 0;

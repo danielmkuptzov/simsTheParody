@@ -261,3 +261,12 @@ void coreDestroyer()
 {
     dateCleanInitializer();
 }
+
+COREElement coreGetElement(CoreUnit unit)
+{
+    if(!unit)
+    {
+        return NULL;
+    }
+    return unit->element;
+}

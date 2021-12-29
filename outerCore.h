@@ -28,7 +28,9 @@
  *   coreFind           -finds specific element(only works with sets)
  *   coreSize           -returns the size of the element (for date will return -1)
  *   coreDestroyer      -use it to end the code
+ *   coreGetElement     -return the data of the element
  */
+
 typedef enum {
     CORE_ERROR,
     CORE_MEMORY_PROBLEM,
@@ -232,5 +234,13 @@ int coreSize(CoreUnit unit);
  *   coreDestroyer      -use it to end the code
  */
 void coreDestroyer();
+
+/**
+ * coreGetElement     -return the data of the element
+ * @return
+ * NULL wrong format or element
+ * core element otherwise
+ */
+COREElement coreGetElement(CoreUnit unit);
 
 #endif //OUTERCORE_H
