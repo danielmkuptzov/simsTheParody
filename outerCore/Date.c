@@ -10,7 +10,7 @@ typedef struct ReferenceDate_t{
     int times;
 }*Refdate;
 
-Refdate first;
+Refdate first= NULL;
 
 static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
                                  30, 31, 30, 31};
@@ -288,6 +288,10 @@ int dateCompeare(Date date1, Date date2)
 
 Date dateGenerate()
 {
+    if(!first)
+    {
+        return NULL;
+    }
     first->times++;
     Date toSend= dateCopy(first->initialisationDate);
     dateAdvance(first->initialisationDate);
@@ -312,21 +316,4 @@ Date dateSum(Date date1, Date date2)
         dateAdvance(sum);
     }
     return sum;
-}
-
-bool dateValid(Date date)
-{
-    if(!date)
-    {
-        return false;
-    }
-    if(date->year<date->diffFunc())
-    {
-        return false;
-    }
-    if(date->day<1)
-    {
-        return false;
-    }
-    return true;
 }

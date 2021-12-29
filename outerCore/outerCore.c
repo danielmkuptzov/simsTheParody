@@ -9,9 +9,6 @@ struct CoreUnit_t{
     void* element;
 };
 
-/**
- * coreBeginner       -the function that you use to begin the date function
- */
 void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
                   RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
                   ReferanceDate date, DayOne firstDay)
@@ -227,27 +224,40 @@ CoreUnit coreFilter(CoreUnit core, FilterCOREElement filter, CoreFilterKey key)
     return filtered;
 }
 
-/**
- *   coreFind           -finds specific element(only works with sets)
- * @param unit
- * @param element
- * @return
- * NULL -if there is any problem with the elements of input
- * core element otherwise
- */
-COREElement coreFind(CoreUnit unit, COREElement element);
+COREElement coreFind(CoreUnit unit, COREElement element)
+{
+    if(!unit||!element)
+    {
+        return NULL;
+    }
+    if(unit->type!=1)
+    {
+        return NULL;
+    }
+    AS_FOREACH(COREElement,iter,(AmountSet)unit->element)
+    {
+        if((asGetCompeare((AmountSet)unit->element))(iter,element)==0)
+        {
+            return asGetCurrent((AmountSet)unit->element);
+        }
+    }
+    return NULL;
+}
 
-/**
- *   coreSize           -returns the size of the element (for date will return -1)
- * @param unit
- * @return
- * -2 null argument
- * -1 this is a date
- * 0 and higher- the set size
- */
-int coreSize(CoreUnit unit);
+int coreSize(CoreUnit unit)
+{
+    if(!unit)
+    {
+        return -2;
+    }
+    if(unit->type!=1)
+    {
+        return -1;
+    }
+    return asGetSize((AmountSet)unit->element);
+}
 
-/**
- *   coreDestroyer      -use it to end the code
- */
-void coreDestroyer();
+void coreDestroyer()
+{
+    dateCleanInitializer();
+}
