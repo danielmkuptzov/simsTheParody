@@ -220,7 +220,7 @@ static void dateAdvance(Date date)
 {
     date->refDateAdvance(date->outerDate);
     yearFixer(date->year);
-    if(date->day==dayInMonth[monthToInt(date->month)])
+    if(date->day==dayInMonth[monthToInt(date->month)-1])
     {
         if(date->month==DEC)
         {
@@ -264,7 +264,7 @@ static int dateDifference(Date date1, Date date2)
 static int dateToDays(Date date)
 {
     int days=0;
-    for (int i = 0; i < date->year; ++i)
+    for (int i = 0; i < (date->year)+(date->diffFunc()); ++i)
     {
         days+= yearCalculator(i);
     }

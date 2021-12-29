@@ -45,33 +45,33 @@ typedef enum {
  * for our users who can't convert to the standard we give you the option to standard the date
  * according to your preaferance
  */
-typedef void* ReferanceDate;
+typedef void* ReferanceDateEx;
 
 /**
  * for copy purposes
  */
-typedef ReferanceDate(*CopyRefDate)(ReferanceDate);
+typedef ReferanceDateEx(*CopyRefDateEx)(ReferanceDateEx);
 
 /**
  * for destruction purposes
  */
-typedef void (*FreeRefDate)(ReferanceDate);
+typedef void (*FreeRefDateEx)(ReferanceDateEx);
 
 
 /**
  * advancement function
  */
-typedef void(*RefDateAdvance)(ReferanceDate);
+typedef void(*RefDateExAdvance)(ReferanceDateEx);
 
 /**
  * year difference calculator for standatisation
  */
-typedef int (*DifferenceCalculator)();
+typedef int (*DifferenceCalculatorEx)();
 
 /**
  * function for moving the clock back
  */
-typedef int (*DayOne)();
+typedef int (*DayOneEx)();
 
 
 /**
@@ -121,9 +121,9 @@ typedef struct CoreUnit_t* CoreUnit;
 /**
  * coreBeginner       -the function that you use to begin the date function
  */
-void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
-                  RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
-                  ReferanceDate date, DayOne firstDay);
+void coreBeginner(CopyRefDateEx copyFunc, FreeRefDateEx freeFunc,
+                  RefDateExAdvance advanceFunc,DifferenceCalculatorEx diffFunc,
+                  ReferanceDateEx date, DayOneEx firstDay);
 
 /**
  *   coreCreate         -Creates the unit.

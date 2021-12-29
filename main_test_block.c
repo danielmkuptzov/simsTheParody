@@ -5,18 +5,6 @@
 //teh files we are testing
 #include "outerCore.h"
 #include "Product.h"
-void* dateCp(void *date)
-{
-    return dateCopy(date);
-}
-void freeDate(void* date)
-{
-    dateDestroy(date);
-}
-int datecomp(void* date1, void* date2)
-{
-    return dateCompeare(date1, date2);
-}
 void* intCopy(void* org)
 {
     int *copy= malloc(sizeof (int*));
@@ -61,36 +49,38 @@ int main()
     int j=7;
     coreBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
     j=0;
-    CoreUnit tmp= coreCreate(2,NULL,NULL,NULL,1);
+    CoreUnit tmp= coreCreate(2,NULL,NULL,NULL,-1);
     Product product= productCreate(1,"apple",HALF_INTEGER_AMOUNT,
                                    intCopy,intDest, coreGetElement(tmp),
-                                   intCopy,intDest,intCompare,&j,2);
+                                   coreCopy,coreDestroy,coreCompeare,&j,2);
     coreDestroy(tmp);
     for(int i=0; i<10; i++)
     {
-        CoreUnit unit=coreCreate(2,);
+        CoreUnit unit=coreCreate(2,NULL,NULL,NULL,1);
         if(productAddComponent(product,unit)!=PRODUCT_SUCSESS)
         {
             return 0;
         }
         coreDestroy(unit);
     }
-    Date tmp2=dateGenerate();
-    Product product2= productCreate(1,"apple",HALF_INTEGER_AMOUNT,
-                                   intCopy,intDest,tmp2,
-                                   intCopy,intDest,intCompare,&j,2);
-    dateDestroy(tmp);
+    Product product2= productCopy(product);
     for(int i=0; i<10; i++)
     {
-        Date tmpDate=dateGenerate();
-        CoreUnit unit=coreCreate(2,tmpDate);
+        CoreUnit unit= coreCreate(2, NULL,NULL,NULL,-1);
         if(productAddComponent(product2,unit)!=PRODUCT_SUCSESS)
         {
             return 0;
         }
         coreDestroy(unit);
     }
+    Product product3= productUnite(product,product2);
+    if(!product3)
+    {
+        printf("bad");
+    }
     productDestroy(product);
-    dateCleanInitializer();
+    productDestroy(product2);
+    productDestroy(product3);
+    coreDestroyer();
     return 0;
 }

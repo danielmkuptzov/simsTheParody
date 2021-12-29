@@ -95,6 +95,14 @@ Product productCreate(int id, char* name, ProductAmountType type,
         return NULL;
     }
     new->freeData=freeFunc;
+    new->name= stringDup(name);
+    if(!new->name)
+    {
+        productDestroy(new);
+        return NULL;
+    }
+    new->id=id;
+    new->amount= type;
     return new;
 }
 
