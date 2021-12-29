@@ -129,11 +129,12 @@ CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2)
     {
         return NULL;
     }
-    CoreUnit sum= coreCreate(((CoreUnit)unit1)->type,NULL,NULL,);
+    CoreUnit sum= malloc(sizeof(struct CoreUnit_t));
     if(!sum)
     {
         return NULL;
     }
+    sum->type=((CoreUnit)unit1)->type;
     if(sum->type==1)
     {
         sum->element= asUnite(((CoreUnit)unit1)->element,((CoreUnit)unit2)->element);
@@ -155,17 +156,27 @@ CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2)
     return sum;
 }
 
-/**
- *   coreInsert         -adds to the core (only works with set)
- * @param core
- * @param element
- * @return
- * CORE_ERROR          -the operation failed
- * CORE_MEMORY_PROBLEM -memory acsess problems
- * CORE_NULL_ARGUMENT  -the arguments were nulll
- * CORE_ELEMENT_EXIST  -the addition is impossible
- */
-OuterCoreErrors coreInsert(CoreUnit core,COREElement element);
+OuterCoreErrors coreInsert(CoreUnit core,COREElement element)
+{
+    if(!core||!element)
+    {
+        return CORE_NULL_ARGUMENT;
+    }
+    if(core->type!=1)
+    {
+        return CORE_ERROR;
+    }
+    AmountSetResult resalt= asRegister((AmountSet)(core->element),element);
+    if(resalt==AS_ITEM_ALREADY_EXISTS)
+    {
+        return CORE_ELEMENT_EXIST;
+    }
+    if(resalt==AS_NULL_ARGUMENT)
+    {
+        return CORE_MEMORY_PROBLEM;
+    }
+    return CORE_SUCSESS;
+}
 
 /**
  *   coreRemove         -removes an element (only works with sets)

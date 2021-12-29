@@ -35,7 +35,8 @@ typedef enum {
     CORE_NULL_ARGUMENT,
     CORE_ADDITION_FAILED,
     CORE_ELEMENT_EXIST,
-    CORE_ELEMENT_DOES_NOT_EXIST
+    CORE_ELEMENT_DOES_NOT_EXIST,
+    CORE_SUCSESS
 }OuterCoreErrors;
 
 /**
@@ -179,6 +180,7 @@ CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2);
  * CORE_MEMORY_PROBLEM -memory acsess problems
  * CORE_NULL_ARGUMENT  -the arguments were nulll
  * CORE_ELEMENT_EXIST  -the addition is impossible
+ * CORE_SUCSESS        -the operation was a sucsess
  */
 OuterCoreErrors coreInsert(CoreUnit core,COREElement element);
 
@@ -191,6 +193,7 @@ OuterCoreErrors coreInsert(CoreUnit core,COREElement element);
  * CORE_MEMORY_PROBLEM -memory acsess problems
  * CORE_NULL_ARGUMENT  -the arguments were nulll
  * CORE_ELEMENT_DOES_NOT_EXIST  -the removle is impossible
+ *  CORE_SUCSESS        -the operation was a sucsess
  */
 OuterCoreErrors coreRemove(CoreUnit core, COREElement element);
 
