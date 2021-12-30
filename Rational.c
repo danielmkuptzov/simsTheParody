@@ -1,123 +1,167 @@
-//
-// Created by danie on 29/12/2021.
-//
+#include <stdlib.h>
 
 #include "Rational.h"
 
-struct Rational_t;
+struct Rational_t {
+    int numerator;
+    int denumerator;
+};
 
-static int rationalGcd(int a, int b);
+static int rationalGcd(int a, int b)
+{
+    int gcd =1;
+    for(int i=1; i <= a && i <=b; ++i)
+    {
+        if(a%i==0 && b%i==0)
+        {
+            gcd=i;
+        }
+    }
+    return gcd;
+}
 
-static double rationalToDoubleConverter(Rational rational);
+static double rationalToDoubleConverter(Rational rational)
+{
+    return rational->numerator/rational->denumerator;
+}
 
-static bool doublePositive(double number);
+static bool doublePositive(double number)
+{
+    if(number>0)
+    {
+        return 1;
+    }
+    if(number<0)
+    {
+        return -1;
+    }
+    return 0;
+}
 
-/**
- *   rationalCreate         -Creates the rational number
- * @param numerator- the upper half of the fraction
- * @param denumerator -the lower half of the fraction (don't enter 0 this isn't calculus)
- * @return
- *  NULL -0 as a denumerator or memory allocation problems
- *  rational otherwise
- */
-Rational rationalCreate(int numerator,int denumerator);
+static int powerInt(int base, int power)
+{
+    int resalt=1;
+    for(int i=0; i<power; i++)
+    {
+        resalt=resalt*base;
+    }
+    return resalt;
+}
 
-/**
- *   rationalDestroy        -Deletes an existing rational and frees all resources
- * @param rational
- */
-void rationalDestroy(Rational rational);
+Rational rationalCreate(int numerator,int denumerator)
+{
+    if(denumerator==0)
+    {
+        return NULL;
+    }
+    Rational new= malloc(sizeof(struct Rational_t));
+    if(!new)
+    {
+        return NULL;
+    }
+    bool negative=(denumerator<0);
+    denumerator= negative*denumerator;
+    int gcd=rationalGcd(numerator,denumerator);
+    new->numerator=negative*numerator/gcd;
+    new->denumerator=denumerator/gcd;
+    return new;
+}
 
-/**
- *   rationalCopy           -Copies an existing rational
- * @param rational
- * @return
- * NULL -if the memory allocation was a problem or problematic input
- */
-Rational rationalCopy(Rational rational);
+void rationalDestroy(Rational rational)
+{
+    if(!rational)
+    {
+        return;
+    }
+    free(rational);
+}
 
-/**
- *   rationalCompeare       -compares between rationals
- * @param rational1
- * @param rasional2
- * @return
- * 0 -f equal
- * negative if rational2> rational1
- * positive if rational2< rational1
- */
-int rationalCompare(Rational rational1, Rational rasional2);
+Rational rationalCopy(Rational rational)
+{
+    Rational copy= rationalCreate(rational->numerator,rational->denumerator);
+    if(!copy)
+    {
+        return NULL;
+    }
+    return copy;
+}
 
-/**
- *   rationalAddition       -adds two rational
- * @param rational1
- * @param rational2
- * @return
- * NULL if there was a a null argument
- * sum otherwise
- */
-Rational rationalAddition(Rational rational1, Rational rational2);
+int rationalCompare(Rational rational1, Rational rational2)
+{
+    Rational nrational= rationalNegate(rational2);
+    Rational resalt= rationalAddition(rational1,nrational);
+    rationalDestroy(nrational);
+    int tosend=doublePositive(rationalToDoubleConverter(resalt));
+    rationalDestroy(resalt);
+    return tosend;
+}
 
-/**
- *   rationalNegate         -negate the rational
- * @param rational
- * @return
- * NULL if there was a NULL argument
- * rational otherwise
- */
-Rational rationalNegate(Rational rational);
+Rational rationalAddition(Rational rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return NULL;
+    }
+    int sumNumerator=rational1->numerator*rational2->denumerator+rational2->numerator*rational1->denumerator;
+    int sumDenumerator=rational1->denumerator*rational2->denumerator;
+    return rationalCreate(sumNumerator,sumDenumerator);
+}
 
-/**
- *   rationalMultiply       -multiplies two rationals
- * @param rational1
- * @param rational2
- * @return
- * NULL if one of the arguments is NULL
- */
-Rational rationalMultiply(Rational rational1, Rational rational2);
+Rational rationalNegate(Rational rational)
+{
+    if(!rational)
+    {
+        return NULL;
+    }
+    return rationalCreate(-rational->numerator,rational->denumerator);
+}
 
-/**
- *   rationalPower          -takes rational to an integer power
- * @param base
- * @param power
- * @return
- */
-Rational rationalPower(Rational base, int power);
+Rational rationalMultiply(Rational rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return NULL;
+    }
+    return rationalCreate(rational1->numerator*rational2->numerator,rational1->denumerator*rational2->denumerator);
+}
 
-/**
- *   rationalTransform      -answers to the question 1/(given rational)
- * @param rational
- * @return
- * NULL for NULL argument
- * rational otherwise
- */
-Rational rationalTransform(Rational rational);
+Rational rationalPower(Rational base, int power)
+{
+    if(!base)
+    {
+        return NULL;
+    }
+    return rationalCreate(powerInt(base->numerator,power), powerInt(base->denumerator,power));
+}
 
-/**
- *   rationalEqual          -the == operator
- * @param rational1
- * @param rational2
- * @return
- * true for equal
- * false for not
- */
-bool rationalEqual(Rational rational1,Rational rational2);
+Rational rationalTransform(Rational rational)
+{
+    if(!rational||rational->numerator==0)
+    {
+        return NULL;
+    }
+    return rationalCreate(rational->denumerator,rational->numerator);
+}
 
-/**
- *   rationalGrater         -the > operator
- * @param rational1
- * @param rational2
- * @return
- * true if rational1> rational2
- * false otherwise
- */
-bool rationalGrater(Rational rational1, Rational rational2);
+bool rationalEqual(Rational rational1,Rational rational2)
+{
+    if((!rationalGrater(rational1,rational2))&&(!rationalLesser(rational1,rational2)))
+    {
+        return true;
+    }
+    return false;
+}
 
-/**
- *   rationalLesser         -the < operator
- * @param rational1
- * @param rational2
- * @return
- * true if rational2> rational1
- * false otherwise
- */
-bool rationalLesser(Rational rational1, Rational rational2);
+bool rationalGrater(Rational rational1, Rational rational2)
+{
+    if(rationalCompare(rational1,rational2)>0)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool rationalLesser(Rational rational1, Rational rational2)
+{
+    return rationalGrater(rational2,rational1);
+}

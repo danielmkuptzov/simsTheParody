@@ -5,7 +5,6 @@
 #ifndef DANIELCITY_RATIONAL_H
 #define DANIELCITY_RATIONAL_H
 
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
 
