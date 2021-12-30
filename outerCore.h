@@ -29,13 +29,13 @@
  *   coreSize           -returns the size of the element (for date will return -1)
  *   coreDestroyer      -use it to end the code
  *   coreGetElement     -return the data of the element
+ *   coreSetElement     -changes the element
  */
 
 typedef enum {
     CORE_ERROR,
     CORE_MEMORY_PROBLEM,
     CORE_NULL_ARGUMENT,
-    CORE_ADDITION_FAILED,
     CORE_ELEMENT_EXIST,
     CORE_ELEMENT_DOES_NOT_EXIST,
     CORE_SUCSESS
@@ -242,5 +242,15 @@ void coreDestroyer();
  * core element otherwise
  */
 COREElement coreGetElement(CoreUnit unit);
+
+/**
+ * coreSetElement     -changes the element
+ * @param unit
+ * @param element
+ * @return
+ * CORE_ERROR -null or wrong type
+ * CORE_SUCSESS -the operation was sucssesful
+ */
+OuterCoreErrors coreSetElement(CoreUnit unit, COREElement element, int type);
 
 #endif //OUTERCORE_H

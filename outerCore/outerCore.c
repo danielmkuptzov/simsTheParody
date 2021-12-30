@@ -270,3 +270,13 @@ COREElement coreGetElement(CoreUnit unit)
     }
     return unit->element;
 }
+
+/**
+ * coreSetElement     -changes the element
+ * @param unit
+ * @param element
+ * @return
+ * CORE_ERROR -null or wrong type
+ * CORE_SUCSESS -the operation was sucssesful
+ */
+OuterCoreErrors coreSetElement(CoreUnit unit, COREElement element, int type);
