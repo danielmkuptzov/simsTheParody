@@ -22,7 +22,6 @@
  *   rationalCompeare       -compares between rationals
  *   rationalAddition       -adds two rational
  *   rationalNegate         -negate the rational
- *   rationalAdvance        -addition but to one of the rationals given
  *   rationalMultiply       -multiplies two rationals
  *   rationalPower          -takes rational to an integer power
  *   rationalTransform      -answers to the question 1/(given rational)
@@ -51,10 +50,35 @@ void rationalDestroy(Rational rational);
 
 /**
  *   rationalCopy           -Copies an existing rational
+ * @param rational
+ * @return
+ * NULL -if the memory allocation was a problem or problematic input
+ */
+Rational rationalCopy(Rational rational);
+
+/**
  *   rationalCompeare       -compares between rationals
+ * @param rational1
+ * @param rasional2
+ * @return
+ * 0 -f equal
+ * negative if rational2> rational1
+ * positive if rational2< rational1
+ */
+int rationalCompare(Rational rational1, Rational rasional2);
+
+/**
  *   rationalAddition       -adds two rational
+ * @param rational1
+ * @param rational2
+ * @return
+ * NULL if there was a a null argument
+ * sum otherwise
+ */
+Rational rationalAddition(Rational rational1, Rational rational2);
+
+/**
  *   rationalNegate         -negate the rational
- *   rationalAdvance        -addition but to one of the rationals given
  *   rationalMultiply       -multiplies two rationals
  *   rationalPower          -takes rational to an integer power
  *   rationalTransform      -answers to the question 1/(given rational)
@@ -63,9 +87,11 @@ void rationalDestroy(Rational rational);
  *   rationalLesser         -the < operator
  * @param rational
  * @return
- * NULL -if the memory allocation was a problem or problematic input
+ * NULL if there was a NULL argument
+ * rational otherwise
  */
-Rational rationalCopy(Rational rational);
+Rational rationalNegate(Rational rational);
 
-int rationalCompare(Rational rational1, Rational rasional2);
+
+Rational rationalMultiply(Rational rational1, Rational rational2);
 #endif //DANIELCITY_RATIONAL_H
