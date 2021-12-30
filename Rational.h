@@ -79,12 +79,6 @@ Rational rationalAddition(Rational rational1, Rational rational2);
 
 /**
  *   rationalNegate         -negate the rational
- *   rationalMultiply       -multiplies two rationals
- *   rationalPower          -takes rational to an integer power
- *   rationalTransform      -answers to the question 1/(given rational)
- *   rationalEqual          -the == operator
- *   rationalGrater         -the > operator
- *   rationalLesser         -the < operator
  * @param rational
  * @return
  * NULL if there was a NULL argument
@@ -92,6 +86,60 @@ Rational rationalAddition(Rational rational1, Rational rational2);
  */
 Rational rationalNegate(Rational rational);
 
-
+/**
+ *   rationalMultiply       -multiplies two rationals
+ * @param rational1
+ * @param rational2
+ * @return
+ * NULL if one of the arguments is NULL
+ */
 Rational rationalMultiply(Rational rational1, Rational rational2);
+
+/**
+ *   rationalPower          -takes rational to an integer power
+ * @param base
+ * @param power
+ * @return
+ */
+Rational rationalPower(Rational base, int power);
+
+/**
+ *   rationalTransform      -answers to the question 1/(given rational)
+ * @param rational
+ * @return
+ * NULL for NULL argument
+ * rational otherwise
+ */
+Rational rationalTransform(Rational rational);
+
+/**
+ *   rationalEqual          -the == operator
+ * @param rational1
+ * @param rational2
+ * @return
+ * true for equal
+ * false for not
+ */
+bool rationalEqual(Rational rational1,Rational rational2);
+
+/**
+ *   rationalGrater         -the > operator
+ * @param rational1
+ * @param rational2
+ * @return
+ * true if rational1> rational2
+ * false otherwise
+ */
+bool rationalGrater(Rational rational1, Rational rational2);
+
+/**
+ *   rationalLesser         -the < operator
+ * @param rational1
+ * @param rational2
+ * @return
+ * true if rational2> rational1
+ * false otherwise
+ */
+bool rationalLesser(Rational rational1, Rational rational2);
+
 #endif //DANIELCITY_RATIONAL_H
