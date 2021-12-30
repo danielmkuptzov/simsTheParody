@@ -279,4 +279,47 @@ COREElement coreGetElement(CoreUnit unit)
  * CORE_ERROR -null or wrong type
  * CORE_SUCSESS -the operation was sucssesful
  */
-OuterCoreErrors coreSetElement(CoreUnit unit, COREElement element, int type);
+OuterCoreErrors coreSetElement(CoreUnit unit, COREElement element, int type)
+{
+    if(!unit||!element)
+    {
+        return CORE_NULL_ARGUMENT;
+    }
+    switch (unit->type)
+    {
+        case 1:
+        {
+            asDestroy((AmountSet)unit->element);
+            break;
+        }
+        case 2:
+        {
+            dateDestroy((Date)unit->element);
+            break;
+        }
+    }
+    switch (type)
+    {
+        case 1:
+        {
+            unit->type=1;
+            unit->element= asCopy((AmountSet)element);
+            if(!unit->element)
+            {
+                return CORE_ERROR;
+            }
+            return CORE_SUCSESS;
+        }
+        case 2:
+        {
+            unit->type=2;
+            unit->element= dateCopy((Date)element);
+            if(!unit->element)
+            {
+                return CORE_ERROR;
+            }
+            return CORE_SUCSESS;
+        }
+    }
+    return CORE_ERROR;
+}
