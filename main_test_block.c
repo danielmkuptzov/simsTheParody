@@ -3,6 +3,7 @@
 #include <string.h>
 
 //teh files we are testing
+#include "Rational.h"
 #include "outerCore.h"
 #include "Product.h"
 void* intCopy(void* org)
