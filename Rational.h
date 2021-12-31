@@ -27,7 +27,16 @@
  *   rationalEqual          -the == operator
  *   rationalGrater         -the > operator
  *   rationalLesser         -the < operator
+ *   rationalAddInto        -operator+=
+ *   rationalSubtruct       -subtructs two rationals
+ *   rationalSubInto        -operator -=
+ *   rationalDivide         -divides two rationals
  */
+typedef enum {
+    RATIONAL_NULL_ARGUMENT,
+    RATIONAL_ERROR,
+    RATIONAL_SUCSESS
+} RtionalErrorCode;
 
 typedef struct Rational_t* Rational;
 
@@ -140,5 +149,47 @@ bool rationalGrater(Rational rational1, Rational rational2);
  * false otherwise
  */
 bool rationalLesser(Rational rational1, Rational rational2);
+
+/**
+ *   rationalAddInto        -operator+=
+ * @param rational1
+ * @param rational2
+ * @return
+ * RATIONAL_NULL_ARGUMENT there is aNULL argument
+ * RATIONAL_ERROR addition failed
+ * RATIONAL_SUCSESS- sucsess
+ */
+RtionalErrorCode rationalAddInto(Rational rational1, Rational rational2);
+
+/**
+ *   rationalSubtruct       -subtructs two rationals
+ * @param rational1
+ * @param rational2
+ * @return
+ * NULL failiure
+ * rational otherwise
+ */
+Rational rationalSubtruct(Rational rational1, Rational rational2);
+
+/**
+ *   rationalSubInto        -operator -=
+ * @param rational1
+ * @param rational2
+ * @return
+ * RATIONAL_NULL_ARGUMENT aNULL was given
+ * RATIONAL_ERROR operation failed
+ * RATIONAL_SUCSESS sucsess
+ */
+RtionalErrorCode rationalSubInto(Rational rational1, Rational rational2);
+
+/**
+ *   rationalDivide         -divides two rationals
+ * @param rational1
+ * @param rational2
+ * @return
+ * NULL sucsess or a expiriment of dividing by 0
+ * rational otherwise
+ */
+Rational rationalDivide(Rational rational1, Rational rational2);
 
 #endif //DANIELCITY_RATIONAL_H

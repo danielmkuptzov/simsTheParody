@@ -176,3 +176,69 @@ bool rationalLesser(Rational rational1, Rational rational2)
 {
     return rationalGrater(rational2,rational1);
 }
+
+RtionalErrorCode rationalAddInto(Rational rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return RATIONAL_NULL_ARGUMENT;
+    }
+    Rational tmp= rational1;
+    rational1= rationalAddition(tmp,rational2);
+    if(!rational1)
+    {
+        rational1=tmp;
+        return RATIONAL_ERROR;
+    }
+    rationalDestroy(tmp);
+    return RATIONAL_SUCSESS;
+}
+
+Rational rationalSubtruct(Rational rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return NULL;
+    }
+    Rational nrational2= rationalNegate(rational2);
+    Rational resalt= rationalAddition(rational1,nrational2);
+    rationalDestroy(nrational2);
+    if(!resalt)
+    {
+        return NULL;
+    }
+    return resalt;
+}
+
+RtionalErrorCode rationalSubInto(Rational rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return RATIONAL_NULL_ARGUMENT;
+    }
+    Rational tmp= rational1;
+    rational1= rationalSubtruct(tmp,rational2);
+    if(!rational1)
+    {
+        rational1=tmp;
+        return RATIONAL_ERROR;
+    }
+    rationalDestroy(tmp);
+    return RATIONAL_SUCSESS;
+}
+
+Rational rationalDivide(Rational rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return NULL;
+    }
+    Rational revrational2= rationalTransform(rational2);
+    if(!revrational2)
+    {
+        return NULL;
+    }
+    Rational resalt= rationalMultiply(rational1, revrational2);
+    rationalDestroy(revrational2);
+    return resalt;
+}
