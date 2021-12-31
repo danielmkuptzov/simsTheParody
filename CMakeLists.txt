@@ -19,7 +19,7 @@ set(COREPROJ outerCore/core/AmountSet.c outerCore/core/List.h outerCore/core/Lis
 
 set(OUTERCORE outerCore/outerCore.c outerCore/AmountSet.h  outerCore/Date.c outerCore/Date.h outerCore/Product.c ${COREPROJ})
 # Add the names of your source files here
-set(C_FILES main_test_block.c  Product.h  outerCore.h Rational.c Rational.h ${OUTERCORE})
+set(C_FILES main_test_block.c  Product.h  outerCore.h Rational.c Rational.h ${OUTERCORE} OrderProduct.c OrderProduct.h)
 
 add_executable(danielCity ${C_FILES})
 # Add the names of your source files here

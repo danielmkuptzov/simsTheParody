@@ -1,6 +1,6 @@
-person:date, product, Rational and amountset needed
-
 shopProd: date, product, Rational and amountset needed
+
+person:date, product, Rational and amountset needed
 
 order:date, product, Rational and amountset needed
 
