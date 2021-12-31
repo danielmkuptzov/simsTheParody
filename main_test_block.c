@@ -82,7 +82,7 @@ int main()
     Product product2= productCopy(product);
     for(int i=0; i<10; i++)
     {
-        Rational temp= rationalCreate(2,i+1);
+        Rational temp= rationalCreate(1,10*(i+2));
         if(productAddComponent(product2,temp)!=PRODUCT_SUCSESS)
         {
             return 0;
@@ -97,9 +97,12 @@ int main()
     productDestroy(product);
     Rational k= rationalCreate(1,10);
     CoreUnit toFilter= coreCreate(1,NULL,NULL,NULL,0);
-    if(coreSetElement(toFilter, productComponentFilter(product3,greaterThanEpsilon,k),1));
+    void * toCore=productComponentFilter(product3,greaterThanEpsilon,k);
+    if(coreSetElement(toFilter,toCore,1)!=CORE_SUCSESS)
+    {
+        printf("why");
+    }
     rationalDestroy(k);
-    productDestroy(product);
     productDestroy(product2);
     productDestroy(product3);
     coreDestroyer();

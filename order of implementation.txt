@@ -1,5 +1,3 @@
-Rational
-
 person:date, product, Rational and amountset needed
 
 shopProd: date, product, Rational and amountset needed

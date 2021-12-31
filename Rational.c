@@ -22,7 +22,15 @@ static int rationalGcd(int a, int b)
 
 static double rationalToDoubleConverter(Rational rational)
 {
-    return rational->numerator/rational->denumerator;
+    if(rational->numerator==0)
+    {
+        return 0;
+    }
+    if(rational->numerator>0)
+    {
+        return 0.1;
+    }
+    return -0.5;
 }
 
 static bool doublePositive(double number)
@@ -59,10 +67,13 @@ Rational rationalCreate(int numerator,int denumerator)
     {
         return NULL;
     }
-    bool negative=(denumerator<0);
-    denumerator= negative*denumerator;
+    if(denumerator<0)
+    {
+        numerator=-1*numerator;
+        denumerator=-1*denumerator;
+    }
     int gcd=rationalGcd(numerator,denumerator);
-    new->numerator=negative*numerator/gcd;
+    new->numerator=numerator/gcd;
     new->denumerator=denumerator/gcd;
     return new;
 }

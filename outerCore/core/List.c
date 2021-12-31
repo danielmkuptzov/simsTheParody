@@ -289,7 +289,6 @@ void listDestroy(List list)
         free(list);
         return;
     }
-    printf("operation failed");
 }
 
 CopyListElement listGetCopy(List list)
