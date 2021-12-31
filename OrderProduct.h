@@ -1,17 +1,18 @@
-#ifndef DANIELCITY_ORDERPRODUCT_H
-#define DANIELCITY_ORDERPRODUCT_H
+#ifndef ORDERPRODUCT_H
+#define ORDERPRODUCT_H
 
 /**
- *  Rational numbers adt
+ *  order product adt
  *
- * this header implements the rational numbers. we will recive in the creator only integers (no doubles)
- * please use with care
+ * this header implements the second basic thing in this project, the trasporting unit of the product.
  *
  * The following functions are available:
- *   rationalCreate         -Creates the rational number.
- *   rationalDestroy        -Deletes an existing rational and frees all resources
- *   rationalCopy           -Copies an existing rational
- *   rationalCompeare       -compares between rationals
+ *   productUnitCreate         -Creates the order product.
+ *   productUnitDestroy        -Deletes an existing order product and frees all resources
+ *   productUnitCopy           -Copies an existing order product
+ *   productUnitCompeare       -compares between order products
+ *   productUnitRaiseAmount    -raise the amount of the product
+ *   productUnitLowerAmount    -lowers the amount of the product
  */
 
-#endif //DANIELCITY_ORDERPRODUCT_H
+#endif //ORDERPRODUCT_H
