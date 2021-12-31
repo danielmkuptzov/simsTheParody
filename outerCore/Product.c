@@ -280,3 +280,25 @@ Product productUnite(Product product1, Product product2)
     return sum;
 }
 
+ProductComp productGetFirst(Product product)
+{
+    if(!product)
+    {
+        return NULL;
+    }
+    return asGetFirst(product->components);
+}
+
+ProductComp productGetNext(Product product)
+{
+    if(!product)
+    {
+        return NULL;
+    }
+    return asGetNext(product->components);
+}
+
+int productCompeare(Product product1, Product product2)
+{
+    return product1->id-product2->id;
+}

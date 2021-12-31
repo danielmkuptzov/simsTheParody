@@ -35,6 +35,7 @@
  *   productUnite             -if the products have the same caracteristics but different components unites them
  *   productGetFirst          -gives the first component in the list
  *   productGetNext           -brings the next one
+ *   productCompeare          -compares between products
  */
 
 /** Type for additional custom data of a product */
@@ -307,6 +308,14 @@ ProductComp productGetFirst(Product product);
  * product component otherwise
  */
 ProductComp productGetNext(Product product);
+
+/**
+ *   productCompeare          -compares between products
+ * @param product1
+ * @param product2
+ * @return
+ */
+int productCompeare(Product product1, Product product2);
 
 /**
  * Macro for iterating over a product.
