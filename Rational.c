@@ -240,3 +240,29 @@ Rational rationalDivide(Rational rational1, Rational rational2)
     rationalDestroy(revrational2);
     return resalt;
 }
+
+Rational rationalround(Rational rational)
+{
+    if(!rational)
+    {
+        return NULL;
+    }
+    int left= rational->numerator%rational->denumerator;
+    int full= rational->numerator/rational->denumerator;
+    if(left>rational->denumerator/2)
+    {
+        full+= rational->denumerator/2;
+    }
+    return rationalCreate(full,rational->denumerator);
+}
+
+bool rationalIsHaveHalf(Rational rational)
+{
+    int left= rational->numerator%rational->denumerator;
+    int full= rational->numerator/rational->denumerator;
+    if(left>rational->denumerator/2)
+    {
+        return true;
+    }
+    return false;
+}

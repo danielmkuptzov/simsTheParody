@@ -31,7 +31,10 @@
  *   rationalSubtruct       -subtructs two rationals
  *   rationalSubInto        -operator -=
  *   rationalDivide         -divides two rationals
+ *   rationalround          -rounds the number to the closest half-integer
+ *   rationalIsHaveHalf     -gives the answer if the number have the .5 resalt
  */
+
 typedef enum {
     RATIONAL_NULL_ARGUMENT,
     RATIONAL_ERROR,
@@ -191,5 +194,21 @@ RtionalErrorCode rationalSubInto(Rational rational1, Rational rational2);
  * rational otherwise
  */
 Rational rationalDivide(Rational rational1, Rational rational2);
+
+/**
+ *   rationalround          -rounds the number to the closest half-integer
+ * @param rational
+ * @return
+ * NULL if the rational waa null
+ * rational otherwise
+ */
+Rational rationalround(Rational rational);
+
+/**
+ *   rationalIsHaveHalf     -gives the answer if the number have the .5 resalt
+ * @param rational
+ * @return
+ */
+bool rationalIsHaveHalf(Rational rational);
 
 #endif //DANIELCITY_RATIONAL_H
