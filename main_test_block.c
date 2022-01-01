@@ -6,6 +6,7 @@
 #include "Rational.h"
 #include "outerCore.h"
 #include "Product.h"
+#include "OrderProduct.h"
 void* intCopy(void* org)
 {
     int *copy= malloc(sizeof (int*));
@@ -104,7 +105,26 @@ int main()
     }
     rationalDestroy(k);
     productDestroy(product2);
+    Rational amount= rationalCreate(1,2);
+    OrderUnit productunit= productUnitCreate(product3,amount);
+    if(!productunit)
+    {
+        rationalDestroy(amount);
+        productDestroy(product3);
+        return 0;
+    }
     productDestroy(product3);
+    rationalDestroy(amount);
+    for(int i=0;i<10;i++)
+    {
+        Rational toAdd= rationalCreate(1,i+1);
+        if(productUnitRaiseAmount(productunit,toAdd)!=ORDER_UNIT_SUCSESS)
+        {
+            return 0;
+        }
+        rationalDestroy(toAdd);
+    }
+    productUnitDestroy(productunit);
     coreDestroyer();
     return 0;
 }
