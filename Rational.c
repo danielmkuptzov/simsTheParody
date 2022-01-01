@@ -99,9 +99,7 @@ Rational rationalCopy(Rational rational)
 
 int rationalCompare(Rational rational1, Rational rational2)
 {
-    Rational nrational= rationalNegate(rational2);
-    Rational resalt= rationalAddition(rational1,nrational);
-    rationalDestroy(nrational);
+    Rational resalt= rationalSubtruct(rational1,rational2);
     int tosend=doublePositive(rationalToDoubleConverter(resalt));
     rationalDestroy(resalt);
     return tosend;
