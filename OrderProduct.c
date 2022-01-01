@@ -37,7 +37,7 @@ static bool checkAmount(Rational amount, ProductAmountType type)
         rationalDestroy(resalt);
         return false;
     }
-    bool answer=rationalGrater(resalt,epsilon);
+    bool answer=!rationalGrater(resalt,epsilon);
     rationalDestroy(epsilon);
     rationalDestroy(resalt);
     return answer;

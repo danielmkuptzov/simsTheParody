@@ -54,7 +54,6 @@ struct product_t {
     Date creationDate;
     int id;
     char* name;
-    double amount;
     ProductData data;
     ProductAmountType amount_type;
     CopyProductData copyData;
@@ -102,7 +101,7 @@ Product productCreate(int id, char* name, ProductAmountType type,
         return NULL;
     }
     new->id=id;
-    new->amount= type;
+    new->amount_type= type;
     return new;
 }
 

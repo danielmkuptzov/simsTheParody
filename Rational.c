@@ -20,7 +20,7 @@ static int rationalGcd(int a, int b)
     return gcd;
 }
 
-static double rationalToDoubleConverter(Rational rational)
+static int rationalToDoubleConverter(Rational rational)
 {
     if(rational->numerator==0)
     {
@@ -28,22 +28,9 @@ static double rationalToDoubleConverter(Rational rational)
     }
     if(rational->numerator>0)
     {
-        return 0.1;
-    }
-    return -0.5;
-}
-
-static bool doublePositive(double number)
-{
-    if(number>0)
-    {
         return 1;
     }
-    if(number<0)
-    {
-        return -1;
-    }
-    return 0;
+    return -1;
 }
 
 static int powerInt(int base, int power)
@@ -100,7 +87,7 @@ Rational rationalCopy(Rational rational)
 int rationalCompare(Rational rational1, Rational rational2)
 {
     Rational resalt= rationalSubtruct(rational1,rational2);
-    int tosend=doublePositive(rationalToDoubleConverter(resalt));
+    int tosend=rationalToDoubleConverter(resalt);
     rationalDestroy(resalt);
     return tosend;
 }
@@ -249,7 +236,7 @@ Rational rationalround(Rational rational)
     }
     int left= rational->numerator%rational->denumerator;
     int full= rational->numerator/rational->denumerator;
-    if(left>rational->denumerator/2)
+    if(left>=rational->denumerator/2)
     {
         full+= rational->denumerator/2;
     }
@@ -259,7 +246,6 @@ Rational rationalround(Rational rational)
 bool rationalIsHaveHalf(Rational rational)
 {
     int left= rational->numerator%rational->denumerator;
-    int full= rational->numerator/rational->denumerator;
     if(left>rational->denumerator/2)
     {
         return true;
