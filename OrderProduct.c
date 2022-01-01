@@ -119,33 +119,51 @@ OrderUnitErrors productUnitRaiseAmount(OrderUnit unit, Rational amount)
     return ORDER_UNIT_SUCSESS;
 }
 
-/**
- *   productUnitLowerAmount    -lowers the amount of the product
- * @param unit
- * @param amount
- * @return
- *   ORDER_UNIT_NULL_ARGUMENT  -aNULL argument was passed
- *   ORDER_UNIT_ERROR          -strange casess
- *   ORDER_UNIT_WRONG_AMOUNT   -amount don't match the decription
- *   ORDER_UNIT_TOO_MUCH       -the amount is too much
- *   ORDER_UNIT_SUCSESS        -sucsess
- */
-OrderUnitErrors productUnitLowerAmount(OrderUnit unit, Rational amount);
+OrderUnitErrors productUnitLowerAmount(OrderUnit unit, Rational amount)
+{
+    if(!unit)
+    {
+        return ORDER_UNIT_NULL_ARGUMENT;
+    }
+    Rational zero= rationalCreate(0,1);
+    if(rationalGrater(amount,zero))
+    {
+        rationalDestroy(zero);
+        return ORDER_UNIT_ERROR;
+    }
+    rationalDestroy(zero);
+    if(!checkAmount(amount, productGetType(unit->product)))
+    {
+        return ORDER_UNIT_WRONG_AMOUNT;
+    }
+    Rational namount= rationalNegate(amount);
+    if(rationalGrater(namount,unit->amount))
+    {
+        rationalDestroy(namount);
+        return ORDER_UNIT_TOO_MUCH;
+    }
+    rationalDestroy(namount);
+    if(rationalSubInto(unit->amount,amount)!=RATIONAL_SUCSESS)
+    {
+        return ORDER_UNIT_ERROR;
+    }
+    return ORDER_UNIT_SUCSESS;
+}
 
-/**
- *   productUnitGetProduct     -to see the product
- * @param unit
- * @return
- * NULL -corrupted argument
- * product otherwise
- */
-Product productUnitGetProduct(OrderUnit unit);
+Product productUnitGetProduct(OrderUnit unit)
+{
+    if(!unit)
+    {
+        return NULL;
+    }
+    return unit->product;
+}
 
-/**
- *   productUnitGetAmount      -to get the amount of the product
- * @param unit
- * @return
- * NULL for corrupted product
- * rational otherwise
- */
-Rational productUnitGetAmount(OrderUnit unit);
+Rational productUnitGetAmount(OrderUnit unit)
+{
+    if(!unit)
+    {
+        return NULL;
+    }
+    return unit->amount;
+}
