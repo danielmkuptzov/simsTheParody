@@ -30,6 +30,9 @@
  *   coreDestroyer      -use it to end the code
  *   coreGetElement     -return the data of the element
  *   coreSetElement     -changes the element
+ *   coreGetFirst       -the first element of the core
+ *   coreGetNext        -the next element
+ *   core foreach       - the amount set foreach
  */
 
 typedef enum {
@@ -252,5 +255,24 @@ COREElement coreGetElement(CoreUnit unit);
  * CORE_SUCSESS -the operation was sucssesful
  */
 OuterCoreErrors coreSetElement(CoreUnit unit, COREElement element, int type);
+
+/**
+ *   coreGetFirst       -the first element of the core
+ * @param unit
+ * @return
+ */
+void* coreGetFirst(CoreUnit unit);
+
+/**
+ *   coreGetNext        -the next element
+ * @param unit
+ * @return
+ */
+void* coreGetNext(CoreUnit unit);
+
+#define CORE_FOREACH(type, iterator,core)          \
+    for(type iterator = (type) coreGetFirst(core) ; \
+        iterator ;                               \
+        iterator = coreGetNext(core))
 
 #endif //OUTERCORE_H

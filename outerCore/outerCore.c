@@ -323,3 +323,26 @@ OuterCoreErrors coreSetElement(CoreUnit unit, COREElement element, int type)
     }
     return CORE_ERROR;
 }
+
+void* coreGetFirst(CoreUnit unit)
+{
+    if(!unit)
+    {
+        return NULL;
+    }
+    if(unit->type!=1)
+    {
+        return NULL;
+    }
+    return asGetFirst((AmountSet)unit->element);
+}
+
+void* coreGetNext(CoreUnit unit)
+{
+    if(!unit||unit->type!=1)
+    {
+        return NULL;
+    }
+    return asGetNext((AmountSet)unit->element);
+}
+
