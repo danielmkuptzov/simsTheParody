@@ -49,6 +49,10 @@ OrderUnit productUnitCreate(Product product, Rational initialAmount)
     {
         return NULL;
     }
+    if(!checkAmount(initialAmount, productGetType(product)))
+    {
+        return NULL;
+    }
     Rational zero= rationalCreate(0,1);
     if(rationalLesser(initialAmount,zero))
     {
