@@ -10,7 +10,7 @@ struct OrderUnit_t{
     Rational amount;
 };
 
-static bool checkAmount(Rational amount, ProductAmountType type)
+static bool checkAmount(const Rational amount, ProductAmountType type)
 {
     if(!amount)
     {
@@ -37,7 +37,7 @@ static bool checkAmount(Rational amount, ProductAmountType type)
         rationalDestroy(resalt);
         return false;
     }
-    bool answer=!(rationalGrater(resalt,epsilon)&&type==HALF_INTEGER_AMOUNT);
+    bool answer=(rationalLesser(resalt,epsilon)&&type==HALF_INTEGER_AMOUNT);
     rationalDestroy(epsilon);
     rationalDestroy(resalt);
     return answer;

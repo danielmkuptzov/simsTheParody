@@ -230,17 +230,18 @@ Rational rationalDivide(Rational rational1, Rational rational2)
 
 Rational rationalround(Rational rational)
 {
-    if(!rational)
+    if(rational->denumerator==1)
     {
-        return NULL;
+        return rational;
     }
-    int left= rational->numerator%rational->denumerator;
-    int full= rational->numerator/rational->denumerator;
+    int left=rational->numerator%rational->denumerator;
+    int full=rational->numerator/rational->denumerator;
+    int newdenu=full;
     if(left>=rational->denumerator/2)
     {
-        full+= rational->denumerator/2;
+        newdenu+=rational->denumerator/2;
     }
-    return rationalCreate(full,rational->denumerator);
+    return rationalCreate(newdenu,rational->denumerator);
 }
 
 bool rationalIsHaveHalf(Rational rational)
