@@ -162,17 +162,17 @@ bool rationalLesser(Rational rational1, Rational rational2)
     return rationalGrater(rational2,rational1);
 }
 
-RtionalErrorCode rationalAddInto(Rational rational1, Rational rational2)
+RtionalErrorCode rationalAddInto(Rational* rational1, Rational rational2)
 {
     if(!rational1||!rational2)
     {
         return RATIONAL_NULL_ARGUMENT;
     }
-    Rational tmp= rational1;
-    rational1= rationalAddition(tmp,rational2);
-    if(!rational1)
+    Rational tmp= *rational1;
+    *rational1= rationalAddition(tmp,rational2);
+    if(!*rational1)
     {
-        rational1=tmp;
+        *rational1=tmp;
         return RATIONAL_ERROR;
     }
     rationalDestroy(tmp);
@@ -195,17 +195,17 @@ Rational rationalSubtruct(Rational rational1, Rational rational2)
     return resalt;
 }
 
-RtionalErrorCode rationalSubInto(Rational rational1, Rational rational2)
+RtionalErrorCode rationalSubInto(Rational* rational1, Rational rational2)
 {
     if(!rational1||!rational2)
     {
         return RATIONAL_NULL_ARGUMENT;
     }
-    Rational tmp= rational1;
-    rational1= rationalSubtruct(tmp,rational2);
-    if(!rational1)
+    Rational tmp=*rational1;
+    *rational1= rationalSubtruct(tmp,rational2);
+    if(!*rational1)
     {
-        rational1=tmp;
+        *rational1=tmp;
         return RATIONAL_ERROR;
     }
     rationalDestroy(tmp);

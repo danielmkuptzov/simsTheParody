@@ -162,7 +162,7 @@ bool rationalLesser(Rational rational1, Rational rational2);
  * RATIONAL_ERROR addition failed
  * RATIONAL_SUCSESS- sucsess
  */
-RtionalErrorCode rationalAddInto(Rational rational1, Rational rational2);
+RtionalErrorCode rationalAddInto(Rational* rational1, Rational rational2);
 
 /**
  *   rationalSubtruct       -subtructs two rationals
@@ -183,7 +183,7 @@ Rational rationalSubtruct(Rational rational1, Rational rational2);
  * RATIONAL_ERROR operation failed
  * RATIONAL_SUCSESS sucsess
  */
-RtionalErrorCode rationalSubInto(Rational rational1, Rational rational2);
+RtionalErrorCode rationalSubInto(Rational* rational1, Rational rational2);
 
 /**
  *   rationalDivide         -divides two rationals

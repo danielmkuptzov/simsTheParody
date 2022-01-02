@@ -37,7 +37,7 @@ static bool checkAmount(Rational amount, ProductAmountType type)
         rationalDestroy(resalt);
         return false;
     }
-    bool answer=!rationalGrater(resalt,epsilon);
+    bool answer=!(rationalGrater(resalt,epsilon)&&type==HALF_INTEGER_AMOUNT);
     rationalDestroy(epsilon);
     rationalDestroy(resalt);
     return answer;
@@ -116,7 +116,7 @@ OrderUnitErrors productUnitRaiseAmount(OrderUnit unit, Rational amount)
     {
         return ORDER_UNIT_WRONG_AMOUNT;
     }
-    if(rationalAddInto(unit->amount,amount)!=RATIONAL_SUCSESS)
+    if(rationalAddInto(&unit->amount,amount)!=RATIONAL_SUCSESS)
     {
         return ORDER_UNIT_ERROR;
     }
@@ -147,7 +147,7 @@ OrderUnitErrors productUnitLowerAmount(OrderUnit unit, Rational amount)
         return ORDER_UNIT_TOO_MUCH;
     }
     rationalDestroy(namount);
-    if(rationalSubInto(unit->amount,amount)!=RATIONAL_SUCSESS)
+    if(rationalSubInto(&unit->amount,amount)!=RATIONAL_SUCSESS)
     {
         return ORDER_UNIT_ERROR;
     }
