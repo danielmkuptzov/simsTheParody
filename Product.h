@@ -145,11 +145,6 @@ typedef enum ProductErrorCode_t{
 } ProductErrorCode;
 
 /**
- * for generating id to the product
- */
- typedef int (*ProductIdGenerator)();
-
-/**
  * the product type, use whith care
  */
 typedef struct product_t *Product;

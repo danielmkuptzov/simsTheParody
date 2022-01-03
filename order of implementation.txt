@@ -1,8 +1,19 @@
-shopProd: date, product, Rational and amountset needed
+a template for every adt
+/**
+ *  adt
+ *
+ * Implements a
+ *
+ *
+ *
+ * The following functions are available:
+ *   Create            - Creates a new
+ *   Destroy           - Deletes an existing and frees all resources
+ *   Copy              - Copies an existing
+ *   Compeare          -compares between
+ */
 
 person:date, product, Rational and amountset needed
-
-order:date, product, Rational and amountset needed
 
 apartment: date, product, person, Rational and amountset needed
 
@@ -22,9 +33,11 @@ hospital: medBag, date and amountset needed
 
 cityqur: date, product, hospital, streed, Rational and amountset needed
 
-class: date, person and amountset needed
+skill: date needed
 
-school: date, class and amountset needed 
+class: date, person, skill and amountset needed
+
+school: date, class, skill and amountset needed
 
 neighorhood: date, product, cityqur, school, Rational and amountset needed
 
