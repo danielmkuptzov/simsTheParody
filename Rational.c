@@ -232,7 +232,7 @@ Rational rationalround(Rational rational)
 {
     if(rational->denumerator==1)
     {
-        return rational;
+        return rationalCopy(rational);
     }
     int left=rational->numerator%rational->denumerator;
     int full=rational->numerator/rational->denumerator;

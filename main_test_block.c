@@ -117,7 +117,7 @@ int main()
     rationalDestroy(amount);
     for(int i=0;i<10;i++)
     {
-        Rational toAdd= rationalCreate(1,i+1);
+        Rational toAdd= rationalCreate(i,1);
         if(productUnitRaiseAmount(productunit,toAdd)!=ORDER_UNIT_SUCSESS)
         {
             return 0;
