@@ -272,21 +272,62 @@ PersonErrorCodes personChangeBalance(Person person);
 
 /**
  *   personChangeAmountINWIshList -changes the amount of the product in wish list
- *   personGetWishList            -getter
- *   personGetSkills              -getter
- *   personGetCv                  -getter
- *   personGetId                  -getter
- *   personGetName                -getter
- *   personMakeDayCycle           -function that simulate a day
  * @param person
  * @param amount
  * @return
- *   PERSON_NULL_ARGUMENT
- *   PERSON_SKILL_DOES_NOT_EXIST
- *   PERSON_TOO_MUCH_TO_ADD
- *   PERSON_WRONG_AMOUNT
- *   PERSON_ERROR
- *   PERSON_SUCSESS
+ *   PERSON_NULL_ARGUMENT -NULL argument was passed
+ *   PERSON_WRONG_AMOUNT  -the amound don't match the critiria
+ *   PERSON_ERROR         -the addition was wrong
+ *   PERSON_SUCSESS       -the operation was sucsess
  */
 PersonErrorCodes personChangeAmountINWIshList(Person person, void* amount);
+
+/**
+ *   personGetWishList            -getter
+ * @param person
+ * @return
+ * NULL -if any problem accures
+ * CoreUnit otherwise
+ */
+void* personGetWishList(Person person);
+
+/**
+ *   personGetSkills              -getter
+ * @param person
+ * @return
+ * NULL if any problem accures
+ * OuterCore otherwise
+ */
+void* personGetSkills(Person person);
+
+/**
+ *   personGetCv                  -getter
+ * @param person
+ * @return
+ */
+void* personGetCv(Person person);
+
+/**
+ *   personGetId                  -getter
+ * @param person
+ * @return
+ * negative nuber if any problem accures
+ * id otherwise
+ */
+int personGetId(Person person);
+
+/**
+ *   personGetName                -getter
+ * @param person
+ * @return
+ * NULL if any problem accures
+ * pointer to name otherwise
+ */
+char* personGetName(Person person);
+
+/**
+ *   personMakeDayCycle           -function that simulate a day
+ */
+void personMakeDayCycle();
+
 #endif //PERSON_H
