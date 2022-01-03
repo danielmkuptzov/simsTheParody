@@ -1,12 +1,15 @@
 #ifndef PERSON_H
 #define PERSON_H
 
+#include <stdio.h>
+#include <stdbool.h>
+
 /**
  *Preson  adt
  *
  * Implements a person type. this would be outside of the kernel and would get most of the kernel adt threw the
  * void* formula, meaning that we would check the elments before doing somthing. for the name fild, please give
- * a butiful name "ana aref" ia a bad name
+ * a butiful name, "ana aref" ia a bad name
  *
  *
  *
@@ -26,6 +29,46 @@
  *   personFixSalary          -gives a person a salary
  *   personChangeBalance      -changes the person balance
  */
+
+/**
+ * the type we would use as a representive of our code
+ */
+typedef struct Person_t* Person;
+
+/**
+ *  the skill generic type
+ */
+ typedef void* Skill;
+
+ /**
+  * the generic copy
+  */
+typedef Skill (*SkillCopy)(Skill);
+
+/**
+ * the skill destroy
+ */
+typedef void (*SkillDestroy)(Skill);
+
+/**
+ * the skill comparison
+ */
+typedef bool (*SkillComp)(Skill,Skill);
+
+/**
+ * the CV unit block
+ */
+typedef void* CVData;
+
+/**
+ * the CV copy function
+ */
+typedef CVData (*CVCopy)(CVData);
+
+/**
+ * the CV destroy function
+ */
+typedef void (*CVDestroy)(CVData);
 
 
 #endif //PERSON_H
