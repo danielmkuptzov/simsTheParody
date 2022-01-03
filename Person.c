@@ -1,10 +1,22 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "Person.h"
 #include "OrderProduct.h"
 #include "Rational.h"
 #include "outerCore.h"
-#include "Product.h"
+
+struct Person_t
+{
+    int id;
+    char* name;
+    CoreUnit dateOfBirth;
+    CoreUnit skills;
+    CoreUnit wishList;
+    CoreUnit CV;
+    double salary;
+    Rational balance;
+};
 
 /**
  *   personCreate              -Creates a new person
@@ -16,7 +28,19 @@
  * person otherwise
  */
 Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
-                    SkillComp skillComp, CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp);
+                    SkillComp skillComp, CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp)
+{
+    if(!name||strcmp(name," "))
+    {
+        return NULL;
+    }
+    Person new= malloc(sizeof(struct Person_t));
+    if(!new)
+    {
+        return NULL;
+    }
+    new->id=id;
+}
 
 /**
  *   personDestroy             -Deletes an existing person and frees all resources
@@ -206,4 +230,4 @@ char* personGetName(Person person);
 /**
  *   personMakeDayCycle           -function that simulate a day
  */
-void personMakeDayCycle();
+void personMakeDayCycle(CVData);
