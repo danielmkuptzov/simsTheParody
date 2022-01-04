@@ -6,6 +6,12 @@
 #include "Rational.h"
 #include "outerCore.h"
 
+static char* stringDup(char* str)
+{
+    char* copy = malloc(strlen(str) + 1);
+    return copy ? strcpy(copy, str) : NULL;
+}
+
 struct Person_t
 {
     int id;
@@ -18,17 +24,24 @@ struct Person_t
     Rational balance;
 };
 
-/**
- *   personCreate              -Creates a new person
- * @param id            -the id of the person
- * @param dateOfBirth   -outerCore type by number 2
- * @param name          -name is a string
- * @return
- * NULL if one of the critiria don't match
- * person otherwise
- */
+static void* orderUnitCopy(void* orderUnit)
+{
+    return productUnitCopy((OrderUnit)orderUnit);
+}
+
+static void orderunitdestroy(void* orderUnit)
+{
+    productUnitDestroy((OrderUnit)orderUnit);
+}
+
+static int orderunitcomp(void* unit1, void* unit2)
+{
+    return productUnitCompeare((OrderUnit)unit1,(OrderUnit)unit2);
+}
+
 Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
-                    SkillComp skillComp, CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp)
+                    SkillComp skillComp, CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp, int CVType,
+                    int SkillType)
 {
     if(!name||strcmp(name," "))
     {
@@ -40,13 +53,58 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
         return NULL;
     }
     new->id=id;
+    new->name= stringDup(name);
+    if(!new->name)
+    {
+        personDestroy(new);
+        return NULL;
+    }
+    new->wishList= coreCreate(1,orderUnitCopy,orderunitdestroy,orderunitcomp,5);
+    if(!new->wishList)
+    {
+        personDestroy(new);
+        return NULL;
+    }
+    new->salary=0.0;
+    new->balance= rationalCreate(0,1);
+    if(!new->salary)
+    {
+        personDestroy(new);
+        return NULL;
+    }
+    new->dateOfBirth= coreCopy((CoreUnit)dateOfBirth);
+    if(!new->dateOfBirth)
+    {
+        personDestroy(new);
+        return NULL;
+    }
+    new->CV=coreCreate(1,cvCopy,cvDestroy,cvComp,CVType);
+    if(!new->CV)
+    {
+        personDestroy(new);
+        return NULL;
+    }
+    new->skills= coreCreate(1,copySkill,skillDestroy,skillComp,SkillType);
+    if(!new->skills)
+    {
+        personDestroy(new);
+        return NULL;
+    }
+    return new;
 }
 
 /**
  *   personDestroy             -Deletes an existing person and frees all resources
  * @param person
  */
-void personDestroy(Person person);
+void personDestroy(Person person)
+{
+    if(!person)
+    {
+        return;
+    }
+
+}
 
 /**
  *   personCopy                -Copies an existing person

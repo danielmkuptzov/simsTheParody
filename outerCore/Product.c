@@ -304,5 +304,9 @@ ProductComp productGetNext(Product product)
 
 int productCompeare(Product product1, Product product2)
 {
+    if(productEquals(product1,product2)==0)
+    {
+        return 0;
+    }
     return product1->id-product2->id;
 }

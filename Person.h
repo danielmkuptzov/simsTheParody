@@ -138,7 +138,8 @@ typedef bool (*CVFilter)(CVData,keyCV);
  * person otherwise
  */
 Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
-                    SkillComp skillComp, CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp);
+                    SkillComp skillComp, CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp, int CVType,
+                    int SkillType);
 
 /**
  *   personDestroy             -Deletes an existing person and frees all resources
