@@ -93,17 +93,19 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
     return new;
 }
 
-/**
- *   personDestroy             -Deletes an existing person and frees all resources
- * @param person
- */
 void personDestroy(Person person)
 {
     if(!person)
     {
         return;
     }
-
+    coreDestroy(person->dateOfBirth);
+    coreDestroy(person->wishList);
+    coreDestroy(person->skills);
+    coreDestroy(person->CV);
+    rationalDestroy(person->balance);
+    free(person->name);
+    free(person);
 }
 
 /**
