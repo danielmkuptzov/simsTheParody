@@ -6,10 +6,48 @@
 #include "Rational.h"
 #include "outerCore.h"
 
+#define CAP_MIN 'A'
+#define CAP_MAX 'Z'
+#define LOW_MIN 'a'
+#define LOW_MAX 'z'
+
 static char* stringDup(char* str)
 {
     char* copy = malloc(strlen(str) + 1);
     return copy ? strcpy(copy, str) : NULL;
+}
+
+static char *casingFix(bool upperCase, char *fixstring)
+{
+    if(!(upperCase)&&((fixstring[0]>=CAP_MIN)&&(fixstring[0]<=CAP_MAX)))
+    {
+        fixstring[0]=fixstring[0]-CAP_MIN+LOW_MIN;
+    }
+    if(upperCase&&((fixstring[0]>=LOW_MIN)&&(fixstring[0]<=LOW_MAX)))
+    {
+        fixstring[0]=fixstring[0]-LOW_MIN+CAP_MIN;
+    }
+    return fixstring;
+}
+
+static int nameComparison(char* first, char*second)
+{
+    char* mainName=NULL;
+    char* secondName=NULL;
+    if(((first[0]>=CAP_MIN)&&(first[0]<=CAP_MAX))||((second[0]>=CAP_MIN)&&(second[0]<=CAP_MAX)))
+    {
+        mainName=   casingFix(true,stringDup(first));
+        secondName= casingFix(true,stringDup(first));
+    }
+    else
+    {
+        mainName=   casingFix(false,stringDup(first));
+        secondName= casingFix(false,stringDup(first));
+    }
+    int diff= strcmp(mainName,secondName);
+    free(mainName);
+    free(secondName);
+    return diff;
 }
 
 struct Person_t
@@ -108,25 +146,57 @@ void personDestroy(Person person)
     free(person);
 }
 
-/**
- *   personCopy                -Copies an existing person
- * @param person
- * @return
- * NULL for NULL argument or other errors
- * person otherwise
- */
-Person personCopy(Person person);
+Person personCopy(Person person)
+{
+    if(!person)
+    {
+        return NULL;
+    }
+    Person copy= personCreate(person->id,person->dateOfBirth,person->name,NULL,NULL,NULL,NULL,NULL,
+                              NULL,1,1);
+    if(!copy)
+    {
+        return NULL;
+    }
+    coreDestroy(copy->wishList);
+    coreDestroy(copy->CV);
+    coreDestroy(copy->skills);
+    copy->wishList= coreCopy(person->wishList);
+    if(!copy->wishList)
+    {
+        personDestroy(copy);
+        return NULL;
+    }
+    copy->skills= coreCopy(person->skills);
+    if(!copy->skills)
+    {
+        personDestroy(copy);
+        return NULL;
+    }
+    copy->CV= coreCopy(person->CV);
+    if(!copy->CV)
+    {
+        personDestroy(copy);
+        return NULL;
+    }
+    copy->balance= coreCopy(person->balance);
+    if(!copy->balance)
+    {
+        personDestroy(copy);
+        return NULL;
+    }
+    copy->salary=person->salary;
+    return copy;
+}
 
-/**
- *   personCompeare            -compares between people id's
- * @param person1
- * @param person2
- * @return
- * 0 -if equal
- * positive- person1 > person2
- * negative -person1< person2
- */
-int personCompeare(Person person1, Person person2);
+int personCompeare(Person person1, Person person2)
+{
+    if(nameComparison(person1->name,person2->name)==0)
+    {
+        return 0;
+    }
+    return person1->id-person2->id;
+}
 
 /**
  *   personAddToWishList      -adds the product to wish list. note that this would accept only the OrderType because
