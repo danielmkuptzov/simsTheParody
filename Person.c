@@ -11,6 +11,15 @@
 #define LOW_MIN 'a'
 #define LOW_MAX 'z'
 
+typedef enum {
+    BABY,
+    STUDENT,
+    UNIVERCITY_STUDENT,
+    SOLDIER,
+    CIVILIAN_JOB,
+    DEAD
+} Acupation;
+
 static char* stringDup(char* str)
 {
     char* copy = malloc(strlen(str) + 1);
@@ -53,6 +62,8 @@ static int nameComparison(char* first, char*second)
 struct Person_t
 {
     int id;
+    int age;
+    Acupation accupation;
     char* name;
     CoreUnit dateOfBirth;
     CoreUnit skills;
@@ -128,6 +139,8 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
         personDestroy(new);
         return NULL;
     }
+    new->age=0;
+    new->accupation=BABY;
     return new;
 }
 
@@ -186,6 +199,8 @@ Person personCopy(Person person)
         return NULL;
     }
     copy->salary=person->salary;
+    copy->age=person->age;
+    copy->accupation=person->accupation;
     return copy;
 }
 
@@ -198,30 +213,41 @@ int personCompeare(Person person1, Person person2)
     return person1->id-person2->id;
 }
 
-/**
- *   personAddToWishList      -adds the product to wish list. note that this would accept only the OrderType because
- *                              we need amount.
- * @param person
- * @param product
- * @return
- *   PERSON_NULL_ARGUMENT  -one of the arguments was NULL
- *   PERSON_PRODUCT_EXIST  -the product exist
- *   PERSON_ERROR          -the action failed
- *   PERSON_SUCSESS        -the addition was a sucsess
- */
-PersonErrorCodes personAddToWishList(Person person, void* product);
+PersonErrorCodes personAddToWishList(Person person, void* product)
+{
+    if(!person||!product)
+    {
+        return PERSON_NULL_ARGUMENT;
+    }
+    OuterCoreErrors resalt= coreInsert(person->wishList,product);
+    if(resalt==CORE_ELEMENT_EXIST)
+    {
+        return PERSON_PRODUCT_EXIST;
+    }
+    if(resalt!=CORE_SUCSESS)
+    {
+        return PERSON_ERROR;
+    }
+    return PERSON_SUCSESS;
+}
 
-/**
- *   personAddSkill            -this whould be a generic thing as we whould implement this later
- * @param person
- * @param skill
- * @return
- *   PERSON_NULL_ARGUMENT  -one  of the arguments was NULL
- *   PERSON_SKILL_EXIST    -the skill exist
- *   PERSON_ERROR          -the action failed
- *   PERSON_SUCSESS        -the skill was added
- */
-PersonErrorCodes personAddSkill(Person person, Skill skill);
+PersonErrorCodes personAddSkill(Person person, Skill skill)
+{
+    if(!person||!skill)
+    {
+        return PERSON_NULL_ARGUMENT;
+    }
+    OuterCoreErrors resalt= coreInsert(person->skills,skill);
+    if(resalt==CORE_ELEMENT_EXIST)
+    {
+        return PERSON_SKILL_EXIST;
+    }
+    if(resalt!=CORE_SUCSESS)
+    {
+        return PERSON_ERROR;
+    }
+    return PERSON_SUCSESS;
+}
 
 /**
  *   personRemoveFromWishList -removes the product from wish list
@@ -360,4 +386,4 @@ char* personGetName(Person person);
 /**
  *   personMakeDayCycle           -function that simulate a day
  */
-void personMakeDayCycle(CVData);
+CycleReturnCode personMakeDayCycle(CVData);

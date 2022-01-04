@@ -47,7 +47,7 @@ typedef struct Person_t* Person;
  */
  typedef enum{
      PERSON_NULL_ARGUMENT,
-     PERSON_SKILL_DOES_NOT_EXIST,
+     PERSON_SKILL_EXIST,
      PERSON_PRODUCT_EXIST,
      PERSON_PRODUCT_DOES_NOT_EXIST,
      PERSON_CV_EXIST,
@@ -58,6 +58,14 @@ typedef struct Person_t* Person;
      PERSON_SUCSESS
  } PersonErrorCodes;
 
+typedef enum{
+    REQUEST_SCHOOL,
+    REQUEST_UNIVERSITY,
+    REQUEST_MILITARY_BACKROUND,
+    REQUEST_JOB,
+    REQUEST_HOSPITAL,
+    REQUEST_CEMETERY
+} CycleReturnCode;
 /**
  *  the skill generic type
  */
@@ -329,6 +337,6 @@ char* personGetName(Person person);
 /**
  *   personMakeDayCycle           -function that simulate a day
  */
-void personMakeDayCycle(CVData data);
+CycleReturnCode personMakeDayCycle(CVData data);
 
 #endif //PERSON_H
