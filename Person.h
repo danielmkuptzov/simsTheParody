@@ -146,8 +146,7 @@ typedef bool (*CVFilter)(CVData,keyCV);
  * person otherwise
  */
 Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
-                    SkillComp skillComp, CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp, int CVType,
-                    int SkillType);
+                    SkillComp skillComp, int SkillType);
 
 /**
  *   personDestroy             -Deletes an existing person and frees all resources
@@ -244,7 +243,7 @@ void* personFilterWishList(Person person, WishlistFilter wishlistFilter,keyProdu
  *   PERSON_ERROR          -the action failed
  *   PERSON_SUCSESS        -the addition was sucsessful
  */
-PersonErrorCodes personAddToCV(Person person, CVData cvData);
+PersonErrorCodes personAddToCV(Person person, CVData cvData,CVCopy cvCopy, CVDestroy cvDestroy);
 
 /**
  *   personFilterCV           -filtersCV according to a given criteria

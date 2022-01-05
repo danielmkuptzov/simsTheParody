@@ -59,6 +59,24 @@ static int nameComparison(char* first, char*second)
     return diff;
 }
 
+typedef struct CVData_t{
+    CoreUnit dateStart;
+    CoreUnit dateStop;
+    char* cvName;
+    CVData description;
+    CVCopy copy;
+    CVDestroy erazor;
+    CVComp comp;
+}*CVdata;
+
+static CVData cvDataCreate(CoreUnit dateStart, CVData, CVCopy copy,CVDestroy erazor,CVComp comp);
+
+static void* cVdataCopy(void* cvdata);
+
+static void cvDataDestroy(void* cvdata);
+
+static int cvDataComp(void* cvData1, void* cvData2);
+
 struct Person_t
 {
     int id;
@@ -89,8 +107,7 @@ static int orderunitcomp(void* unit1, void* unit2)
 }
 
 Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
-                    SkillComp skillComp, CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp, int CVType,
-                    int SkillType)
+                    SkillComp skillComp, int SkillType)
 {
     if(!name||strcmp(name," "))
     {
@@ -127,7 +144,7 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
         personDestroy(new);
         return NULL;
     }
-    new->CV=coreCreate(1,cvCopy,cvDestroy,cvComp,CVType);
+    new->CV=coreCreate(1,,,,);
     if(!new->CV)
     {
         personDestroy(new);
@@ -206,10 +223,6 @@ Person personCopy(Person person)
 
 int personCompeare(Person person1, Person person2)
 {
-    if(nameComparison(person1->name,person2->name)==0)
-    {
-        return 0;
-    }
     return person1->id-person2->id;
 }
 
@@ -295,13 +308,12 @@ void* personFilterWishList(Person person, WishlistFilter wishlistFilter,keyProdu
  *   PERSON_ERROR          -the action failed
  *   PERSON_SUCSESS        -the addition was sucsessful
  */
-PersonErrorCodes personAddToCV(Person person, CVData cvData)
+PersonErrorCodes personAddToCV(Person person, CVData cvData,CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp)
 {
     if(!person||!cvData)
     {
         return PERSON_NULL_ARGUMENT;
     }
-
 }
 
 /**
