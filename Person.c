@@ -249,17 +249,23 @@ PersonErrorCodes personAddSkill(Person person, Skill skill)
     return PERSON_SUCSESS;
 }
 
-/**
- *   personRemoveFromWishList -removes the product from wish list
- * @param person
- * @param product
- * @return
- *   PERSON_NULL_ARGUMENT           -one of the arguments was NULL
- *   PERSON_PRODUCT_DOES_NOT_EXIST  -the product wasn't found
- *   PERSON_ERROR                   -the action failed
- *   PERSON_SUCSESS                 -the removle was sucsessful
- */
-PersonErrorCodes personRemoveFromWishList(Person person, void* product);
+PersonErrorCodes personRemoveFromWishList(Person person, void* product)
+{
+    if(!person||!product)
+    {
+        return PERSON_NULL_ARGUMENT;
+    }
+    OuterCoreErrors resalt= coreRemove(person->wishList,product);
+    if(resalt==CORE_ELEMENT_DOES_NOT_EXIST)
+    {
+        return PERSON_PRODUCT_DOES_NOT_EXIST;
+    }
+    if(resalt!=CORE_SUCSESS)
+    {
+        return PERSON_ERROR;
+    }
+    return PERSON_SUCSESS;
+}
 
 /**
  *   personFilterSkills       -filters the skills according to a critiria
