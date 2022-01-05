@@ -69,9 +69,46 @@ typedef struct CVData_t{
     CVComp comp;
 }*CVdata;
 
-static CVData cvDataCreate(CoreUnit dateStart, CVData, CVCopy copy,CVDestroy erazor,CVComp comp);
+static CVData cvDataCreate(CoreUnit dateStart, CVData element, CVCopy copy,CVDestroy erazor,CVComp comp,
+                           char* cvName)
+{
+    if(!element||!copy||!dateStart||!erazor||!comp)
+    {
+        return NULL;
+    }
+    CVdata new= malloc(sizeof(struct CVData_t));
+    if(!new)
+    {
+        return NULL;
+    }
+    new->dateStart= coreCopy(dateStart);
+    if(!new->dateStart)
+    {
+        free(new);
+        return NULL;
+    }
+    new->copy=copy;
+    new->description=new->copy(element);
+    if(!new->description)
+    {
+        coreDestroy(dateStart);
+        free(new);
+    }
+    new->erazor=erazor;
+    new->cvName= stringDup(cvName);
+    if(!new->cvName)
+    {
+        new->erazor(new->description);
+        coreDestroy(dateStart);
+        free(new);
+    }
+    return new;
+}
 
-static void* cVdataCopy(void* cvdata);
+static void* cVdataCopy(void* cvdata)
+{
+
+}
 
 static void cvDataDestroy(void* cvdata);
 
@@ -182,8 +219,7 @@ Person personCopy(Person person)
     {
         return NULL;
     }
-    Person copy= personCreate(person->id,person->dateOfBirth,person->name,NULL,NULL,NULL,NULL,NULL,
-                              NULL,1,1);
+    Person copy= personCreate(person->id,person->dateOfBirth,person->name,NULL,NULL,NULL,1);
     if(!copy)
     {
         return NULL;
