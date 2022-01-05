@@ -267,27 +267,23 @@ PersonErrorCodes personRemoveFromWishList(Person person, void* product)
     return PERSON_SUCSESS;
 }
 
-/**
- *   personFilterSkills       -filters the skills according to a critiria
- * @param person
- * @param filterFunc
- * @param keyValue
- * @return
- * NULL if one of the argument was null
- * OuterCore otherwise
- */
-void* personFilterSkills(Person person, SkillFilter filterFunc, keySkill keyValue);
+void* personFilterSkills(Person person, SkillFilter filterFunc, keySkill keyValue)
+{
+    if(!person||!filterFunc||!keyValue)
+    {
+        return NULL;
+    }
+    return coreFilter(person->skills,filterFunc,keyValue);
+}
 
-/**
- *   personFilterWishList     -filters the skills according to a critiria
- * @param person
- * @param wishlistFilter
- * @param product
- * @return
- * NULL if one of the argument was null
- * OuterCore otherwise
- */
-void* personFilterWishList(Person person, WishlistFilter wishlistFilter,keyProduct product);
+void* personFilterWishList(Person person, WishlistFilter wishlistFilter,keyProduct product)
+{
+    if(!person||!wishlistFilter||!product)
+    {
+        return NULL;
+    }
+    return coreFilter(person->wishList,wishlistFilter,product);
+}
 
 /**
  *   personAddToCV            -adds a new element in the CV list of the person
@@ -299,7 +295,14 @@ void* personFilterWishList(Person person, WishlistFilter wishlistFilter,keyProdu
  *   PERSON_ERROR          -the action failed
  *   PERSON_SUCSESS        -the addition was sucsessful
  */
-PersonErrorCodes personAddToCV(Person person, CVData cvData);
+PersonErrorCodes personAddToCV(Person person, CVData cvData)
+{
+    if(!person||!cvData)
+    {
+        return PERSON_NULL_ARGUMENT;
+    }
+
+}
 
 /**
  *   personFilterCV           -filtersCV according to a given criteria
