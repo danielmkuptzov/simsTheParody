@@ -102,17 +102,54 @@ static CVData cvDataCreate(CoreUnit dateStart, CVData element, CVCopy copy,CVDes
         coreDestroy(dateStart);
         free(new);
     }
+    new->dateStop=NULL;
     return new;
 }
 
 static void* cVdataCopy(void* cvdata)
 {
-
+    if(!cvdata)
+    {
+        return NULL;
+    }
+    CVdata org= cvdata;
+    CVdata copy= cvDataCreate(org->dateStart,org->description,org->copy,org->erazor,org->comp,org->cvName);
+    if(!copy)
+    {
+        return NULL;
+    }
+    if(org->dateStop)
+    {
+        copy->dateStop= coreCopy(org->dateStop);
+        if(!copy->dateStop)
+        {
+            return NULL;
+        }
+    }
+    return copy;
 }
 
-static void cvDataDestroy(void* cvdata);
+static void cvDataDestroy(void* cvdata)
+{
+    if(!cvdata)
+    {
+        return;
+    }
+    coreDestroy(((CVdata)cvdata)->dateStart);
+    coreDestroy(((CVdata)cvdata)->dateStop);
+    free(((CVdata)cvdata)->cvName);
+    ((CVdata)cvdata)->erazor(((CVdata)cvdata)->description);
+    free(cvdata);
+}
 
-static int cvDataComp(void* cvData1, void* cvData2);
+static int cvDataComp(void* cvData1, void* cvData2)
+{
+    if(nameComparison(((CVdata)cvData1)->cvName,((CVdata)cvData2)->cvName)==0)
+    {
+        return 0;
+    }
+    return coreCompeare(((CVdata)cvData1)->dateStart,((CVdata)cvData2)->dateStart);
+}
 
 struct Person_t
 {
@@ -181,7 +218,7 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
         personDestroy(new);
         return NULL;
     }
-    new->CV=coreCreate(1,,,,);
+    new->CV=coreCreate(1,cVdataCopy,cvDataDestroy,cvDataComp,5);
     if(!new->CV)
     {
         personDestroy(new);
@@ -334,68 +371,108 @@ void* personFilterWishList(Person person, WishlistFilter wishlistFilter,keyProdu
     return coreFilter(person->wishList,wishlistFilter,product);
 }
 
-/**
- *   personAddToCV            -adds a new element in the CV list of the person
- * @param person
- * @param cvData
- * @return
- *   PERSON_NULL_ARGUMENT  -one of the argument was NULL
- *   PERSON_CV_EXIST       -the CV exists
- *   PERSON_ERROR          -the action failed
- *   PERSON_SUCSESS        -the addition was sucsessful
- */
-PersonErrorCodes personAddToCV(Person person, CVData cvData,CVCopy cvCopy, CVDestroy cvDestroy, CVComp cvComp)
+PersonErrorCodes personAddToCV(Person person, CVData cvData,CVCopy cvCopy, CVDestroy cvDestroy,
+                               void* dateStart, char* name);
 {
-    if(!person||!cvData)
+    if(!person||!cvData||!cvCopy||!cvDestroy||!cvComp)
     {
         return PERSON_NULL_ARGUMENT;
     }
+    CVdata new= cvDataCreate((CoreUnit)dateStart,cvData,cvCopy,cvDestroy,cvComp,name);
+    if(!new)
+    {
+        return PERSON_ERROR;
+    }
+    OuterCoreErrors resalt= coreInsert(person->CV,new);
+    cvDataDestroy(new);
+    if(resalt==CORE_ELEMENT_EXIST)
+    {
+        return PERSON_CV_EXIST;
+    }
+    if(resalt!=CORE_SUCSESS)
+    {
+        return PERSON_ERROR;
+    }
+    return PERSON_SUCSESS;
 }
 
-/**
- *   personFilterCV           -filtersCV according to a given criteria
- * @param person
- * @param cvFilter
- * @param keyCv
- * @return
- * NULL if one of the argument was null
- * OuterCore otherwise
- */
-void* personFilterCV(Person person, CVFilter cvFilter, keyCV keyCv);
+void* personFilterCV(Person person, CVFilter cvFilter, keyCV keyCv)
+{
+    if(!person||!cvFilter||!keyCv)
+    {
+        return NULL;
+    }
+    return coreFilter(person->CV,cvFilter,keyCv);
+}
 
-/**
- *   personFixSalary          -gives a person a salary
- * @param person
- * @param salary
- * @return
- *   PERSON_NULL_ARGUMENT -one of the arguments was NULL
- *   PERSON_WRONG_SALARY  -the salary is: negative, to much spesific (19.999 is not a salary)
- *   PERSON_ERROR         -the change failed
- *   PERSON_SUCSESS
- */
-PersonErrorCodes personFixSalary(Person person, double salary);
+PersonErrorCodes personFixSalary(Person person, double salary)
+{
+    if(!person)
+    {
+        return PERSON_NULL_ARGUMENT;
+    }
+    if(salary<0.0||(salary*1000)-((int)(salary*100)*10))
+    {
+        return PERSON_WRONG_SALARY;
+    }
+    person->salary+=salary;
+    return PERSON_SUCSESS;
+}
 
-/**
- *   personChangeBalance          -changes the person balance
- * @param person
- * @return
- *   PERSON_NULL_ARGUMENT  -the argument was NULL
- *   PERSON_ERROR          -the operation failed
- *   PERSON_SUCSESS        -the change sucseeded
- */
-PersonErrorCodes personChangeBalance(Person person);
+PersonErrorCodes personChangeBalance(Person person, void* amount)
+{
+    if(!person||!amount)
+    {
+        return PERSON_NULL_ARGUMENT;
+    }
+    Rational zero= rationalCreate(0,1);
+    RtionalErrorCode resalt;
+    if(rationalLesser((Rational)amount,zero))
+    {
+        Rational fixedAmount= rationalNegate(amount);
+        resalt= rationalSubInto(&person->balance,fixedAmount);
+        rationalDestroy(fixedAmount);
+    }
+    else
+    {
+        resalt= rationalAddInto(&person->balance,amount);
+    }
+    rationalDestroy(zero);
+    if(resalt!=RATIONAL_SUCSESS)
+    {
+        return PERSON_ERROR;
+    }
+    return PERSON_SUCSESS;
+}
 
-/**
- *   personChangeAmountINWIshList -changes the amount of the product in wish list
- * @param person
- * @param amount
- * @return
- *   PERSON_NULL_ARGUMENT -NULL argument was passed
- *   PERSON_WRONG_AMOUNT  -the amound don't match the critiria
- *   PERSON_ERROR         -the addition was wrong
- *   PERSON_SUCSESS       -the operation was sucsess
- */
-PersonErrorCodes personChangeAmountINWIshList(Person person, void* amount);
+PersonErrorCodes personChangeAmountINWIshList(Person person,void* amount, void* product)
+{
+    if(!person||!amount)
+    {
+        return PERSON_NULL_ARGUMENT;
+    }
+    Rational zero= rationalCreate(0,1);
+    OrderUnit toComp=productUnitCreate((Product)product,zero);
+    OrderUnit toChange= coreFind(person->wishList,toComp);
+    orderunitdestroy(toComp);
+    Rational changAmount=amount;
+    OrderUnitErrors resalt;
+    if(rationalLesser(changAmount,zero))
+    {
+        Rational fixedAmount= rationalNegate(changAmount);
+        resalt=productUnitLowerAmount(toChange,fixedAmount);
+        rationalDestroy(fixedAmount);
+    }
+    else
+    {
+        resalt= productUnitLowerAmount(toChange,changAmount);
+    }
+    if(resalt!=ORDER_UNIT_SUCSESS)
+    {
+        return PERSON_ERROR;
+    }
+    return PERSON_SUCSESS;
+}
 
 /**
  *   personGetWishList            -getter

@@ -243,7 +243,8 @@ void* personFilterWishList(Person person, WishlistFilter wishlistFilter,keyProdu
  *   PERSON_ERROR          -the action failed
  *   PERSON_SUCSESS        -the addition was sucsessful
  */
-PersonErrorCodes personAddToCV(Person person, CVData cvData,CVCopy cvCopy, CVDestroy cvDestroy);
+PersonErrorCodes personAddToCV(Person person, CVData cvData,CVCopy cvCopy, CVDestroy cvDestroy,
+                               void* dateStart, char* name);
 
 /**
  *   personFilterCV           -filtersCV according to a given criteria
@@ -271,12 +272,13 @@ PersonErrorCodes personFixSalary(Person person, double salary);
 /**
  *   personChangeBalance          -changes the person balance
  * @param person
+ * @param amount
  * @return
  *   PERSON_NULL_ARGUMENT  -the argument was NULL
  *   PERSON_ERROR          -the operation failed
  *   PERSON_SUCSESS        -the change sucseeded
  */
-PersonErrorCodes personChangeBalance(Person person);
+PersonErrorCodes personChangeBalance(Person person, void* amount);
 
 /**
  *   personChangeAmountINWIshList -changes the amount of the product in wish list
@@ -288,7 +290,7 @@ PersonErrorCodes personChangeBalance(Person person);
  *   PERSON_ERROR         -the addition was wrong
  *   PERSON_SUCSESS       -the operation was sucsess
  */
-PersonErrorCodes personChangeAmountINWIshList(Person person, void* amount);
+PersonErrorCodes personChangeAmountINWIshList(Person person, void* amount, void* product);
 
 /**
  *   personGetWishList            -getter
