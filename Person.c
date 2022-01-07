@@ -521,5 +521,24 @@ char* personGetName(Person person)
 
 /**
  *   personMakeDayCycle           -function that simulate a day
+ *   @param date
+ *   @param newData
+ *   @return
+ *       REQUEST_SCHOOL
+ *       REQUEST_UNIVERSITY
+ *       REQUEST_MILITARY_BACKROUND
+ *       REQUEST_JOB,REQUEST_HOSPITAL
+ *       REQUEST_CEMETERY
+ *       CYCLE_ERROR
  */
-CycleReturnCode personMakeDayCycle(void* date);
+CycleReturnCode personMakeDayCycle(Person person,void* date, void* newData)
+{
+    if(!person||!date)
+    {
+        return CYCLE_ERROR;
+    }
+    if(coreCompeare(date,person->dateOfBirth)%365==0)
+    {
+        person->age++;
+    }
+}
