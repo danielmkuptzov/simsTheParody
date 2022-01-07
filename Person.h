@@ -338,6 +338,6 @@ char* personGetName(Person person);
 /**
  *   personMakeDayCycle           -function that simulate a day
  */
-CycleReturnCode personMakeDayCycle(CVData data);
+CycleReturnCode personMakeDayCycle(void* date);
 
 #endif //PERSON_H

@@ -474,50 +474,52 @@ PersonErrorCodes personChangeAmountINWIshList(Person person,void* amount, void* 
     return PERSON_SUCSESS;
 }
 
-/**
- *   personGetWishList            -getter
- * @param person
- * @return
- * NULL -if any problem accures
- * CoreUnit otherwise
- */
-void* personGetWishList(Person person);
+void* personGetWishList(Person person)
+{
+    if(!person)
+    {
+        return NULL;
+    }
+    return person->wishList;
+}
 
-/**
- *   personGetSkills              -getter
- * @param person
- * @return
- * NULL if any problem accures
- * OuterCore otherwise
- */
-void* personGetSkills(Person person);
+void* personGetSkills(Person person)
+{
+    if(!person)
+    {
+        return NULL;
+    }
+    return person->skills;
+}
 
-/**
- *   personGetCv                  -getter
- * @param person
- * @return
- */
-void* personGetCv(Person person);
+void* personGetCv(Person person)
+{
+    if(!person)
+    {
+        return NULL;
+    }
+    return person->CV;
+}
 
-/**
- *   personGetId                  -getter
- * @param person
- * @return
- * negative nuber if any problem accures
- * id otherwise
- */
-int personGetId(Person person);
+int personGetId(Person person)
+{
+    if(!person)
+    {
+        return -1;
+    }
+    return person->id;
+}
 
-/**
- *   personGetName                -getter
- * @param person
- * @return
- * NULL if any problem accures
- * pointer to name otherwise
- */
-char* personGetName(Person person);
+char* personGetName(Person person)
+{
+    if(!person)
+    {
+        return NULL;
+    }
+    return person->name;
+}
 
 /**
  *   personMakeDayCycle           -function that simulate a day
  */
-CycleReturnCode personMakeDayCycle(CVData);
+CycleReturnCode personMakeDayCycle(void* date);
