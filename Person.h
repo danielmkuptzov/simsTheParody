@@ -65,7 +65,8 @@ typedef enum{
     REQUEST_JOB,
     REQUEST_HOSPITAL,
     REQUEST_CEMETERY,
-    CYCLE_ERROR
+    CYCLE_ERROR,
+    CYCLE_SUCSESS
 } CycleReturnCode;
 /**
  *  the skill generic type
@@ -347,7 +348,10 @@ char* personGetName(Person person);
  *       REQUEST_JOB,REQUEST_HOSPITAL
  *       REQUEST_CEMETERY
  *       CYCLE_ERROR
+ *       CYCLE_SUCSESS
  */
-CycleReturnCode personMakeDayCycle(Person person,void* date, void* newData);
+CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
+                                   CVCopy copyData, CVDestroy dataDest,char* dataName,
+                                   bool serviceFlag);
 
 #endif //PERSON_H

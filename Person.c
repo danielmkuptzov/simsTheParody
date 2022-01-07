@@ -519,26 +519,108 @@ char* personGetName(Person person)
     return person->name;
 }
 
-/**
- *   personMakeDayCycle           -function that simulate a day
- *   @param date
- *   @param newData
- *   @return
- *       REQUEST_SCHOOL
- *       REQUEST_UNIVERSITY
- *       REQUEST_MILITARY_BACKROUND
- *       REQUEST_JOB,REQUEST_HOSPITAL
- *       REQUEST_CEMETERY
- *       CYCLE_ERROR
- */
-CycleReturnCode personMakeDayCycle(Person person,void* date, void* newData)
+CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
+                                   CVCopy copyData, CVDestroy dataDest,char* dataName,
+                                   bool serviceFlag)
 {
     if(!person||!date)
     {
         return CYCLE_ERROR;
     }
-    if(coreCompeare(date,person->dateOfBirth)%365==0)
+    if(coreCompeare(date,person->dateOfBirth)%365!=0)
     {
-        person->age++;
+        return CYCLE_SUCSESS;
     }
+    person->age++;
+    if(person->age==6)
+    {
+        person->accupation=STUDENT;
+        if(!newData&&!copyData&&!dataDest)
+        {
+            return REQUEST_SCHOOL;
+        }
+        if(nameComparison("school",dataName)==0&&
+            personAddToCV(person,newData,copyData,
+                          dataDest,date,dataName)==PERSON_SUCSESS)
+        {
+            return CYCLE_SUCSESS;
+        }
+        return CYCLE_ERROR;
+    }
+    if(person->age==18&&!serviceFlag)
+    {
+        person->accupation=SOLDIER;
+        if(!newData&&!copyData&&!dataDest)
+        {
+            return REQUEST_MILITARY_BACKROUND;
+        }
+        if(nameComparison("service",dataName)==0&&
+           personAddToCV(person,newData,copyData,
+                         dataDest,date,dataName)==PERSON_SUCSESS)
+        {
+            return CYCLE_SUCSESS;
+        }
+        return CYCLE_ERROR;
+    }
+    if(serviceFlag&&person->age==21)
+    {
+        person->accupation=UNIVERCITY_STUDENT;
+        if(!newData&&!copyData&&!dataDest)
+        {
+            return REQUEST_UNIVERSITY;
+        }
+        if(nameComparison("university",dataName)==0&&
+           personAddToCV(person,newData,copyData,
+                         dataDest,date,dataName)==PERSON_SUCSESS)
+        {
+            return CYCLE_SUCSESS;
+        }
+        return CYCLE_ERROR;
+    }
+    if(person->age==24)
+    {
+        person->accupation=CIVILIAN_JOB;
+        if(!newData&&!copyData&&!dataDest)
+        {
+            return REQUEST_JOB;
+        }
+        if(nameComparison("job",dataName)==0&&
+           personAddToCV(person,newData,copyData,
+                         dataDest,date,dataName)==PERSON_SUCSESS)
+        {
+            return CYCLE_SUCSESS;
+        }
+        return CYCLE_ERROR;
+    }
+    if(person->age==80)
+    {
+        person->accupation=CIVILIAN_JOB;
+        if(!newData&&!copyData&&!dataDest)
+        {
+            return REQUEST_HOSPITAL;
+        }
+        if(nameComparison("hospital",dataName)==0&&
+           personAddToCV(person,newData,copyData,
+                         dataDest,date,dataName)==PERSON_SUCSESS)
+        {
+            return CYCLE_SUCSESS;
+        }
+        return CYCLE_ERROR;
+    }
+    if(person->age==120)
+    {
+        person->accupation=DEAD;
+        if(!newData&&!copyData&&!dataDest)
+        {
+            return REQUEST_CEMETERY;
+        }
+        if(nameComparison("cemetery",dataName)==0&&
+           personAddToCV(person,newData,copyData,
+                         dataDest,date,dataName)==PERSON_SUCSESS)
+        {
+            return CYCLE_SUCSESS;
+        }
+        return CYCLE_ERROR;
+    }
+    return CYCLE_SUCSESS;
 }
