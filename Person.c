@@ -209,7 +209,8 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
         personDestroy(new);
         return NULL;
     }
-    new->wishList= coreCreate(1,orderUnitCopy,orderunitdestroy,orderunitcomp,5);
+    new->wishList= coreCreate(1,orderUnitCopy,
+                              orderunitdestroy,orderunitcomp,5);
     if(!new->wishList)
     {
         personDestroy(new);
