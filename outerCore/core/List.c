@@ -98,7 +98,7 @@ List listCopy(List list)
     cpList->cpElement=list->cpElement;
     cpList->size=list->size;
     cpList->head= nodeCopy(list,list->head,1);
-    if(!cpList->head)
+    if(!cpList->head&&list->size!=0)
     {
         listDestroy(cpList);
         return NULL;

@@ -267,7 +267,8 @@ Person personCopy(Person person)
     {
         return NULL;
     }
-    Person copy= personCreate(person->id,person->dateOfBirth,person->name,NULL,NULL,NULL,1);
+    Person copy= personCreate(person->id,person->dateOfBirth,
+                              person->name,NULL,NULL,NULL,1);
     if(!copy)
     {
         return NULL;

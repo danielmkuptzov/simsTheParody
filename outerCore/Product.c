@@ -5,6 +5,7 @@
 #include "AmountSet.h"
 #include "Date.h"
 
+#define ENDWORD '\0'
 #define CAP_MIN 'A'
 #define CAP_MAX 'Z'
 #define LOW_MIN 'a'
@@ -36,12 +37,12 @@ static int nameComparison(char* first, char*second)
     if(((first[0]>=CAP_MIN)&&(first[0]<=CAP_MAX))||((second[0]>=CAP_MIN)&&(second[0]<=CAP_MAX)))
     {
         mainName=   casingFix(true,stringDup(first));
-        secondName= casingFix(true,stringDup(first));
+        secondName= casingFix(true,stringDup(second));
     }
     else
     {
         mainName=   casingFix(false,stringDup(first));
-        secondName= casingFix(false,stringDup(first));
+        secondName= casingFix(false,stringDup(second));
     }
     int diff= strcmp(mainName,secondName);
     free(mainName);
