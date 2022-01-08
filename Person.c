@@ -193,7 +193,7 @@ static int orderunitcomp(void* unit1, void* unit2)
 Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
                     SkillComp skillComp, int SkillType)
 {
-    if(!name||strcmp(name," "))
+    if(!name|| nameComparison(name," "))
     {
         return NULL;
     }
