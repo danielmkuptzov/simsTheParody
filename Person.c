@@ -6,6 +6,16 @@
 #include "Rational.h"
 #include "outerCore.h"
 
+#define SCHOOLAGE 6
+#define SERVICEAGE 18
+#define UNIVERCITYAGE 21
+#define JOBAGE 24
+#define OLDAGE 80
+#define DEADAGE 120
+
+#define WORKDAY 7
+#define MEGA 100
+
 #define CAP_MIN 'A'
 #define CAP_MAX 'Z'
 #define LOW_MIN 'a'
@@ -528,7 +538,7 @@ static bool cvFilter(void* cvunit, void* key)
     return false;
 }
 
-CycleReturnCode cycleChanger(Person person,void* date, CVData newData,
+static CycleReturnCode cycleChanger(Person person,void* date, CVData newData,
                                     CVCopy copyData, CVDestroy dataDest,char* dataName,
                                     Acupation newAccupation, char* accupationPlace,
                                     CycleReturnCode matchingError)
@@ -552,6 +562,20 @@ CycleReturnCode cycleChanger(Person person,void* date, CVData newData,
     return CYCLE_SUCSESS;
 }
 
+static CycleReturnCode moneyCycle(Person person)
+{
+    if(person->salary==0.0)
+    {
+        return CYCLE_ERROR;
+    }
+    Rational money= rationalCreate(person->salary*WORKDAY*MEGA,MEGA);
+    if(personChangeBalance(person,money)!=PERSON_SUCSESS)
+    {
+        return CYCLE_ERROR;
+    }
+    return CYCLE_SUCSESS;
+}
+
 CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
                                    CVCopy copyData, CVDestroy dataDest,char* dataName,
                                    bool serviceFlag)
@@ -559,6 +583,10 @@ CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
     if(!person||!date)
     {
         return CYCLE_ERROR;
+    }
+    if(person->accupation==CIVILIAN_JOB||person->accupation==SOLDIER)
+    {
+        return moneyCycle(person);
     }
     if(person->accupation==DEAD)
     {
@@ -569,35 +597,35 @@ CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
         return CYCLE_SUCSESS;
     }
     person->age++;
-    if(person->age>=6&&person->age<18)
+    if(person->age>=SCHOOLAGE&&person->age<SERVICEAGE)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
         STUDENT,"school",REQUEST_SCHOOL);
     }
-    if(person->age>=18&&person->age<21&&!serviceFlag)
+    if(person->age>=SERVICEAGE&&person->age<UNIVERCITYAGE&&!serviceFlag)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             SOLDIER,"service",REQUEST_MILITARY_BACKROUND);
     }
-    if(serviceFlag&&person->age>=21&&person->age<24)
+    if(serviceFlag&&person->age>=UNIVERCITYAGE&&person->age<JOBAGE)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             UNIVERCITY_STUDENT,"univercity",
                             REQUEST_UNIVERSITY);
     }
-    if(person->age>=24&&person->age<80)
+    if(person->age>=JOBAGE&&person->age<OLDAGE)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             CIVILIAN_JOB,"job",
                             REQUEST_JOB);
     }
-    if(person->age>=80&&person->age<120)
+    if(person->age>=OLDAGE&&person->age<DEADAGE)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             VERY_OLD,"hospital",
                             REQUEST_HOSPITAL);
     }
-    if(person->age>=120)
+    if(person->age>=DEADAGE)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             DEAD,"cemetery",
