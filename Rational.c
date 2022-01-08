@@ -239,7 +239,7 @@ Rational rationalround(Rational rational)
     int newdenu=full;
     if(left>=rational->denumerator/2)
     {
-        newdenu+=rational->denumerator/2;
+        newdenu=newdenu*rational->denumerator+rational->denumerator/2;
     }
     return rationalCreate(newdenu,rational->denumerator);
 }
