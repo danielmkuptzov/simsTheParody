@@ -193,7 +193,7 @@ static int orderunitcomp(void* unit1, void* unit2)
 Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
                     SkillComp skillComp, int SkillType)
 {
-    if(!name|| nameComparison(name," "))
+    if(!name||name[0]==' ')
     {
         return NULL;
     }
@@ -218,7 +218,7 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
     }
     new->salary=0.0;
     new->balance= rationalCreate(0,1);
-    if(!new->salary)
+    if(!new->balance)
     {
         personDestroy(new);
         return NULL;

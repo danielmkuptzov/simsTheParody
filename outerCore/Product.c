@@ -94,7 +94,7 @@ Product productCreate(int id, char* name, ProductAmountType type,
         return NULL;
     }
     new->freeData=freeFunc;
-    if(strcmp(name,""))
+    if(!name||name[0]==' ')
     {
         productDestroy(new);
         return NULL;
