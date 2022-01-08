@@ -15,11 +15,11 @@ set(MTM_FLAGS_RELEASE "${MTM_FLAGS_DEBUG} -DNDEBUG")
 # Set the flags for gcc
 set(CMAKE_C_FLAGS ${MTM_FLAGS_DEBUG})
 
-set(COREPROJ outerCore/core/AmountSet.c outerCore/core/List.h outerCore/core/List.c outerCore/core/set.h outerCore/core/set.c)
+set(COREPROJ Kernel/outerCore/core/AmountSet.c Kernel/outerCore/core/List.h Kernel/outerCore/core/List.c Kernel/outerCore/core/set.h Kernel/outerCore/core/set.c)
 
-set(OUTERCORE outerCore/outerCore.c outerCore/AmountSet.h  outerCore/Date.c outerCore/Date.h outerCore/Product.c ${COREPROJ})
+set(Kernel/outerCore Kernel/outerCore/outerCore.c Kernel/outerCore/AmountSet.h Kernel/outerCore/Date.c Kernel/outerCore/Date.h Kernel/outerCore/Product.c ${COREPROJ})
 # Add the names of your source files here
-set(C_FILES main_test_block.c  Product.h  outerCore.h Rational.c Rational.h ${OUTERCORE} OrderProduct.c OrderProduct.h Person.c Person.h)
+set(C_FILES main_test_block.c Kernel/Product.h Kernel/outerCore.h Kernel/Rational.c Kernel/Rational.h ${OUTERCORE} Kernel/OrderProduct.c Kernel/OrderProduct.h Kernel/Person.c Person.h Kernel/Kernel.c Kernel.h)
 
 add_executable(danielCity ${C_FILES})
 # Add the names of your source files here

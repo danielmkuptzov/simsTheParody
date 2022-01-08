@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "Person.h"
+#include "../Person.h"
 #include "OrderProduct.h"
 #include "Rational.h"
 #include "outerCore.h"

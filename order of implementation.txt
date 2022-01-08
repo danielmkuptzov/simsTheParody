@@ -13,8 +13,6 @@ a template for every adt
  *   Compeare          -compares between
  */
 
-person:date, product, Rational and amountset needed
-
 apartment: date, product, person, Rational and amountset needed
 
 floor: date, product, person, apartment, Rational and amountset needed
