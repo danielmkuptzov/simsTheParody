@@ -17,6 +17,7 @@ typedef enum {
     UNIVERCITY_STUDENT,
     SOLDIER,
     CIVILIAN_JOB,
+    VERY_OLD,
     DEAD
 } Acupation;
 
@@ -66,13 +67,12 @@ typedef struct CVData_t{
     CVData description;
     CVCopy copy;
     CVDestroy erazor;
-    CVComp comp;
 }*CVdata;
 
-static CVData cvDataCreate(CoreUnit dateStart, CVData element, CVCopy copy,CVDestroy erazor,CVComp comp,
+static CVData cvDataCreate(CoreUnit dateStart, CVData element, CVCopy copy,CVDestroy erazor,
                            char* cvName)
 {
-    if(!element||!copy||!dateStart||!erazor||!comp)
+    if(!element||!copy||!dateStart||!erazor)
     {
         return NULL;
     }
@@ -113,7 +113,7 @@ static void* cVdataCopy(void* cvdata)
         return NULL;
     }
     CVdata org= cvdata;
-    CVdata copy= cvDataCreate(org->dateStart,org->description,org->copy,org->erazor,org->comp,org->cvName);
+    CVdata copy= cvDataCreate(org->dateStart,org->description,org->copy,org->erazor,org->cvName);
     if(!copy)
     {
         return NULL;
@@ -372,13 +372,13 @@ void* personFilterWishList(Person person, WishlistFilter wishlistFilter,keyProdu
 }
 
 PersonErrorCodes personAddToCV(Person person, CVData cvData,CVCopy cvCopy, CVDestroy cvDestroy,
-                               void* dateStart, char* name);
+                               void* dateStart, char* name)
 {
-    if(!person||!cvData||!cvCopy||!cvDestroy||!cvComp)
+    if(!person||!cvData||!cvCopy||!cvDestroy)
     {
         return PERSON_NULL_ARGUMENT;
     }
-    CVdata new= cvDataCreate((CoreUnit)dateStart,cvData,cvCopy,cvDestroy,cvComp,name);
+    CVdata new= cvDataCreate((CoreUnit)dateStart,cvData,cvCopy,cvDestroy,name);
     if(!new)
     {
         return PERSON_ERROR;
@@ -519,6 +519,39 @@ char* personGetName(Person person)
     return person->name;
 }
 
+static bool cvFilter(void* cvunit, void* key)
+{
+    if(nameComparison(((CVdata)cvunit)->cvName,(char*)key)==0)
+    {
+        return true;
+    }
+    return false;
+}
+
+CycleReturnCode cycleChanger(Person person,void* date, CVData newData,
+                                    CVCopy copyData, CVDestroy dataDest,char* dataName,
+                                    Acupation newAccupation, char* accupationPlace,
+                                    CycleReturnCode matchingError)
+{
+    person->accupation=newAccupation;
+    CoreUnit filter= personFilterCV(person,cvFilter,accupationPlace);
+    if(!filter)
+    {
+        coreDestroy(filter);
+        if (!newData && !copyData && !dataDest) {
+            return matchingError;
+        }
+        if (nameComparison(accupationPlace, dataName) == 0 &&
+            personAddToCV(person, newData, copyData,
+                          dataDest, date, dataName) == PERSON_SUCSESS) {
+            return CYCLE_SUCSESS;
+        }
+        return CYCLE_ERROR;
+    }
+    coreDestroy(filter);
+    return CYCLE_SUCSESS;
+}
+
 CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
                                    CVCopy copyData, CVDestroy dataDest,char* dataName,
                                    bool serviceFlag)
@@ -527,100 +560,48 @@ CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
     {
         return CYCLE_ERROR;
     }
+    if(person->accupation==DEAD)
+    {
+        return CYCLE_ERROR;
+    }
     if(coreCompeare(date,person->dateOfBirth)%365!=0)
     {
         return CYCLE_SUCSESS;
     }
     person->age++;
-    if(person->age==6)
+    if(person->age>=6&&person->age<18)
     {
-        person->accupation=STUDENT;
-        if(!newData&&!copyData&&!dataDest)
-        {
-            return REQUEST_SCHOOL;
-        }
-        if(nameComparison("school",dataName)==0&&
-            personAddToCV(person,newData,copyData,
-                          dataDest,date,dataName)==PERSON_SUCSESS)
-        {
-            return CYCLE_SUCSESS;
-        }
-        return CYCLE_ERROR;
+        return cycleChanger(person,date, newData,copyData,dataDest,dataName,
+        STUDENT,"school",REQUEST_SCHOOL);
     }
-    if(person->age==18&&!serviceFlag)
+    if(person->age>=18&&person->age<21&&!serviceFlag)
     {
-        person->accupation=SOLDIER;
-        if(!newData&&!copyData&&!dataDest)
-        {
-            return REQUEST_MILITARY_BACKROUND;
-        }
-        if(nameComparison("service",dataName)==0&&
-           personAddToCV(person,newData,copyData,
-                         dataDest,date,dataName)==PERSON_SUCSESS)
-        {
-            return CYCLE_SUCSESS;
-        }
-        return CYCLE_ERROR;
+        return cycleChanger(person,date, newData,copyData,dataDest,dataName,
+                            SOLDIER,"service",REQUEST_MILITARY_BACKROUND);
     }
-    if(serviceFlag&&person->age==21)
+    if(serviceFlag&&person->age>=21&&person->age<24)
     {
-        person->accupation=UNIVERCITY_STUDENT;
-        if(!newData&&!copyData&&!dataDest)
-        {
-            return REQUEST_UNIVERSITY;
-        }
-        if(nameComparison("university",dataName)==0&&
-           personAddToCV(person,newData,copyData,
-                         dataDest,date,dataName)==PERSON_SUCSESS)
-        {
-            return CYCLE_SUCSESS;
-        }
-        return CYCLE_ERROR;
+        return cycleChanger(person,date, newData,copyData,dataDest,dataName,
+                            UNIVERCITY_STUDENT,"univercity",
+                            REQUEST_UNIVERSITY);
     }
-    if(person->age==24)
+    if(person->age>=24&&person->age<80)
     {
-        person->accupation=CIVILIAN_JOB;
-        if(!newData&&!copyData&&!dataDest)
-        {
-            return REQUEST_JOB;
-        }
-        if(nameComparison("job",dataName)==0&&
-           personAddToCV(person,newData,copyData,
-                         dataDest,date,dataName)==PERSON_SUCSESS)
-        {
-            return CYCLE_SUCSESS;
-        }
-        return CYCLE_ERROR;
+        return cycleChanger(person,date, newData,copyData,dataDest,dataName,
+                            CIVILIAN_JOB,"job",
+                            REQUEST_JOB);
     }
-    if(person->age==80)
+    if(person->age>=80&&person->age<120)
     {
-        person->accupation=CIVILIAN_JOB;
-        if(!newData&&!copyData&&!dataDest)
-        {
-            return REQUEST_HOSPITAL;
-        }
-        if(nameComparison("hospital",dataName)==0&&
-           personAddToCV(person,newData,copyData,
-                         dataDest,date,dataName)==PERSON_SUCSESS)
-        {
-            return CYCLE_SUCSESS;
-        }
-        return CYCLE_ERROR;
+        return cycleChanger(person,date, newData,copyData,dataDest,dataName,
+                            VERY_OLD,"hospital",
+                            REQUEST_HOSPITAL);
     }
-    if(person->age==120)
+    if(person->age>=120)
     {
-        person->accupation=DEAD;
-        if(!newData&&!copyData&&!dataDest)
-        {
-            return REQUEST_CEMETERY;
-        }
-        if(nameComparison("cemetery",dataName)==0&&
-           personAddToCV(person,newData,copyData,
-                         dataDest,date,dataName)==PERSON_SUCSESS)
-        {
-            return CYCLE_SUCSESS;
-        }
-        return CYCLE_ERROR;
+        return cycleChanger(person,date, newData,copyData,dataDest,dataName,
+                            DEAD,"cemetery",
+                            REQUEST_CEMETERY);
     }
     return CYCLE_SUCSESS;
 }
