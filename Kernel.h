@@ -13,10 +13,23 @@
  *
  *
  * The following functions are available:
+ *   kernelBeginner       -the function that you use to begin the date function
  *   kernelCreate            - Creates a new kernel unit
  *   kernelDestroy           - Deletes an existing kernel unit and frees all resources
  *   kernelCopy              - Copies an existing kernel unit
  *   kernelCompeare          -compares between kernel units
+ *   kernelAddition       -adds two units together
+ *   kernelInsert         -adds to the core (works whith all accept for date)
+ *   kernelRemove         -removes an element (works whith all accept for date)
+ *   kernelFilter         -filters core according to a criteria (works whith all accept for date)
+ *   kernelFind           -finds specific element(works whith all accept for date)
+ *   kernelSize           -returns the size of the element (for date will return -1)
+ *   kernelDestroyer      -use it to end the code
+ *   kernelGetElement     -return the data of the element
+ *   kernelSetElement     -changes the element
+ *   kernelGetFirst       -the first element of the core
+ *   kernelGetNext        -the next element
+ *   kernel foreach       - the amount set foreach
  */
 
 #endif //KERNEL_H
