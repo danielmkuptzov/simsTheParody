@@ -3,10 +3,7 @@
 #include <string.h>
 
 //teh files we are testing
-#include "Kernel/Rational.h"
-#include "Kernel/outerCore.h"
-#include "Kernel/Product.h"
-#include "Kernel/OrderProduct.h"
+#include "Kernel.h"
 #include "Person.h"
 
 void* intCopy(void* org)
