@@ -6,17 +6,17 @@
 #define KERNEL_H
 
 /**
- *  adt
+ * kernel  adt
  *
- * Implements a
+ * Implements a functions that are inside the kernel
  *
  *
  *
  * The following functions are available:
- *   Create            - Creates a new
- *   Destroy           - Deletes an existing and frees all resources
- *   Copy              - Copies an existing
- *   Compeare          -compares between
+ *   kernelCreate            - Creates a new kernel unit
+ *   kernelDestroy           - Deletes an existing kernel unit and frees all resources
+ *   kernelCopy              - Copies an existing kernel unit
+ *   kernelCompeare          -compares between kernel units
  */
 
 #endif //KERNEL_H
