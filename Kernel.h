@@ -36,7 +36,6 @@
 //the external libreries we are working with
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdarg.h>
 
 //the enums to the creator
 typedef enum {
@@ -46,6 +45,13 @@ typedef enum {
     RATIONAL,
     ORDER_PRODUCT
 } CreatingType;
+
+//for generic copy function
+
+//for generic destroy
+
+//for generic compare function
+
 
 typedef struct Kernel_t* Kernel;
 
