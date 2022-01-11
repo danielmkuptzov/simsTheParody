@@ -27,10 +27,10 @@
  *   kernelDestroyer         -use it to end the code
  *   kernelGetElement        -return the data of the element
  *   kernelSetElement        -changes the element
+ *   kernelGetInternalData   -gives the internal element requested
  *   kernelGetFirst          -the first element of the core
  *   kernelGetNext           -the next element
  *   kernel foreach          -the amount set foreach
- *   kernelGetInternalData   -gives the internal element requested
  */
 
 //the external libreries we are working with
@@ -94,6 +94,22 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
 
 /**
  *   kernelCreate            -Creates a new kernel unit
+ * @param block               -the type of the kernel we need
+ * @param elements            -the simple  elements we pass
+ * @param elementsSize        -the elements array size
+ * @param copyFunctions       -the copy functions we need
+ * @param copyFuncAmount      -the size of the copy functions array
+ * @param destructors         -the destructors we need
+ * @param destructorsAmount   -the size of the destructors array
+ * @param comparison          -the comparison functions
+ * @return
+ *  NULL -if one of the critiria didn't passed
+ *  kernel -otherwise
+ */
+Kernel kernelCreate(CreatingType block, CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
+                    DestFunc* destructors, int destructorsAmount, CompFunc comparison);
+
+/**
  *   kernelDestroy           -Deletes an existing kernel unit and frees all resources
  *   kernelCopy              -Copies an existing kernel unit
  *   kernelCompeare          -compares between kernel units
@@ -110,17 +126,8 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
  *   kernelGetNext           -the next element
  *   kernel foreach          -the amount set foreach
  *   kernelGetInternalData   -gives the internal element requested
- * @param block               -the type of the kernel we need
- * @param elements            -the simple  elements we pass
- * @param elementsSize        -
- * @param copyFunctions
- * @param copyFuncAmount
- * @param destructors
- * @param destructorsAmount
- * @param comparison
- * @return
+ * @param kernel
  */
-Kernel kernelCreate(CreatingType block, CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
-                    DestFunc* destructors, int destructorsAmount, CompFunc comparison);
+void kernelDestroy(void* kernel);
 
 #endif //KERNEL_H
