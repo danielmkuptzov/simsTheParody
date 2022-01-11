@@ -46,15 +46,25 @@ typedef enum {
     ORDER_PRODUCT
 } CreatingType;
 
+//our base element
+typedef void* CreatorUnit;
+
 //for generic copy function
+typedef CreatorUnit (*CopyFunc)(CreatorUnit);
 
 //for generic destroy
+typedef void (*DestFunc)(CreatorUnit);
 
 //for generic compare function
-
+typedef int(*CompFunc)(CreatorUnit,CreatorUnit);
 
 typedef struct Kernel_t* Kernel;
 
+void kernelBeginner(CopyRefDateEx copyFunc, FreeRefDateEx freeFunc,
+                    RefDateExAdvance advanceFunc,DifferenceCalculatorEx diffFunc,
+                    ReferanceDateEx date, DayOneEx firstDay);
 
+Kernel kernelCreate(CreatingType block, CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
+                    DestFunc* destructors, int destructorsAmount, CompFunc comparison);
 
 #endif //KERNEL_H
