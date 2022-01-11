@@ -46,6 +46,25 @@ typedef enum {
     ORDER_PRODUCT
 } CreatingType;
 
+//this definition is for the date
+typedef void* ExternalDate;
+
+//this is for coping the external date
+typedef ExternalDate (*CopyExternal)(ExternalDate);
+
+//this is for destroing the date
+typedef void (*DestExternal)(ExternalDate);
+
+//this is for date advancment
+typedef void (*AdvanceExternal)(ExternalDate);
+
+//this is for giving the difference between the calendars
+typedef int(*DifferenceForCync)();
+
+
+//this is for the begining date
+typedef int (*CyncFunc)();
+
 //our base element
 typedef void* CreatorUnit;
 
@@ -60,10 +79,47 @@ typedef int(*CompFunc)(CreatorUnit,CreatorUnit);
 
 typedef struct Kernel_t* Kernel;
 
-void kernelBeginner(CopyRefDateEx copyFunc, FreeRefDateEx freeFunc,
-                    RefDateExAdvance advanceFunc,DifferenceCalculatorEx diffFunc,
-                    ReferanceDateEx date, DayOneEx firstDay);
+/**
+ *   kernelBeginner          -the function that you use to begin the date function
+ * @param copyFunc
+ * @param freeFunc
+ * @param advanceFunc
+ * @param diffFunc
+ * @param date
+ * @param firstDay
+ */
+void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
+                    AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
+                    ExternalDate date, CyncFunc firstDay);
 
+/**
+ *   kernelCreate            -Creates a new kernel unit
+ *   kernelDestroy           -Deletes an existing kernel unit and frees all resources
+ *   kernelCopy              -Copies an existing kernel unit
+ *   kernelCompeare          -compares between kernel units
+ *   kernelAddition          -adds two units together
+ *   kernelInsert            -adds to the core (works whith all accept for date)
+ *   kernelRemove            -removes an element (works whith all accept for date)
+ *   kernelFilter            -filters core according to a criteria (works whith all accept for date)
+ *   kernelFind              -finds specific element(works whith all accept for date)
+ *   kernelSize              -returns the size of the element (for not amount set will return -1)
+ *   kernelDestroyer         -use it to end the code
+ *   kernelGetElement        -return the data of the element
+ *   kernelSetElement        -changes the element
+ *   kernelGetFirst          -the first element of the core
+ *   kernelGetNext           -the next element
+ *   kernel foreach          -the amount set foreach
+ *   kernelGetInternalData   -gives the internal element requested
+ * @param block               -the type of the kernel we need
+ * @param elements            -the simple  elements we pass
+ * @param elementsSize        -
+ * @param copyFunctions
+ * @param copyFuncAmount
+ * @param destructors
+ * @param destructorsAmount
+ * @param comparison
+ * @return
+ */
 Kernel kernelCreate(CreatingType block, CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
                     DestFunc* destructors, int destructorsAmount, CompFunc comparison);
 
