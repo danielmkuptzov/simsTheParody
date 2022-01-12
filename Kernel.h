@@ -46,6 +46,16 @@ typedef enum {
     ORDER_PRODUCT
 } CreatingType;
 
+//error enum
+typedef enum{
+    KERNEL_NULL_ARGUMENT,
+    KERNEL_ELEMENT_EXIST,
+    KERNEL_ELEMENT_DOES_NOT_EXIST,
+    KERNEL_ERROR,
+    KERNEL_MEMORY_PROBLEM,
+    KERNEL_SUCSESS
+} KernelErrors;
+
 //this definition is for the date
 typedef void* ExternalDate;
 
@@ -111,9 +121,41 @@ Kernel kernelCreate(CreatingType block, CreatorUnit* elements, int elementsSize,
 
 /**
  *   kernelDestroy           -Deletes an existing kernel unit and frees all resources
+ * @param kernel
+ */
+void kernelDestroy(void* kernel);
+
+/**
  *   kernelCopy              -Copies an existing kernel unit
+ * @param kernel
+ * @return
+ * NULL -problem with the element
+ * kernel -otherwise
+ */
+void* kernelCopy(void* kernel);
+
+/**
  *   kernelCompeare          -compares between kernel units
+ * @param kernel1
+ * @param kernel2
+ * @return
+ * 0- equal
+ * positive kernel1> kernel2
+ * negative kernel1< kernel2
+ */
+int kernelCompeare(void* kernel1, void* kernel2);
+
+/**
  *   kernelAddition          -adds two units together
+ * @param kernel1
+ * @param kernel2
+ * @return
+ * NULL -wrong addition or corrupter input
+ * kernel otherwise
+ */
+Kernel kernelAddition(void* kernel1, void* kernel2);
+
+/**
  *   kernelInsert            -adds to the core (works whith all accept for date)
  *   kernelRemove            -removes an element (works whith all accept for date)
  *   kernelFilter            -filters core according to a criteria (works whith all accept for date)
@@ -124,10 +166,19 @@ Kernel kernelCreate(CreatingType block, CreatorUnit* elements, int elementsSize,
  *   kernelSetElement        -changes the element
  *   kernelGetFirst          -the first element of the core
  *   kernelGetNext           -the next element
- *   kernel foreach          -the amount set foreach
  *   kernelGetInternalData   -gives the internal element requested
+ *   kernel foreach          -the amount set foreach
+ *   KERNEL_NULL_ARGUMENT
+ *   KERNEL_ELEMENT_EXIST
+ *   KERNEL_ELEMENT_DOES_NOT_EXIST
+ *   KERNEL_ERROR
+ *   KERNEL_MEMORY_PROBLEM
+ *   KERNEL_SUCSESS
  * @param kernel
+ * @param insertType
+ * @param unit
+ * @return
  */
-void kernelDestroy(void* kernel);
+KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit);
 
 #endif //KERNEL_H
