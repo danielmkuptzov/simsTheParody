@@ -87,6 +87,12 @@ typedef void (*DestFunc)(CreatorUnit);
 //for generic compare function
 typedef int(*CompFunc)(CreatorUnit,CreatorUnit);
 
+//filtering key
+typedef void* KerFilKey;
+
+//filtering func
+typedef bool (*KernelFilter)(void*, KerFilKey);
+
 typedef struct Kernel_t* Kernel;
 
 /**
@@ -157,7 +163,33 @@ Kernel kernelAddition(void* kernel1, void* kernel2);
 
 /**
  *   kernelInsert            -adds to the core (works whith all accept for date)
+ * @param kernel
+ * @param insertType -for adt's that have more than one list
+ * @param unit
+ * @return
+ *   KERNEL_NULL_ARGUMENT -NULL argument was passed
+ *   KERNEL_ELEMENT_EXIST -the element we wish to add exist
+ *   KERNEL_ERROR         -not memory related arror
+ *   KERNEL_MEMORY_PROBLEM -memory problem or wrong type was passed
+ *   KERNEL_SUCSESS        -the addition was sucsessful
+ */
+KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit);
+
+/**
  *   kernelRemove            -removes an element (works whith all accept for date)
+ * @param kernel
+ * @param insertType -for adt's that have more than one list
+ * @param unit
+ * @return
+ *   KERNEL_NULL_ARGUMENT -NULL argument was passed
+ *   KERNEL_ELEMENT_DOES_NOT_EXIST -the element we wish to destroy does not exist
+ *   KERNEL_ERROR                  -not memory related problems
+ *   KERNEL_MEMORY_PROBLEM -memory problem or wrong type was passed
+ *   KERNEL_SUCSESS        -the removle was sucsessful
+ */
+KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit);
+
+/**
  *   kernelFilter            -filters core according to a criteria (works whith all accept for date)
  *   kernelFind              -finds specific element(works whith all accept for date)
  *   kernelSize              -returns the size of the element (for not amount set will return -1)
@@ -168,17 +200,12 @@ Kernel kernelAddition(void* kernel1, void* kernel2);
  *   kernelGetNext           -the next element
  *   kernelGetInternalData   -gives the internal element requested
  *   kernel foreach          -the amount set foreach
- *   KERNEL_NULL_ARGUMENT
- *   KERNEL_ELEMENT_EXIST
- *   KERNEL_ELEMENT_DOES_NOT_EXIST
- *   KERNEL_ERROR
- *   KERNEL_MEMORY_PROBLEM
- *   KERNEL_SUCSESS
  * @param kernel
- * @param insertType
- * @param unit
+ * @param filter
+ * @param filKey
  * @return
  */
-KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit);
+Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey);
+
 
 #endif //KERNEL_H
