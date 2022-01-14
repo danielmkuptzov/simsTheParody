@@ -244,14 +244,35 @@ KernelErrors kernelSetElement(Kernel kernel,int type, void* element);
 
 /**
  *   kernelGetFirst          -the first element of the core
- *   kernelGetNext           -the next element
- *   kernelGetInternalData   -gives the internal element requested
- *   kernelDestroyer         -use it to end the code
- *   kernel foreach          -the amount set foreach
  * @param kernel
  * @param type
  * @return
+ *  NULL if there was a problem with the input
+ *  void* otherwise
  */
 void* kernelGetFirst(Kernel kernel, int type);
 
+/**
+ *   kernelGetNext           -the next element
+ * @param kernel
+ * @param type
+ * @return
+ *  NULL if there was a problem with the input
+ *  void* otherwise
+ */
+void* kernelGetNext(Kernel kernel,int type);
+
+/**
+ *   kernelGetInternalData   -gives the internal element requested
+ * @param kernel
+ * @param data -the data you need
+ * @return
+ */
+void* kernelGetInternalData(Kernel kernel, int data);
+
+/**
+ *   kernelDestroyer         -use it to end the code
+ *   kernel foreach          -the amount set foreach
+ */
+void kernelDestroyer();
 #endif //KERNEL_H
