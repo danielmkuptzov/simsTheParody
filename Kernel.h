@@ -272,7 +272,14 @@ void* kernelGetInternalData(Kernel kernel, int data);
 
 /**
  *   kernelDestroyer         -use it to end the code
- *   kernel foreach          -the amount set foreach
  */
 void kernelDestroyer();
+
+/**
+ *   kernel foreach          -the amount set foreach
+ */
+#define CORE_FOREACH(type, iterator,kernel)          \
+    for(type iterator =kernelGetFirst(kernel,type) ; \
+        iterator ;                               \
+        iterator = kernelGetNext(kernel,type))
 #endif //KERNEL_H
