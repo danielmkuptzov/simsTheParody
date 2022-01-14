@@ -24,12 +24,12 @@
  *   kernelFilter            -filters core according to a criteria (works whith all accept for date)
  *   kernelFind              -finds specific element(works whith all accept for date)
  *   kernelSize              -returns the size of the element (for not amount set will return -1)
- *   kernelDestroyer         -use it to end the code
  *   kernelGetElement        -return the data of the element
  *   kernelSetElement        -changes the element
  *   kernelGetInternalData   -gives the internal element requested
  *   kernelGetFirst          -the first element of the core
  *   kernelGetNext           -the next element
+ *   kernelDestroyer         -use it to end the code
  *   kernel foreach          -the amount set foreach
  */
 
@@ -191,15 +191,6 @@ KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit);
 
 /**
  *   kernelFilter            -filters core according to a criteria (works whith all accept for date)
- *   kernelFind              -finds specific element(works whith all accept for date)
- *   kernelSize              -returns the size of the element (for not amount set will return -1)
- *   kernelDestroyer         -use it to end the code
- *   kernelGetElement        -return the data of the element
- *   kernelSetElement        -changes the element
- *   kernelGetFirst          -the first element of the core
- *   kernelGetNext           -the next element
- *   kernelGetInternalData   -gives the internal element requested
- *   kernel foreach          -the amount set foreach
  * @param kernel
  * @param filter
  * @param filKey
@@ -207,5 +198,32 @@ KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit);
  */
 Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey);
 
+/**
+ *   kernelFind              -finds specific element(works whith all accept for date)
+ * @param kernel
+ * @param type
+ * @param element
+ * @return
+ * NULL -if the element doesn't exist
+ * void* otherwise
+ */
+void* kernelFind(Kernel kernel,int type, void* element);
+
+/**
+ *   kernelSize              -returns the size of the element (for not amount set will return -1)
+ *   kernelGetElement        -return the data of the element
+ *   kernelSetElement        -changes the element
+ *   kernelGetFirst          -the first element of the core
+ *   kernelGetNext           -the next element
+ *   kernelGetInternalData   -gives the internal element requested
+ *   kernelDestroyer         -use it to end the code
+ *   kernel foreach          -the amount set foreach
+ * @param kernel
+ * @param type
+ * @return
+ *  -1 wrong type or NULL argument
+ *  size otherwise
+ */
+int kernelSize(Kernel kernel, int type);
 
 #endif //KERNEL_H
