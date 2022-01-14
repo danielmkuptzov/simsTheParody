@@ -111,6 +111,7 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
 /**
  *   kernelCreate            -Creates a new kernel unit
  * @param block               -the type of the kernel we need
+ * @param creOrCp             -for explaining purpose
  * @param elements            -the simple  elements we pass
  * @param elementsSize        -the elements array size
  * @param copyFunctions       -the copy functions we need
@@ -122,7 +123,7 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
  *  NULL -if one of the critiria didn't passed
  *  kernel -otherwise
  */
-Kernel kernelCreate(CreatingType block, CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
+Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
                     DestFunc* destructors, int destructorsAmount, CompFunc comparison);
 
 /**
@@ -211,8 +212,37 @@ void* kernelFind(Kernel kernel,int type, void* element);
 
 /**
  *   kernelSize              -returns the size of the element (for not amount set will return -1)
+ * @param kernel
+ * @param type
+ * @return
+ *  -1 wrong type or NULL argument
+ *  size otherwise
+ */
+int kernelSize(Kernel kernel, int type);
+
+/**
  *   kernelGetElement        -return the data of the element
+ * @param kernel
+ * @return
+ * NULL if null argument was passed
+ * void* otherwise
+ */
+void* kernelGetElement(Kernel kernel);
+
+/**
  *   kernelSetElement        -changes the element
+ * @param kernel
+ * @param type
+ * @param element
+ * @return
+ *  KERNEL_NULL_ARGUMENT   -gess what
+ *  KERNEL_ERROR           -not memory related problems
+ *  KERNEL_MEMORY_PROBLEM  -memory problems
+ *  KERNEL_SUCSESS         -the change was sucsess
+ */
+KernelErrors kernelSetElement(Kernel kernel,int type, void* element);
+
+/**
  *   kernelGetFirst          -the first element of the core
  *   kernelGetNext           -the next element
  *   kernelGetInternalData   -gives the internal element requested
@@ -221,9 +251,7 @@ void* kernelFind(Kernel kernel,int type, void* element);
  * @param kernel
  * @param type
  * @return
- *  -1 wrong type or NULL argument
- *  size otherwise
  */
-int kernelSize(Kernel kernel, int type);
+void* kernelGetFirst(Kernel kernel, int type);
 
 #endif //KERNEL_H
