@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 /**
- *Preson  adt
+ *Person  adt
  *
  * Implements a person type. this would be outside of the kernel and would get most of the kernel adt threw the
  * void* formula, meaning that we would check the elments before doing somthing. for the name fild, please give
