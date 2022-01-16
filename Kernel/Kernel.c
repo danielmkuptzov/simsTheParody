@@ -81,8 +81,13 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
         }
         else if (block==PRODUCT)
         {
-            if(!elements||)
-            new->data= productCreate()
+            if(!elements||elementsSize!=6||!copyFunctions||copyFuncAmount!=2
+                ||!destructors||destructorsAmount!=2||!comparison)
+            {
+                free(new);
+                return NULL;
+            }
+            new->data= productCreate();
         }
     }
     return new;
