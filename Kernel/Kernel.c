@@ -157,8 +157,18 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
                 free(new);
                 return NULL;
             }
-            new->data= productCreate(*((int*)elements[0]),*((int*)elements[2]),type,
-                                     copyFunctions[0],destructors[0],);
+            new->data= productCreate(*((int*)elements[0]),(char*)elements[2],type,
+                                     copyFunctions[0],destructors[0],elements[1],copyFunctions[1],destructors[1],
+                                     comparison,elements[4],*((int*)elements[5]));
+           if(!new->data)
+           {
+               free(new);
+               return NULL;
+           }
+        }
+        else if (block==RATIONAL)
+        {
+
         }
     }
     return new;
