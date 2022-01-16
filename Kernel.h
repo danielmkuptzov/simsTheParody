@@ -123,7 +123,8 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
  *  NULL -if one of the critiria didn't passed
  *  kernel -otherwise
  */
-Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
+Kernel kernelCreate(CreatingType block,bool creOrCp,
+                    CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
                     DestFunc* destructors, int destructorsAmount, CompFunc comparison);
 
 /**

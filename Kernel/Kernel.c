@@ -6,6 +6,12 @@
 #include "Product.h"
 #include "../Kernel.h"
 
+struct Kernel_t{
+    CreatingType type;
+    void* data;
+};
+
+
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay)
@@ -28,8 +34,59 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
  *  NULL -if one of the critiria didn't passed
  *  kernel -otherwise
  */
-Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
-                    DestFunc* destructors, int destructorsAmount, CompFunc comparison);
+Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int elementsSize,
+                    CopyFunc* copyFunctions, int copyFuncAmount,DestFunc* destructors,
+                    int destructorsAmount, CompFunc comparison)
+{
+    if(!elements)
+    {
+        return NULL;
+    }
+    Kernel new= malloc(sizeof(struct Kernel_t));
+    if(!new)
+    {
+        return NULL;
+    }
+    new->type=block;
+    if(creOrCp)
+    {
+        if(block==AMOUNT_SET)
+        {
+            if(!copyFunctions||!destructors||!copyFunctions)
+            {
+                free(new);
+                return NULL;
+            }
+            new->data= coreCreate(1,copyFunctions[0],destructors[0],
+                                  comparison,*((int*)elements[0]));
+            if(!new->data)
+            {
+                free(new);
+                return NULL;
+            }
+        }
+        else if (block==DATE)
+        {
+            if(!elements)
+            {
+                free(new);
+                return NULL;
+            }
+            new->data= coreCreate(2,NULL,NULL,NULL,-1);
+            if(!new->data)
+            {
+                free(new);
+                return NULL;
+            }
+        }
+        else if (block==PRODUCT)
+        {
+            if(!elements||)
+            new->data= productCreate()
+        }
+    }
+    return new;
+}
 
 /**
  *   kernelDestroy           -Deletes an existing kernel unit and frees all resources
