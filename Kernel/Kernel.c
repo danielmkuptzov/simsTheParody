@@ -168,7 +168,6 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
         }
         else if (block==RATIONAL)
         {
-
         }
     }
     return new;
