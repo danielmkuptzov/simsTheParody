@@ -5,7 +5,6 @@
 #include "AmountSet.h"
 #include "Date.h"
 
-#define ENDWORD '\0'
 #define CAP_MIN 'A'
 #define CAP_MAX 'Z'
 #define LOW_MIN 'a'

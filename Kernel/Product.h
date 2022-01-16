@@ -131,6 +131,7 @@ typedef enum ProductAmountType_t {
     INTEGER_AMOUNT,
     HALF_INTEGER_AMOUNT,
     ANY_AMOUNT,
+    ERROR
 } ProductAmountType;
 
 /**

@@ -114,10 +114,13 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
  * @param creOrCp             -for explaining purpose
  * @param elements            -the simple  elements we pass
  * @important the order is this
- *           0- the id of the item or the element
+ *           0- the id of the item or the element type if the type is amount set
  *           1- the date
  *           2- the name
- *           3-
+ *           3- for product the type in char
+ *           4-additional data
+ *           5-component data
+ *           6-component type
  * @param elementsSize        -the elements array size
  * @param copyFunctions       -the copy functions we need
  * @param copyFuncAmount      -the size of the copy functions array
