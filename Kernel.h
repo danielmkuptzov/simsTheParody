@@ -113,6 +113,11 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
  * @param block               -the type of the kernel we need
  * @param creOrCp             -for explaining purpose
  * @param elements            -the simple  elements we pass
+ * @important the order is this
+ *           0- the id of the item or the element
+ *           1- the date
+ *           2- the name
+ *           3-
  * @param elementsSize        -the elements array size
  * @param copyFunctions       -the copy functions we need
  * @param copyFuncAmount      -the size of the copy functions array
