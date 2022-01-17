@@ -12,6 +12,8 @@
 #define LOW_MIN 'a'
 #define LOW_MAX 'z'
 
+#define ERRORCOMP -1000000000;
+
 static char* stringDup(char* str)
 {
     char* copy = malloc(strlen(str) + 1);
@@ -69,6 +71,40 @@ static ProductAmountType converter(char* name)
     {
         return ERROR;
     }
+}
+
+static int convertTypeToInt(CreatingType type)
+{
+    if(type==AMOUNT_SET)
+    {
+        return 1;
+    }
+    else if(type==DATE)
+    {
+        return 2;
+    }
+    else if(type==PRODUCT)
+    {
+        return 3;
+    }
+    else if(type==RATIONAL)
+    {
+        return 4;
+    }
+    else if(type==ORDER_PRODUCT)
+    {
+        return 5;
+    }
+    return -1;
+}
+
+static int typeComparison(CreatingType type1, CreatingType type2)
+{
+    if(convertTypeToInt(type1)==-1|| convertTypeToInt(type2)==-1)
+    {
+        return ERRORCOMP;
+    }
+    return convertTypeToInt(type1)- convertTypeToInt(type2);
 }
 
 struct Kernel_t{
@@ -241,7 +277,11 @@ int kernelCompeare(void* kernel1, void* kernel2)
 {
     Kernel first=kernel1;
     Kernel second=kernel2;
-
+    if(first->type!=second->type)
+    {
+        return typeComparison(first->type,second->type);
+    }
+    if()
 }
 
 /**
