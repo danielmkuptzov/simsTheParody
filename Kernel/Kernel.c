@@ -239,6 +239,8 @@ void* kernelCopy(void* kernel)
  */
 int kernelCompeare(void* kernel1, void* kernel2)
 {
+    Kernel first=kernel1;
+    Kernel second=kernel2;
 
 }
 
