@@ -176,7 +176,7 @@ int kernelCompeare(void* kernel1, void* kernel2);
  * NULL -wrong addition or corrupter input
  * kernel otherwise
  */
-Kernel kernelAddition(void* kernel1, void* kernel2);
+Kernel kernelAddition(Kernel kernel1,Kernel kernel2);
 
 /**
  *   kernelInsert            -adds to the core (works whith all accept for date)

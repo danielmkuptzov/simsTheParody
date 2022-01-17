@@ -292,7 +292,20 @@ int kernelCompeare(void* kernel1, void* kernel2)
  * NULL -wrong addition or corrupter input
  * kernel otherwise
  */
-Kernel kernelAddition(void* kernel1, void* kernel2);
+Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
+{
+    if(kernel1->type!=kernel2->type)
+    {
+        return NULL;
+    }
+    Kernel sum= kernelCreate(kernel1->type,false,NULL,0,
+                             NULL,0,NULL,0,NULL);
+    if(!sum)
+    {
+        return NULL;
+    }
+
+}
 
 /**
  *   kernelInsert            -adds to the core (works whith all accept for date)
