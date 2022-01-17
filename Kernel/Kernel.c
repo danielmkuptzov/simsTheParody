@@ -257,22 +257,6 @@ void* kernelCopy(void* kernel)
     return copy;
 }
 
-/**
- *   kernelCompeare          -compares between kernel units
- * @param kernel1
- * @param kernel2
- * @return
- * @note if the types are different the hirarcy is-
- *  1 amount set
- *  2 date
- *  3 product
- *  4 rational
- *  5 order product
- *
- * 0- equal
- * positive kernel1> kernel2
- * negative kernel1< kernel2
- */
 int kernelCompeare(void* kernel1, void* kernel2)
 {
     Kernel first=kernel1;
@@ -281,7 +265,23 @@ int kernelCompeare(void* kernel1, void* kernel2)
     {
         return typeComparison(first->type,second->type);
     }
-    if()
+    if(first->type==AMOUNT_SET||first->type==DATE)
+    {
+        return coreCompeare(first->data,second->data);
+    }
+    else if (first->type==PRODUCT)
+    {
+        return productCompeare(first->data,second->data);
+    }
+    else if (first->type==RATIONAL)
+    {
+        return rationalCompare(first->data,second->data);
+    }
+    else if(first->type==ORDER_PRODUCT)
+    {
+        return productUnitCompeare(first->data,second->data);
+    }
+    return ERRORCOMP;
 }
 
 /**
