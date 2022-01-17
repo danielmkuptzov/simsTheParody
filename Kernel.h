@@ -155,6 +155,13 @@ void* kernelCopy(void* kernel);
  * @param kernel1
  * @param kernel2
  * @return
+ * @note if the types are different the hirarcy is-
+ *  1 amount set
+ *  2 date
+ *  3 product
+ *  4 rational
+ *  5 order product
+ *
  * 0- equal
  * positive kernel1> kernel2
  * negative kernel1< kernel2

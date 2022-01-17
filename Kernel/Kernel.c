@@ -87,10 +87,6 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
                     CopyFunc* copyFunctions, int copyFuncAmount,DestFunc* destructors,
                     int destructorsAmount, CompFunc comparison)
 {
-    if(!elements)
-    {
-        return NULL;
-    }
     Kernel new= malloc(sizeof(struct Kernel_t));
     if(!new)
     {
@@ -99,6 +95,10 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
     new->type=block;
     if(creOrCp)
     {
+        if(!elements)
+        {
+            return NULL;
+        }
         if(block==AMOUNT_SET)
         {
             if(!copyFunctions||!destructors||!copyFunctions)
@@ -183,25 +183,64 @@ void kernelDestroy(void* kernel)
     free(kernel);
 }
 
-/**
- *   kernelCopy              -Copies an existing kernel unit
- * @param kernel
- * @return
- * NULL -problem with the element
- * kernel -otherwise
- */
-void* kernelCopy(void* kernel);
+void* kernelCopy(void* kernel)
+{
+    if(!kernel||!((Kernel)kernel)->data)
+    {
+        return NULL;
+    }
+    Kernel copy= kernelCreate(AMOUNT_SET,false,NULL,
+                              0,NULL,0,
+                              NULL,0,NULL);
+    if(!copy)
+    {
+        return NULL;
+    }
+    copy->type=((Kernel)kernel)->type;
+    if(copy->type==AMOUNT_SET||copy->type==DATE)
+    {
+        copy->data= coreCopy(((Kernel)kernel)->data);
+    }
+    else if(copy->type==PRODUCT)
+    {
+        copy->data= productCopy(((Kernel)kernel)->data);
+    }
+    else if(copy->type==RATIONAL)
+    {
+        copy->data= rationalCopy(((Kernel)kernel)->data);
+    }
+    else if(copy->type==ORDER_PRODUCT)
+    {
+        copy->data= productUnitCopy(((Kernel)kernel)->data);
+    }
+    if(!copy->data)
+    {
+        free(copy);
+        return NULL;
+    }
+    return copy;
+}
 
 /**
  *   kernelCompeare          -compares between kernel units
  * @param kernel1
  * @param kernel2
  * @return
+ * @note if the types are different the hirarcy is-
+ *  1 amount set
+ *  2 date
+ *  3 product
+ *  4 rational
+ *  5 order product
+ *
  * 0- equal
  * positive kernel1> kernel2
  * negative kernel1< kernel2
  */
-int kernelCompeare(void* kernel1, void* kernel2);
+int kernelCompeare(void* kernel1, void* kernel2)
+{
+
+}
 
 /**
  *   kernelAddition          -adds two units together
