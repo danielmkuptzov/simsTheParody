@@ -83,21 +83,6 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
     coreBeginner(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay);
 }
 
-/**
- *   kernelCreate            -Creates a new kernel unit
- * @param block               -the type of the kernel we need
- * @param creOrCp             -for explaining purpose
- * @param elements            -the simple  elements we pass
- * @param elementsSize        -the elements array size
- * @param copyFunctions       -the copy functions we need
- * @param copyFuncAmount      -the size of the copy functions array
- * @param destructors         -the destructors we need
- * @param destructorsAmount   -the size of the destructors array
- * @param comparison          -the comparison functions
- * @return
- *  NULL -if one of the critiria didn't passed
- *  kernel -otherwise
- */
 Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int elementsSize,
                     CopyFunc* copyFunctions, int copyFuncAmount,DestFunc* destructors,
                     int destructorsAmount, CompFunc comparison)
@@ -123,29 +108,14 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
             }
             new->data= coreCreate(1,copyFunctions[0],destructors[0],
                                   comparison,*((int*)elements[0]));
-            if(!new->data)
-            {
-                free(new);
-                return NULL;
-            }
         }
         else if (block==DATE)
         {
-            if(!elements)
-            {
-                free(new);
-                return NULL;
-            }
             new->data= coreCreate(2,NULL,NULL,NULL,-1);
-            if(!new->data)
-            {
-                free(new);
-                return NULL;
-            }
         }
         else if (block==PRODUCT)
         {
-            if(!elements||elementsSize!=6||!copyFunctions||copyFuncAmount!=2
+            if(elementsSize!=6||!copyFunctions||copyFuncAmount!=2
                 ||!destructors||destructorsAmount!=2||!comparison)
             {
                 free(new);
@@ -160,24 +130,58 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
             new->data= productCreate(*((int*)elements[0]),(char*)elements[2],type,
                                      copyFunctions[0],destructors[0],elements[1],copyFunctions[1],destructors[1],
                                      comparison,elements[4],*((int*)elements[5]));
-           if(!new->data)
-           {
-               free(new);
-               return NULL;
-           }
         }
         else if (block==RATIONAL)
         {
+            if(elementsSize!=2||*((int*)elements[1])==0||copyFunctions||destructors||comparison)
+            {
+                free(new);
+                return NULL;
+            }
+            new->data= rationalCreate(*((int*)elements[0]),*((int*)elements[1]));
+        }
+        else if (block==ORDER_PRODUCT)
+        {
+            if(elementsSize!=2||copyFunctions||destructors||comparison)
+            {
+                free(new);
+                return NULL;
+            }
+            new->data= productUnitCreate((Product)elements[0],(Rational)elements[1]);
+        }
+        if(!new->data)
+        {
+            free(new);
+            return NULL;
         }
     }
     return new;
 }
 
-/**
- *   kernelDestroy           -Deletes an existing kernel unit and frees all resources
- * @param kernel
- */
-void kernelDestroy(void* kernel);
+void kernelDestroy(void* kernel)
+{
+    if(!kernel)
+    {
+        return;
+    }
+    if(((Kernel)kernel)->type==AMOUNT_SET||((Kernel)kernel)->type==DATE)
+    {
+        coreDestroy(((Kernel)kernel)->data);
+    }
+    else if(((Kernel)kernel)->type==PRODUCT)
+    {
+        productDestroy(((Kernel)kernel)->data);
+    }
+    else if(((Kernel)kernel)->type==RATIONAL)
+    {
+        rationalDestroy(((Kernel)kernel)->data);
+    }
+    else if(((Kernel)kernel)->type==ORDER_PRODUCT)
+    {
+        productUnitDestroy(((Kernel)kernel)->data);
+    }
+    free(kernel);
+}
 
 /**
  *   kernelCopy              -Copies an existing kernel unit
