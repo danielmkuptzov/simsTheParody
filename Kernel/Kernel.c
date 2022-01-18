@@ -365,6 +365,10 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
     {
         return KERNEL_NULL_ARGUMENT;
     }
+    if(insertType==0&&kernel->type==RATIONAL)
+    {
+
+    }
 }
 
 /**
