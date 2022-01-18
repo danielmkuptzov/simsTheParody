@@ -365,10 +365,15 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
     {
         return KERNEL_NULL_ARGUMENT;
     }
-    if(insertType==0&&kernel->type==RATIONAL)
+    if(insertType==0&&kernel->type==ORDER_PRODUCT)
     {
-
+        if(productUnitChangeAmount(kernel->data,unit)==ORDER_UNIT_SUCSESS)
+        {
+            return KERNEL_SUCSESS;
+        }
+        return KERNEL_ERROR;
     }
+
 }
 
 /**
