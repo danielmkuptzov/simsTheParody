@@ -304,6 +304,27 @@ Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
     {
         return NULL;
     }
+    sum->type=kernel1->type;
+    if(!kernel1->data&&kernel2->data)
+    {
+        sum->data= kernelCopy(kernel2);
+    }
+    else if(!kernel2->data&&kernel1->data)
+    {
+        sum->data= kernelCopy(kernel1);
+    }
+    if(kernel1->type==AMOUNT_SET||kernel1->type==DATE)
+    {
+        sum->data= coreAddition(kernel1->data,kernel2->data);
+    }
+    else if(kernel1->type==PRODUCT)
+    {
+        sum->data= productUnite(kernel1->data,kernel2->data);
+    }
+    else if(kernel1->type==RATIONAL)
+    {
+        sum->data= rationalAddition(kernel1->data,kernel2->data);
+    }
 
 }
 
