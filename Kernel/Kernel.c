@@ -349,7 +349,8 @@ Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
 /**
  *   kernelInsert            -adds to the core (works whith all accept for date)
  * @param kernel
- * @param insertType -for adt's that have more than one list
+ * @param insertType -0 for addition
+ *                    1 and onward depends if the adt have more than one area to add element
  * @param unit
  * @return
  *   KERNEL_NULL_ARGUMENT -NULL argument was passed
@@ -360,7 +361,10 @@ Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
  */
 KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
 {
-
+    if(!kernel||!unit)
+    {
+        return KERNEL_NULL_ARGUMENT;
+    }
 }
 
 /**
