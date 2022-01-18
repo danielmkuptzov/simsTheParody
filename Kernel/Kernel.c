@@ -358,7 +358,10 @@ Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
  *   KERNEL_MEMORY_PROBLEM -memory problem or wrong type was passed
  *   KERNEL_SUCSESS        -the addition was sucsessful
  */
-KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit);
+KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
+{
+
+}
 
 /**
  *   kernelRemove            -removes an element (works whith all accept for date)
