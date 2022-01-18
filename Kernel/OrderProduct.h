@@ -19,6 +19,7 @@
  *   productUnitLowerAmount    -lowers the amount of the product
  *   productUnitGetProduct     -to see the product
  *   productUnitGetAmount      -to get the amount of the product
+ *   productUnitChangeAmount   -for general amount change
  */
 
 typedef enum {
@@ -104,5 +105,18 @@ Product productUnitGetProduct(OrderUnit unit);
  * rational otherwise
  */
 Rational productUnitGetAmount(OrderUnit unit);
+
+/**
+ *   productUnitChangeAmount   -for general amount change
+ * @param unit
+ * @param amount
+ * @return
+ * ORDER_UNIT_NULL_ARGUMENT
+ * ORDER_UNIT_ERROR
+ * ORDER_UNIT_WRONG_AMOUNT
+ * ORDER_UNIT_TOO_MUCH
+ * ORDER_UNIT_SUCSESS
+ */
+OrderUnitErrors productUnitChangeAmount(OrderUnit unit, Rational amount);
 
 #endif //ORDERPRODUCT_H

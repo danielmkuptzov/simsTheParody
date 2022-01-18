@@ -171,3 +171,23 @@ Rational productUnitGetAmount(OrderUnit unit)
     }
     return unit->amount;
 }
+
+/**
+ *   productUnitChangeAmount   -for general amount change
+ * @param unit
+ * @param amount
+ * @return
+ * ORDER_UNIT_NULL_ARGUMENT
+ * ORDER_UNIT_ERROR
+ * ORDER_UNIT_WRONG_AMOUNT
+ * ORDER_UNIT_TOO_MUCH
+ * ORDER_UNIT_SUCSESS
+ */
+OrderUnitErrors productUnitChangeAmount(OrderUnit unit, Rational amount)
+{
+    if(!unit||!amount)
+    {
+        return ORDER_UNIT_NULL_ARGUMENT;
+    }
+
+}

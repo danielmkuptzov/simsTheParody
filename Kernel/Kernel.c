@@ -284,14 +284,6 @@ int kernelCompeare(void* kernel1, void* kernel2)
     return ERRORCOMP;
 }
 
-/**
- *   kernelAddition          -adds two units together
- * @param kernel1
- * @param kernel2
- * @return
- * NULL -wrong addition or corrupter input
- * kernel otherwise
- */
 Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
 {
     if(kernel1->type!=kernel2->type)
@@ -313,7 +305,7 @@ Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
     {
         sum->data= kernelCopy(kernel1);
     }
-    if(kernel1->type==AMOUNT_SET||kernel1->type==DATE)
+    else if(kernel1->type==AMOUNT_SET||kernel1->type==DATE)
     {
         sum->data= coreAddition(kernel1->data,kernel2->data);
     }
@@ -325,7 +317,33 @@ Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
     {
         sum->data= rationalAddition(kernel1->data,kernel2->data);
     }
-
+    else if(kernel1->type==ORDER_PRODUCT)
+    {
+        if(productUnitCompeare(kernel1->data,kernel2->data)!=0)
+        {
+            free(sum);
+            return NULL;
+        }
+        sum->data= productUnitCopy(kernel1->data);
+        if(!sum->data)
+        {
+            free(sum);
+            return NULL;
+        }
+        if(productUnitRaiseAmount(kernel1->data,
+                                  productUnitGetAmount(kernel2->data))!=ORDER_UNIT_SUCSESS)
+        {
+            free(sum->data);
+            free(sum);
+            return NULL;
+        }
+    }
+    if(!sum->data)
+    {
+        free(sum);
+        return NULL;
+    }
+    return sum;
 }
 
 /**
