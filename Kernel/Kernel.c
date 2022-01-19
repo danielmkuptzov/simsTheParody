@@ -373,7 +373,27 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
         }
         return KERNEL_ERROR;
     }
+    else
+    {
+        if(kernel->type==AMOUNT_SET)
+        {
+            OuterCoreErrors resalt=coreInsert(kernel->data,unit);
+            if(resalt==CORE_ELEMENT_EXIST)
+            {
+                return KERNEL_ELEMENT_EXIST;
+            }
+            else if(resalt==CORE_SUCSESS)
+            {
+                return KERNEL_SUCSESS;
+            }
+            return KERNEL_ERROR;
+        }
+        else if(kernel->type==DATE)
+        {
+            return KERNEL_ERROR;
+        }
 
+    }
 }
 
 /**
