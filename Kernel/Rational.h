@@ -15,24 +15,25 @@
  * please use with care
  *
  * The following functions are available:
- *   rationalCreate         -Creates the rational number.
- *   rationalDestroy        -Deletes an existing rational and frees all resources
- *   rationalCopy           -Copies an existing rational
- *   rationalCompeare       -compares between rationals
- *   rationalAddition       -adds two rational
- *   rationalNegate         -negate the rational
- *   rationalMultiply       -multiplies two rationals
- *   rationalPower          -takes rational to an integer power
- *   rationalTransform      -answers to the question 1/(given rational)
- *   rationalEqual          -the == operator
- *   rationalGrater         -the > operator
- *   rationalLesser         -the < operator
- *   rationalAddInto        -operator+=
- *   rationalSubtruct       -subtructs two rationals
- *   rationalSubInto        -operator -=
- *   rationalDivide         -divides two rationals
- *   rationalround          -rounds the number to the closest half-integer
- *   rationalIsHaveHalf     -gives the answer if the number have the .5 resalt
+ *   rationalCreate           -Creates the rational number.
+ *   rationalDestroy          -Deletes an existing rational and frees all resources
+ *   rationalCopy             -Copies an existing rational
+ *   rationalCompeare         -compares between rationals
+ *   rationalAddition         -adds two rational
+ *   rationalNegate           -negate the rational
+ *   rationalMultiply         -multiplies two rationals
+ *   rationalPower            -takes rational to an integer power
+ *   rationalTransform        -answers to the question 1/(given rational)
+ *   rationalEqual            -the == operator
+ *   rationalGrater           -the > operator
+ *   rationalLesser           -the < operator
+ *   rationalAddInto          -operator+=
+ *   rationalSubtruct         -subtructs two rationals
+ *   rationalSubInto          -operator -=
+ *   rationalDivide           -divides two rationals
+ *   rationalround            -rounds the number to the closest half-integer
+ *   rationalIsHaveHalf       -gives the answer if the number have the .5 resalt
+ *   rationalArithmeticChange -unites the addition and substruct operations
  */
 
 typedef enum {
@@ -211,4 +212,6 @@ Rational rationalround(Rational rational);
  */
 bool rationalIsHaveHalf(Rational rational);
 
+
+RtionalErrorCode rationalArithmeticChange(Rational rational1, Rational rational2);
 #endif //DANIELCITY_RATIONAL_H

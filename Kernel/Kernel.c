@@ -392,7 +392,29 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
         {
             return KERNEL_ERROR;
         }
+        else if(kernel->type==PRODUCT)
+        {
+            ProductErrorCode resalt= productAddComponent(kernel->data,unit);
+            if(resalt==PRODUCT_COMPONENT_ALREADY_EXIST)
+            {
+                return KERNEL_ELEMENT_EXIST;
+            }
+            else if(resalt==PRODUCT_SUCSESS)
+            {
+                return KERNEL_SUCSESS;
+            }
+            return KERNEL_ERROR;
+        }
+        else if(kernel->type==RATIONAL)
+        {
+            Kernel newElement=unit;
+            if(kernel->type!=newElement->type)
+            {
+                return KERNEL_ERROR;
+            }
 
+        }
+        return KERNEL_MEMORY_PROBLEM;
     }
 }
 
