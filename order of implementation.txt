@@ -140,3 +140,9 @@ factoryblo: date, product, person, Rational and amountset needed
 factory: date,product, factoryblo, person, Rational and amountset needed
 
 system: date, planet, person, factory, bank and amountset needed
+
+future expiriment: c++ cover of my code
+
+more future: swig and python
+
+in the year 292929: terminal operation
