@@ -410,25 +410,43 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
     }
 }
 
-/**
- *   kernelRemove            -removes an element (works whith all accept for date)
- * @param kernel
- * @param insertType -for adt's that have more than one list
- * @param unit
- * @return
- *   KERNEL_NULL_ARGUMENT -NULL argument was passed
- *   KERNEL_ELEMENT_DOES_NOT_EXIST -the element we wish to destroy does not exist
- *   KERNEL_ERROR                  -not memory related problems
- *   KERNEL_MEMORY_PROBLEM -memory problem or wrong type was passed
- *   KERNEL_SUCSESS        -the removle was sucsessful
- */
 KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit)
 {
     if(!kernel||!unit)
     {
         return KERNEL_NULL_ARGUMENT;
     }
-
+    if(kernel->type==RATIONAL||kernel->type==DATE||kernel->type==ORDER_PRODUCT)
+    {
+        return KERNEL_ERROR;
+    }
+    else if (kernel->type==AMOUNT_SET)
+    {
+        OuterCoreErrors resalt=coreRemove(kernel->data,unit);
+        if(resalt==CORE_SUCSESS)
+        {
+            return KERNEL_SUCSESS;
+        }
+        else if (resalt==CORE_ELEMENT_DOES_NOT_EXIST)
+        {
+            return KERNEL_ELEMENT_DOES_NOT_EXIST;
+        }
+        return KERNEL_ERROR;
+    }
+    else if(kernel->type==PRODUCT)
+    {
+        ProductErrorCode resalt= productRemoveComponent(kernel->data,unit);
+        if(resalt==PRODUCT_COMPONENT_DOES_NOT_EXIST)
+        {
+            return KERNEL_ELEMENT_DOES_NOT_EXIST;
+        }
+        if(resalt==PRODUCT_SUCSESS)
+        {
+            return KERNEL_SUCSESS;
+        }
+        return KERNEL_ERROR;
+    }
+    return KERNEL_ERROR;
 }
 
 /**
