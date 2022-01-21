@@ -212,6 +212,14 @@ Rational rationalround(Rational rational);
  */
 bool rationalIsHaveHalf(Rational rational);
 
-
+/**
+ *  rationalArithmeticChange- for easier addition and substruct
+ * @param rational1
+ * @param rational2
+ * @return
+ * RATIONAL_NULL_ARGUMENT there is aNULL argument
+ * RATIONAL_ERROR the action failed failed
+ * RATIONAL_SUCSESS- sucsess
+ */
 RtionalErrorCode rationalArithmeticChange(Rational rational1, Rational rational2);
 #endif //DANIELCITY_RATIONAL_H

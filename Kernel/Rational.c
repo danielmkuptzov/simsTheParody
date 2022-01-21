@@ -253,3 +253,27 @@ bool rationalIsHaveHalf(Rational rational)
     }
     return false;
 }
+
+RtionalErrorCode rationalArithmeticChange(Rational rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return RATIONAL_NULL_ARGUMENT;
+    }
+    Rational zero= rationalCreate(0,1);
+    if(!zero)
+    {
+        return RATIONAL_ERROR;
+    }
+    RtionalErrorCode resalt=RATIONAL_ERROR;
+    if(rationalLesser(rational2,zero))
+    {
+        resalt= rationalSubInto(&rational1,rational2);
+    }
+    else
+    {
+        resalt= rationalAddInto(&rational1,rational2);
+    }
+    rationalDestroy(zero);
+    return resalt;
+}

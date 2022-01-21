@@ -346,19 +346,6 @@ Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
     return sum;
 }
 
-/**
- *   kernelInsert            -adds to the core (works whith all accept for date)
- * @param kernel
- * @param insertType -0 for addition
- *                    1 and onward depends if the adt have more than one area to add element
- * @param unit
- * @return
- *   KERNEL_NULL_ARGUMENT -NULL argument was passed
- *   KERNEL_ELEMENT_EXIST -the element we wish to add exist
- *   KERNEL_ERROR         -not memory related arror
- *   KERNEL_MEMORY_PROBLEM -memory problem or wrong type was passed
- *   KERNEL_SUCSESS        -the addition was sucsessful
- */
 KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
 {
     if(!kernel||!unit)
@@ -412,7 +399,12 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
             {
                 return KERNEL_ERROR;
             }
-
+            RtionalErrorCode resalt= rationalArithmeticChange(kernel->data,newElement->data);
+            if(resalt==RATIONAL_ERROR)
+            {
+                return KERNEL_ERROR;
+            }
+            return KERNEL_SUCSESS;
         }
         return KERNEL_MEMORY_PROBLEM;
     }
