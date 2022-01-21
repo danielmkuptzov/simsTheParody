@@ -222,4 +222,6 @@ bool rationalIsHaveHalf(Rational rational);
  * RATIONAL_SUCSESS- sucsess
  */
 RtionalErrorCode rationalArithmeticChange(Rational rational1, Rational rational2);
+
+
 #endif //DANIELCITY_RATIONAL_H
