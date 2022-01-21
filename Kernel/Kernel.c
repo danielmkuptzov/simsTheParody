@@ -422,7 +422,14 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
  *   KERNEL_MEMORY_PROBLEM -memory problem or wrong type was passed
  *   KERNEL_SUCSESS        -the removle was sucsessful
  */
-KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit);
+KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit)
+{
+    if(!kernel||!unit)
+    {
+        return KERNEL_NULL_ARGUMENT;
+    }
+
+}
 
 /**
  *   kernelFilter            -filters core according to a criteria (works whith all accept for date)
@@ -503,6 +510,24 @@ void* kernelGetNext(Kernel kernel,int type);
  * @return
  */
 void* kernelGetInternalData(Kernel kernel, int data);
+
+/**
+ *   kernelALU               -aritmetical functions to rational and to orderProduct
+ * @param kernel1
+ * @param kernel2
+ * @param action
+ *                0- for addition
+ *                1- to substruct
+ *                2- multiply
+ *                3- divide
+ *                4- power by integer
+ * @return
+ *  KERNEL_NULL_ARGUMENT   one of the arguments was NULL
+ *  KERNEL_ERROR           error not related to the memory
+ *  KERNEL_MEMORY_PROBLEM  the operation failed or was iligal
+ *  KERNEL_SUCSESS         the operation was a sucsess
+ */
+KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action);
 
 /**
  *   kernelDestroyer         -use it to end the code

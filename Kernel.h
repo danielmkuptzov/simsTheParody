@@ -30,6 +30,7 @@
  *   kernelGetFirst          -the first element of the core
  *   kernelGetNext           -the next element
  *   kernelDestroyer         -use it to end the code
+ *   kernelALU               -aritmetical functions to rational and to orderProduct
  *   kernel foreach          -the amount set foreach
  */
 
@@ -283,8 +284,28 @@ void* kernelGetNext(Kernel kernel,int type);
  * @param kernel
  * @param data -the data you need
  * @return
+ *  NULL if there was any error
+ *  data otherwise
  */
 void* kernelGetInternalData(Kernel kernel, int data);
+
+/**
+ *   kernelALU               -aritmetical functions to rational and to orderProduct
+ * @param kernel1
+ * @param kernel2
+ * @param action
+ *                0- for addition
+ *                1- to substruct
+ *                2- multiply
+ *                3- divide
+ *                4- power by integer
+ * @return
+ *  KERNEL_NULL_ARGUMENT   one of the arguments was NULL
+ *  KERNEL_ERROR           error not related to the memory
+ *  KERNEL_MEMORY_PROBLEM  the operation failed or was iligal
+ *  KERNEL_SUCSESS         the operation was a sucsess
+ */
+KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action);
 
 /**
  *   kernelDestroyer         -use it to end the code
@@ -294,7 +315,7 @@ void kernelDestroyer();
 /**
  *   kernel foreach          -the amount set foreach
  */
-#define CORE_FOREACH(type, iterator,kernel)          \
+#define KERNEL_FOREACH(type, iterator,kernel)          \
     for(type iterator =kernelGetFirst(kernel,type) ; \
         iterator ;                               \
         iterator = kernelGetNext(kernel,type))
