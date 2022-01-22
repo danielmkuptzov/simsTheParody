@@ -146,3 +146,5 @@ future expiriment: c++ cover of my code
 more future: swig and python
 
 in the year 292929: terminal operation
+
+more further future: to implement the string and stdio functions

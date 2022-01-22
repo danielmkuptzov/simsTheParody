@@ -449,13 +449,7 @@ KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit)
     return KERNEL_ERROR;
 }
 
-/**
- *   kernelFilter            -filters core according to a criteria (works whith all accept for date)
- * @param kernel
- * @param filter
- * @param filKey
- * @return
- */
+
 Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey)
 {
     if(!kernel||!filter||!filKey)
@@ -466,14 +460,26 @@ Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey)
     {
         return NULL;
     }
-    else if(kernel->type==PRODUCT)
+    Kernel filtered= kernelCreate(kernel->type,false,NULL,0,
+                                  NULL,0,NULL,0,NULL);
+    if(!filtered)
     {
-        return productComponentFilter(kernel->data,filter,filKey);
+        return NULL;
+    }
+    if(kernel->type==PRODUCT)
+    {
+        filtered->data=productComponentFilter(kernel->data,filter,filKey);
     }
     else if(kernel->type==AMOUNT_SET)
     {
-        return coreFilter(kernel->data,filter,filKey);
+        filtered->data=coreFilter(kernel->data,filter,filKey);
     }
+    if(!filtered->data)
+    {
+        kernelDestroy(filtered);
+        return NULL;
+    }
+    return filtered;
 }
 
 /**

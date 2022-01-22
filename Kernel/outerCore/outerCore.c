@@ -199,7 +199,7 @@ OuterCoreErrors coreRemove(CoreUnit core, COREElement element)
     return CORE_SUCSESS;
 }
 
-void* coreFilter(CoreUnit core, FilterCOREElement filter, CoreFilterKey key)
+CoreUnit coreFilter(CoreUnit core, FilterCOREElement filter, CoreFilterKey key)
 {
     if(!core||!filter||!key)
     {
