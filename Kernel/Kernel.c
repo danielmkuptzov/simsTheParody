@@ -456,7 +456,25 @@ KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit)
  * @param filKey
  * @return
  */
-Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey);
+Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey)
+{
+    if(!kernel||!filter||!filKey)
+    {
+        return NULL;
+    }
+    if(kernel->type==RATIONAL||kernel->type==DATE||kernel->type==ORDER_PRODUCT)
+    {
+        return NULL;
+    }
+    else if(kernel->type==PRODUCT)
+    {
+        return productComponentFilter(kernel->data,filter,filKey);
+    }
+    else if(kernel->type==AMOUNT_SET)
+    {
+        return coreFilter(kernel->data,filter,filKey);
+    }
+}
 
 /**
  *   kernelFind              -finds specific element(works whith all accept for date)

@@ -211,7 +211,7 @@ OuterCoreErrors coreRemove(CoreUnit core, COREElement element);
  * NULL -if any problem accures
  * core unit otherwise
  */
-CoreUnit coreFilter(CoreUnit core, FilterCOREElement filter, CoreFilterKey key);
+void* coreFilter(CoreUnit core, FilterCOREElement filter, CoreFilterKey key);
 
 /**
  *   coreFind           -finds specific element(only works with sets)
