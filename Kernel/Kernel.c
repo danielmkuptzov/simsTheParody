@@ -491,7 +491,20 @@ Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey)
  * NULL -if the element doesn't exist
  * void* otherwise
  */
-void* kernelFind(Kernel kernel,int type, void* element);
+void* kernelFind(Kernel kernel,int type, void* element)
+{
+    if(!kernel||!element)
+    {
+        return NULL;
+    }
+    if(kernel->type==AMOUNT_SET)
+    {
+        CORE_FOREACH(void*, iter, kernel->data)
+        {
+            if()
+        }
+    }
+}
 
 /**
  *   kernelSize              -returns the size of the element (for not amount set will return -1)
