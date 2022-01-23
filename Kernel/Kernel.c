@@ -499,11 +499,25 @@ void* kernelFind(Kernel kernel,int type, void* element)
     }
     if(kernel->type==AMOUNT_SET)
     {
+        CompareCOREElements compFunc=coreGetCompare(kernel->data);
+        if(!compFunc)
+        {
+            return NULL;
+        }
         CORE_FOREACH(void*, iter, kernel->data)
         {
-            if()
+            if(compFunc(element,iter)==0)
+            {
+                return iter;
+            }
         }
+        return NULL;
     }
+    else if(kernel->type==PRODUCT)
+    {
+
+    }
+    return NULL;
 }
 
 /**

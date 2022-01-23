@@ -346,3 +346,11 @@ void* coreGetNext(CoreUnit unit)
     return asGetNext((AmountSet)unit->element);
 }
 
+CompareCOREElements coreGetCompare(CoreUnit unit)
+{
+    if(!unit||unit->type!=0)
+    {
+        return NULL;
+    }
+    return asGetCompeare(unit->element);
+}

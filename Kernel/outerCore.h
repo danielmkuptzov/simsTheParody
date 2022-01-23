@@ -32,6 +32,7 @@
  *   coreSetElement     -changes the element
  *   coreGetFirst       -the first element of the core
  *   coreGetNext        -the next element
+ *   coreGetCompare     -gets the comparison function
  *   core foreach       - the amount set foreach
  */
 
@@ -269,6 +270,16 @@ void* coreGetFirst(CoreUnit unit);
  * @return
  */
 void* coreGetNext(CoreUnit unit);
+
+/**
+ * coreGetCompare -gets the comparison function
+ * @param unit
+ * @return
+ * NULL otherwise
+ *  the function
+ */
+CompareCOREElements coreGetCompare(CoreUnit unit);
+
 
 #define CORE_FOREACH(type, iterator,core)          \
     for(type iterator = (type) coreGetFirst(core) ; \
