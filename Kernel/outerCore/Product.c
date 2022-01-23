@@ -310,3 +310,12 @@ int productCompeare(Product product1, Product product2)
     }
     return product1->id-product2->id;
 }
+
+ProductCompCmp productGetCompDataFunc(Product product)
+{
+    if(!product)
+    {
+        return NULL;
+    }
+    return asGetCompeare(product->components);
+}

@@ -497,9 +497,10 @@ void* kernelFind(Kernel kernel,int type, void* element)
     {
         return NULL;
     }
+    CompFunc compFunc=NULL;
     if(kernel->type==AMOUNT_SET)
     {
-        CompareCOREElements compFunc=coreGetCompare(kernel->data);
+        compFunc=coreGetCompare(kernel->data);
         if(!compFunc)
         {
             return NULL;
@@ -515,7 +516,11 @@ void* kernelFind(Kernel kernel,int type, void* element)
     }
     else if(kernel->type==PRODUCT)
     {
-
+        compFunc= productGetCompDataFunc(kernel->data);
+        if(!compFunc)
+        {
+            return NULL;
+        }
     }
     return NULL;
 }
