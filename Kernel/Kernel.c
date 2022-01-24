@@ -482,16 +482,7 @@ Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey)
     return filtered;
 }
 
-/**
- *   kernelFind              -finds specific element(works whith all accept for date)
- * @param kernel
- * @param type
- * @param element
- * @return
- * NULL -if the element doesn't exist
- * void* otherwise
- */
-void* kernelFind(Kernel kernel,int type, void* element)
+void* kernelFind(Kernel kernel, void* element)
 {
     if(!kernel||!element)
     {
@@ -512,7 +503,6 @@ void* kernelFind(Kernel kernel,int type, void* element)
                 return iter;
             }
         }
-        return NULL;
     }
     else if(kernel->type==PRODUCT)
     {
@@ -520,6 +510,13 @@ void* kernelFind(Kernel kernel,int type, void* element)
         if(!compFunc)
         {
             return NULL;
+        }
+        PRODUCT_FOREACH(iter,kernel->data)
+        {
+            if(compFunc(iter,element))
+            {
+                return iter;
+            }
         }
     }
     return NULL;
