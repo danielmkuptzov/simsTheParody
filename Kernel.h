@@ -256,7 +256,7 @@ void* kernelGetElement(Kernel kernel);
  *  KERNEL_MEMORY_PROBLEM  -memory problems
  *  KERNEL_SUCSESS         -the change was sucsess
  */
-KernelErrors kernelSetElement(Kernel kernel,int type, void* element);
+KernelErrors kernelSetElement(Kernel kernel,CreatingType type, void* element);
 
 /**
  *   kernelGetFirst          -the first element of the core

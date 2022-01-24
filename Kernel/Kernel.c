@@ -539,14 +539,14 @@ int kernelSize(Kernel kernel)
     return -1;
 }
 
-/**
- *   kernelGetElement        -return the data of the element
- * @param kernel
- * @return
- * NULL if null argument was passed
- * void* otherwise
- */
-void* kernelGetElement(Kernel kernel);
+void* kernelGetElement(Kernel kernel)
+{
+    if(!kernel)
+    {
+        return NULL;
+    }
+    return kernel->data;
+}
 
 /**
  *   kernelSetElement        -changes the element
@@ -559,7 +559,14 @@ void* kernelGetElement(Kernel kernel);
  *  KERNEL_MEMORY_PROBLEM  -memory problems
  *  KERNEL_SUCSESS         -the change was sucsess
  */
-KernelErrors kernelSetElement(Kernel kernel,int type, void* element);
+KernelErrors kernelSetElement(Kernel kernel,CreatingType type, void* element)
+{
+    if(!kernel)
+    {
+        return KERNEL_NULL_ARGUMENT;
+    }
+
+}
 
 /**
  *   kernelGetFirst          -the first element of the core
