@@ -522,15 +522,22 @@ void* kernelFind(Kernel kernel, void* element)
     return NULL;
 }
 
-/**
- *   kernelSize              -returns the size of the element (for not amount set will return -1)
- * @param kernel
- * @param type
- * @return
- *  -1 wrong type or NULL argument
- *  size otherwise
- */
-int kernelSize(Kernel kernel, int type);
+int kernelSize(Kernel kernel)
+{
+    if(!kernel)
+    {
+        return -1;
+    }
+    if(kernel->type==AMOUNT_SET)
+    {
+        return coreSize(kernel->data);
+    }
+    else if(kernel->type==PRODUCT)
+    {
+        return productGetCompAmount(kernel->data);
+    }
+    return -1;
+}
 
 /**
  *   kernelGetElement        -return the data of the element

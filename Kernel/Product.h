@@ -37,6 +37,7 @@
  *   productGetNext           -brings the next one
  *   productCompeare          -compares between products
  *   productGetCompDataFunc   -gives the comp func of the components
+ *   productGetCompAmount     -gives the amount of the components
  *   PRODUCT_FOREACH          -Macro for iterating over a product.Declares a new iterator for the loop.
  */
 
@@ -321,6 +322,15 @@ int productCompeare(Product product1, Product product2);
  * @return
  */
 ProductCompCmp productGetCompDataFunc(Product product);
+
+/**
+ * productGetCompAmount     -gives the amount of the components
+ * @param product
+ * @return
+ *  -1 if there is any error
+ *  size elsewise
+ */
+int productGetCompAmount(Product product);
 
 /**
  * PRODUCT_FOREACH- Macro for iterating over a product.

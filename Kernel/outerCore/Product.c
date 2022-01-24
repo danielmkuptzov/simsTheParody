@@ -319,3 +319,12 @@ ProductCompCmp productGetCompDataFunc(Product product)
     }
     return asGetCompeare(product->components);
 }
+
+int productGetCompAmount(Product product)
+{
+    if(!product)
+    {
+        return -1;
+    }
+    return asGetSize(product->components);
+}

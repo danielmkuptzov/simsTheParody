@@ -234,7 +234,7 @@ void* kernelFind(Kernel kernel, void* element);
  *  -1 wrong type or NULL argument
  *  size otherwise
  */
-int kernelSize(Kernel kernel, int type);
+int kernelSize(Kernel kernel);
 
 /**
  *   kernelGetElement        -return the data of the element
