@@ -582,15 +582,26 @@ KernelErrors kernelSetElement(Kernel kernel,CreatingType type, void* element)
     return KERNEL_SUCSESS;
 }
 
-/**
- *   kernelGetFirst          -the first element of the core
- * @param kernel
- * @param type
- * @return
- *  NULL if there was a problem with the input
- *  void* otherwise
- */
-void* kernelGetFirst(Kernel kernel, int type);
+void* kernelGetFirst(Kernel kernel)
+{
+    if(!kernel||!(kernel->data))
+    {
+        return NULL;
+    }
+    if(kernel->type==ORDER_PRODUCT||kernel->type==RATIONAL||kernel->type==DATE)
+    {
+        return NULL;
+    }
+    if(kernel->type==AMOUNT_SET)
+    {
+        return coreGetFirst(kernel->data);
+    }
+    else if(kernel->type==PRODUCT)
+    {
+        return productGetFirst(kernel->data);
+    }
+    return NULL;
+}
 
 /**
  *   kernelGetNext           -the next element
@@ -600,7 +611,7 @@ void* kernelGetFirst(Kernel kernel, int type);
  *  NULL if there was a problem with the input
  *  void* otherwise
  */
-void* kernelGetNext(Kernel kernel,int type);
+void* kernelGetNext(Kernel kernel);
 
 /**
  *   kernelGetInternalData   -gives the internal element requested
@@ -627,6 +638,13 @@ void* kernelGetInternalData(Kernel kernel, int data);
  *  KERNEL_SUCSESS         the operation was a sucsess
  */
 KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action);
+
+/**
+ *  kernelGetType           -gives to the user the type of the kernel
+ * @param kernel
+ * @return
+ */
+CreatingType kernelGetType(Kernel kernel);
 
 /**
  *   kernelDestroyer         -use it to end the code

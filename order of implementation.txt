@@ -141,10 +141,12 @@ factory: date,product, factoryblo, person, Rational and amountset needed
 
 system: date, planet, person, factory, bank and amountset needed
 
+till the end of the hard code i would use c
+
 future expiriment: c++ cover of my code
 
 more future: swig and python
 
 in the year 292929: terminal operation
 
-more further future: to implement the string and stdio functions
+more further future: try to create the combination or risc v pipeline multicycle

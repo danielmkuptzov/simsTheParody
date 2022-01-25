@@ -578,7 +578,8 @@ static CycleReturnCode moneyCycle(Person person)
     return CYCLE_SUCSESS;
 }
 
-CycleReturnCode personMakeDayCycle(Person person,CycleReturnCode code, void* date, CVData newData,
+CycleReturnCode personMakeDayCycle(Person person,CycleReturnCode code,bool toAddToWishList,
+                                   Kernel product,void* date, CVData newData,
                                    CVCopy copyData, CVDestroy dataDest,char* dataName,
                                    bool serviceFlag)
 {
@@ -595,7 +596,23 @@ CycleReturnCode personMakeDayCycle(Person person,CycleReturnCode code, void* dat
         return CYCLE_ERROR;
     }
     person->age++;
-    if(coreCompeare(date,person->dateOfBirth)%365!=0)
+    if(toAddToWishList)
+    {
+        if(kernelGetType(product)!=PRODUCT)
+        {
+            return CYCLE_ERROR;
+        }
+        PersonErrorCodes resalt= personAddToWishList(person, kernelGetElement(product));
+        if(resalt==PERSON_SUCSESS&&code==CYCLE_SUCSESS)
+        {
+            return CYCLE_SUCSESS;
+        }
+        else if(resalt!=PERSON_SUCSESS)
+        {
+            return CYCLE_ERROR;
+        }
+    }
+    if(coreCompeare(date,person->dateOfBirth)%365!=0&&code==CYCLE_SUCSESS)
     {
         return CYCLE_SUCSESS;
     }

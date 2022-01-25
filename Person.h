@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "Kernel.h"
 /**
  *Person  adt
  *
@@ -350,7 +351,8 @@ char* personGetName(Person person);
  *       CYCLE_ERROR
  *       CYCLE_SUCSESS
  */
-CycleReturnCode personMakeDayCycle(Person person,CycleReturnCode code, void* date, CVData newData,
+CycleReturnCode personMakeDayCycle(Person person,CycleReturnCode code,bool toAddToWishList,
+                                   Kernel product,void* date, CVData newData,
                                    CVCopy copyData, CVDestroy dataDest,char* dataName,
                                    bool serviceFlag);
 

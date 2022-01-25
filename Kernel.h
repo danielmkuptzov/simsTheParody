@@ -31,6 +31,7 @@
  *   kernelGetNext           -the next element
  *   kernelDestroyer         -use it to end the code
  *   kernelALU               -aritmetical functions to rational and to orderProduct
+ *   kernelGetType           -gives to the user the type of the kernel
  *   kernel foreach          -the amount set foreach
  */
 
@@ -266,7 +267,7 @@ KernelErrors kernelSetElement(Kernel kernel,CreatingType type, void* element);
  *  NULL if there was a problem with the input
  *  void* otherwise
  */
-void* kernelGetFirst(Kernel kernel, int type);
+void* kernelGetFirst(Kernel kernel);
 
 /**
  *   kernelGetNext           -the next element
@@ -276,7 +277,7 @@ void* kernelGetFirst(Kernel kernel, int type);
  *  NULL if there was a problem with the input
  *  void* otherwise
  */
-void* kernelGetNext(Kernel kernel,int type);
+void* kernelGetNext(Kernel kernel);
 
 /**
  *   kernelGetInternalData   -gives the internal element requested
@@ -307,6 +308,13 @@ void* kernelGetInternalData(Kernel kernel, int data);
 KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action);
 
 /**
+ *  kernelGetType           -gives to the user the type of the kernel
+ * @param kernel
+ * @return
+ */
+CreatingType kernelGetType(Kernel kernel);
+
+/**
  *   kernelDestroyer         -use it to end the code
  */
 void kernelDestroyer();
@@ -315,7 +323,7 @@ void kernelDestroyer();
  *   kernel foreach          -the amount set foreach
  */
 #define KERNEL_FOREACH(type, iterator,kernel)          \
-    for(type iterator =kernelGetFirst(kernel,type) ; \
+    for(type iterator =kernelGetFirst(kernel) ; \
         iterator ;                               \
-        iterator = kernelGetNext(kernel,type))
+        iterator = kernelGetNext(kernel))
 #endif //KERNEL_H
