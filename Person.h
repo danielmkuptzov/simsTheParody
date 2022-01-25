@@ -350,7 +350,7 @@ char* personGetName(Person person);
  *       CYCLE_ERROR
  *       CYCLE_SUCSESS
  */
-CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
+CycleReturnCode personMakeDayCycle(Person person,CycleReturnCode code, void* date, CVData newData,
                                    CVCopy copyData, CVDestroy dataDest,char* dataName,
                                    bool serviceFlag);
 

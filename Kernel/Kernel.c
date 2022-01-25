@@ -548,39 +548,14 @@ void* kernelGetElement(Kernel kernel)
     return kernel->data;
 }
 
-/**
- *   kernelSetElement        -changes the element
- * @param kernel
- * @param type
- * @param element
- * @return
- *  KERNEL_NULL_ARGUMENT   -gess what
- *  KERNEL_ERROR           -not memory related problems
- *  KERNEL_MEMORY_PROBLEM  -memory problems
- *  KERNEL_SUCSESS         -the change was sucsess
- */
 KernelErrors kernelSetElement(Kernel kernel,CreatingType type, void* element)
 {
     if(!kernel)
     {
         return KERNEL_NULL_ARGUMENT;
     }
-    if(kernel->type==AMOUNT_SET||kernel->type==DATE)
-    {
-        coreDestroy(kernel->data);
-    }
-    else if(kernel->type==PRODUCT)
-    {
-        productDestroy(kernel->data);
-    }
-    else if(kernel->type==RATIONAL)
-    {
-        rationalDestroy(kernel->data);
-    }
-    else if(kernel->type==ORDER_PRODUCT)
-    {
-        productUnitDestroy(kernel->data);
-    }
+    CreatingType tmpType=kernel->type;
+    void* tmpData= kernel->data;
     kernel->type=type;
     if (kernel->type==AMOUNT_SET||kernel->type==DATE)
     {
@@ -592,8 +567,19 @@ KernelErrors kernelSetElement(Kernel kernel,CreatingType type, void* element)
     }
     else if (kernel->type==RATIONAL)
     {
-        kernel->data=
+        kernel->data= rationalCopy(kernel->data);
     }
+    else if(kernel->type==ORDER_PRODUCT)
+    {
+        kernel->data= productUnitCopy(element);
+    }
+    if(!kernel->data)
+    {
+        kernel->type=tmpType;
+        kernel->data=tmpData;
+        return KERNEL_ERROR;
+    }
+    return KERNEL_SUCSESS;
 }
 
 /**
