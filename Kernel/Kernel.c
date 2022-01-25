@@ -565,7 +565,35 @@ KernelErrors kernelSetElement(Kernel kernel,CreatingType type, void* element)
     {
         return KERNEL_NULL_ARGUMENT;
     }
-
+    if(kernel->type==AMOUNT_SET||kernel->type==DATE)
+    {
+        coreDestroy(kernel->data);
+    }
+    else if(kernel->type==PRODUCT)
+    {
+        productDestroy(kernel->data);
+    }
+    else if(kernel->type==RATIONAL)
+    {
+        rationalDestroy(kernel->data);
+    }
+    else if(kernel->type==ORDER_PRODUCT)
+    {
+        productUnitDestroy(kernel->data);
+    }
+    kernel->type=type;
+    if (kernel->type==AMOUNT_SET||kernel->type==DATE)
+    {
+        kernel->data= coreCopy(element);
+    }
+    else if (kernel->type==PRODUCT)
+    {
+        kernel->data= productCopy(element);
+    }
+    else if (kernel->type==RATIONAL)
+    {
+        kernel->data=
+    }
 }
 
 /**
