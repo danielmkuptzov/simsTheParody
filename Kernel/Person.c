@@ -578,7 +578,7 @@ static CycleReturnCode moneyCycle(Person person)
     return CYCLE_SUCSESS;
 }
 
-CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
+CycleReturnCode personMakeDayCycle(Person person,CycleReturnCode code, void* date, CVData newData,
                                    CVCopy copyData, CVDestroy dataDest,char* dataName,
                                    bool serviceFlag)
 {
@@ -594,40 +594,40 @@ CycleReturnCode personMakeDayCycle(Person person,void* date, CVData newData,
     {
         return CYCLE_ERROR;
     }
+    person->age++;
     if(coreCompeare(date,person->dateOfBirth)%365!=0)
     {
         return CYCLE_SUCSESS;
     }
-    person->age++;
-    if(person->age>=SCHOOLAGE&&person->age<SERVICEAGE)
+    if((person->age>=SCHOOLAGE&&person->age<SERVICEAGE)||code==REQUEST_SCHOOL)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
         STUDENT,"school",REQUEST_SCHOOL);
     }
-    if(person->age>=SERVICEAGE&&person->age<UNIVERCITYAGE&&!serviceFlag)
+    if((person->age>=SERVICEAGE&&person->age<UNIVERCITYAGE&&!serviceFlag)||code==REQUEST_MILITARY_BACKROUND)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             SOLDIER,"service",REQUEST_MILITARY_BACKROUND);
     }
-    if(serviceFlag&&person->age>=UNIVERCITYAGE&&person->age<JOBAGE)
+    if((serviceFlag&&person->age>=UNIVERCITYAGE&&person->age<JOBAGE)||code==REQUEST_UNIVERSITY)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             UNIVERCITY_STUDENT,"univercity",
                             REQUEST_UNIVERSITY);
     }
-    if(person->age>=JOBAGE&&person->age<OLDAGE)
+    if((person->age>=JOBAGE&&person->age<OLDAGE)||code==REQUEST_JOB)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             CIVILIAN_JOB,"job",
                             REQUEST_JOB);
     }
-    if(person->age>=OLDAGE&&person->age<DEADAGE)
+    if((person->age>=OLDAGE&&person->age<DEADAGE)||code==REQUEST_HOSPITAL)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             VERY_OLD,"hospital",
                             REQUEST_HOSPITAL);
     }
-    if(person->age>=DEADAGE)
+    if(person->age>=DEADAGE||code==REQUEST_CEMETERY)
     {
         return cycleChanger(person,date, newData,copyData,dataDest,dataName,
                             DEAD,"cemetery",
