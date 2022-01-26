@@ -603,15 +603,26 @@ void* kernelGetFirst(Kernel kernel)
     return NULL;
 }
 
-/**
- *   kernelGetNext           -the next element
- * @param kernel
- * @param type
- * @return
- *  NULL if there was a problem with the input
- *  void* otherwise
- */
-void* kernelGetNext(Kernel kernel);
+void* kernelGetNext(Kernel kernel)
+{
+    if(!kernel||!(kernel->data))
+    {
+        return NULL;
+    }
+    if(kernel->type==DATE||kernel->type==RATIONAL||kernel->type==ORDER_PRODUCT)
+    {
+        return NULL;
+    }
+    if(kernel->type==AMOUNT_SET)
+    {
+        return coreGetNext(kernel->data);
+    }
+    else if(kernel->type==PRODUCT)
+    {
+        return productGetNext(kernel->data);
+    }
+    return NULL;
+}
 
 /**
  *   kernelGetInternalData   -gives the internal element requested
