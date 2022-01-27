@@ -58,6 +58,18 @@ typedef enum{
     KERNEL_SUCSESS
 } KernelErrors;
 
+//enum for internal data
+typedef enum {
+    ID,
+    DATE_OF_CREATION,
+    NAME,
+    AMOUNT,
+    PRODUCT_PART,
+    COMPONENTS,
+    ELEMENT
+} InternalDataPart;
+
+
 //this definition is for the date
 typedef void* ExternalDate;
 
@@ -282,12 +294,18 @@ void* kernelGetNext(Kernel kernel);
 /**
  *   kernelGetInternalData   -gives the internal element requested
  * @param kernel
- * @param data -the data you need
+ * @param data -
+ *  ID
+ *  DATE_OF_CREATION
+ *  NAME AMOUNT
+ *  PRODUCT_PART
+ *  COMPONENTS
+ *  ELEMENT
  * @return
  *  NULL if there was any error
  *  data otherwise
  */
-void* kernelGetInternalData(Kernel kernel, int data);
+void* kernelGetInternalData(Kernel kernel, InternalDataPart data);
 
 /**
  *   kernelALU               -aritmetical functions to rational and to orderProduct

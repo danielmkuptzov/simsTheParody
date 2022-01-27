@@ -627,10 +627,18 @@ void* kernelGetNext(Kernel kernel)
 /**
  *   kernelGetInternalData   -gives the internal element requested
  * @param kernel
- * @param data -the data you need
+ * @param data -
+ *  ID
+ *  DATE_OF_CREATION
+ *  NAME AMOUNT
+ *  PRODUCT_PART
+ *  COMPONENTS
+ *  ELEMENT
  * @return
+ *  NULL if there was any error
+ *  data otherwise
  */
-void* kernelGetInternalData(Kernel kernel, int data)
+void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
 {
     if(!kernel)
     {
