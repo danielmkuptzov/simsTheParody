@@ -630,7 +630,13 @@ void* kernelGetNext(Kernel kernel)
  * @param data -the data you need
  * @return
  */
-void* kernelGetInternalData(Kernel kernel, int data);
+void* kernelGetInternalData(Kernel kernel, int data)
+{
+    if(!kernel)
+    {
+        return NULL;
+    }
+}
 
 /**
  *   kernelALU               -aritmetical functions to rational and to orderProduct
