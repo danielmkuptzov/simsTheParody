@@ -644,6 +644,22 @@ void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
     {
         return NULL;
     }
+    if(kernel->type==DATE||kernel->type==RATIONAL)
+    {
+        return NULL;
+    }
+    else if(kernel->type==AMOUNT_SET)
+    {
+        if(data==ELEMENT)
+        {
+            return coreGetElement(kernel->data);
+        }
+        return NULL;
+    }
+    else if(kernel->type==PRODUCT)
+    {
+
+    }
 }
 
 /**
