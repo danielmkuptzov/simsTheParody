@@ -695,7 +695,17 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
  *  KERNEL_MEMORY_PROBLEM  the operation failed or was iligal
  *  KERNEL_SUCSESS         the operation was a sucsess
  */
-KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action);
+KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action)
+{
+    if(!kernel1||!kernel2)
+    {
+        return KERNEL_NULL_ARGUMENT;
+    }
+    if(kernel1->type!=RATIONAL||kernel2->type!=RATIONAL)
+    {
+        return KERNEL_ERROR;
+    }
+}
 
 /**
  *  kernelGetType           -gives to the user the type of the kernel
