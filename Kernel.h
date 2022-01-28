@@ -305,7 +305,7 @@ void* kernelGetNext(Kernel kernel);
  *  NULL if there was any error
  *  data otherwise
  */
-void* kernelGetInternalData(Kernel kernel, InternalDataPart data);
+const void* kernelGetInternalData(Kernel kernel, InternalDataPart data);
 
 /**
  *   kernelALU               -aritmetical functions to rational and to orderProduct

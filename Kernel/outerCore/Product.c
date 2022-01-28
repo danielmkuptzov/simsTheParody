@@ -235,7 +235,7 @@ ProductErrorCode productSetAdditionalData(Product product, ProductData data)
     return PRODUCT_SUCSESS;
 }
 
-char*  productGetName(Product product)
+const char*  productGetName(Product product)
 {
     if(!product)
     {

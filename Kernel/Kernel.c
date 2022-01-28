@@ -624,19 +624,7 @@ void* kernelGetNext(Kernel kernel)
     return NULL;
 }
 
-/**
- *   kernelGetInternalData   -gives the internal element requested
- * @param kernel
- * @param data -
- *  NAME
- *  AMOUNT
- *  PRODUCT_PART
- *  COMPONENTS
- * @return
- *  NULL if there was any error
- *  data otherwise
- */
-void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
+const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
 {
     if(!kernel)
     {
@@ -666,13 +654,29 @@ void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
         {
             return productGetDate(kernel->data);
         }
-
+        else if (data==NAME)
+        {
+            return productGetName(kernel->data);
+        }
+        else if(data==COMPONENTS)
+        {
+            return productGetComponent(kernel->data);
+        }
+        return NULL;
     }
-    else if (data==NAME)
+    else if (kernel->type==ORDER_PRODUCT)
     {
-        return productGetName(kernel->data);
+        if(data==PRODUCT_PART)
+        {
+            return productUnitGetProduct(kernel->data);
+        }
+        else if(data==AMOUNT)
+        {
+            return productUnitGetAmount(kernel->data);
+        }
+        return NULL;
     }
-
+    return NULL;
 }
 
 /**

@@ -269,7 +269,7 @@ ProductErrorCode productSetAdditionalData(Product product, ProductData data);
  * NULL -wrong format or problems
  * name otherwise
  */
-char*  productGetName(Product product);
+const char*  productGetName(Product product);
 
 /**
  * productComponentFilter   -for filtering purposes
