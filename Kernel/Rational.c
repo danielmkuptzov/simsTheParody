@@ -278,39 +278,64 @@ RtionalErrorCode rationalArithmeticChange(Rational rational1, Rational rational2
     return resalt;
 }
 
-/**
- *  rationalMultiplyInto     -creates the *= operation
- * @param rational1
- * @param rational2
- * @return
- * RATIONAL_NULL_ARGUMENT there is aNULL argument
- * RATIONAL_ERROR the action failed failed
- * RATIONAL_SUCSESS- sucsess
- */
 RtionalErrorCode rationalMultiplyInto(Rational* rational1, Rational rational2)
 {
-
+    if(!rational1||!rational2)
+    {
+        return RATIONAL_NULL_ARGUMENT;
+    }
+    Rational tmp=*rational1;
+    *rational1= rationalMultiply(tmp,rational2);
+    if(!*rational1)
+    {
+        *rational1=tmp;
+        return RATIONAL_ERROR;
+    }
+    rationalDestroy(tmp);
+    return RATIONAL_SUCSESS;
 }
 
-/**
- *  rationaldivideInto       -creates the /= operation
- * @param rational1
- * @param rational2
- * @return
- * RATIONAL_NULL_ARGUMENT there is aNULL argument
- * RATIONAL_ERROR the action failed failed
- * RATIONAL_DIVISION_BY_ZERO -unactepteble operation and whould be tolerated harshly
- * RATIONAL_SUCSESS- sucsess
- */
-RtionalErrorCode rationaldivideInto(Rational* rational1, Rational rational2);
+RtionalErrorCode rationaldivideInto(Rational* rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return RATIONAL_NULL_ARGUMENT;
+    }
+    Rational zero= rationalCreate(0,1);
+    if(rationalCompare(*rational1,zero)||rationalCompare(rational2,zero))
+    {
+        rationalDestroy(zero);
+        return RATIONAL_DIVISION_BY_ZERO;
+    }
+    rationalDestroy(zero);
+    Rational tmp=*rational1;
+    *rational1= rationalDivide(tmp,rational2);
+    if(!*rational1)
+    {
+        *rational1=tmp;
+        return RATIONAL_ERROR;
+    }
+    rationalDestroy(tmp);
+    return RATIONAL_SUCSESS;
+}
 
-/**
- *   rationalPowerInto        -operation that is not known in the standart c types
- * @param rational1
- * @param rational2
- * @return
- * RATIONAL_NULL_ARGUMENT there is aNULL argument
- * RATIONAL_ERROR the action failed failed
- * RATIONAL_SUCSESS- sucsess
- */
-RtionalErrorCode rationalPowerInto(Rational* rational1, Rational rational2);
+RtionalErrorCode rationalPowerInto(Rational* rational1, Rational rational2)
+{
+    if(!rational1||!rational2)
+    {
+        return RATIONAL_NULL_ARGUMENT;
+    }
+    Rational tmp=*rational1;
+    if(rational2->denumerator==1)
+    {
+        return RATIONAL_ERROR;
+    }
+    *rational1= rationalPower(tmp,rational2->numerator);
+    if(!*rational1)
+    {
+        *rational1=tmp;
+        return RATIONAL_ERROR;
+    }
+    rationalDestroy(tmp);
+    return RATIONAL_SUCSESS;
+}
