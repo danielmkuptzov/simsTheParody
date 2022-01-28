@@ -658,7 +658,10 @@ void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
     }
     else if(kernel->type==PRODUCT)
     {
-
+        if(data==ID)
+        {
+            int retData=productGetId(kernel->data);
+        }
     }
 }
 
