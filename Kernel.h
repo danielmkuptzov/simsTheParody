@@ -45,7 +45,8 @@ typedef enum {
     DATE,
     PRODUCT,
     RATIONAL,
-    ORDER_PRODUCT
+    ORDER_PRODUCT,
+    ERROR_TYPE
 } CreatingType;
 
 //error enum

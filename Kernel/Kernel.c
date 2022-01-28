@@ -679,18 +679,6 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
     return NULL;
 }
 
-/**
- *   kernelALU               -aritmetical functions to rational and to orderProduct
- * @param kernel1
- * @param kernel2
- * @param action
- *                2- multiply
- *                3- divide
- *                4- power by integer
- * @return
- *  KERNEL_MEMORY_PROBLEM  the operation failed or was iligal
- *  KERNEL_SUCSESS         the operation was a sucsess
- */
 KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action)
 {
     if(!kernel1||!kernel2)
@@ -701,27 +689,51 @@ KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action)
     {
         return KERNEL_ERROR;
     }
-    RtionalErrorCode resalt;
+    RtionalErrorCode resalt=RATIONAL_ERROR;
+    Rational* tmp=kernel1->data;
     if(action==0)
     {
-        resalt= rationalAddInto(kernel1->data,kernel2->data);
+        resalt= rationalAddInto(tmp,kernel2->data);
     }
     else if(action==1)
     {
-        resalt= rationalSubInto(kernel1->data,kernel2->data);
+        resalt= rationalSubInto(tmp,kernel2->data);
     }
     else if(action==2)
     {
-        resalt= rationalMultiplyInto();
+        resalt= rationalMultiplyInto(tmp,kernel2->data);
     }
+    else if(action==4)
+    {
+        resalt= rationalPowerInto(tmp,kernel2->data);
+    }
+    if(resalt==RATIONAL_NULL_ARGUMENT)
+    {
+        return KERNEL_NULL_ARGUMENT;
+    }
+    else if(resalt==RATIONAL_ERROR)
+    {
+        return KERNEL_ERROR;
+    }
+    else if(resalt==RATIONAL_DIVISION_BY_ZERO)
+    {
+        return KERNEL_MEMORY_PROBLEM;
+    }
+    else if(resalt==RATIONAL_SUCSESS)
+    {
+        return KERNEL_SUCSESS;
+    }
+    return KERNEL_ERROR;
 }
 
-/**
- *  kernelGetType           -gives to the user the type of the kernel
- * @param kernel
- * @return
- */
-CreatingType kernelGetType(Kernel kernel);
+CreatingType kernelGetType(Kernel kernel)
+{
+    if(!kernel)
+    {
+        return ERROR_TYPE;
+    }
+    return kernel->type;
+}
 
 /**
  *   kernelDestroyer         -use it to end the code
