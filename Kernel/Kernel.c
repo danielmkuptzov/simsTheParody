@@ -628,12 +628,10 @@ void* kernelGetNext(Kernel kernel)
  *   kernelGetInternalData   -gives the internal element requested
  * @param kernel
  * @param data -
- *  ID
- *  DATE_OF_CREATION
- *  NAME AMOUNT
+ *  NAME
+ *  AMOUNT
  *  PRODUCT_PART
  *  COMPONENTS
- *  ELEMENT
  * @return
  *  NULL if there was any error
  *  data otherwise
@@ -660,9 +658,21 @@ void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
     {
         if(data==ID)
         {
-            int retData=productGetId(kernel->data);
+            int* toSend=malloc(sizeof(int));
+            *toSend=productGetId(kernel->data);
+            return  toSend;
         }
+        else if(data==DATE_OF_CREATION)
+        {
+            return productGetDate(kernel->data);
+        }
+
     }
+    else if (data==NAME)
+    {
+        return productGetName(kernel->data);
+    }
+
 }
 
 /**

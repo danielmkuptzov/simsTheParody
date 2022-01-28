@@ -38,6 +38,7 @@
  *   productCompeare          -compares between products
  *   productGetCompDataFunc   -gives the comp func of the components
  *   productGetCompAmount     -gives the amount of the components
+ *   productGetDate           -gives the date of creation of the product
  *   PRODUCT_FOREACH          -Macro for iterating over a product.Declares a new iterator for the loop.
  */
 
@@ -268,7 +269,7 @@ ProductErrorCode productSetAdditionalData(Product product, ProductData data);
  * NULL -wrong format or problems
  * name otherwise
  */
-const char*  productGetName(Product product);
+char*  productGetName(Product product);
 
 /**
  * productComponentFilter   -for filtering purposes
@@ -331,6 +332,15 @@ ProductCompCmp productGetCompDataFunc(Product product);
  *  size elsewise
  */
 int productGetCompAmount(Product product);
+
+/**
+ *   productGetDate           -gives the date of creation of the product
+ * @param product
+ * @return
+ *  NULL if there was an erorr
+ *  Date otherwise
+ */
+ void* productGetDate(Product product);
 
 /**
  * PRODUCT_FOREACH- Macro for iterating over a product.

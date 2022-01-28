@@ -235,7 +235,7 @@ ProductErrorCode productSetAdditionalData(Product product, ProductData data)
     return PRODUCT_SUCSESS;
 }
 
-const char*  productGetName(Product product)
+char*  productGetName(Product product)
 {
     if(!product)
     {
@@ -327,4 +327,20 @@ int productGetCompAmount(Product product)
         return -1;
     }
     return asGetSize(product->components);
+}
+
+/**
+ *   productGetDate           -gives the date of creation of the product
+ * @param product
+ * @return
+ *  NULL if there was an erorr
+ *  Date otherwise
+ */
+void* productGetDate(Product product)
+{
+    if(!product)
+    {
+        return NULL;
+    }
+    return product->creationDate;
 }
