@@ -712,7 +712,7 @@ KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action)
     }
     else if(action==2)
     {
-
+        resalt= rationalMultiplyInto();
     }
 }
 

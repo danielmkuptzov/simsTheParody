@@ -277,3 +277,40 @@ RtionalErrorCode rationalArithmeticChange(Rational rational1, Rational rational2
     rationalDestroy(zero);
     return resalt;
 }
+
+/**
+ *  rationalMultiplyInto     -creates the *= operation
+ * @param rational1
+ * @param rational2
+ * @return
+ * RATIONAL_NULL_ARGUMENT there is aNULL argument
+ * RATIONAL_ERROR the action failed failed
+ * RATIONAL_SUCSESS- sucsess
+ */
+RtionalErrorCode rationalMultiplyInto(Rational* rational1, Rational rational2)
+{
+
+}
+
+/**
+ *  rationaldivideInto       -creates the /= operation
+ * @param rational1
+ * @param rational2
+ * @return
+ * RATIONAL_NULL_ARGUMENT there is aNULL argument
+ * RATIONAL_ERROR the action failed failed
+ * RATIONAL_DIVISION_BY_ZERO -unactepteble operation and whould be tolerated harshly
+ * RATIONAL_SUCSESS- sucsess
+ */
+RtionalErrorCode rationaldivideInto(Rational* rational1, Rational rational2);
+
+/**
+ *   rationalPowerInto        -operation that is not known in the standart c types
+ * @param rational1
+ * @param rational2
+ * @return
+ * RATIONAL_NULL_ARGUMENT there is aNULL argument
+ * RATIONAL_ERROR the action failed failed
+ * RATIONAL_SUCSESS- sucsess
+ */
+RtionalErrorCode rationalPowerInto(Rational* rational1, Rational rational2);
