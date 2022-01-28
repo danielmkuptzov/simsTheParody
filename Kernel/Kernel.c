@@ -684,14 +684,10 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
  * @param kernel1
  * @param kernel2
  * @param action
- *                0- for addition
- *                1- to substruct
  *                2- multiply
  *                3- divide
  *                4- power by integer
  * @return
- *  KERNEL_NULL_ARGUMENT   one of the arguments was NULL
- *  KERNEL_ERROR           error not related to the memory
  *  KERNEL_MEMORY_PROBLEM  the operation failed or was iligal
  *  KERNEL_SUCSESS         the operation was a sucsess
  */
@@ -704,6 +700,19 @@ KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action)
     if(kernel1->type!=RATIONAL||kernel2->type!=RATIONAL)
     {
         return KERNEL_ERROR;
+    }
+    RtionalErrorCode resalt;
+    if(action==0)
+    {
+        resalt= rationalAddInto(kernel1->data,kernel2->data);
+    }
+    else if(action==1)
+    {
+        resalt= rationalSubInto(kernel1->data,kernel2->data);
+    }
+    else if(action==2)
+    {
+
     }
 }
 
