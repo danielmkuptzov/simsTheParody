@@ -735,7 +735,7 @@ CreatingType kernelGetType(Kernel kernel)
     return kernel->type;
 }
 
-/**
- *   kernelDestroyer         -use it to end the code
- */
-void kernelDestroyer();
+void kernelDestroyer()
+{
+    coreDestroyer();
+}
