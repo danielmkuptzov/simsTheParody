@@ -65,8 +65,8 @@ int main()
     int j=7;
     char* names[]={"apple","banana","coconout","pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
-    coreBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
-    CoreUnit t=coreCreate(2,NULL,NULL,NULL,-1);
+    kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
+    Kernel t= kernelCreate(DATE,true,NULL,0,NULL,0,NULL,0,NULL);
     Person test=personCreate(1,t,"daniel",intCopy,
                              intDest,intCompare,4);
     if(!test)
@@ -76,7 +76,7 @@ int main()
     for (int k = 0; k < 10; ++k)
     {
         j=0;
-        CoreUnit tmp= coreCreate(2,NULL,NULL,NULL,-1);
+        Kernel tmp= kernelCreate();
         Product product= productCreate(k+1,names[k],HALF_INTEGER_AMOUNT,
                                        intCopy,intDest, coreGetElement(tmp),
                                        rasCopy,rasDest,rasCompare,&j,3);
