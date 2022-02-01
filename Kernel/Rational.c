@@ -127,6 +127,10 @@ Rational rationalPower(Rational base, int power)
     {
         return NULL;
     }
+    if(power<0)
+    {
+        return NULL;
+    }
     return rationalCreate(powerInt(base->numerator,power), powerInt(base->denumerator,power));
 }
 
@@ -326,7 +330,7 @@ RtionalErrorCode rationalPowerInto(Rational* rational1, Rational rational2)
         return RATIONAL_NULL_ARGUMENT;
     }
     Rational tmp=*rational1;
-    if(rational2->denumerator==1)
+    if(rational2->denumerator!=1)
     {
         return RATIONAL_ERROR;
     }
