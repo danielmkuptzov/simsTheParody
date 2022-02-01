@@ -693,7 +693,15 @@ KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action)
     Rational* tmp=kernel1->data;
     if(action==0)
     {
-        resalt= rationalAddInto(tmp,kernel2->data);
+        Kernel tmpKern=kernel1;
+        kernel1=kernelAddition(kernel1, kernel2);
+        if(!kernel1)
+        {
+            kernel1=tmpKern;
+            return KERNEL_MEMORY_PROBLEM;
+        }
+        kernelDestroy(tmpKern);
+        return KERNEL_SUCSESS;
     }
     else if(action==1)
     {
