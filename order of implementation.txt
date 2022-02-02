@@ -37,6 +37,8 @@ class: date, person, skill and amountset needed
 
 school: date, class, skill and amountset needed
 
+monome: rational needed
+
 neighorhood: date, product, cityqur, school, Rational and amountset needed
 
 profesion: date, person and amountset needed
@@ -46,6 +48,8 @@ facalty: date, person, profession and amountset needed
 university: date, facalty, profession, person and amountset needed
 
 goal for first project: city: date, product, university, neightborhood, Rational and amountset needed
+
+polinom: monome and rational needed
 
 cityadmin: date, product, person, city, Rational and amountset needed
 
@@ -140,6 +144,16 @@ factoryblo: date, product, person, Rational and amountset needed
 factory: date,product, factoryblo, person, Rational and amountset needed
 
 system: date, planet, person, factory, bank and amountset needed
+
+systemManagment: date, system, person, rational and amount set needed
+
+element: date needed
+
+mine: date, element needed
+
+miningRegion: date, mine and element needed
+
+miningPlanet:date, element and miningRegion needed
 
 till the end of the hard code i would use c
 
