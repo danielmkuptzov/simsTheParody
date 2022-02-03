@@ -354,7 +354,39 @@ Rational rationalPureRound(Rational rational, int typeOfRound)
     {
         return rationalround(rational);
     }
-    return rationalCreate(rational->numerator/rational->denumerator,1);
+    Rational lowerValue=rationalCreate(rational->numerator/rational->denumerator,1);
+    if(!lowerValue)
+    {
+        return NULL;
+    }
+    Rational left= rationalSubtruct(rational,lowerValue);
+    if(!left)
+    {
+        rationalDestroy(lowerValue);
+        return NULL;
+    }
+    Rational half= rationalCreate(0,5);
+    if(!half)
+    {
+        rationalDestroy(left);
+        rationalDestroy(lowerValue);
+        return NULL;
+    }
+    bool resalt= rationalLesser(left,half);
+    rationalDestroy(half);
+    rationalDestroy(left);
+    if(resalt)
+    {
+        return lowerValue;
+    }
+    Rational toSend= rationalCreate(rationalGetNumerator(lowerValue)+1,
+                                    rationalGetDenumerator(lowerValue));
+    rationalDestroy(lowerValue);
+    if(!toSend)
+    {
+        return NULL;
+    }
+    return toSend;
 }
 
 int rationalGetNumerator(Rational rational)
