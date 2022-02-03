@@ -343,3 +343,34 @@ RtionalErrorCode rationalPowerInto(Rational* rational1, Rational rational2)
     rationalDestroy(tmp);
     return RATIONAL_SUCSESS;
 }
+
+Rational rationalPureRound(Rational rational, int typeOfRound)
+{
+    if(!rational||typeOfRound>1)
+    {
+        return NULL;
+    }
+    if(typeOfRound==0)
+    {
+        return rationalround(rational);
+    }
+    return rationalCreate(rational->numerator/rational->denumerator,1);
+}
+
+int rationalGetNumerator(Rational rational)
+{
+    if(!rational)
+    {
+        return -999999999;
+    }
+    return rational->numerator;
+}
+
+int rationalGetDenumerator(Rational rational)
+{
+    if(!rational)
+    {
+        return -999999999;
+    }
+    return rational->denumerator;
+}

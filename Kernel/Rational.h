@@ -37,6 +37,9 @@
  *   rationalMultiplyInto     -creates the *= operation
  *   rationaldivideInto       -creates the /= operation
  *   rationalPowerInto        -operation that is not known in the standart c types
+ *   rationalPureRound        -rounds acording to the user preference
+ *   rationalGetNumerator     -gets the upper part of the number
+ *   rationalGetDenumerator     -gets the lower part of the number
  */
 
 typedef enum {
@@ -260,5 +263,33 @@ RtionalErrorCode rationaldivideInto(Rational* rational1, Rational rational2);
  * RATIONAL_SUCSESS- sucsess
  */
 RtionalErrorCode rationalPowerInto(Rational* rational1, Rational rational2);
+
+/**
+*   rationalPureRound        -rounds acording to the user preference
+* @param rational
+* @param typeOfRound
+*          0- for standard round
+*          1- for rount to check halves
+* @return
+*/
+Rational rationalPureRound(Rational rational, int typeOfRound);
+
+/**
+*   rationalGetNumerator     -gets the upper part of the number
+* @param rational
+* @return
+*  -999999999 if there was any problem
+*  denumerator else
+*/
+int rationalGetNumerator(Rational rational);
+
+/**
+*   rationalGetDenumerator     -gets the lower part of the number
+* @param rational
+* @return
+*  -999999999 if there was any problem
+*  denumerator else
+*/
+int rationalGetDenumerator(Rational rational);
 
 #endif //DANIELCITY_RATIONAL_H
