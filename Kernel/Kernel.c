@@ -630,7 +630,7 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
     {
         return NULL;
     }
-    if(kernel->type==DATE||kernel->type==RATIONAL)
+    if(kernel->type==DATE)
     {
         return NULL;
     }
@@ -675,6 +675,25 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
             return productUnitGetAmount(kernel->data);
         }
         return NULL;
+    }
+    if(kernel->type==RATIONAL)
+    {
+        int* dataRas= malloc(sizeof(int));
+        if(data==NUMERATOR)
+        {
+            *dataRas= rationalGetNumerator(kernel->data);
+            return dataRas;
+        }
+        else if(data==DENUMERATOR)
+        {
+            *dataRas= rationalGetDenumerator(kernel->data);
+            return dataRas;
+        }
+        else
+        {
+            free(dataRas);
+            return NULL;
+        }
     }
     return NULL;
 }
@@ -742,6 +761,16 @@ CreatingType kernelGetType(Kernel kernel)
     }
     return kernel->type;
 }
+
+/**
+ *   kernelRound             -function for rounding the rational
+ * @param kernel
+ * @param typeOfRound
+ *          0 -for the product round
+ *          1- for the standart round
+ * @return
+ */
+Kernel kernelRound(Kernel kernel, int typeOfRound);
 
 void kernelDestroyer()
 {

@@ -29,10 +29,11 @@
  *   kernelGetInternalData   -gives the internal element requested
  *   kernelGetFirst          -the first element of the core
  *   kernelGetNext           -the next element
- *   kernelDestroyer         -use it to end the code
  *   kernelALU               -aritmetical functions to rational and to orderProduct
  *   kernelGetType           -gives to the user the type of the kernel
  *   kernel foreach          -the amount set foreach
+ *   kernelRound             -function for rounding the rational
+ *   kernelDestroyer         -use it to end the code
  */
 
 //the external libreries we are working with
@@ -67,7 +68,9 @@ typedef enum {
     AMOUNT,
     PRODUCT_PART,
     COMPONENTS,
-    ELEMENT
+    ELEMENT,
+    NUMERATOR,
+    DENUMERATOR
 } InternalDataPart;
 
 
@@ -332,6 +335,16 @@ KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action);
  * @return
  */
 CreatingType kernelGetType(Kernel kernel);
+
+/**
+ *   kernelRound             -function for rounding the rational
+ * @param kernel
+ * @param typeOfRound
+ *          0 -for the product round
+ *          1- for the standart round
+ * @return
+ */
+Kernel kernelRound(Kernel kernel, int typeOfRound);
 
 /**
  *   kernelDestroyer         -use it to end the code
