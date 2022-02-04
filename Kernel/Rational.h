@@ -268,8 +268,8 @@ RtionalErrorCode rationalPowerInto(Rational* rational1, Rational rational2);
 *   rationalPureRound        -rounds acording to the user preference
 * @param rational
 * @param typeOfRound
-*          0- for standard round
-*          1- for rount to check halves
+*          0- for rount to check halves
+*          1- for standard round
 * @return
 */
 Rational rationalPureRound(Rational rational, int typeOfRound);

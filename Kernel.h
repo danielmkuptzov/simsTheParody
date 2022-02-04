@@ -343,6 +343,8 @@ CreatingType kernelGetType(Kernel kernel);
  *          0 -for the product round
  *          1- for the standart round
  * @return
+ *      NULL if there is any error
+ *      kernel elsewise
  */
 Kernel kernelRound(Kernel kernel, int typeOfRound);
 

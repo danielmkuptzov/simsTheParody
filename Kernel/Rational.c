@@ -45,7 +45,7 @@ static int powerInt(int base, int power)
 
 Rational rationalCreate(int numerator,int denumerator)
 {
-    if(denumerator==0)
+    if(denumerator==0||numerator==-999999999||denumerator==-999999999)
     {
         return NULL;
     }
@@ -378,6 +378,11 @@ Rational rationalPureRound(Rational rational, int typeOfRound)
     if(resalt)
     {
         return lowerValue;
+    }
+    if(rationalGetNumerator(lowerValue)==-999999999)
+    {
+        rationalDestroy(lowerValue);
+        return NULL;
     }
     Rational toSend= rationalCreate(rationalGetNumerator(lowerValue)+1,
                                     rationalGetDenumerator(lowerValue));

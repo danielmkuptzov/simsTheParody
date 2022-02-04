@@ -762,15 +762,26 @@ CreatingType kernelGetType(Kernel kernel)
     return kernel->type;
 }
 
-/**
- *   kernelRound             -function for rounding the rational
- * @param kernel
- * @param typeOfRound
- *          0 -for the product round
- *          1- for the standart round
- * @return
- */
-Kernel kernelRound(Kernel kernel, int typeOfRound);
+Kernel kernelRound(Kernel kernel, int typeOfRound)
+{
+    if(!kernel||typeOfRound>1||kernel->type!=RATIONAL)
+    {
+        return NULL;
+    }
+    Kernel toSend= kernelCreate(RATIONAL,false,NULL,0,NULL,
+                                0,NULL,0,NULL);
+    if(!toSend)
+    {
+        return NULL;
+    }
+    toSend->data= rationalPureRound(kernel->data,typeOfRound);
+    if(!toSend->data)
+    {
+        kernelDestroy(toSend);
+        return NULL;
+    }
+    return toSend;
+}
 
 void kernelDestroyer()
 {
