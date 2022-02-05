@@ -783,6 +783,24 @@ Kernel kernelRound(Kernel kernel, int typeOfRound)
     return toSend;
 }
 
+/**
+ *   kernelSetter            -for changing things in the element
+ * @param kernel
+ * @param data -
+ *  ID
+ *  DATE_OF_CREATION
+ *  NAME AMOUNT
+ *  PRODUCT_PART
+ *  COMPONENTS
+ *  ELEMENT
+ * @return
+ *  KERNEL_NULL_ARGUMENT   one of the arguments was NULL
+ *  KERNEL_ERROR           error not related to the memory
+ *  KERNEL_MEMORY_PROBLEM  the element was wrong
+ *  KERNEL_SUCSESS         the operation was a sucsess
+ */
+KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element);
+
 void kernelDestroyer()
 {
     coreDestroyer();

@@ -33,6 +33,7 @@
  *   kernelGetType           -gives to the user the type of the kernel
  *   kernel foreach          -the amount set foreach
  *   kernelRound             -function for rounding the rational
+ *   kernelSetter            -for changing things in the element
  *   kernelDestroyer         -use it to end the code
  */
 
@@ -347,6 +348,24 @@ CreatingType kernelGetType(Kernel kernel);
  *      kernel elsewise
  */
 Kernel kernelRound(Kernel kernel, int typeOfRound);
+
+/**
+ *   kernelSetter            -for changing things in the element
+ * @param kernel
+ * @param data -
+ *  ID
+ *  DATE_OF_CREATION
+ *  NAME AMOUNT
+ *  PRODUCT_PART
+ *  COMPONENTS
+ *  ELEMENT
+ * @return
+ *  KERNEL_NULL_ARGUMENT   one of the arguments was NULL
+ *  KERNEL_ERROR           error not related to the memory
+ *  KERNEL_MEMORY_PROBLEM  the element was wrong
+ *  KERNEL_SUCSESS         the operation was a sucsess
+ */
+KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element);
 
 /**
  *   kernelDestroyer         -use it to end the code
