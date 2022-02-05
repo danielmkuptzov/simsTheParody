@@ -77,9 +77,9 @@ int main()
     {
         j=0;
         Kernel tmp= kernelCopy(t);
-        Product product= productCreate(k+1,names[k],HALF_INTEGER_AMOUNT,
-                                       intCopy,intDest, coreGetElement(tmp),
-                                       rasCopy,rasDest,rasCompare,&j,3);
+        int* id=&k;
+        void* elements[3];
+        Kernel product= kernelCreate(PRODUCT,true,elements,);
         Rational amount= rationalCreate(k+1,2);
         OrderUnit productunit= productUnitCreate(product,amount);
         if(!productunit)
