@@ -734,6 +734,10 @@ KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action)
     {
         resalt= rationalMultiplyInto(tmp,kernel2->data);
     }
+    else if(action==3)
+    {
+        resalt= rationaldivideInto(tmp,kernel2->data);
+    }
     else if(action==4)
     {
         resalt= rationalPowerInto(tmp,kernel2->data);
