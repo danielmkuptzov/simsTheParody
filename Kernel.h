@@ -71,7 +71,8 @@ typedef enum {
     COMPONENTS,
     ELEMENT,
     NUMERATOR,
-    DENUMERATOR
+    DENUMERATOR,
+    ADDITIONAL_DATA
 } InternalDataPart;
 
 
@@ -302,10 +303,12 @@ void* kernelGetNext(Kernel kernel);
  * @param data -
  *  ID
  *  DATE_OF_CREATION
- *  NAME AMOUNT
+ *  NAME
+ *  AMOUNT
  *  PRODUCT_PART
  *  COMPONENTS
  *  ELEMENT
+ *  ADDITIONAL_DATA
  * @return
  *  NULL if there was any error
  *  data otherwise
@@ -355,10 +358,11 @@ Kernel kernelRound(Kernel kernel, int typeOfRound);
  * @param data -
  *  ID
  *  DATE_OF_CREATION
- *  NAME AMOUNT
+ *  NAME
+ *  AMOUNT
  *  PRODUCT_PART
  *  COMPONENTS
- *  ELEMENT
+ *  ADDITIONAL_DATA
  * @return
  *  KERNEL_NULL_ARGUMENT   one of the arguments was NULL
  *  KERNEL_ERROR           error not related to the memory

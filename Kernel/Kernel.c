@@ -662,6 +662,10 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
         {
             return productGetComponent(kernel->data);
         }
+        else if(data==ADDITIONAL_DATA)
+        {
+            return productGetAdditionalData(kernel->data);
+        }
         return NULL;
     }
     else if (kernel->type==ORDER_PRODUCT)
@@ -792,7 +796,7 @@ Kernel kernelRound(Kernel kernel, int typeOfRound)
  *  NAME AMOUNT
  *  PRODUCT_PART
  *  COMPONENTS
- *  ELEMENT
+ *  ADDITIONAL_DATA
  * @return
  *  KERNEL_NULL_ARGUMENT   one of the arguments was NULL
  *  KERNEL_ERROR           error not related to the memory
