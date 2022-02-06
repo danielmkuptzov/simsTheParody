@@ -1,3 +1,4 @@
+# not critical. do it after the project ends
 CC=gcc
 OBJS=body.o person.o kernelUnit.o orderProduct.o rational.o outerCore.o date.o core.o set.o list.o
 EXEC=danielCity
