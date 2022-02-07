@@ -793,21 +793,31 @@ Kernel kernelRound(Kernel kernel, int typeOfRound)
 
 /**
  *   kernelSetter            -for changing things in the element
- * @param kernel
  * @param data -
  *  ID
  *  DATE_OF_CREATION
- *  NAME AMOUNT
+ *  NAME
+ *  AMOUNT
  *  PRODUCT_PART
  *  COMPONENTS
  *  ADDITIONAL_DATA
  * @return
- *  KERNEL_NULL_ARGUMENT   one of the arguments was NULL
  *  KERNEL_ERROR           error not related to the memory
  *  KERNEL_MEMORY_PROBLEM  the element was wrong
  *  KERNEL_SUCSESS         the operation was a sucsess
  */
-KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element);
+KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element)
+{
+    if(!kernel||!element)
+    {
+        return KERNEL_NULL_ARGUMENT;
+    }
+    if(kernel->type==RATIONAL||kernel->type==AMOUNT_SET)
+    {
+        return KERNEL_ERROR;
+    }
+
+}
 
 void kernelDestroyer()
 {
