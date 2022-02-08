@@ -791,32 +791,45 @@ Kernel kernelRound(Kernel kernel, int typeOfRound)
     return toSend;
 }
 
-/**
- *   kernelSetter            -for changing things in the element
- * @param data -
- *  ID
- *  DATE_OF_CREATION
- *  NAME
- *  AMOUNT
- *  PRODUCT_PART
- *  COMPONENTS
- *  ADDITIONAL_DATA
- * @return
- *  KERNEL_ERROR           error not related to the memory
- *  KERNEL_MEMORY_PROBLEM  the element was wrong
- *  KERNEL_SUCSESS         the operation was a sucsess
- */
 KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element)
 {
     if(!kernel||!element)
     {
         return KERNEL_NULL_ARGUMENT;
     }
-    if(kernel->type==RATIONAL||kernel->type==AMOUNT_SET)
+    if(kernel->type==RATIONAL||kernel->type==AMOUNT_SET||kernel->type==DATE)
     {
         return KERNEL_ERROR;
     }
-
+    if(kernel->type==PRODUCT)
+    {
+        ProductErrorCode resalt=PRODUCT_ERROR;
+        if(data==ADDITIONAL_DATA)
+        {
+            resalt= productSetAdditionalData(kernel->data,element);
+        }
+        if(resalt!=PRODUCT_SUCSESS)
+        {
+            return KERNEL_ERROR;
+        }
+    }
+    else if(kernel->type==ORDER_PRODUCT)
+    {
+        OrderUnitErrors resalt=ORDER_UNIT_ERROR;
+        if(data==AMOUNT)
+        {
+            Kernel amount=element;
+            if(amount->type==RATIONAL)
+            {
+                resalt= productUnitChangeAmount(kernel->data,amount->data);
+            }
+        }
+        if(resalt!=ORDER_UNIT_SUCSESS)
+        {
+            return KERNEL_ERROR;
+        }
+    }
+    return KERNEL_ERROR;
 }
 
 void kernelDestroyer()
