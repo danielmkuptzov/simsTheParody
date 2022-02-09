@@ -75,10 +75,10 @@ int main()
     }
     for (int k = 0; k < 10; ++k)
     {
-        j=0;
+        j=5;
         Kernel tmp= kernelCopy(t);
         int* id=&k;
-        void* elements[3]={id, kernelGetElement(tmp),names[k],};
+        void* elements[]={id, kernelGetElement(tmp),names[k],&j,};
         Kernel product= kernelCreate(PRODUCT,true,elements,);
         Rational amount= rationalCreate(k+1,2);
         OrderUnit productunit= productUnitCreate(product,amount);
