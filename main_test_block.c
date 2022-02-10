@@ -78,7 +78,7 @@ int main()
         j=5;
         Kernel tmp= kernelCopy(t);
         int* id=&k;
-        void* elements[]={id, kernelGetElement(tmp),names[k],&j,};
+        void* elements[]={id, kernelGetElement(tmp),names[k],,};
         Kernel product= kernelCreate(PRODUCT,true,elements,);
         Rational amount= rationalCreate(k+1,2);
         OrderUnit productunit= productUnitCreate(product,amount);
