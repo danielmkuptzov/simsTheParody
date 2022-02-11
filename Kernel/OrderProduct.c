@@ -5,6 +5,8 @@
 
 #include "OrderProduct.h"
 
+Rational epsilon=NULL;
+
 struct OrderUnit_t{
     Product product;
     Rational amount;
@@ -31,16 +33,24 @@ static bool checkAmount(const Rational amount, ProductAmountType type)
     {
         return false;
     }
-    Rational epsilon= rationalCreate(1,1000);
-    if(!epsilon)
-    {
-        rationalDestroy(resalt);
-        return false;
-    }
     bool answer=(rationalLesser(resalt,epsilon)&&type==HALF_INTEGER_AMOUNT);
     rationalDestroy(epsilon);
     rationalDestroy(resalt);
     return answer;
+}
+
+void  productSetEpsilon(Rational margin)
+{
+    if(!margin)
+    {
+        return;
+    }
+    epsilon= rationalCopy(margin);
+    if(!epsilon)
+    {
+        return;
+    }
+    return;
 }
 
 OrderUnit productUnitCreate(Product product, Rational initialAmount)
@@ -193,4 +203,9 @@ OrderUnitErrors productUnitChangeAmount(OrderUnit unit, Rational amount)
     }
     rationalDestroy(zero);
     return productUnitRaiseAmount(unit,amount);
+}
+
+void  productDestroyEpsilon()
+{
+    rationalDestroy(epsilon);
 }

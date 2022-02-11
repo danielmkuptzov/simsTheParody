@@ -15,6 +15,7 @@
  * please use with care
  *
  * The following functions are available:
+ *   doubleToRationalConvert  -converts from double to rational
  *   rationalCreate           -Creates the rational number.
  *   rationalDestroy          -Deletes an existing rational and frees all resources
  *   rationalCopy             -Copies an existing rational
@@ -50,6 +51,13 @@ typedef enum {
 } RtionalErrorCode;
 
 typedef struct Rational_t* Rational;
+
+/**
+ *   doubleToRationalConvert  -converts from double to rational
+ * @param value
+ * @return
+ */
+Rational doubleToRationalConvert(double value);
 
 /**
  *   rationalCreate         -Creates the rational number

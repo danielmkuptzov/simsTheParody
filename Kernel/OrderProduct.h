@@ -11,6 +11,7 @@
  * this header implements the second basic thing in this project, the trasporting unit of the product.
  *
  * The following functions are available:
+ *   productSetEpsilon         -sets the epsilon of the margin
  *   productUnitCreate         -Creates the order product.
  *   productUnitDestroy        -Deletes an existing order product and frees all resources
  *   productUnitCopy           -Copies an existing order product
@@ -20,6 +21,7 @@
  *   productUnitGetProduct     -to see the product
  *   productUnitGetAmount      -to get the amount of the product
  *   productUnitChangeAmount   -for general amount change
+ *   productDestroyEpsilon     -destroys the epsilon
  */
 
 typedef enum {
@@ -31,6 +33,12 @@ typedef enum {
 } OrderUnitErrors;
 
 typedef struct OrderUnit_t* OrderUnit;
+
+/**
+ *   productSetEpsilon         -sets the epsilon of the margin
+ * @param margin- the margin should be less than 1
+ */
+void  productSetEpsilon(Rational margin);
 
 /**
  *   productUnitCreate         -Creates the order product.
@@ -118,5 +126,10 @@ Rational productUnitGetAmount(OrderUnit unit);
  * ORDER_UNIT_SUCSESS
  */
 OrderUnitErrors productUnitChangeAmount(OrderUnit unit, Rational amount);
+
+/**
+ *   productDestroyEpsilon     -destroys the epsilon
+ */
+void  productDestroyEpsilon();
 
 #endif //ORDERPRODUCT_H
