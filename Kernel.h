@@ -137,7 +137,7 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
  *           0- the id of the item or the element type if the type is amount set
  *           1- the date
  *           2- the name
- *           3- for product the type in char
+ *           3- for product the type in char ("integer amount", "half integer amount", "any amount")
  *           4-additional data
  *           5-component data
  *           6-component type
