@@ -45,12 +45,15 @@ void  productSetEpsilon(Rational margin)
     {
         return;
     }
+    if(rationalCompare(margin,epsilon))
+    {
+        return;
+    }
     epsilon= rationalCopy(margin);
     if(!epsilon)
     {
         return;
     }
-    return;
 }
 
 OrderUnit productUnitCreate(Product product, Rational initialAmount)

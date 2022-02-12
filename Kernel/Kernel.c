@@ -127,6 +127,7 @@ void kernelEpsilonSetter(int base)
         return;
     }
     productSetEpsilon(newEpsilon);
+    rationalDestroy(newEpsilon);
 }
 
 Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int elementsSize,
