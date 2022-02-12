@@ -35,6 +35,7 @@
  *   kernel foreach          -the amount set foreach
  *   kernelRound             -function for rounding the rational
  *   kernelSetter            -for changing things in the element
+ *   kernelEpsilonDestroyer  -to destroy the epsilon
  *   kernelDestroyer         -use it to end the code
  */
 
@@ -378,6 +379,11 @@ Kernel kernelRound(Kernel kernel, int typeOfRound);
  *  KERNEL_SUCSESS         the operation was a sucsess
  */
 KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element);
+
+/**
+ *   kernelEpsilonDestroyer  -to destroy the epsilon
+ */
+void kernelEpsilonDestroyer();
 
 /**
  *   kernelDestroyer         -use it to end the code

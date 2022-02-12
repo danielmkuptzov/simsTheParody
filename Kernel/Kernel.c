@@ -842,6 +842,11 @@ KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element)
     return KERNEL_ERROR;
 }
 
+/**
+ *   kernelEpsilonDestroyer  -to destroy the epsilon
+ */
+void kernelEpsilonDestroyer();
+
 void kernelDestroyer()
 {
     coreDestroyer();
