@@ -45,7 +45,7 @@ void  productSetEpsilon(Rational margin)
     {
         return;
     }
-    if(rationalCompare(margin,epsilon))
+    if(rationalEqual(margin,epsilon))
     {
         return;
     }

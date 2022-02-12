@@ -808,9 +808,16 @@ KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element)
     {
         return KERNEL_NULL_ARGUMENT;
     }
-    if(kernel->type==RATIONAL||kernel->type==AMOUNT_SET||kernel->type==DATE)
+    if(kernel->type==RATIONAL||kernel->type==AMOUNT_SET)
     {
         return KERNEL_ERROR;
+    }
+    else if(kernel->type==DATE)
+    {
+        if(coreSetElement(kernel->data, element, convertTypeToInt(DATE))!=CORE_SUCSESS)
+        {
+            return KERNEL_ERROR;
+        }
     }
     if(kernel->type==PRODUCT)
     {
