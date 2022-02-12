@@ -54,10 +54,10 @@ typedef struct Rational_t* Rational;
 
 /**
  *   doubleToRationalConvert  -converts from double to rational
- * @param value
+ * @param base the power of 10 we want (less than 1 wouldn't be tolerated)
  * @return
  */
-Rational doubleToRationalConvert(double value);
+Rational doubleToRationalConvert(int base);
 
 /**
  *   rationalCreate         -Creates the rational number

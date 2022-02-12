@@ -14,6 +14,7 @@
  *
  * The following functions are available:
  *   kernelBeginner          -the function that you use to begin the date function
+ *   kernelEpsilonSetter     -to set the epsilon we would work on
  *   kernelCreate            -Creates a new kernel unit
  *   kernelDestroy           -Deletes an existing kernel unit and frees all resources
  *   kernelCopy              -Copies an existing kernel unit
@@ -127,6 +128,13 @@ typedef struct Kernel_t* Kernel;
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay);
+
+/**
+ *   kernelEpsilonSetter     -to set the epsilon we would work on
+ * @param base the power of 10 we want
+ */
+void kernelEpsilonSetter(int base);
+
 
 /**
  *   kernelCreate            -Creates a new kernel unit

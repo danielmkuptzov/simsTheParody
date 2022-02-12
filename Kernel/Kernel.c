@@ -119,6 +119,16 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
     coreBeginner(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay);
 }
 
+void kernelEpsilonSetter(int base)
+{
+    Rational newEpsilon= doubleToRationalConvert(base);
+    if(!newEpsilon)
+    {
+        return;
+    }
+    productSetEpsilon(newEpsilon);
+}
+
 Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int elementsSize,
                     CopyFunc* copyFunctions, int copyFuncAmount,DestFunc* destructors,
                     int destructorsAmount, CompFunc comparison)

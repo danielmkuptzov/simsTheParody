@@ -43,19 +43,13 @@ static int powerInt(int base, int power)
     return resalt;
 }
 
-
-static int* doubleToIntConvert(double value,int decimalBase)
+Rational doubleToRationalConvert(int base)
 {
-    double diff=value-(int)value;
-    if(diff==0)
+    if(base<=1)
     {
-        int*
+        return NULL;
     }
-}
-
-Rational doubleToRationalConvert(double value)
-{
-
+    return rationalCreate(1, powerInt(10,base));
 }
 
 Rational rationalCreate(int numerator,int denumerator)
