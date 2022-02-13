@@ -22,18 +22,6 @@ int intCompare(void* first, void* second)
     int* two=second;
     return one-two;
 }
-void* rasCopy(void* org)
-{
-    return rationalCopy((Rational)org);
-}
-void rasDest(void* org)
-{
-    rationalDestroy((Rational)org);
-}
-int rasCompare(void* first, void* second)
-{
-    return rationalCompare((Rational)first,(Rational)second);
-}
 bool greaterThanEpsilon(void* ras, void* key)
 {
     Rational epsilon= rationalCreate(0,1);
