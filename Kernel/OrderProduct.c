@@ -212,3 +212,8 @@ void  productDestroyEpsilon()
 {
     rationalDestroy(epsilon);
 }
+
+Rational productGetEpsilon()
+{
+    return epsilon;
+}

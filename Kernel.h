@@ -36,6 +36,7 @@
  *   kernelRound             -function for rounding the rational
  *   kernelSetter            -for changing things in the element
  *   kernelEpsilonDestroyer  -to destroy the epsilon
+ *   kernelEpsilonGetter     -gives the epsilon
  *   kernelDestroyer         -use it to end the code
  */
 
@@ -384,6 +385,12 @@ KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element);
  *   kernelEpsilonDestroyer  -to destroy the epsilon
  */
 void kernelEpsilonDestroyer();
+
+/**
+ *   kernelEpsilonGetter     -gives the epsilon
+ * @return
+ */
+Kernel  kernelEpsilonGetter();
 
 /**
  *   kernelDestroyer         -use it to end the code

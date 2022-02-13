@@ -127,6 +127,10 @@ void kernelEpsilonSetter(int base)
         return;
     }
     productSetEpsilon(newEpsilon);
+    if(!productGetEpsilon())
+    {
+        productSetEpsilon(newEpsilon);
+    }
     rationalDestroy(newEpsilon);
 }
 
@@ -857,6 +861,19 @@ void kernelEpsilonDestroyer()
 {
     productDestroyEpsilon();
 }
+
+Kernel  kernelEpsilonGetter()
+{
+    Kernel toSend=kernelCreate(RATIONAL,false,NULL,0,NULL,
+                               0,NULL,0,NULL);
+    if(!toSend)
+    {
+        return NULL;
+    }
+    toSend->data= rationalCopy(productGetEpsilon());
+    return toSend;
+}
+
 
 void kernelDestroyer()
 {

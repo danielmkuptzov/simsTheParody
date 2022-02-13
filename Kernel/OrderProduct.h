@@ -22,6 +22,7 @@
  *   productUnitGetAmount      -to get the amount of the product
  *   productUnitChangeAmount   -for general amount change
  *   productDestroyEpsilon     -destroys the epsilon
+ *   productGetEpsilon         -gives the epsilon
  */
 
 typedef enum {
@@ -131,5 +132,11 @@ OrderUnitErrors productUnitChangeAmount(OrderUnit unit, Rational amount);
  *   productDestroyEpsilon     -destroys the epsilon
  */
 void  productDestroyEpsilon();
+
+/**
+ *   productGetEpsilon         -gives the epsilon
+ * @return
+ */
+Rational productGetEpsilon();
 
 #endif //ORDERPRODUCT_H
