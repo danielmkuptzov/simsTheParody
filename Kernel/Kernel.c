@@ -853,7 +853,10 @@ KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element)
 /**
  *   kernelEpsilonDestroyer  -to destroy the epsilon
  */
-void kernelEpsilonDestroyer();
+void kernelEpsilonDestroyer()
+{
+    productDestroyEpsilon();
+}
 
 void kernelDestroyer()
 {
