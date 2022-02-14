@@ -24,15 +24,15 @@ int intCompare(void* first, void* second)
 }
 bool greaterThanEpsilon(void* ras, void* key)
 {
-    Rational epsilon= rationalCreate(0,1);
-    Rational diff= rationalAddition(epsilon,(Rational)ras);
+    Kernel epsilon=kernelEpsilonGetter();
+    Kernel diff= kernelAddition(epsilon,(Kernel)ras);
     bool resalt=false;
-    if(rationalEqual((Rational)key,diff))
+    if(kernelCompeare((Kernel)key,diff))
     {
         resalt=true;
     }
-    rationalDestroy(epsilon);
-    rationalDestroy(diff);
+    kernelDestroy(epsilon);
+    kernelDestroy(diff);
     return resalt;
 }
 void intAdvance(void* org)
