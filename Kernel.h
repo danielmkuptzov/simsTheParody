@@ -19,6 +19,9 @@
  *   kernelDestroy           -Deletes an existing kernel unit and frees all resources
  *   kernelCopy              -Copies an existing kernel unit
  *   kernelCompeare          -compares between kernel units
+ *   kernelGreaterThan       -the > opreration
+ *   kernelLesserThan       -the < operation
+ *   kernelEqual             -uses the operator ==
  *   kernelAddition          -adds two units together
  *   kernelInsert            -adds to the core (works whith all accept for date)
  *   kernelRemove            -removes an element (works whith all accept for date)
@@ -161,6 +164,7 @@ void kernelEpsilonSetter(int base);
  *  NULL -if one of the critiria didn't passed
  *  kernel -otherwise
  */
+
 Kernel kernelCreate(CreatingType block,bool creOrCp,
                     CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
                     DestFunc* destructors, int destructorsAmount, CompFunc comparison);
@@ -182,6 +186,8 @@ void* kernelCopy(void* kernel);
 
 /**
  *   kernelCompeare          -compares between kernel units
+ *   kernelGreaterThan       -the > opreration
+ *   kernelLesserThan       -the < operation
  * @param kernel1
  * @param kernel2
  * @return
@@ -197,6 +203,36 @@ void* kernelCopy(void* kernel);
  * negative kernel1< kernel2
  */
 int kernelCompeare(void* kernel1, void* kernel2);
+
+/**
+ *   kernelGreaterThan       -the > opreration
+ * @param kernel1
+ * @param kernel2
+ * @return
+ *  true if kernel1> kernel2
+ *  false otherwise
+ */
+bool kernelGreaterThan(void* kernel1, void* kernel2);
+
+/**
+ *   kernelLesserThan       -the < operation
+ * @param kernel1
+ * @param kernel2
+ * @return
+ *  true if kernel1< kernel2
+ *  false otherwise
+ */
+bool kernelLesserThan(void* kernel1, void* kernel2);
+
+/**
+ *   kernelEqual             -uses the operator ==
+ * @param kernel1
+ * @param kernel2
+ * @return
+ *  true equal
+ *  false non equal
+ */
+bool kernelEqual(void* kernel1, void* kernel2);
 
 /**
  *   kernelAddition          -adds two units together

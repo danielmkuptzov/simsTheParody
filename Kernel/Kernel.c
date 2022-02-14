@@ -299,6 +299,25 @@ int kernelCompeare(void* kernel1, void* kernel2)
     return ERRORCOMP;
 }
 
+bool kernelGreaterThan(void* kernel1, void* kernel2)
+{
+    if(kernelCompeare(kernel1,kernel2)>0)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool kernelLesserThan(void* kernel1, void* kernel2)
+{
+    return kernelGreaterThan(kernel2,kernel1);
+}
+
+bool kernelEqual(void* kernel1, void* kernel2)
+{
+    return ((!kernelGreaterThan(kernel1,kernel2))&&(!kernelLesserThan(kernel1,kernel2)));
+}
+
 Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
 {
     if(kernel1->type!=kernel2->type)
