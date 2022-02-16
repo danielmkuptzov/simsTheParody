@@ -174,7 +174,7 @@ typedef struct product_t *Product;
 Product productCreate(int id, char* name, ProductAmountType type,
                       CopyProductData copyData, FreeData freeFunc,void* dateCre,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
-                      ProductCompCmp compCmp, ProductData data,int  CompType);
+                      ProductCompCmp compCmp, ProductData data,int  CompType, TypeOfProduct typeOfProduct);
 
 /**
  *   productDestroy           - Deletes an existing product and frees all resources

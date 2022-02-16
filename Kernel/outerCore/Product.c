@@ -49,6 +49,25 @@ static int nameComparison(char* first, char*second)
     return diff;
 }
 
+static void* typeOfProdCopy(void* type)
+{
+    if(!type)
+    {
+        return NULL;
+    }
+    TypeOfProduct* toSend= malloc(sizeof(TypeOfProduct));
+    if(!toSend)
+    {
+        return NULL;
+    }
+    *toSend=*((TypeOfProduct*)type);
+    return toSend;
+}
+
+static void typeOfProdDestroy(void* type);
+
+static void typeOfProdCompare();
+
 // Product struct - represents a product in MatamIkya
 struct product_t {
     AmountSet classifications;
@@ -65,7 +84,7 @@ struct product_t {
 Product productCreate(int id, char* name, ProductAmountType type,
                       CopyProductData copyData, FreeData freeFunc,void* dateCre,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
-                      ProductCompCmp compCmp, ProductData data, int CompType)
+                      ProductCompCmp compCmp, ProductData data,int  CompType, TypeOfProduct typeOfProduct)
 {
     Product new= malloc(sizeof(struct product_t));
     if(!new)
@@ -108,6 +127,12 @@ Product productCreate(int id, char* name, ProductAmountType type,
     }
     new->id=id;
     new->amount_type= type;
+    new->components= asCreate();
+    if(asRegister(new->components,&typeOfProduct)!=AS_SUCCESS)
+    {
+        productDestroy(new);
+        return NULL;
+    }
     return new;
 }
 
