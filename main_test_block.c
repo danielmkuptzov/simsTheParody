@@ -68,8 +68,8 @@ int main()
         int* id=&k;
         void* elements[]={id, kernelGetElement(tmp),names[k],"half integer",&k,
                           id,&k};
-
-        Kernel product= kernelCreate(PRODUCT,true,elements,7,);
+        CopyFunc copyArr[]={intCopy, intCopy};
+        Kernel product= kernelCreate(PRODUCT,true,elements,7,copyArr,2,);
         Rational amount= rationalCreate(k+1,2);
         OrderUnit productunit= productUnitCreate(product,amount);
         if(!productunit)
