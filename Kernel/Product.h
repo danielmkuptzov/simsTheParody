@@ -39,6 +39,9 @@
  *   productGetCompDataFunc   -gives the comp func of the components
  *   productGetCompAmount     -gives the amount of the components
  *   productGetDate           -gives the date of creation of the product
+ *   productSetType           -to change a product clasificasion
+ *   productGetTypeOfProd     -to find the types of the product (this is an array so take notice)
+ *   isProductAType           -boolean function to find if the type matches
  *   PRODUCT_FOREACH          -Macro for iterating over a product.Declares a new iterator for the loop.
  */
 
@@ -62,13 +65,6 @@ typedef ProductData (*CopyProductData)(ProductData);
  */
 typedef void (*FreeData)(ProductData);
 
-/**
- * type of function to compeare data
- *
- * Such a function receives two ProductData objects and compeares between them. The
- * ProductData can't be NULL, we cant compeare whith NULL.
- */
-typedef int (*ProductDataCmp)(ProductData,ProductData);
 
 /**
  * for easy addition of new components we have this
@@ -148,6 +144,18 @@ typedef enum ProductErrorCode_t{
     PRODUCT_WRONG_FORMAT,
     PRODUCT_SUCSESS
 } ProductErrorCode;
+
+/**
+ * to determine the type of a product.
+ * the product can have more than one classification
+ */
+typedef enum {
+    FURNITURE,
+    ELECTRONICS,
+    FOOD,
+    BOOK,
+    MEDICINE
+} TypeOfProduct;
 
 /**
  * the product type, use whith care
@@ -341,6 +349,41 @@ int productGetCompAmount(Product product);
  *  Date otherwise
  */
  void* productGetDate(Product product);
+
+ /**
+ *   productSetType           -to change a product clasificasion
+ * @param product
+ * @param typeOfProduct
+ * FURNITURE
+ * ELECTRONICS
+ * FOOD
+ * BOOK
+ * MEDICINE
+ * @return
+ *  PRODUCT_ERROR         this type already exist
+ *  PRODUCT_WRONG_FORMAT  NULL arguments
+ *  PRODUCT_SUCSESS       the operation was sucssesful
+ */
+ ProductErrorCode productSetType(Product product, TypeOfProduct typeOfProduct);
+
+/**
+ *   productGetTypeOfProd     -to find the types of the product (this is an array so take notice)
+ * @param product
+ * @return
+ * NULL if any problem arose
+ * array otherwise
+ */
+ CoreUnit productGetTypeOfProd(Product product);
+
+/**
+ *   isProductAType           -boolean function to find if the type matches
+ * @param product
+ * @param typeOfProduct
+ * @return
+ *  true if the type is one of the products classsificatin
+ *  false otherwise
+ */
+ bool isProductAType(Product product, TypeOfProduct typeOfProduct);
 
 /**
  * PRODUCT_FOREACH- Macro for iterating over a product.

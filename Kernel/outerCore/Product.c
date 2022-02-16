@@ -51,6 +51,7 @@ static int nameComparison(char* first, char*second)
 
 // Product struct - represents a product in MatamIkya
 struct product_t {
+    AmountSet classifications;
     Date creationDate;
     int id;
     char* name;
@@ -344,3 +345,38 @@ void* productGetDate(Product product)
     }
     return product->creationDate;
 }
+
+/**
+*   productSetType           -to change a product clasificasion
+* @param product
+* @param typeOfProduct
+* FURNITURE
+* ELECTRONICS
+* FOOD
+* BOOK
+* MEDICINE
+* @return
+*  PRODUCT_ERROR         this type already exist
+*  PRODUCT_WRONG_FORMAT  NULL arguments
+*  PRODUCT_SUCSESS       the operation was sucssesful
+*/
+ProductErrorCode productSetType(Product product, TypeOfProduct typeOfProduct);
+
+/**
+ *   productGetTypeOfProd     -to find the types of the product (this is an array so take notice)
+ * @param product
+ * @return
+ * NULL if any problem arose
+ * array otherwise
+ */
+CoreUnit productGetTypeOfProd(Product product);
+
+/**
+ *   isProductAType           -boolean function to find if the type matches
+ * @param product
+ * @param typeOfProduct
+ * @return
+ *  true if the type is one of the products classsificatin
+ *  false otherwise
+ */
+bool isProductAType(Product product, TypeOfProduct typeOfProduct);
