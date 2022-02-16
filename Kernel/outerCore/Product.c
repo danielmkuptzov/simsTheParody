@@ -64,9 +64,12 @@ static void* typeOfProdCopy(void* type)
     return toSend;
 }
 
-static void typeOfProdDestroy(void* type);
+static void typeOfProdDestroy(void* type)
+{
+    free(type);
+}
 
-static void typeOfProdCompare();
+static void typeOfProdCompare(void* type1, void* type2);
 
 // Product struct - represents a product in MatamIkya
 struct product_t {
