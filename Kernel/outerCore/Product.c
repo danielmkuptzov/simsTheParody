@@ -49,6 +49,30 @@ static int nameComparison(char* first, char*second)
     return diff;
 }
 
+static char* typeToStringConvert(TypeOfProduct typeOfProduct)
+{
+    if(typeOfProduct==FURNITURE)
+    {
+        return "furniture";
+    }
+    else if(typeOfProduct==ELECTRONICS)
+    {
+        return "electronic";
+    }
+    else if(typeOfProduct==FOOD)
+    {
+        return "food";
+    }
+    else if(typeOfProduct==BOOK)
+    {
+        return "book";
+    }
+    else
+    {
+        return "medicine";
+    }
+}
+
 static void* typeOfProdCopy(void* type)
 {
     if(!type)
@@ -69,7 +93,12 @@ static void typeOfProdDestroy(void* type)
     free(type);
 }
 
-static void typeOfProdCompare(void* type1, void* type2);
+static int typeOfProdCompare(void* type1, void* type2)
+{
+    TypeOfProduct* tmp1= type1;
+    TypeOfProduct* tmp2= type2;
+    return nameComparison(typeToStringConvert(*tmp1), typeToStringConvert(*tmp2));
+}
 
 // Product struct - represents a product in MatamIkya
 struct product_t {
@@ -130,7 +159,8 @@ Product productCreate(int id, char* name, ProductAmountType type,
     }
     new->id=id;
     new->amount_type= type;
-    new->components= asCreate();
+    new->components= asCreate(typeOfProdCopy,typeOfProdDestroy,typeOfProdCompare
+                              ,1);
     if(asRegister(new->components,&typeOfProduct)!=AS_SUCCESS)
     {
         productDestroy(new);
@@ -145,6 +175,7 @@ void productDestroy(Product product)
     asDestroy(product->components);
     free(product->name);
     dateDestroy(product->creationDate);
+    asDestroy(product->classifications);
     free(product);
 }
 
@@ -154,10 +185,11 @@ Product productCopy(Product product)
     {
         return NULL;
     }
+    TypeOfProduct* mainClass= asGetFirst(product->classifications);
     Product copy=productCreate(product->id,product->name,product->amount_type,
                          product->copyData,product->freeData,product->creationDate,
                          NULL,NULL,NULL,product->data,
-                         asGetType(product->components));
+                         asGetType(product->components),*mainClass);
     if(!copy)
     {
         return NULL;
@@ -165,6 +197,13 @@ Product productCopy(Product product)
     asDestroy(copy->components);
     copy->components= asCopy(product->components);
     if(!copy->components)
+    {
+        productDestroy(copy);
+        return NULL;
+    }
+    asDestroy(copy->classifications);
+    copy->classifications= asCopy(product->classifications);
+    if(!copy->classifications)
     {
         productDestroy(copy);
         return NULL;
@@ -282,30 +321,29 @@ void* productComponentFilter(Product product, FilterComponent filterFunc, Compon
    return asFilter(product->components,filterFunc, key);
 }
 
-/**
- *  productUnite             -if the products have the same caracteristics but different components unites them
- * @param product1
- * @param product2
- * @return
- * NULL -null arguments of different products
- * product- elsewise
- */
 Product productUnite(Product product1, Product product2)
 {
     if(!product1||!product2|| productEquals(product1,product2)!=0)
     {
         return NULL;
     }
+    TypeOfProduct* mainClassification= asGetFirst(product1->classifications);
     Product sum= productCreate(product1->id,product1->name,product1->amount_type,product1->copyData,
                                product1->freeData,product1->creationDate,asGetCopy(product1->components),
                                asGetFree(product1->components),asGetCompeare(product1->components),product1->data,
-                               asGetType(product1->components));
+                               asGetType(product1->components),*mainClassification);
     if(!sum)
     {
         return NULL;
     }
     sum->components= asUnite(product1->components,product2->components);
     if(!sum->components)
+    {
+        productDestroy(sum);
+        return NULL;
+    }
+    sum->classifications= asUnite(product1->classifications,product2->classifications);
+    if(!sum->classifications)
     {
         productDestroy(sum);
         return NULL;
@@ -358,13 +396,6 @@ int productGetCompAmount(Product product)
     return asGetSize(product->components);
 }
 
-/**
- *   productGetDate           -gives the date of creation of the product
- * @param product
- * @return
- *  NULL if there was an erorr
- *  Date otherwise
- */
 void* productGetDate(Product product)
 {
     if(!product)
