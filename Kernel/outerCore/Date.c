@@ -10,7 +10,7 @@ typedef struct ReferenceDate_t{
     int times;
 }*Refdate;
 
-Refdate first= NULL;
+static Refdate first= NULL;
 
 static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
                                  30, 31, 30, 31};
@@ -279,7 +279,7 @@ static int dateToDays(Date date)
 
 int dateCompeare(Date date1, Date date2)
 {
-    if(dateDifference(date1,date2)==0||date1->diffFunc(date1->outerDate,date2->outerDate)==0)
+    if(dateDifference(date1,date2)==0 && date1->diffFunc(date1->outerDate,date2->outerDate)==0)
     {
         return 0;
     }

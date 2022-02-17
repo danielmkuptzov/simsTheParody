@@ -42,6 +42,7 @@
  *   productSetType           -to change a product clasificasion
  *   productGetTypeOfProd     -to find the types of the product (this is an array so take notice)
  *   isProductAType           -boolean function to find if the type matches
+ *   productRemoveType        -to remove a undesireble type
  *   PRODUCT_FOREACH          -Macro for iterating over a product.Declares a new iterator for the loop.
  */
 
@@ -362,6 +363,7 @@ int productGetCompAmount(Product product);
  * @return
  *  PRODUCT_ERROR         this type already exist
  *  PRODUCT_WRONG_FORMAT  NULL arguments
+ *  PRODUCT_COMPONENT_ALREADY_EXIST
  *  PRODUCT_SUCSESS       the operation was sucssesful
  */
  ProductErrorCode productSetType(Product product, TypeOfProduct typeOfProduct);
@@ -384,6 +386,18 @@ int productGetCompAmount(Product product);
  *  false otherwise
  */
  bool isProductAType(Product product, TypeOfProduct typeOfProduct);
+
+/**
+ *   productRemoveType        -to remove a undesireble type
+ * @param product
+ * @param typeOfProduct
+ * @return
+ *  PRODUCT_ERROR         this type already exist
+ *  PRODUCT_WRONG_FORMAT  NULL arguments
+ *  PRODUCT_COMPONENT_DOES_NOT_EXIST
+ *  PRODUCT_SUCSESS       the operation was sucssesful
+ */
+ ProductErrorCode  productRemoveType(Product product,TypeOfProduct typeOfProduct);
 
 /**
  * PRODUCT_FOREACH- Macro for iterating over a product.

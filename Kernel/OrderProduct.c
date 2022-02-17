@@ -5,7 +5,7 @@
 
 #include "OrderProduct.h"
 
-Rational epsilon=NULL;
+static Rational epsilon=NULL;
 
 struct OrderUnit_t{
     Product product;
