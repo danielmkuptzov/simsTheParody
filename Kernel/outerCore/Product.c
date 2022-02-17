@@ -336,12 +336,14 @@ Product productUnite(Product product1, Product product2)
     {
         return NULL;
     }
+    asDestroy(sum->components);
     sum->components= asUnite(product1->components,product2->components);
     if(!sum->components)
     {
         productDestroy(sum);
         return NULL;
     }
+    asDestroy(sum->classifications);
     sum->classifications= asUnite(product1->classifications,product2->classifications);
     if(!sum->classifications)
     {
