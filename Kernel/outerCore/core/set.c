@@ -12,19 +12,19 @@ struct Set_t{
 
 Set setCreate(copySetElements copyElement, freeSetElements freeElement, compareSetElements compareElements)
 {
-    Set new= malloc(sizeof(struct Set_t));
-    if(!new)
+    Set new_set= malloc(sizeof(struct Set_t));
+    if(!new_set)
     {
         return NULL;
     }
-    new->elements= listCreate(copyElement, freeElement);
-    if(!(new->elements))
+    new_set->elements= listCreate(copyElement, freeElement);
+    if(!(new_set->elements))
     {
-        free(new);
+        free(new_set);
         return NULL;
     }
-    new->setcomp=compareElements;
-    return new;
+    new_set->setcomp=compareElements;
+    return new_set;
 }
 
 Set setCopy(Set set)
