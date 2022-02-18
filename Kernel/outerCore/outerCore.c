@@ -24,8 +24,8 @@ CoreUnit coreCreate(int type, CopyCOREElement copyfunc, FreeCOREElement freefunc
     {
         return NULL;
     }
-    CoreUnit new= malloc(sizeof(struct CoreUnit_t));
-    if(!new)
+    CoreUnit newCore= malloc(sizeof(struct CoreUnit_t));
+    if(!newCore)
     {
         return NULL;
     }
@@ -37,18 +37,18 @@ CoreUnit coreCreate(int type, CopyCOREElement copyfunc, FreeCOREElement freefunc
             CopyASElement copy= copyfunc;
             FreeASElement freePointer=freefunc;
             CompareASElements comparison=compfunc;
-            new->type=1;
-            new->element= asCreate(copy,freePointer,comparison,asType);
+            newCore->type=1;
+            newCore->element= asCreate(copy,freePointer,comparison,asType);
             break;
         }
         case 2:
         {
-            new->type=2;
-            new->element= dateCopy(dateGenerate());
+            newCore->type=2;
+            newCore->element= dateCopy(dateGenerate());
             break;
         }
     }
-    return new;
+    return newCore;
 }
 
 void coreDestroy(void* unit)

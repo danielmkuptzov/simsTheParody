@@ -118,60 +118,60 @@ Product productCreate(int id, char* name, ProductAmountType type,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
                       ProductCompCmp compCmp, ProductData data,int  CompType, TypeOfProduct typeOfProduct)
 {
-    Product new= malloc(sizeof(struct product_t));
-    if(!new)
+    Product newProd= malloc(sizeof(struct product_t));
+    if(!newProd)
     {
         return NULL;
     }
-    new->copyData=copyData;
-    new->data=new->copyData(data);
-    if(!new->data)
+    newProd->copyData=copyData;
+    newProd->data=newProd->copyData(data);
+    if(!newProd->data)
     {
-        free(new);
+        free(newProd);
         return NULL;
     }
-    new->components= asCreate(copyComp,freeComp, compCmp,CompType);
-    if(!new->components)
+    newProd->components= asCreate(copyComp,freeComp, compCmp,CompType);
+    if(!newProd->components)
     {
-        freeFunc(new->data);
-        free(new);
+        freeFunc(newProd->data);
+        free(newProd);
         return NULL;
     }
-    new->creationDate= dateCopy((Date)dateCre);
-    if(!new->creationDate)
+    newProd->creationDate= dateCopy((Date)dateCre);
+    if(!newProd->creationDate)
     {
-        asDestroy(new->components);
-        freeFunc(new->data);
-        free(new);
+        asDestroy(newProd->components);
+        freeFunc(newProd->data);
+        free(newProd);
         return NULL;
     }
-    new->freeData=freeFunc;
+    newProd->freeData=freeFunc;
     if(!name||name[0]==' ')
     {
-        productDestroy(new);
+        productDestroy(newProd);
         return NULL;
     }
-    new->name= stringDup(name);
-    if(!new->name)
+    newProd->name= stringDup(name);
+    if(!newProd->name)
     {
-        productDestroy(new);
+        productDestroy(newProd);
         return NULL;
     }
-    new->id=id;
-    new->amount_type= type;
-    new->classifications= asCreate(typeOfProdCopy,typeOfProdDestroy,typeOfProdCompare
+    newProd->id=id;
+    newProd->amount_type= type;
+    newProd->classifications= asCreate(typeOfProdCopy,typeOfProdDestroy,typeOfProdCompare
                               ,7);
-    if(!new->classifications)
+    if(!newProd->classifications)
     {
-        productDestroy(new);
+        productDestroy(newProd);
         return NULL;
     }
-    if(asRegister(new->classifications,&typeOfProduct)!=AS_SUCCESS)
+    if(asRegister(newProd->classifications,&typeOfProduct)!=AS_SUCCESS)
     {
-        productDestroy(new);
+        productDestroy(newProd);
         return NULL;
     }
-    return new;
+    return newProd;
 }
 
 void productDestroy(Product product)
