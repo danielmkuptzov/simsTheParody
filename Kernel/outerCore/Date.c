@@ -167,28 +167,28 @@ static Date dateCreate(int day, int month, int year,
     {
         return NULL;
     }
-    Date new= malloc(sizeof(struct Date_t));
-    if(!new)
+    Date new_date= malloc(sizeof(struct Date_t));
+    if(!new_date)
     {
         return NULL;
     }
-    new->copyFunc=copyFunc;
-    if(new->copyFunc)
+    new_date->copyFunc=copyFunc;
+    if(new_date->copyFunc)
     {
-        new->outerDate=new->copyFunc(refDate);
-        if(!new->outerDate)
+        new_date->outerDate=new_date->copyFunc(refDate);
+        if(!new_date->outerDate)
         {
             free(new);
             return NULL;
         }
     }
-    new->freeRefDate=freeFunc;
-    new->refDateAdvance=advanceFunc;
-    new->diffFunc=diffFunc;
-    new->day=day;
-    new->month=month;
-    new->year=year;
-    return new;
+    new_date->freeRefDate=freeFunc;
+    new_date->refDateAdvance=advanceFunc;
+    new_date->diffFunc=diffFunc;
+    new_date->day=day;
+    new_date->month=month;
+    new_date->year=year;
+    return new_date;
 }
 
 void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
