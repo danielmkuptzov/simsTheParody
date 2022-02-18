@@ -13,19 +13,19 @@ AmountSet asCreate(CopyASElement copyElement,
                    CompareASElements compareElements,
                    int type)
 {
-    AmountSet new= malloc(sizeof (struct AmountSet_t));
-    if(!new)
+    AmountSet newAs= malloc(sizeof (struct AmountSet_t));
+    if(!newAs)
     {
         return NULL;
     }
-    new->components= setCreate(copyElement, freeElement, compareElements);
-    if(!(new->components))
+    newAs->components= setCreate(copyElement, freeElement, compareElements);
+    if(!(newAs->components))
     {
-        free(new);
+        free(newAs);
         return NULL;
     }
-    new->type=type;
-    return new;
+    newAs->type=type;
+    return newAs;
 }
 
 void asDestroy(AmountSet set)
