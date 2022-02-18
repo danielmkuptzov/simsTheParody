@@ -178,7 +178,7 @@ static Date dateCreate(int day, int month, int year,
         new_date->outerDate=new_date->copyFunc(refDate);
         if(!new_date->outerDate)
         {
-            free(new);
+            free(new_date);
             return NULL;
         }
     }
