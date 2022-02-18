@@ -3,8 +3,9 @@ a very important note: the numbers that refere to the types:
 2.date
 3.product
 4.order product
-5.person
-6.classification
+5. rational
+6.person
+7.classification
 
 
 a template for every adt

@@ -160,7 +160,7 @@ Product productCreate(int id, char* name, ProductAmountType type,
     new->id=id;
     new->amount_type= type;
     new->classifications= asCreate(typeOfProdCopy,typeOfProdDestroy,typeOfProdCompare
-                              ,6);
+                              ,7);
     if(!new->classifications)
     {
         productDestroy(new);
