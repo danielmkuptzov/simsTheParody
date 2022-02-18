@@ -123,7 +123,8 @@ static void* cVdataCopy(void* cvdata)
         return NULL;
     }
     CVdata org= cvdata;
-    CVdata copy= cvDataCreate(org->dateStart,org->description,org->copy,org->erazor,org->cvName);
+    CVdata copy= cvDataCreate(org->dateStart,org->description,
+                              org->copy,org->erazor,org->cvName);
     if(!copy)
     {
         return NULL;
@@ -197,53 +198,53 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
     {
         return NULL;
     }
-    Person new= malloc(sizeof(struct Person_t));
-    if(!new)
+    Person newPer= malloc(sizeof(struct Person_t));
+    if(!newPer)
     {
         return NULL;
     }
-    new->id=id;
-    new->name= stringDup(name);
-    if(!new->name)
+    newPer->id=id;
+    newPer->name= stringDup(name);
+    if(!newPer->name)
     {
-        personDestroy(new);
+        personDestroy(newPer);
         return NULL;
     }
-    new->wishList= coreCreate(1,orderUnitCopy,
+    newPer->wishList= coreCreate(1,orderUnitCopy,
                               orderunitdestroy,orderunitcomp,5);
-    if(!new->wishList)
+    if(!newPer->wishList)
     {
-        personDestroy(new);
+        personDestroy(newPer);
         return NULL;
     }
-    new->salary=0.0;
-    new->balance= rationalCreate(0,1);
-    if(!new->balance)
+    newPer->salary=0.0;
+    newPer->balance= rationalCreate(0,1);
+    if(!newPer->balance)
     {
-        personDestroy(new);
+        personDestroy(newPer);
         return NULL;
     }
-    new->dateOfBirth= coreCopy((CoreUnit)dateOfBirth);
-    if(!new->dateOfBirth)
+    newPer->dateOfBirth= coreCopy((CoreUnit)dateOfBirth);
+    if(!newPer->dateOfBirth)
     {
-        personDestroy(new);
+        personDestroy(newPer);
         return NULL;
     }
-    new->CV=coreCreate(1,cVdataCopy,cvDataDestroy,cvDataComp,5);
-    if(!new->CV)
+    newPer->CV=coreCreate(1,cVdataCopy,cvDataDestroy,cvDataComp,5);
+    if(!newPer->CV)
     {
-        personDestroy(new);
+        personDestroy(newPer);
         return NULL;
     }
-    new->skills= coreCreate(1,copySkill,skillDestroy,skillComp,SkillType);
-    if(!new->skills)
+    newPer->skills= coreCreate(1,copySkill,skillDestroy,skillComp,SkillType);
+    if(!newPer->skills)
     {
-        personDestroy(new);
+        personDestroy(newPer);
         return NULL;
     }
-    new->age=0;
-    new->accupation=BABY;
-    return new;
+    newPer->age=0;
+    newPer->accupation=BABY;
+    return newPer;
 }
 
 void personDestroy(Person person)
