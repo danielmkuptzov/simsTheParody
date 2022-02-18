@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 # Set <PROJNAME> to be your project name. We set C here as the target language. for future expansion to add c++
-project(danielCity VERSION 0.1.0 LANGUAGES C)
+project(danielCity VERSION 0.1.0 LANGUAGES C CXX)
 
 # If you want to see "under the hood" of CMake, uncomment this:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
