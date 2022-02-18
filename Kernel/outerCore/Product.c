@@ -159,9 +159,14 @@ Product productCreate(int id, char* name, ProductAmountType type,
     }
     new->id=id;
     new->amount_type= type;
-    new->components= asCreate(typeOfProdCopy,typeOfProdDestroy,typeOfProdCompare
-                              ,1);
-    if(asRegister(new->components,&typeOfProduct)!=AS_SUCCESS)
+    new->classifications= asCreate(typeOfProdCopy,typeOfProdDestroy,typeOfProdCompare
+                              ,6);
+    if(!new->classifications)
+    {
+        productDestroy(new);
+        return NULL;
+    }
+    if(asRegister(new->classifications,&typeOfProduct)!=AS_SUCCESS)
     {
         productDestroy(new);
         return NULL;
