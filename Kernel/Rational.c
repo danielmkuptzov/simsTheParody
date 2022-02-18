@@ -58,8 +58,8 @@ Rational rationalCreate(int numerator,int denumerator)
     {
         return NULL;
     }
-    Rational new= malloc(sizeof(struct Rational_t));
-    if(!new)
+    Rational newRas= malloc(sizeof(struct Rational_t));
+    if(!newRas)
     {
         return NULL;
     }
@@ -69,9 +69,9 @@ Rational rationalCreate(int numerator,int denumerator)
         denumerator=-1*denumerator;
     }
     int gcd=rationalGcd(numerator,denumerator);
-    new->numerator=numerator/gcd;
-    new->denumerator=denumerator/gcd;
-    return new;
+    newRas->numerator=numerator/gcd;
+    newRas->denumerator=denumerator/gcd;
+    return newRas;
 }
 
 void rationalDestroy(Rational rational)

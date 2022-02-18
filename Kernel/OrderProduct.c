@@ -73,25 +73,25 @@ OrderUnit productUnitCreate(Product product, Rational initialAmount)
         return NULL;
     }
     rationalDestroy(zero);
-    OrderUnit new= malloc(sizeof(struct OrderUnit_t));
-    if(!new)
+    OrderUnit newOrder= malloc(sizeof(struct OrderUnit_t));
+    if(!newOrder)
     {
         return NULL;
     }
-    new->product= productCopy(product);
-    if(!new->product)
+    newOrder->product= productCopy(product);
+    if(!newOrder->product)
     {
-        free(new);
+        free(newOrder);
         return NULL;
     }
-    new->amount= rationalCopy(initialAmount);
-    if(!new->amount)
+    newOrder->amount= rationalCopy(initialAmount);
+    if(!newOrder->amount)
     {
-        productDestroy(new->product);
-        free(new);
+        productDestroy(newOrder->product);
+        free(newOrder);
         return NULL;
     }
-    return new;
+    return newOrder;
 }
 
 void productUnitDestroy(OrderUnit unit)

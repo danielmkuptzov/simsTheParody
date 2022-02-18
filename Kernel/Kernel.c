@@ -138,12 +138,12 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
                     CopyFunc* copyFunctions, int copyFuncAmount,DestFunc* destructors,
                     int destructorsAmount, CompFunc comparison)
 {
-    Kernel new= malloc(sizeof(struct Kernel_t));
-    if(!new)
+    Kernel newKer= malloc(sizeof(struct Kernel_t));
+    if(!newKer)
     {
         return NULL;
     }
-    new->type=block;
+    newKer->type=block;
     if(creOrCp)
     {
         if(!elements)
@@ -154,31 +154,31 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
         {
             if(!copyFunctions||!destructors||!copyFunctions)
             {
-                free(new);
+                free(newKer);
                 return NULL;
             }
-            new->data= coreCreate(1,copyFunctions[0],destructors[0],
+            newKer->data= coreCreate(1,copyFunctions[0],destructors[0],
                                   comparison,*((int*)elements[0]));
         }
         else if (block==DATE)
         {
-            new->data= coreCreate(2,NULL,NULL,NULL,-1);
+            newKer->data= coreCreate(2,NULL,NULL,NULL,-1);
         }
         else if (block==PRODUCT)
         {
             if(elementsSize!=6||!copyFunctions||copyFuncAmount!=2
                 ||!destructors||destructorsAmount!=2||!comparison)
             {
-                free(new);
+                free(newKer);
                 return NULL;
             }
             ProductAmountType type= converter((char*)elements[3]);
             if(type==ERROR)
             {
-                free(new);
+                free(newKer);
                 return NULL;
             }
-            new->data= productCreate(*((int*)elements[0]),(char*)elements[2],type,
+            newKer->data= productCreate(*((int*)elements[0]),(char*)elements[2],type,
                                      copyFunctions[0],destructors[0],elements[1],copyFunctions[1],destructors[1],
                                      comparison,elements[4],*((int*)elements[5]));
         }
@@ -186,27 +186,27 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
         {
             if(elementsSize!=2||*((int*)elements[1])==0||copyFunctions||destructors||comparison)
             {
-                free(new);
+                free(newKer);
                 return NULL;
             }
-            new->data= rationalCreate(*((int*)elements[0]),*((int*)elements[1]));
+            newKer->data= rationalCreate(*((int*)elements[0]),*((int*)elements[1]));
         }
         else if (block==ORDER_PRODUCT)
         {
             if(elementsSize!=2||copyFunctions||destructors||comparison)
             {
-                free(new);
+                free(newKer);
                 return NULL;
             }
-            new->data= productUnitCreate((Product)elements[0],(Rational)elements[1]);
+            newKer->data= productUnitCreate((Product)elements[0],(Rational)elements[1]);
         }
-        if(!new->data)
+        if(!newKer->data)
         {
-            free(new);
+            free(newKer);
             return NULL;
         }
     }
-    return new;
+    return newKer;
 }
 
 void kernelDestroy(void* kernel)
