@@ -430,14 +430,30 @@ ProductErrorCode productSetType(Product product, TypeOfProduct typeOfProduct)
     return PRODUCT_SUCSESS;
 }
 
-/**
- *   productGetTypeOfProd     -to find the types of the product (this is an array so take notice)
- * @param product
- * @return
- * NULL if any problem arose
- * array otherwise
- */
-CoreUnit productGetTypeOfProd(Product product);
+CoreUnit productGetTypeOfProd(Product product)
+{
+    if(!product)
+    {
+        return NULL;
+    }
+    CoreUnit toSend= coreCreate(1,asGetCopy(product->classifications),
+                                asGetFree(product->classifications),
+                                asGetCompeare(product->classifications),
+                                asGetType(product->classifications));
+    if(!toSend)
+    {
+        return NULL;
+    }
+    AS_FOREACH(TypeOfProduct*,iter,product->classifications)
+    {
+        if(coreInsert(toSend,iter)!=CORE_SUCSESS)
+        {
+            coreDestroy(toSend);
+            return NULL;
+        }
+    }
+    return toSend;
+}
 
 /**
  *   isProductAType           -boolean function to find if the type matches
