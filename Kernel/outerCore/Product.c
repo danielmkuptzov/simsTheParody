@@ -470,14 +470,20 @@ bool isProductAType(Product product, TypeOfProduct typeOfProduct)
     return false;
 }
 
-/**
- *   productRemoveType        -to remove a undesireble type
- * @param product
- * @param typeOfProduct
- * @return
- *  PRODUCT_ERROR         this type already exist
- *  PRODUCT_WRONG_FORMAT  NULL arguments
- *  PRODUCT_COMPONENT_DOES_NOT_EXIST
- *  PRODUCT_SUCSESS       the operation was sucssesful
- */
-ProductErrorCode  productRemoveType(Product product,TypeOfProduct typeOfProduct);
+ProductErrorCode  productRemoveType(Product product,TypeOfProduct typeOfProduct)
+{
+    if(!product)
+    {
+        return PRODUCT_WRONG_FORMAT;
+    }
+    AmountSetResult resalt= asDelete(product->classifications,&typeOfProduct);
+    if(resalt==AS_ITEM_DOES_NOT_EXIST)
+    {
+        return PRODUCT_COMPONENT_DOES_NOT_EXIST;
+    }
+    if(resalt==AS_SUCCESS)
+    {
+        return PRODUCT_SUCSESS;
+    }
+    return PRODUCT_WRONG_FORMAT;
+}
