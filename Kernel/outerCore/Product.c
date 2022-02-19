@@ -455,15 +455,21 @@ CoreUnit productGetTypeOfProd(Product product)
     return toSend;
 }
 
-/**
- *   isProductAType           -boolean function to find if the type matches
- * @param product
- * @param typeOfProduct
- * @return
- *  true if the type is one of the products classsificatin
- *  false otherwise
- */
-bool isProductAType(Product product, TypeOfProduct typeOfProduct);
+bool isProductAType(Product product, TypeOfProduct typeOfProduct)
+{
+    if(!product)
+    {
+        return false;
+    }
+    AS_FOREACH(TypeOfProduct*,iter,product->classifications)
+    {
+        if(*iter==typeOfProduct)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 /**
  *   productRemoveType        -to remove a undesireble type
