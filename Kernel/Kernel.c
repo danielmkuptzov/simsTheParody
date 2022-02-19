@@ -68,6 +68,38 @@ static int typeComparison(CreatingType type1, CreatingType type2)
     return convertTypeToInt(type1)- convertTypeToInt(type2);
 }
 
+/**
+ *   stringCopy              -to copy strings
+ * @param org
+ * @return
+ *   NULL if any error accures
+ *   char* otherwise
+ */
+char*  stringCopy(char* org);
+
+/**
+ *   casingFixer             -to lower or upper the word
+ * @param upper
+ *      true for upper
+ *      false for lowercase
+ * @param org
+ * @return
+ *      NULL if any error accures
+ *      char* otherwise
+ */
+char*  casingFixer(bool upper, char* org);
+
+/**
+ *   stringComp              -compare between strings
+ * @param first
+ * @param second
+ * @return
+ *   positive first> second
+ *   negative second> first
+ *   0 if they are equal
+ */
+int  stringComp(char* first, char* second);
+
 struct Kernel_t{
     CreatingType type;
     void* data;

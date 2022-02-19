@@ -13,6 +13,9 @@
  *
  *
  * The following functions are available:
+ *   stringCopy              -to copy strings
+ *   casingFixer             -to lower or upper the word
+ *   stringComp              -compare between strings
  *   kernelBeginner          -the function that you use to begin the date function
  *   kernelEpsilonSetter     -to set the epsilon we would work on
  *   kernelCreate            -Creates a new kernel unit
@@ -120,6 +123,38 @@ typedef void* KerFilKey;
 typedef bool (*KernelFilter)(void*, KerFilKey);
 
 typedef struct Kernel_t* Kernel;
+
+/**
+ *   stringCopy              -to copy strings
+ * @param org
+ * @return
+ *   NULL if any error accures
+ *   char* otherwise
+ */
+char*  stringCopy(char* org);
+
+/**
+ *   casingFixer             -to lower or upper the word
+ * @param upper
+ *      true for upper
+ *      false for lowercase
+ * @param org
+ * @return
+ *      NULL if any error accures
+ *      char* otherwise
+ */
+char*  casingFixer(bool upper, char* org);
+
+/**
+ *   stringComp              -compare between strings
+ * @param first
+ * @param second
+ * @return
+ *   positive first> second
+ *   negative second> first
+ *   0 if they are equal
+ */
+int  stringComp(char* first, char* second);
 
 /**
  *   kernelBeginner          -the function that you use to begin the date function
