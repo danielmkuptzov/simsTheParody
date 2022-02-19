@@ -19,6 +19,9 @@
  *
  *
  * The following functions are available:
+ *   stringDup                -a more convinient copy function for strings
+ *   casingFix                -for comparison purpose
+ *   nameComparison           -more accurate string comparison
  *   productCreate            - Creates a new product
  *   productDestroy           - Deletes an existing product and frees all resources
  *   productCopy              - Copies an existing product
@@ -134,6 +137,41 @@ typedef enum ProductAmountType_t {
     ANY_AMOUNT,
     ERROR
 } ProductAmountType;
+
+/**
+ * string functions for not duplicating code
+ */
+
+/**
+ *   stringDup                -a more convinient copy function for strings
+ * @param str
+ * @return
+ *  NULL if any error accured
+ *  char* otherwise
+ */
+char* stringDup(char* str);
+
+/**
+ *   casingFix                -for comparison purpose
+ * @param upperCase
+ * @param fixstring
+ * @return
+ *  Null if there was any error
+ *  char* elsewise
+ */
+char *casingFix(bool upperCase, char *fixstring);
+
+/**
+ *   nameComparison           -more accurate string comparison
+ * @param first
+ * @param second
+ * @return
+ * positive if first>second
+ * negative if second>first
+ * 0 if they are equal
+ */
+int nameComparison(char* first, char*second);
+
 
 /**
  * product error codes

@@ -10,45 +10,6 @@
 #define LOW_MIN 'a'
 #define LOW_MAX 'z'
 
-static char* stringDup(char* str)
-{
-    char* copy = malloc(strlen(str) + 1);
-    return copy ? strcpy(copy, str) : NULL;
-}
-
-static char *casingFix(bool upperCase, char *fixstring)
-{
-    if(!(upperCase)&&((fixstring[0]>=CAP_MIN)&&(fixstring[0]<=CAP_MAX)))
-    {
-        fixstring[0]=fixstring[0]-CAP_MIN+LOW_MIN;
-    }
-    if(upperCase&&((fixstring[0]>=LOW_MIN)&&(fixstring[0]<=LOW_MAX)))
-    {
-        fixstring[0]=fixstring[0]-LOW_MIN+CAP_MIN;
-    }
-    return fixstring;
-}
-
-static int nameComparison(char* first, char*second)
-{
-    char* mainName=NULL;
-    char* secondName=NULL;
-    if(((first[0]>=CAP_MIN)&&(first[0]<=CAP_MAX))||((second[0]>=CAP_MIN)&&(second[0]<=CAP_MAX)))
-    {
-        mainName=   casingFix(true,stringDup(first));
-        secondName= casingFix(true,stringDup(second));
-    }
-    else
-    {
-        mainName=   casingFix(false,stringDup(first));
-        secondName= casingFix(false,stringDup(second));
-    }
-    int diff= strcmp(mainName,secondName);
-    free(mainName);
-    free(secondName);
-    return diff;
-}
-
 static char* typeToStringConvert(TypeOfProduct typeOfProduct)
 {
     if(typeOfProduct==FURNITURE)
@@ -100,7 +61,45 @@ static int typeOfProdCompare(void* type1, void* type2)
     return nameComparison(typeToStringConvert(*tmp1), typeToStringConvert(*tmp2));
 }
 
-// Product struct - represents a product in MatamIkya
+char* stringDup(char* str)
+{
+    char* copy = malloc(strlen(str) + 1);
+    return copy ? strcpy(copy, str) : NULL;
+}
+
+char *casingFix(bool upperCase, char *fixstring)
+{
+    if(!(upperCase)&&((fixstring[0]>=CAP_MIN)&&(fixstring[0]<=CAP_MAX)))
+    {
+        fixstring[0]=fixstring[0]-CAP_MIN+LOW_MIN;
+    }
+    if(upperCase&&((fixstring[0]>=LOW_MIN)&&(fixstring[0]<=LOW_MAX)))
+    {
+        fixstring[0]=fixstring[0]-LOW_MIN+CAP_MIN;
+    }
+    return fixstring;
+}
+
+int nameComparison(char* first, char*second)
+{
+    char* mainName=NULL;
+    char* secondName=NULL;
+    if(((first[0]>=CAP_MIN)&&(first[0]<=CAP_MAX))||((second[0]>=CAP_MIN)&&(second[0]<=CAP_MAX)))
+    {
+        mainName=   casingFix(true,stringDup(first));
+        secondName= casingFix(true,stringDup(second));
+    }
+    else
+    {
+        mainName=   casingFix(false,stringDup(first));
+        secondName= casingFix(false,stringDup(second));
+    }
+    int diff= strcmp(mainName,secondName);
+    free(mainName);
+    free(secondName);
+    return diff;
+}
+
 struct product_t {
     AmountSet classifications;
     Date creationDate;
