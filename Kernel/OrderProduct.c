@@ -83,16 +83,6 @@ bool productUnitIsACategory(OrderUnit unit,TypeOfProduct typeOfProduct)
     return isProductAType(unit->product,typeOfProduct);
 }
 
-/**
- *   productUnitRemoveCategory -removes a category by users request
- * @param unit
- * @param typeOfProduct
- * @return
- *   ORDER_UNIT_NULL_ARGUMENT  -a NULL was passed
- *   ORDER_UNIT_ERROR          -new unknown error
- *   ORDER_UNIT_CATEGORY_DOES_NOT_EXIST  -the product didn't existed
- *   ORDER_UNIT_SUCSESS  -sucsess
- */
 OrderUnitErrors productUnitRemoveCategory(OrderUnit unit,TypeOfProduct typeOfProduct)
 {
     if(!unit)
@@ -103,6 +93,14 @@ OrderUnitErrors productUnitRemoveCategory(OrderUnit unit,TypeOfProduct typeOfPro
     if(resalt==PRODUCT_CATEGORY_DOES_NOT_EXIST)
     {
         return ORDER_UNIT_CATEGORY_DOES_NOT_EXIST;
+    }
+    else if(resalt==PRODUCT_SUCSESS)
+    {
+        return ORDER_UNIT_SUCSESS;
+    }
+    else
+    {
+        return ORDER_UNIT_ERROR;
     }
 }
 
