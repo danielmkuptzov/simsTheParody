@@ -12,6 +12,10 @@
  *
  * The following functions are available:
  *   productSetEpsilon         -sets the epsilon of the margin
+ *   productUnitAddCategory    -adds new category for the product
+ *   productUnitIsACategory    -checks if the product is in a specific category
+ *   productUnitRemoveCategory -removes a category by users request
+ *   productUnitGetCategories  -returns the categories the product have
  *   productUnitCreate         -Creates the order product.
  *   productUnitDestroy        -Deletes an existing order product and frees all resources
  *   productUnitCopy           -Copies an existing order product
@@ -30,6 +34,8 @@ typedef enum {
     ORDER_UNIT_ERROR,
     ORDER_UNIT_WRONG_AMOUNT,
     ORDER_UNIT_TOO_MUCH,
+    ORDER_UNIT_CATEGORY_DOES_NOT_EXIST,
+    ORDRE_UNIT_CATEGORY_EXIST,
     ORDER_UNIT_SUCSESS
 } OrderUnitErrors;
 
@@ -40,6 +46,49 @@ typedef struct OrderUnit_t* OrderUnit;
  * @param margin- the margin should be less than 1
  */
 void  productSetEpsilon(Rational margin);
+
+/**
+ *   productUnitAddCategory    -adds new category for the product
+ * @param unit
+ * @param typeOfProduct
+ * @return
+ *   ORDER_UNIT_NULL_ARGUMENT -a NULL argument was passed
+ *   ORDRE_UNIT_CATEGORY_EXIST -the category we want to add exist
+ *   ORDER_UNIT_ERROR          -any error not directly related to the previous codes
+ *   ORDER_UNIT_SUCSESS        - sucsess
+ */
+OrderUnitErrors productUnitAddCategory(OrderUnit unit,TypeOfProduct typeOfProduct);
+
+/**
+ *   productUnitIsACategory    -checks if the product is in a specific category
+ * @param unit
+ * @param typeOfProduct
+ * @return
+ *   true if exist
+ *   false if not
+ */
+bool productUnitIsACategory(OrderUnit unit,TypeOfProduct typeOfProduct);
+
+/**
+ *   productUnitRemoveCategory -removes a category by users request
+ * @param unit
+ * @param typeOfProduct
+ * @return
+ *   ORDER_UNIT_NULL_ARGUMENT  -a NULL was passed
+ *   ORDER_UNIT_ERROR          -new unknown error
+ *   ORDER_UNIT_CATEGORY_DOES_NOT_EXIST  -the product didn't existed
+ *   ORDER_UNIT_SUCSESS  -sucsess
+ */
+OrderUnitErrors productUnitRemoveCategory(OrderUnit unit,TypeOfProduct typeOfProduct);
+
+/**
+ *   productUnitGetCategories  -returns the categories the product have
+ * @param unit
+ * @return
+ *  NULL for any error
+ *  coreunit otherwise
+ */
+CoreUnit productUnitGetCategories(OrderUnit unit);
 
 /**
  *   productUnitCreate         -Creates the order product.
