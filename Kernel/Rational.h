@@ -15,6 +15,7 @@
  * please use with care
  *
  * The following functions are available:
+ *   powerInt                 -power function for integers
  *   doubleToRationalConvert  -converts from double to rational
  *   rationalCreate           -Creates the rational number.
  *   rationalDestroy          -Deletes an existing rational and frees all resources
@@ -51,6 +52,15 @@ typedef enum {
 } RtionalErrorCode;
 
 typedef struct Rational_t* Rational;
+
+/**
+ *   powerInt                 -power function for integers
+ * @param base
+ * @param power
+ * @return
+ *  an answer to base^power
+ */
+int powerInt(int base, int power);
 
 /**
  *   doubleToRationalConvert  -converts from double to rational

@@ -33,7 +33,7 @@ static int rationalToDoubleConverter(Rational rational)
     return -1;
 }
 
-static int powerInt(int base, int power)
+int powerInt(int base, int power)
 {
     int resalt=1;
     for(int i=0; i<power; i++)
