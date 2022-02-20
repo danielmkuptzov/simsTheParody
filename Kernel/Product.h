@@ -180,6 +180,8 @@ typedef enum ProductErrorCode_t{
     PRODUCT_ERROR,
     PRODUCT_COMPONENT_ALREADY_EXIST,
     PRODUCT_COMPONENT_DOES_NOT_EXIST,
+    PRODUCT_CATEGORY_EXIST,
+    PRODUCT_CATEGORY_DOES_NOT_EXIST,
     PRODUCT_WRONG_FORMAT,
     PRODUCT_SUCSESS
 } ProductErrorCode;
@@ -401,7 +403,7 @@ int productGetCompAmount(Product product);
  * @return
  *  PRODUCT_ERROR         this type already exist
  *  PRODUCT_WRONG_FORMAT  NULL arguments
- *  PRODUCT_COMPONENT_ALREADY_EXIST
+ *  PRODUCT_CATEGORY_EXIST
  *  PRODUCT_SUCSESS       the operation was sucssesful
  */
  ProductErrorCode productSetType(Product product, TypeOfProduct typeOfProduct);
@@ -432,7 +434,7 @@ int productGetCompAmount(Product product);
  * @return
  *  PRODUCT_ERROR         this type already exist
  *  PRODUCT_WRONG_FORMAT  NULL arguments
- *  PRODUCT_COMPONENT_DOES_NOT_EXIST
+ *  PRODUCT_CATEGORY_DOES_NOT_EXIST
  *  PRODUCT_SUCSESS       the operation was sucssesful
  */
  ProductErrorCode  productRemoveType(Product product,TypeOfProduct typeOfProduct);

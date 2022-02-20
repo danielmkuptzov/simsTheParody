@@ -53,27 +53,35 @@ void  productSetEpsilon(Rational margin)
     }
 }
 
-/**
- *   productUnitAddCategory    -adds new category for the product
- * @param unit
- * @param typeOfProduct
- * @return
- *   ORDER_UNIT_NULL_ARGUMENT -a NULL argument was passed
- *   ORDRE_UNIT_CATEGORY_EXIST -the category we want to add exist
- *   ORDER_UNIT_ERROR          -any error not directly related to the previous codes
- *   ORDER_UNIT_SUCSESS        - sucsess
- */
-OrderUnitErrors productUnitAddCategory(OrderUnit unit,TypeOfProduct typeOfProduct);
+OrderUnitErrors productUnitAddCategory(OrderUnit unit,TypeOfProduct typeOfProduct)
+{
+    if(!unit)
+    {
+        return ORDER_UNIT_NULL_ARGUMENT;
+    }
+    ProductErrorCode resalt= productSetType(unit->product,typeOfProduct);
+    if(resalt==PRODUCT_CATEGORY_EXIST)
+    {
+        return ORDRE_UNIT_CATEGORY_EXIST;
+    }
+    else if(resalt==PRODUCT_SUCSESS)
+    {
+        return ORDER_UNIT_SUCSESS;
+    }
+    else
+    {
+        return ORDER_UNIT_ERROR;
+    }
+}
 
-/**
- *   productUnitIsACategory    -checks if the product is in a specific category
- * @param unit
- * @param typeOfProduct
- * @return
- *   true if exist
- *   false if not
- */
-bool productUnitIsACategory(OrderUnit unit,TypeOfProduct typeOfProduct);
+bool productUnitIsACategory(OrderUnit unit,TypeOfProduct typeOfProduct)
+{
+    if(!unit)
+    {
+        return false;
+    }
+    return isProductAType(unit->product,typeOfProduct);
+}
 
 /**
  *   productUnitRemoveCategory -removes a category by users request
@@ -85,7 +93,18 @@ bool productUnitIsACategory(OrderUnit unit,TypeOfProduct typeOfProduct);
  *   ORDER_UNIT_CATEGORY_DOES_NOT_EXIST  -the product didn't existed
  *   ORDER_UNIT_SUCSESS  -sucsess
  */
-OrderUnitErrors productUnitRemoveCategory(OrderUnit unit,TypeOfProduct typeOfProduct);
+OrderUnitErrors productUnitRemoveCategory(OrderUnit unit,TypeOfProduct typeOfProduct)
+{
+    if(!unit)
+    {
+        return ORDER_UNIT_NULL_ARGUMENT;
+    }
+    ProductErrorCode resalt= productRemoveType(unit->product,typeOfProduct);
+    if(resalt==PRODUCT_CATEGORY_DOES_NOT_EXIST)
+    {
+        return ORDER_UNIT_CATEGORY_DOES_NOT_EXIST;
+    }
+}
 
 /**
  *   productUnitGetCategories  -returns the categories the product have

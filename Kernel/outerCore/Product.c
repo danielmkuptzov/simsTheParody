@@ -424,7 +424,7 @@ ProductErrorCode productSetType(Product product, TypeOfProduct typeOfProduct)
     }
     else if(resalt==AS_ITEM_ALREADY_EXISTS)
     {
-        return PRODUCT_COMPONENT_ALREADY_EXIST;
+        return PRODUCT_CATEGORY_EXIST;
     }
     return PRODUCT_SUCSESS;
 }
@@ -479,7 +479,7 @@ ProductErrorCode  productRemoveType(Product product,TypeOfProduct typeOfProduct)
     AmountSetResult resalt= asDelete(product->classifications,&typeOfProduct);
     if(resalt==AS_ITEM_DOES_NOT_EXIST)
     {
-        return PRODUCT_COMPONENT_DOES_NOT_EXIST;
+        return PRODUCT_CATEGORY_DOES_NOT_EXIST;
     }
     if(resalt==AS_SUCCESS)
     {
