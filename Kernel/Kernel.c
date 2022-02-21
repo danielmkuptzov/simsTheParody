@@ -73,17 +73,14 @@ char*  stringCopy(char* org)
     return stringDup(org);
 }
 
-/**
- *   casingFixer             -to lower or upper the word
- * @param upper
- *      true for upper
- *      false for lowercase
- * @param org
- * @return
- *      NULL if any error accures
- *      char* otherwise
- */
-char*  casingFixer(bool upper, char* org);
+char*  casingFixer(bool upper, char* org)
+{
+    if(!org)
+    {
+        return NULL;
+    }
+    return casingFix(upper,org);
+}
 
 /**
  *   stringComp              -compare between strings
