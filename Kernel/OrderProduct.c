@@ -104,14 +104,14 @@ OrderUnitErrors productUnitRemoveCategory(OrderUnit unit,TypeOfProduct typeOfPro
     }
 }
 
-/**
- *   productUnitGetCategories  -returns the categories the product have
- * @param unit
- * @return
- *  NULL for any error
- *  coreunit otherwise
- */
-CoreUnit productUnitGetCategories(OrderUnit unit);
+CoreUnit productUnitGetCategories(OrderUnit unit)
+{
+    if(!unit)
+    {
+        return NULL;
+    }
+    return productGetTypeOfProd(unit->product);
+}
 
 OrderUnit productUnitCreate(Product product, Rational initialAmount)
 {

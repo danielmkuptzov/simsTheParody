@@ -68,14 +68,10 @@ static int typeComparison(CreatingType type1, CreatingType type2)
     return convertTypeToInt(type1)- convertTypeToInt(type2);
 }
 
-/**
- *   stringCopy              -to copy strings
- * @param org
- * @return
- *   NULL if any error accures
- *   char* otherwise
- */
-char*  stringCopy(char* org);
+char*  stringCopy(char* org)
+{
+    return stringDup(org);
+}
 
 /**
  *   casingFixer             -to lower or upper the word
