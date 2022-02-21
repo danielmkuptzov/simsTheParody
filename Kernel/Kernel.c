@@ -82,16 +82,10 @@ char*  casingFixer(bool upper, char* org)
     return casingFix(upper,org);
 }
 
-/**
- *   stringComp              -compare between strings
- * @param first
- * @param second
- * @return
- *   positive first> second
- *   negative second> first
- *   0 if they are equal
- */
-int  stringComp(char* first, char* second);
+int  stringComp(char* first, char* second)
+{
+    return nameComparison(first, second);
+}
 
 struct Kernel_t{
     CreatingType type;

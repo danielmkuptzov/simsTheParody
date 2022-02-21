@@ -57,6 +57,7 @@ typedef enum {
     PRODUCT,
     RATIONAL,
     ORDER_PRODUCT,
+    CATEGORY,
     ERROR_TYPE
 } CreatingType;
 
@@ -189,6 +190,7 @@ void kernelEpsilonSetter(int base);
  *           4-additional data
  *           5-component data
  *           6-component type
+ *           7-main category of the product
  * @param elementsSize        -the elements array size
  * @param copyFunctions       -the copy functions we need
  * @param copyFuncAmount      -the size of the copy functions array
