@@ -21,6 +21,8 @@ struct Date_t{
     int day;
     Months month;
     int year;
+    int milenia;
+    int hanoyYear;
     ReferanceDate outerDate;
     CopyRefDate copyFunc;
     FreeRefDate freeRefDate;
@@ -131,6 +133,14 @@ static void intDateReturn(Date date, int back)
         {
             if(tmpDate->month==JAN)
             {
+                if(tmpDate->year==0||tmpDate->year==-999999999)
+                {
+                    if(tmpDate->milenia==0||tmpDate->milenia==-999999999)
+                    {
+                        tmpDate->hanoyYear--;
+                    }
+                    tmpDate->milenia--;
+                }
                 tmpDate->year--;
                 tmpDate->month=DEC;
                 tmpDate->day=dayInMonth[monthToInt(DEC)-1];
@@ -152,7 +162,7 @@ static void intDateReturn(Date date, int back)
     date->day=tmpDate->day;
 }
 
-static Date dateCreate(int day, int month, int year,
+static Date dateCreate(int day, int month, int year, int milenia, int hanoyYear,
                 CopyRefDate copyFunc, FreeRefDate freeFunc,
                 RefDateAdvance advanceFunc, DifferenceCalculator diffFunc,
                 ReferanceDate refDate)
@@ -188,6 +198,8 @@ static Date dateCreate(int day, int month, int year,
     new_date->day=day;
     new_date->month=month;
     new_date->year=year;
+    new_date->milenia=milenia;
+    new_date->hanoyYear=hanoyYear;
     return new_date;
 }
 
@@ -196,7 +208,7 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                      ReferanceDate date,DayOne firstDay)
 {
     first= malloc(sizeof(struct Date_t));
-    Date dateOne=dateCreate(1,1,0,
+    Date dateOne=dateCreate(1,1,0,0,0,
                             copyFunc,freeFunc,advanceFunc,diffFunc,date);
     intDateReturn(dateOne,firstDay());
     first->initialisationDate=dateOne;
@@ -224,6 +236,23 @@ static void dateAdvance(Date date)
     {
         if(date->month==DEC)
         {
+            if(date->year==999999999)
+            {
+                if(date->milenia==999999999)
+                {
+                    date->hanoyYear++;
+                    date->milenia=0;
+                    date->year=0;
+                    date->month=JAN;
+                    date->day=1;
+                    return;
+                }
+                date->milenia++;
+                date->year=0;
+                date->month=JAN;
+                date->day=1;
+                return;
+            }
             date->year++;
             date->month=JAN;
             date->day=1;
@@ -243,7 +272,8 @@ Date dateCopy(Date date)
     {
         return NULL;
     }
-    return dateCreate(date->day,date->month,date->year,date->copyFunc,
+    return dateCreate(date->day,date->month,date->year,date->milenia,
+                      date->hanoyYear,date->copyFunc,
                       date->freeRefDate,date->refDateAdvance,
                       date->diffFunc,date->outerDate);
 }
