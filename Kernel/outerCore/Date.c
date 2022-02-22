@@ -236,9 +236,9 @@ static void dateAdvance(Date date)
     {
         if(date->month==DEC)
         {
-            if(date->year==999999999)
+            if(date->year==-1||date->year==999999999)
             {
-                if(date->milenia==999999999)
+                if(date->milenia==-1||date->milenia==999999999)
                 {
                     date->hanoyYear++;
                     date->milenia=0;
