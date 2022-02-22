@@ -195,7 +195,8 @@ typedef enum {
     ELECTRONICS,
     FOOD,
     BOOK,
-    MEDICINE
+    MEDICINE,
+    NONE_EXIST_TYPE
 } TypeOfProduct;
 
 /**

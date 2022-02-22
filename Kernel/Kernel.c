@@ -68,8 +68,30 @@ static int typeComparison(CreatingType type1, CreatingType type2)
     return convertTypeToInt(type1)- convertTypeToInt(type2);
 }
 
-static char* stringToTypeConvert(char* name)
-{}
+static TypeOfProduct stringToTypeConvert(char* name)
+{
+    if(stringComp(name,"furniture")==0)
+    {
+        return FURNITURE;
+    }
+    else if(stringComp(name,"electronics")==0)
+    {
+        return ELECTRONICS;
+    }
+    else if(stringComp(name,"food")==0)
+    {
+        return FOOD;
+    }
+    else if(stringComp(name,"book")==0)
+    {
+        return BOOK;
+    }
+    else if(stringComp(name,"medicine")==0)
+    {
+        return MEDICINE;
+    }
+    return NONE_EXIST_TYPE;
+}
 
 char*  stringCopy(char* org)
 {
@@ -161,10 +183,15 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
                 free(newKer);
                 return NULL;
             }
-            TypeOfProduct* tmp= stringToTypeConvert(elements[7]);
+            TypeOfProduct tmp= stringToTypeConvert(elements[7]);
+            if(tmp==NONE_EXIST_TYPE)
+            {
+                free(newKer);
+                return NULL;
+            }
             newKer->data= productCreate(*((int*)elements[0]),(char*)elements[2],type,
                                      copyFunctions[0],destructors[0],elements[1],copyFunctions[1],destructors[1],
-                                     comparison,elements[4],*((int*)elements[5]),);
+                                     comparison,elements[4],*((int*)elements[5]),tmp);
         }
         else if (block==RATIONAL)
         {
