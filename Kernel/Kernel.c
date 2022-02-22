@@ -68,6 +68,9 @@ static int typeComparison(CreatingType type1, CreatingType type2)
     return convertTypeToInt(type1)- convertTypeToInt(type2);
 }
 
+static char* stringToTypeConvert(char* name)
+{}
+
 char*  stringCopy(char* org)
 {
     return stringDup(org);
@@ -146,7 +149,7 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
         }
         else if (block==PRODUCT)
         {
-            if(elementsSize!=6||!copyFunctions||copyFuncAmount!=2
+            if(elementsSize!=8||!copyFunctions||copyFuncAmount!=2
                 ||!destructors||destructorsAmount!=2||!comparison)
             {
                 free(newKer);
@@ -158,9 +161,10 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
                 free(newKer);
                 return NULL;
             }
+            TypeOfProduct* tmp= stringToTypeConvert(elements[7]);
             newKer->data= productCreate(*((int*)elements[0]),(char*)elements[2],type,
                                      copyFunctions[0],destructors[0],elements[1],copyFunctions[1],destructors[1],
-                                     comparison,elements[4],*((int*)elements[5]));
+                                     comparison,elements[4],*((int*)elements[5]),);
         }
         else if (block==RATIONAL)
         {
