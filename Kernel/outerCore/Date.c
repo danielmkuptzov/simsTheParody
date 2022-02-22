@@ -19,6 +19,26 @@ struct  counter_t{
     int longest;
 };
 
+static Refdate first= NULL;
+
+static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
+                           30, 31, 30, 31};
+
+typedef enum months{ JAN=1,FEB=2,MAR=3,APR=4,MAY=5,JUN=6,JUL=7,AUG=8,SEP=9,OCT=10,NOV=11,DEC=12} Months;
+
+struct Date_t{
+    int day;
+    Months month;
+    int year;
+    int milenia;
+    int hanoyYear;
+    ReferanceDate outerDate;
+    CopyRefDate copyFunc;
+    FreeRefDate freeRefDate;
+    RefDateAdvance refDateAdvance;
+    DifferenceCalculator diffFunc;
+};
+
 static int counterAdvance(Counter counter)
 {
     if(counter->lowest==999999999)
@@ -55,26 +75,6 @@ static int counterAdvance(Counter counter)
     }
     return 0;
 }
-
-static Refdate first= NULL;
-
-static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
-                                 30, 31, 30, 31};
-
-typedef enum months{ JAN=1,FEB=2,MAR=3,APR=4,MAY=5,JUN=6,JUL=7,AUG=8,SEP=9,OCT=10,NOV=11,DEC=12} Months;
-
-struct Date_t{
-    int day;
-    Months month;
-    int year;
-    int milenia;
-    int hanoyYear;
-    ReferanceDate outerDate;
-    CopyRefDate copyFunc;
-    FreeRefDate freeRefDate;
-    RefDateAdvance refDateAdvance;
-    DifferenceCalculator diffFunc;
-};
 
 static int monthToInt(Months month)
 {
