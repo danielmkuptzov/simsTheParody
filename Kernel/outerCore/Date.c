@@ -325,7 +325,7 @@ static int dateAdvance(Date date)
             {
                 date->year++;
             }
-            date->month==JAN;
+            date->month=JAN;
         }
         else
         {
