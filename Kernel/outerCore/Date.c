@@ -5,10 +5,56 @@
 
 #define MIN_DAY 1
 
+typedef struct counter_t* Counter;
+
 typedef struct ReferenceDate_t{
     Date initialisationDate;
-    int times;
+    Counter times;
 }*Refdate;
+
+struct  counter_t{
+    int lowest;
+    int  middle;
+    int hightest;
+    int longest;
+};
+
+static int counterAdvance(Counter counter)
+{
+    if(counter->lowest==999999999)
+    {
+        if(counter->middle==999999999)
+        {
+            if(counter->hightest==999999999)
+            {
+                if(counter->longest==999999999)
+                {
+                    return -1;
+                }
+                else
+                {
+                    counter->longest++;
+                }
+                counter->hightest=0;
+            }
+            else
+            {
+                counter->hightest++;
+            }
+            counter->middle=0;
+        }
+        else
+        {
+            counter->middle++;
+        }
+        counter->lowest=0;
+    }
+    else
+    {
+        counter->lowest++;
+    }
+    return 0;
+}
 
 static Refdate first= NULL;
 
@@ -208,11 +254,30 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                      ReferanceDate date,DayOne firstDay)
 {
     first= malloc(sizeof(struct Date_t));
+    if(!first)
+    {
+        return;
+    }
     Date dateOne=dateCreate(1,1,0,0,0,
                             copyFunc,freeFunc,advanceFunc,diffFunc,date);
+    if(!dateOne)
+    {
+        free(first);
+        return;
+    }
     intDateReturn(dateOne,firstDay());
     first->initialisationDate=dateOne;
-    first->times=0;
+    first->times= malloc(sizeof(struct counter_t));
+    if(!first->times)
+    {
+        dateDestroy(first->initialisationDate);
+        free(first);
+        return;
+    }
+    first->times->lowest=0;
+    first->times->middle=0;
+    first->times->hightest=0;
+    first->times->longest=0;
 }
 
 void dateDestroy(Date date)
@@ -228,7 +293,7 @@ void dateDestroy(Date date)
     free(date);
 }
 
-static void dateAdvance(Date date)
+static int dateAdvance(Date date)
 {
     date->refDateAdvance(date->outerDate);
     yearFixer(date->year);
@@ -240,30 +305,39 @@ static void dateAdvance(Date date)
             {
                 if(date->milenia==-1||date->milenia==999999999)
                 {
-                    date->hanoyYear++;
+                    if(date->hanoyYear==999999999)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        date->hanoyYear++;
+                    }
                     date->milenia=0;
-                    date->year=0;
-                    date->month=JAN;
-                    date->day=1;
-                    return;
                 }
-                date->milenia++;
+                else
+                {
+                    date->milenia++;
+                }
                 date->year=0;
-                date->month=JAN;
-                date->day=1;
-                return;
             }
-            date->year++;
-            date->month=JAN;
-            date->day=1;
-            return;
+            else
+            {
+                date->year++;
+            }
+            date->month==JAN;
         }
-        date->month++;
+        else
+        {
+            date->month++;
+        }
         date->day=1;
-        return;
     }
-    date->day++;
-    return;
+    else
+    {
+        date->day++;
+    }
+    return 0;
 }
 
 Date dateCopy(Date date)
@@ -322,9 +396,19 @@ Date dateGenerate()
     {
         return NULL;
     }
-    first->times++;
+    int resalt= counterAdvance(first->times);
+    if(resalt==-1)
+    {
+        printf("the counter is in his limit");
+        return NULL;
+    }
     Date toSend= dateCopy(first->initialisationDate);
-    dateAdvance(first->initialisationDate);
+    resalt=dateAdvance(first->initialisationDate);
+    if(resalt==-1)
+    {
+        printf("the last date of the calendar");
+        return NULL;
+    }
     return toSend;
 }
 
