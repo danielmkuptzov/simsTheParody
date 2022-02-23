@@ -57,7 +57,6 @@ typedef enum {
     PRODUCT,
     RATIONAL,
     ORDER_PRODUCT,
-    CATEGORY,
     ERROR_TYPE
 } CreatingType;
 
@@ -82,6 +81,7 @@ typedef enum {
     ELEMENT,
     NUMERATOR,
     DENUMERATOR,
+    CATEGORY,
     ADDITIONAL_DATA
 } InternalDataPart;
 

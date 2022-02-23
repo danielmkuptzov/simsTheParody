@@ -489,7 +489,16 @@ KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit)
     }
     else if(kernel->type==PRODUCT)
     {
-        ProductErrorCode resalt= productRemoveComponent(kernel->data,unit);
+        ProductErrorCode resalt;
+        if(insertType==7)
+        {
+            TypeOfProduct tmp= stringToTypeConvert(unit);
+            resalt= productRemoveType(kernel->data,tmp);
+        }
+        else
+        {
+            resalt= productRemoveComponent(kernel->data,unit);
+        }
         if(resalt==PRODUCT_COMPONENT_DOES_NOT_EXIST)
         {
             return KERNEL_ELEMENT_DOES_NOT_EXIST;
@@ -720,6 +729,10 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
         {
             return productGetAdditionalData(kernel->data);
         }
+        else if(data==CATEGORY)
+        {
+            return productGetTypeOfProd(kernel->data);
+        }
         return NULL;
     }
     else if (kernel->type==ORDER_PRODUCT)
@@ -893,9 +906,6 @@ KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element)
     return KERNEL_ERROR;
 }
 
-/**
- *   kernelEpsilonDestroyer  -to destroy the epsilon
- */
 void kernelEpsilonDestroyer()
 {
     productDestroyEpsilon();
