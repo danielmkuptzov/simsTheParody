@@ -426,8 +426,17 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
         }
         else if(kernel->type==PRODUCT)
         {
-            ProductErrorCode resalt= productAddComponent(kernel->data,unit);
-            if(resalt==PRODUCT_COMPONENT_ALREADY_EXIST)
+            ProductErrorCode resalt;
+            if(insertType==7)
+            {
+                TypeOfProduct tmp= stringToTypeConvert(unit);
+                resalt= productSetType(kernel->data,tmp);
+            }
+            else
+            {
+                resalt= productAddComponent(kernel->data,unit);
+            }
+            if(resalt==PRODUCT_COMPONENT_ALREADY_EXIST||resalt==PRODUCT_CATEGORY_EXIST)
             {
                 return KERNEL_ELEMENT_EXIST;
             }
