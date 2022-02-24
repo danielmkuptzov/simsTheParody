@@ -67,9 +67,11 @@ int main()
         Kernel tmp= kernelCopy(t);
         int* id=&k;
         void* elements[]={id, kernelGetElement(tmp),names[k],"half integer",&k,
-                          id,&k};
+                          id,&k, "medicine"};
         CopyFunc copyArr[]={intCopy, intCopy};
-        Kernel product= kernelCreate(PRODUCT,true,elements,7,copyArr,2,);
+        DestFunc dtours[]={intDest, intDest};
+        Kernel product= kernelCreate(PRODUCT,true,elements,8,copyArr,
+                                     2,dtours,2,intCompare);
         Rational amount= rationalCreate(k+1,2);
         OrderUnit productunit= productUnitCreate(product,amount);
         if(!productunit)
