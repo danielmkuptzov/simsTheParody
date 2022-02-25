@@ -61,6 +61,7 @@ int main()
     {
         return 0;
     }
+
     for (int k = 0; k < 10; ++k)
     {
         j=5;
@@ -72,6 +73,10 @@ int main()
         DestFunc dtours[]={intDest, intDest};
         Kernel product= kernelCreate(PRODUCT,true,elements,8,copyArr,
                                      2,dtours,2,intCompare);
+        int den=k+1;
+        int* pden=&den;
+
+        void* elem[]={};
         Rational amount= rationalCreate(k+1,2);
         OrderUnit productunit= productUnitCreate(product,amount);
         if(!productunit)
