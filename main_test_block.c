@@ -77,7 +77,8 @@ int main()
         int* pden=&den;
         int o=k+1;
         void* elem[]={&o,&l};
-        Kernel amount= kernelCreate();
+        Kernel amount= kernelCreate(RATIONAL,true,elem,2,NULL,0
+                                    ,NULL,0,NULL);
         OrderUnit productunit= productUnitCreate(product,amount);
         if(!productunit)
         {
