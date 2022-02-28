@@ -125,7 +125,10 @@ static int cvDataComp(void* cvData1, void* cvData2)
 
 struct Person_t
 {
-    int id;
+    void* id;
+    IdCopy copyId;
+    IdDestroy destroyId;
+    IdComp idComp;
     int age;
     Acupation accupation;
     char* name;
@@ -152,10 +155,11 @@ static int orderunitcomp(void* unit1, void* unit2)
     return productUnitCompeare((OrderUnit)unit1,(OrderUnit)unit2);
 }
 
-Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
+Person personCreate(void* id, IdCopy copyId, IdDestroy destroyId, IdComp idComp,
+                    void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
                     SkillComp skillComp, int SkillType)
 {
-    if(!name||name[0]==' ')
+    if(!name||name[0]==' '||!idComp||!destroyId)
     {
         return NULL;
     }
@@ -164,7 +168,15 @@ Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, S
     {
         return NULL;
     }
-    newPer->id=id;
+    newPer->copyId=copyId;
+    if(!newPer->copyId)
+    {
+        free(newPer);
+        return NULL;
+    }
+    newPer->destroyId=destroyId;
+    newPer->idComp=idComp;
+    newPer->id=newPer->copyId(id);
     newPer->name= stringDup(name);
     if(!newPer->name)
     {
@@ -229,8 +241,9 @@ Person personCopy(Person person)
     {
         return NULL;
     }
-    Person copy= personCreate(person->id,person->dateOfBirth,
-                              person->name,NULL,NULL,NULL,1);
+    Person copy= personCreate(person->id,person->copyId,person->destroyId, person->idComp,
+                              person->dateOfBirth,person->name,NULL,
+                              NULL,NULL,1);
     if(!copy)
     {
         return NULL;
@@ -270,7 +283,7 @@ Person personCopy(Person person)
 
 int personCompeare(Person person1, Person person2)
 {
-    return person1->id-person2->id;
+    return person1->idComp(person1->id,person2->id);
 }
 
 PersonErrorCodes personAddToWishList(Person person, void* product)
@@ -475,11 +488,11 @@ void* personGetCv(Person person)
     return person->CV;
 }
 
-int personGetId(Person person)
+void* personGetId(Person person)
 {
     if(!person)
     {
-        return -1;
+        return NULL;
     }
     return person->id;
 }

@@ -69,6 +69,27 @@ typedef enum{
     CYCLE_ERROR,
     CYCLE_SUCSESS
 } CycleReturnCode;
+
+/**
+ * the id generic type
+ */
+typedef void* Id;
+
+/**
+ * the generic copy
+ */
+typedef Id (*IdCopy)(Id);
+
+/**
+ * the id destroy
+ */
+typedef void (*IdDestroy)(Id);
+
+/**
+ * the id comparison
+ */
+typedef int (*IdComp)(Id ,Id);
+
 /**
  *  the skill generic type
  */
@@ -148,7 +169,8 @@ typedef bool (*CVFilter)(CVData,keyCV);
  * NULL if one of the critiria don't match
  * person otherwise
  */
-Person personCreate(int id, void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
+Person personCreate(void* id, IdCopy copyId, IdDestroy destroyId, IdComp idComp,
+                    void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
                     SkillComp skillComp, int SkillType);
 
 /**
@@ -324,10 +346,10 @@ void* personGetCv(Person person);
  *   personGetId                  -getter
  * @param person
  * @return
- * negative nuber if any problem accures
+ * NULL if the number was problematic
  * id otherwise
  */
-int personGetId(Person person);
+Id personGetId(Person person);
 
 /**
  *   personGetName                -getter
