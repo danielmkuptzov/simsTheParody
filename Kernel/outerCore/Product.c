@@ -103,7 +103,10 @@ int nameComparison(char* first, char*second)
 struct product_t {
     AmountSet classifications;
     Date creationDate;
-    int id;
+    ProdId id;
+    ProdIdCopy copyId;
+    ProdIdDestroy destructor;
+    ProdIdComp comparison;
     char* name;
     ProductData data;
     ProductAmountType amount_type;
@@ -112,11 +115,16 @@ struct product_t {
     AmountSet components;
 };
 
-Product productCreate(int id, char* name, ProductAmountType type,
+Product productCreate(ProdId id,ProdIdCopy copyId, ProdIdDestroy destId,
+                      ProdIdComp compId, char* name, ProductAmountType type,
                       CopyProductData copyData, FreeData freeFunc,void* dateCre,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
                       ProductCompCmp compCmp, ProductData data,int  CompType, TypeOfProduct typeOfProduct)
 {
+    if(!destId||!compId)
+    {
+        return NULL;
+    }
     Product newProd= malloc(sizeof(struct product_t));
     if(!newProd)
     {
@@ -156,7 +164,15 @@ Product productCreate(int id, char* name, ProductAmountType type,
         productDestroy(newProd);
         return NULL;
     }
-    newProd->id=id;
+    newProd->copyId=copyId;
+    if(!newProd->copyId)
+    {
+        productDestroy(newProd);
+        return NULL;
+    }
+    newProd->id=newProd->copyId(id);
+    newProd->destructor=destId;
+    newProd->comparison=compId;
     newProd->amount_type= type;
     newProd->classifications= asCreate(typeOfProdCopy,typeOfProdDestroy,typeOfProdCompare
                               ,7);
@@ -175,6 +191,7 @@ Product productCreate(int id, char* name, ProductAmountType type,
 
 void productDestroy(Product product)
 {
+    product->destructor(product->id);
     product->freeData(product->data);
     asDestroy(product->components);
     free(product->name);
@@ -190,7 +207,8 @@ Product productCopy(Product product)
         return NULL;
     }
     TypeOfProduct* mainClass= asGetFirst(product->classifications);
-    Product copy=productCreate(product->id,product->name,product->amount_type,
+    Product copy=productCreate(product->id,product->copyData,product->destructor,
+                               product->comparison,product->name,product->amount_type,
                          product->copyData,product->freeData,product->creationDate,
                          NULL,NULL,NULL,product->data,
                          asGetType(product->components),*mainClass);
@@ -221,14 +239,14 @@ int productEquals(Product first, Product secont)
     {
         return 0;
     }
-    return first->id-secont->id;
+    return first->comparison(first->id,secont->id);
 }
 
-const int productGetId(Product product)
+ProdId productGetId(Product product)
 {
     if(!product)
     {
-        return -1;
+        return NULL;
     }
     return product->id;
 }
@@ -332,9 +350,11 @@ Product productUnite(Product product1, Product product2)
         return NULL;
     }
     TypeOfProduct* mainClassification= asGetFirst(product1->classifications);
-    Product sum= productCreate(product1->id,product1->name,product1->amount_type,product1->copyData,
-                               product1->freeData,product1->creationDate,asGetCopy(product1->components),
-                               asGetFree(product1->components),asGetCompeare(product1->components),product1->data,
+    Product sum= productCreate(product1->id,product1->copyId,product1->destructor,
+                               product1->comparison,product1->name,product1->amount_type,
+                               product1->copyData,product1->freeData,product1->creationDate,
+                               asGetCopy(product1->components),asGetFree(product1->components),
+                               asGetCompeare(product1->components),product1->data,
                                asGetType(product1->components),*mainClassification);
     if(!sum)
     {
@@ -381,7 +401,7 @@ int productCompeare(Product product1, Product product2)
     {
         return 0;
     }
-    return product1->id-product2->id;
+    return product1->comparison(product1->id,product2->id);
 }
 
 ProductCompCmp productGetCompDataFunc(Product product)

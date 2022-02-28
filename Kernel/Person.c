@@ -226,6 +226,7 @@ void personDestroy(Person person)
     {
         return;
     }
+    person->destroyId(person->id);
     coreDestroy(person->dateOfBirth);
     coreDestroy(person->wishList);
     coreDestroy(person->skills);

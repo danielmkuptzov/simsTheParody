@@ -187,6 +187,27 @@ typedef enum ProductErrorCode_t{
 } ProductErrorCode;
 
 /**
+ * the id generic type
+ */
+typedef void* ProdId;
+
+/**
+ * the generic copy
+ */
+typedef ProdId (*ProdIdCopy)(ProdId);
+
+/**
+ * the id destroy
+ */
+typedef void (*ProdIdDestroy)(ProdId);
+
+/**
+ * the id comparison
+ */
+typedef int (*ProdIdComp)(ProdId ,ProdId);
+
+
+/**
  * to determine the type of a product.
  * the product can have more than one classification
  */
@@ -213,7 +234,8 @@ typedef struct product_t *Product;
  *         Null- if the requirement don't match
  *         product othrwise
  */
-Product productCreate(int id, char* name, ProductAmountType type,
+Product productCreate(ProdId id,ProdIdCopy copyId, ProdIdDestroy destId,
+                      ProdIdComp compId, char* name, ProductAmountType type,
                       CopyProductData copyData, FreeData freeFunc,void* dateCre,
                       CopyProductComponent copyComp, FreeProductComponent freeComp,
                       ProductCompCmp compCmp, ProductData data,int  CompType, TypeOfProduct typeOfProduct);
@@ -251,7 +273,7 @@ int productEquals(Product first, Product secont);
  * -1 if the imput is problematic
  * id otherwise
  */
-const int productGetId(Product product);
+ProdId productGetId(Product product);
 
 /**
  *   productGetType           -gives the type of the product
