@@ -54,8 +54,9 @@ int main()
     char* names[]={"apple","banana","coconout","pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
-    Kernel t= kernelCreate(DATE,true,NULL,0,NULL,0,NULL,0,NULL);
-    Person test=personCreate(1, kernelGetElement(t),"daniel",intCopy,
+    Kernel t= kernelCreate(DATE,true,NULL,0,NULL,0,NULL,0,NULL,0);
+
+    Person test=personCreate(, kernelGetElement(t),"daniel",intCopy,
                              intDest,intCompare,4);
     if(!test)
     {
@@ -69,10 +70,11 @@ int main()
         int* id=&k;
         void* elements[]={id, kernelGetElement(tmp),names[k],"half integer",&k,
                           id,&k, "medicine"};
-        CopyFunc copyArr[]={intCopy, intCopy};
-        DestFunc dtours[]={intDest, intDest};
+        CopyFunc copyArr[]={intCopy, intCopy, intCopy};
+        DestFunc dtours[]={intDest, intDest, intDest};
+        CompFunc compFunc[]={intCompare, intCompare};
         Kernel product= kernelCreate(PRODUCT,true,elements,8,copyArr,
-                                     2,dtours,2,intCompare);
+                                     2,dtours,2,compFunc,2);
         int den=k+1;
         int* pden=&den;
         int o=k+1;
