@@ -204,7 +204,7 @@ void kernelEpsilonSetter(int base);
 
 Kernel kernelCreate(CreatingType block,bool creOrCp,
                     CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
-                    DestFunc* destructors, int destructorsAmount, CompFunc comparison);
+                    DestFunc* destructors, int destructorsAmount, CompFunc* comparison, int compAmount);
 
 /**
  *   kernelDestroy           -Deletes an existing kernel unit and frees all resources

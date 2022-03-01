@@ -139,9 +139,9 @@ void kernelEpsilonSetter(int base)
     rationalDestroy(newEpsilon);
 }
 
-Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int elementsSize,
-                    CopyFunc* copyFunctions, int copyFuncAmount,DestFunc* destructors,
-                    int destructorsAmount, CompFunc comparison)
+Kernel kernelCreate(CreatingType block,bool creOrCp,
+                    CreatorUnit* elements, int elementsSize, CopyFunc* copyFunctions, int copyFuncAmount,
+                    DestFunc* destructors, int destructorsAmount, CompFunc* comparison, int compAmount)
 {
     Kernel newKer= malloc(sizeof(struct Kernel_t));
     if(!newKer)
@@ -163,7 +163,7 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
                 return NULL;
             }
             newKer->data= coreCreate(1,copyFunctions[0],destructors[0],
-                                  comparison,*((int*)elements[0]));
+                                  comparison[0],*((int*)elements[0]));
         }
         else if (block==DATE)
         {
@@ -172,7 +172,7 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
         else if (block==PRODUCT)
         {
             if(elementsSize!=8||!copyFunctions||copyFuncAmount!=2
-                ||!destructors||destructorsAmount!=2||!comparison)
+                ||!destructors||destructorsAmount!=2||!comparison||compAmount!=2)
             {
                 free(newKer);
                 return NULL;
@@ -189,9 +189,10 @@ Kernel kernelCreate(CreatingType block,bool creOrCp, CreatorUnit* elements, int 
                 free(newKer);
                 return NULL;
             }
-            newKer->data= productCreate(*((int*)elements[0]),(char*)elements[2],type,
-                                     copyFunctions[0],destructors[0],elements[1],copyFunctions[1],destructors[1],
-                                     comparison,elements[4],*((int*)elements[5]),tmp);
+            newKer->data= productCreate(elements[0],copyFunctions[0],destructors[0],
+                                        comparison[0],(char*)elements[2],type,
+                                     copyFunctions[1],destructors[1],elements[1],copyFunctions[2],destructors[2],
+                                     comparison[1],elements[4],*((int*)elements[5]),tmp);
         }
         else if (block==RATIONAL)
         {
@@ -253,7 +254,7 @@ void* kernelCopy(void* kernel)
     }
     Kernel copy= kernelCreate(AMOUNT_SET,false,NULL,
                               0,NULL,0,
-                              NULL,0,NULL);
+                              NULL,0,NULL,0);
     if(!copy)
     {
         return NULL;
@@ -336,7 +337,7 @@ Kernel kernelAddition(Kernel kernel1,Kernel kernel2)
         return NULL;
     }
     Kernel sum= kernelCreate(kernel1->type,false,NULL,0,
-                             NULL,0,NULL,0,NULL);
+                             NULL,0,NULL,0,NULL,0);
     if(!sum)
     {
         return NULL;
@@ -524,7 +525,7 @@ Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey)
         return NULL;
     }
     Kernel filtered= kernelCreate(kernel->type,false,NULL,0,
-                                  NULL,0,NULL,0,NULL);
+                                  NULL,0,NULL,0,NULL,0);
     if(!filtered)
     {
         return NULL;
@@ -709,9 +710,7 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
     {
         if(data==ID)
         {
-            int* toSend=malloc(sizeof(int));
-            *toSend=productGetId(kernel->data);
-            return  toSend;
+            return  productGetId(kernel->data);
         }
         else if(data==DATE_OF_CREATION)
         {
@@ -844,7 +843,7 @@ Kernel kernelRound(Kernel kernel, int typeOfRound)
         return NULL;
     }
     Kernel toSend= kernelCreate(RATIONAL,false,NULL,0,NULL,
-                                0,NULL,0,NULL);
+                                0,NULL,0,NULL,0);
     if(!toSend)
     {
         return NULL;
@@ -914,7 +913,7 @@ void kernelEpsilonDestroyer()
 Kernel  kernelEpsilonGetter()
 {
     Kernel toSend=kernelCreate(RATIONAL,false,NULL,0,NULL,
-                               0,NULL,0,NULL);
+                               0,NULL,0,NULL,0);
     if(!toSend)
     {
         return NULL;
