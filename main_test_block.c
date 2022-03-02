@@ -54,9 +54,10 @@ int main()
     char* names[]={"apple","banana","coconout","pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
-    Kernel t= kernelCreate(DATE,true,NULL,0,NULL,0,NULL,0,NULL,0);
-
-    Person test=personCreate(, kernelGetElement(t),"daniel",intCopy,
+    Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
+                           0,NULL,0,NULL,0);
+    int* idp=&j;
+    Person test=personCreate(idp,intCopy,intDest,intCompare, kernelGetElement(t),"daniel",intCopy,
                              intDest,intCompare,4);
     if(!test)
     {
@@ -80,7 +81,7 @@ int main()
         int o=k+1;
         void* elem[]={&o,&l};
         Kernel amount= kernelCreate(RATIONAL,true,elem,2,NULL,0
-                                    ,NULL,0,NULL);
+                                    ,NULL,0,NULL,0);
         OrderUnit productunit= productUnitCreate(product,amount);
         if(!productunit)
         {
