@@ -82,11 +82,14 @@ int main()
         void* elem[]={&o,&l};
         Kernel amount= kernelCreate(RATIONAL,true,elem,2,NULL,0
                                     ,NULL,0,NULL,0);
-        OrderUnit productunit= productUnitCreate(product,amount);
+        void* prodUniElem[]={kernelGetElement(product), kernelGetElement(amount)};
+        Kernel productunit= kernelCreate(ORDER_PRODUCT,true,prodUniElem,2,
+                                         NULL,0,NULL,
+                                         0,NULL,0);
         if(!productunit)
         {
-            rationalDestroy(amount);
-            productDestroy(product);
+            kernelDestroy(amount);
+            kernelDestroy(product);
             return 0;
         }
         productDestroy(product);
