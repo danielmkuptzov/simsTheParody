@@ -92,8 +92,8 @@ int main()
             kernelDestroy(product);
             return 0;
         }
-        productDestroy(product);
-        rationalDestroy(amount);
+        kernelDestroy(product);
+        kernelDestroy(amount);
         if(personAddToWishList(test,productunit)!=PERSON_SUCSESS)
         {
             return 0;
