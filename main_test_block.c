@@ -98,8 +98,9 @@ int main()
         {
             return 0;
         }
-        productUnitDestroy(productunit);
+        kernelDestroy(productunit);
     }
-    coreDestroyer();
+    personDestroy(test);
+    kernelDestroyer();
     return 0;
 }
