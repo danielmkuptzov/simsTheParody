@@ -144,7 +144,7 @@ Product productCreate(ProdId id,ProdIdCopy copyId, ProdIdDestroy destId,
         free(newProd);
         return NULL;
     }
-    newProd->creationDate= dateCopy((Date)dateCre);
+    newProd->creationDate= dateCopy(coreGetElement(dateCre));
     if(!newProd->creationDate)
     {
         asDestroy(newProd->components);

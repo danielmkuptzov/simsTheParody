@@ -68,7 +68,7 @@ int main()
         j=5;
         Kernel tmp= kernelCopy(t);
         int* id=&k;
-        void* elements[]={id, kernelGetElement(tmp),names[k],"half integer",&k,
+        void* elements[]={id, kernelGetElement(tmp),names[k],"half int amount",&k,
                           id,&k, "medicine"};
         CopyFunc copyArr[]={intCopy, intCopy, intCopy};
         DestFunc dtours[]={intDest, intDest, intDest};
