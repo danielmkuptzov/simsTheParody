@@ -192,7 +192,7 @@ Kernel kernelCreate(CreatingType block,bool creOrCp,
             newKer->data= productCreate(elements[0],copyFunctions[0],destructors[0],
                                         comparison[0],(char*)elements[2],type,
                                      copyFunctions[1],destructors[1],
-                                        kernelGetElement(elements[1]),
+                                        elements[1],
                                      copyFunctions[2],destructors[2],
                                      comparison[1],elements[4],*((int*)elements[5]),tmp);
         }

@@ -171,6 +171,11 @@ Product productCreate(ProdId id,ProdIdCopy copyId, ProdIdDestroy destId,
         return NULL;
     }
     newProd->id=newProd->copyId(id);
+    if(!newProd->id)
+    {
+        productDestroy(newProd);
+        return NULL;
+    }
     newProd->destructor=destId;
     newProd->comparison=compId;
     newProd->amount_type= type;
