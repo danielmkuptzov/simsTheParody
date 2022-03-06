@@ -63,7 +63,6 @@ int main()
     {
         return 0;
     }
-    int l=2;
     for (int k = 0; k < 10; ++k)
     {
         j=5;
@@ -79,7 +78,7 @@ int main()
         int den=k+1;
         int* pden=&den;
         int o=k+1;
-        void* elem[]={&o,&l};
+        void* elem[]={&o,pden};
         Kernel amount= kernelCreate(RATIONAL,true,elem,2,NULL,0
                                     ,NULL,0,NULL,0);
         void* prodUniElem[]={kernelGetElement(product), kernelGetElement(amount)};

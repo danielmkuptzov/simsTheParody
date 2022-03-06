@@ -151,7 +151,7 @@ Kernel kernelCreate(CreatingType block,bool creOrCp,
     newKer->type=block;
     if(creOrCp)
     {
-        if(!elements)
+        if(!elements&&block!=DATE)
         {
             return NULL;
         }
