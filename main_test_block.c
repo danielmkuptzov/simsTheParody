@@ -51,6 +51,7 @@ int refDate()
 int main()
 {
     int j=7;
+    kernelEpsilonSetter(3);
     char* names[]={"apple","banana","coconout","pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);

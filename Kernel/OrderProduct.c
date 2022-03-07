@@ -42,6 +42,11 @@ void  productSetEpsilon(Rational margin)
     {
         return;
     }
+    if(!epsilon)
+    {
+        epsilon= rationalCopy(margin);
+        return;
+    }
     if(rationalEqual(margin,epsilon))
     {
         return;
