@@ -210,7 +210,7 @@ int personCompeare(Person person1, Person person2);
  *   PERSON_ERROR          -the action failed
  *   PERSON_SUCSESS        -the addition was a sucsess
  */
-PersonErrorCodes personAddToWishList(Person person, void* product);
+PersonErrorCodes personAddToWishList(Person person, Kernel product);
 
 /**
  *   personAddSkill            -this whould be a generic thing as we whould implement this later
@@ -234,7 +234,7 @@ PersonErrorCodes personAddSkill(Person person, Skill skill);
  *   PERSON_ERROR                   -the action failed
  *   PERSON_SUCSESS                 -the removle was sucsessful
  */
-PersonErrorCodes personRemoveFromWishList(Person person, void* product);
+PersonErrorCodes personRemoveFromWishList(Person person, Kernel product);
 
 /**
  *   personFilterSkills       -filters the skills according to a critiria

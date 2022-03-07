@@ -287,13 +287,13 @@ int personCompeare(Person person1, Person person2)
     return person1->idComp(person1->id,person2->id);
 }
 
-PersonErrorCodes personAddToWishList(Person person, void* product)
+PersonErrorCodes personAddToWishList(Person person, Kernel product)
 {
-    if(!person||!product)
+    if(!person||!product|| kernelGetType(product)!=ORDER_PRODUCT)
     {
         return PERSON_NULL_ARGUMENT;
     }
-    OuterCoreErrors resalt= coreInsert(person->wishList,product);
+    OuterCoreErrors resalt= coreInsert(person->wishList,kernelGetElement(product));
     if(resalt==CORE_ELEMENT_EXIST)
     {
         return PERSON_PRODUCT_EXIST;
@@ -323,9 +323,9 @@ PersonErrorCodes personAddSkill(Person person, Skill skill)
     return PERSON_SUCSESS;
 }
 
-PersonErrorCodes personRemoveFromWishList(Person person, void* product)
+PersonErrorCodes personRemoveFromWishList(Person person, Kernel product)
 {
-    if(!person||!product)
+    if(!person||!product|| kernelGetType(product)!=ORDER_PRODUCT)
     {
         return PERSON_NULL_ARGUMENT;
     }
