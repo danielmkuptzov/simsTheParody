@@ -212,11 +212,22 @@ Product productCopy(Product product)
         return NULL;
     }
     TypeOfProduct* mainClass= asGetFirst(product->classifications);
+    CoreUnit tmp= coreCreate(1,NULL,NULL,NULL,0);
+    if(!tmp)
+    {
+        return NULL;
+    }
+    if(coreSetElement(tmp,product->creationDate,2)!=CORE_SUCSESS)
+    {
+        coreDestroy(tmp);
+        return NULL;
+    }
     Product copy=productCreate(product->id,product->copyData,product->destructor,
                                product->comparison,product->name,product->amount_type,
-                         product->copyData,product->freeData,product->creationDate,
+                         product->copyData,product->freeData,tmp,
                          NULL,NULL,NULL,product->data,
                          asGetType(product->components),*mainClass);
+    coreDestroy(tmp);
     if(!copy)
     {
         return NULL;
