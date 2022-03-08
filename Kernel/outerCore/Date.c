@@ -203,6 +203,8 @@ static void intDateReturn(Date date, int back)
             tmpDate->day--;
         }
     }
+    date->hanoyYear=tmpDate->hanoyYear;
+    date->milenia=tmpDate->milenia;
     date->year=tmpDate->year;
     date->month=tmpDate->month;
     date->day=tmpDate->day;

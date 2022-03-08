@@ -102,5 +102,6 @@ int main()
     }
     personDestroy(test);
     kernelDestroyer();
+    kernelEpsilonDestroyer();
     return 0;
 }
