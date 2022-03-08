@@ -39,7 +39,7 @@ set(KERNEL Kernel/Product.h
            ${OUTERCORE})
 
 # Add the names of your source files here
-set(C_FILES main_test_block.c   Person.h  Kernel.h ${KERNEL})
+set(C_FILES main_test_block.c   Person.h  Kernel.h ${KERNEL} Apartment.c Apartment.h)
 
 add_executable(danielCity ${C_FILES})
 # Add the names of your source files here
