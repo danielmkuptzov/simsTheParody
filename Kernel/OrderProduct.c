@@ -31,7 +31,6 @@ static bool checkAmount(const Rational amount, ProductAmountType type)
         return false;
     }
     bool answer=(rationalLesser(resalt,epsilon)&&type==HALF_INTEGER_AMOUNT);
-    rationalDestroy(epsilon);
     rationalDestroy(resalt);
     return answer;
 }
