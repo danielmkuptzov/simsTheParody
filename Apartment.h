@@ -6,17 +6,17 @@
 #define DANIELCITY_APARTMENT_H
 
 /**
- *  adt
+ * apartment  adt
  *
- * Implements a
+ * Implements an apartment data type
  *
  *
  *
  * The following functions are available:
- *   Create            - Creates a new
- *   Destroy           - Deletes an existing and frees all resources
- *   Copy              - Copies an existing
- *   Compeare          -compares between
+ *   apartmentCreate            - Creates a new apartment
+ *   apartmentDestroy           - Deletes an existing apartment and frees all resources
+ *   apartmentCopy              - Copies an existing apartment
+ *   apartmentCompeare          -compares between
  */
 
 
