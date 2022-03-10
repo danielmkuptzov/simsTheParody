@@ -17,6 +17,9 @@
  *   apartmentDestroy           - Deletes an existing apartment and frees all resources
  *   apartmentCopy              - Copies an existing apartment
  *   apartmentCompeare          -compares between
+ *   apartmentSetArnona         -change the arnona
+ *   apartmentGetOwner          -get the owner
+ *   apartmentSetOwner          -changes the owner
  */
 
 
