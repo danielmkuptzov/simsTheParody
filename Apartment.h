@@ -22,8 +22,12 @@
  *   apartmentSetOwner          -changes the owner
  *   apartmentAddResident       -adds new resident
  *   apartmentRemoveResident    -remove resident from the apartment
- *   apartmentGiveShoppingList  -gives the shopping list of the residents
- *
+ *   apartmentGiveShoppingList  -gives the shopping list of the shopping list
+ *   apartmentGetResidents      -gives the list of the residents
+ *   apartmentAddFurniture      -adds furniture to the apartment
+ *   appaertmentRemoveFurniture -removes furniture
+ *   appartmentGetArnona        -gives the cost of the estate
+ *   appartmentGetType          -gives the type of the appartment
  */
 
 
