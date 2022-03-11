@@ -20,6 +20,10 @@
  *   apartmentSetArnona         -change the arnona
  *   apartmentGetOwner          -get the owner
  *   apartmentSetOwner          -changes the owner
+ *   apartmentAddResident       -adds new resident
+ *   apartmentRemoveResident    -remove resident from the apartment
+ *   apartmentGiveShoppingList  -gives the shopping list of the residents
+ *
  */
 
 
