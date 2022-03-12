@@ -16,9 +16,11 @@
 /**
  * apartment  adt
  *
- * Implements an apartment data type
- *
- *
+ * Implements an apartment data type. in this data type the apartment is a general termen for living unit,
+ * meaning that the apartment could be one of the foloing categories: standart apartment, vila,
+ * semi house (a living unit that is half of the house), panthouse.
+ * also, the postal code could be any type you desire (recomended somthing that could be compeared and copied).
+ * and please don't use float in the bills
  *
  * The following functions are available:
  *   apartmentCreate            - Creates a new apartment
@@ -43,8 +45,10 @@
  *   APARTMENT_FOREACH
  */
 
+//the data type
 typedef struct apartment_t* Apartment;
 
+//error codes
 typedef enum {
     APARTMENT_SUCSESS,
     APARTMENT_RESIDENT_EXIST,
@@ -52,6 +56,7 @@ typedef enum {
     APARTMENT_ERROR
 } ApartmentErrorCodes;
 
+//apartment type
 typedef enum {
     FLAT,
     VILA,
@@ -61,9 +66,15 @@ typedef enum {
 
 typedef void* PostalCode;
 
-typedef Kernel(*GetArnona)();
+typedef PostalCode(*PostalCodeCopy)(PostalCode);
 
-typedef Kernel(*ElecBill)();
+typedef void(*PostalCodeDestroy)(PostalCode);
+
+typedef int(*PostalCodeCompear)(PostalCode,PostalCode);
+
+typedef Kernel(*GetArnona)(Apartment);
+
+typedef Kernel(*ElecBill)(Apartment);
 
 typedef Kernel(*FoodBill)(Kernel);
 
