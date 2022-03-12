@@ -2,8 +2,16 @@
 // Created by danie on 08/03/2022.
 //
 
-#ifndef DANIELCITY_APARTMENT_H
-#define DANIELCITY_APARTMENT_H
+#ifndef APARTMENT_H
+#define APARTMENT_H
+
+//external libreries
+#include <stdio.h>
+#include <stdbool.h>
+
+//internal libreries
+#include "Kernel.h"
+#include "Person.h"
 
 /**
  * apartment  adt
@@ -28,7 +36,16 @@
  *   appaertmentRemoveFurniture -removes furniture
  *   appartmentGetArnona        -gives the cost of the estate
  *   appartmentGetType          -gives the type of the appartment
+ *   apartmentGetBills          -gives the bills of the apartment
  */
 
+typedef struct apartment_t* Apartment;
 
-#endif //DANIELCITY_APARTMENT_H
+typedef enum {} ApartmentErrorCodes;
+
+typedef enum {} ApartmentType;
+
+typedef Kernel(*GetArnona)();
+
+
+#endif //APARTMENT_H
