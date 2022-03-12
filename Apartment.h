@@ -47,5 +47,9 @@ typedef enum {} ApartmentType;
 
 typedef Kernel(*GetArnona)();
 
+typedef Kernel(*ElecBill)();
+
+typedef Kernel(*FoodBill)(Kernel);
+
 
 #endif //APARTMENT_H
