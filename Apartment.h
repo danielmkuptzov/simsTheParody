@@ -37,6 +37,8 @@
  *   appartmentGetArnona        -gives the cost of the estate
  *   appartmentGetType          -gives the type of the appartment
  *   apartmentGetBills          -gives the bills of the apartment
+ *   apartmentGetfirst          -
+ *   APARTMENT_FOREACH
  */
 
 typedef struct apartment_t* Apartment;
@@ -50,6 +52,12 @@ typedef Kernel(*GetArnona)();
 typedef Kernel(*ElecBill)();
 
 typedef Kernel(*FoodBill)(Kernel);
+
+typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill);
+
+typedef Kernel(*BillFilter)(AvarageSpending);
+
+typedef Kernel(*generalFilter)();
 
 
 #endif //APARTMENT_H
