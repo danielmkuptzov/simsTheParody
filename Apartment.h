@@ -37,15 +37,29 @@
  *   appartmentGetArnona        -gives the cost of the estate
  *   appartmentGetType          -gives the type of the appartment
  *   apartmentGetBills          -gives the bills of the apartment
- *   apartmentGetfirst          -
+ *   apartmentGetfirst          -gives the first resident in the list
+ *   apartmentGetNext           -the next one
+ *   apartmentFilter            -filtersAccording to a crutiria
  *   APARTMENT_FOREACH
  */
 
 typedef struct apartment_t* Apartment;
 
-typedef enum {} ApartmentErrorCodes;
+typedef enum {
+    APARTMENT_SUCSESS,
+    APARTMENT_RESIDENT_EXIST,
+    APARTMENT_RESIDENT_DOES_NOT_EXIST,
+    APARTMENT_ERROR
+} ApartmentErrorCodes;
 
-typedef enum {} ApartmentType;
+typedef enum {
+    FLAT,
+    VILA,
+    SEMI_HOUSE,
+    PANTHOUSE
+} ApartmentType;
+
+typedef void* PostalCode;
 
 typedef Kernel(*GetArnona)();
 
@@ -58,6 +72,5 @@ typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill);
 typedef Kernel(*BillFilter)(AvarageSpending);
 
 typedef Kernel(*generalFilter)();
-
 
 #endif //APARTMENT_H
