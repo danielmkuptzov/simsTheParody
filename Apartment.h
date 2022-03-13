@@ -39,6 +39,7 @@
  *   appartmentGetArnona        -gives the cost of the estate
  *   appartmentGetType          -gives the type of the appartment
  *   apartmentGetBills          -gives the bills of the apartment
+ *   partmentMerge              -merges two same apartments
  *   apartmentGetfirst          -gives the first resident in the list
  *   apartmentGetNext           -the next one
  *   apartmentFilter            -filtersAccording to a crutiria
@@ -112,6 +113,7 @@ Apartment apartmentCreate(ApartmentType type, PostalCode postalCode, Person owne
  *   appartmentGetArnona        -gives the cost of the estate
  *   appartmentGetType          -gives the type of the appartment
  *   apartmentGetBills          -gives the bills of the apartment
+ *   partmentMerge              -merges two same apartments
  *   apartmentGetfirst          -gives the first resident in the list
  *   apartmentGetNext           -the next one
  *   apartmentFilter            -filtersAccording to a crutiria
@@ -119,5 +121,6 @@ Apartment apartmentCreate(ApartmentType type, PostalCode postalCode, Person owne
  * @param apartment
  */
 void apartmentDestroy(Apartment apartment);
+
 
 #endif //APARTMENT_H
