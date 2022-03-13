@@ -42,7 +42,7 @@
  *   apartmentGetfirst          -gives the first resident in the list
  *   apartmentGetNext           -the next one
  *   apartmentFilter            -filtersAccording to a crutiria
- *   APARTMENT_FOREACH
+ *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
  */
 
 //the data type
@@ -82,6 +82,37 @@ typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill);
 
 typedef Kernel(*BillFilter)(AvarageSpending);
 
+
 typedef Kernel(*generalFilter)();
+
+/**
+ *   apartmentCreate            - Creates a new apartment
+ *   apartmentDestroy           - Deletes an existing apartment and frees all resources
+ *   apartmentCopy              - Copies an existing apartment
+ *   apartmentCompeare          -compares between
+ *   apartmentSetArnona         -change the arnona
+ *   apartmentGetOwner          -get the owner
+ *   apartmentSetOwner          -changes the owner
+ *   apartmentAddResident       -adds new resident
+ *   apartmentRemoveResident    -remove resident from the apartment
+ *   apartmentGiveShoppingList  -gives the shopping list of the shopping list
+ *   apartmentGetResidents      -gives the list of the residents
+ *   apartmentAddFurniture      -adds furniture to the apartment
+ *   appaertmentRemoveFurniture -removes furniture
+ *   appartmentGetArnona        -gives the cost of the estate
+ *   appartmentGetType          -gives the type of the appartment
+ *   apartmentGetBills          -gives the bills of the apartment
+ *   apartmentGetfirst          -gives the first resident in the list
+ *   apartmentGetNext           -the next one
+ *   apartmentFilter            -filtersAccording to a crutiria
+ *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
+ * @param type
+ * @param postalCode
+ * @param owner
+ * @return
+ *   NULL for any error
+ *   Apartment otherwise
+ */
+Apartment apartmentCreate(ApartmentType type, PostalCode postalCode, Person owner);
 
 #endif //APARTMENT_H
