@@ -929,3 +929,20 @@ void kernelDestroyer()
 {
     coreDestroyer();
 }
+
+bool kernelCheckType(Kernel kernel,char* name)
+{
+    if(!name||!kernel)
+    {
+        return false;
+    }
+    if(kernel->type!=PRODUCT)
+    {
+        return false;
+    }
+    if(kernelGetInternalData(kernel,CATEGORY)== stringToTypeConvert(name))
+    {
+        return true;
+    }
+    return false;
+}

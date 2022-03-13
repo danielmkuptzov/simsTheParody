@@ -1,7 +1,3 @@
-//
-// Created by danie on 08/01/2022.
-//
-
 #ifndef KERNEL_H
 #define KERNEL_H
 
@@ -44,6 +40,8 @@
  *   kernelEpsilonDestroyer  -to destroy the epsilon
  *   kernelEpsilonGetter     -gives the epsilon
  *   kernelDestroyer         -use it to end the code
+ *   kernelCheckType         -for elements that has type
+ *   kernel_foreach          -iterator
  */
 
 //the external libreries we are working with
@@ -469,6 +467,17 @@ Kernel  kernelEpsilonGetter();
  *   kernelDestroyer         -use it to end the code
  */
 void kernelDestroyer();
+
+/**
+ *   kernelCheckType         -for elements that has type
+ * @param kernel
+ * @param type
+ * @param name
+ * @return
+ *   false for any error or wrong type
+ *   true otherwise
+ */
+bool kernelCheckType(Kernel kernel,char* name);
 
 /**
  *   kernel foreach          -the amount set foreach
