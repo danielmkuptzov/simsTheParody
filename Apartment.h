@@ -87,6 +87,16 @@ typedef Kernel(*generalFilter)();
 
 /**
  *   apartmentCreate            - Creates a new apartment
+ * @param type
+ * @param postalCode
+ * @param owner
+ * @return
+ *   NULL for any error
+ *   Apartment otherwise
+ */
+Apartment apartmentCreate(ApartmentType type, PostalCode postalCode, Person owner);
+
+/**
  *   apartmentDestroy           - Deletes an existing apartment and frees all resources
  *   apartmentCopy              - Copies an existing apartment
  *   apartmentCompeare          -compares between
@@ -106,13 +116,8 @@ typedef Kernel(*generalFilter)();
  *   apartmentGetNext           -the next one
  *   apartmentFilter            -filtersAccording to a crutiria
  *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
- * @param type
- * @param postalCode
- * @param owner
- * @return
- *   NULL for any error
- *   Apartment otherwise
+ * @param apartment
  */
-Apartment apartmentCreate(ApartmentType type, PostalCode postalCode, Person owner);
+void apartmentDestroy(Apartment apartment);
 
 #endif //APARTMENT_H
