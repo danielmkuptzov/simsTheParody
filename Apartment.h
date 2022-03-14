@@ -28,6 +28,7 @@
  *   apartmentCopy              - Copies an existing apartment
  *   apartmentCompeare          -compares between apartments
  *   apartmentSetArnona         -change the arnona
+ *   apartmentGetArnona         -gives back the arnona calculation
  *   apartmentGetOwner          -get the owner
  *   apartmentSetOwner          -changes the owner
  *   apartmentAddResident       -adds new resident
@@ -128,7 +129,34 @@ int apartmentCompeare(Apartment apartment1, Apartment apartment2);
 
 /**
  *   apartmentSetArnona         -change the arnona
+ * @param apartment
+ * @param arnona
+ * @return
+ *      APARTMENT_SUCSESS -the change was sucsessful
+ *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ *      APARTMENT_ERROR
+ */
+ApartmentErrorCodes apartmentSetArnona(Apartment apartment, GetArnona arnona);
+
+/**
+ *   apartmentGetArnona         -gives back the arnona calculation
+ * @param apartment
+ * @return
+ *      NULL- for any error
+ *      Kernel otherwise
+ */
+Kernel apartmentGetArnona(Apartment apartment);
+
+/**
  *   apartmentGetOwner          -get the owner
+ * @param apartment
+ * @return
+ *      NULL for any error
+ *      Person otherwise
+ */
+Person apartmentGetOwner(Apartment apartment);
+
+/**
  *   apartmentSetOwner          -changes the owner
  *   apartmentAddResident       -adds new resident
  *   apartmentRemoveResident    -remove resident from the apartment
@@ -145,10 +173,13 @@ int apartmentCompeare(Apartment apartment1, Apartment apartment2);
  *   apartmentFilter            -filtersAccording to a crutiria
  *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
  * @param apartment
- * @param arnona
- * @return APARTMENT_SUCSESS, APARTMENT_NULL_ARGUMENT, APARTMENT_ERROR
+ * @param newOwner
+ * @return
+ *      APARTMENT_SUCSESS -the owner has changed
+ *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ *      APARTMENT_ERROR -any error not related to the previous one
  */
-ApartmentErrorCodes apartmentSetArnona(Apartment apartment, GetArnona arnona);
+ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
 
 
 #endif //APARTMENT_H
