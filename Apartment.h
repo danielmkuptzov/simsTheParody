@@ -26,7 +26,7 @@
  *   apartmentCreate            - Creates a new apartment
  *   apartmentDestroy           - Deletes an existing apartment and frees all resources
  *   apartmentCopy              - Copies an existing apartment
- *   apartmentCompeare          -compares between
+ *   apartmentCompeare          -compares between apartments
  *   apartmentSetArnona         -change the arnona
  *   apartmentGetOwner          -get the owner
  *   apartmentSetOwner          -changes the owner
@@ -95,12 +95,27 @@ typedef Kernel(*generalFilter)();
  *   NULL for any error
  *   Apartment otherwise
  */
-Apartment apartmentCreate(ApartmentType type, PostalCode postalCode, Person owner);
+Apartment apartmentCreate(ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
+                          PostalCodeDestroy destructor,PostalCodeCompear compare, Person owner,
+                          GetArnona arnona,ElecBill electricity, FoodBill food);
 
 /**
  *   apartmentDestroy           - Deletes an existing apartment and frees all resources
+ * @param apartment
+ */
+void apartmentDestroy(Apartment apartment);
+
+/**
  *   apartmentCopy              - Copies an existing apartment
- *   apartmentCompeare          -compares between
+ *   apartmentCompeare          -compares between apartments
+ * @param apartment
+ * @return
+ *   NULL if there was any error
+ *   apartment otherwise
+ */
+Apartment apartmentCopy(Apartment apartment);
+
+/**
  *   apartmentSetArnona         -change the arnona
  *   apartmentGetOwner          -get the owner
  *   apartmentSetOwner          -changes the owner
@@ -118,9 +133,11 @@ Apartment apartmentCreate(ApartmentType type, PostalCode postalCode, Person owne
  *   apartmentGetNext           -the next one
  *   apartmentFilter            -filtersAccording to a crutiria
  *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
- * @param apartment
+ * @param apartment1
+ * @param apartment2
+ * @return
  */
-void apartmentDestroy(Apartment apartment);
+int apartmentCompeare(Apartment apartment1, Apartment apartment2);
 
 
 #endif //APARTMENT_H
