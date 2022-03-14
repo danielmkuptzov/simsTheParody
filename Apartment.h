@@ -54,6 +54,7 @@ typedef enum {
     APARTMENT_SUCSESS,
     APARTMENT_RESIDENT_EXIST,
     APARTMENT_RESIDENT_DOES_NOT_EXIST,
+    APARTMENT_NULL_ARGUMENT,
     APARTMENT_ERROR
 } ApartmentErrorCodes;
 
@@ -107,13 +108,23 @@ void apartmentDestroy(Apartment apartment);
 
 /**
  *   apartmentCopy              - Copies an existing apartment
- *   apartmentCompeare          -compares between apartments
  * @param apartment
  * @return
  *   NULL if there was any error
  *   apartment otherwise
  */
 Apartment apartmentCopy(Apartment apartment);
+
+/**
+ *   apartmentCompeare          -compares between apartments
+ * @param apartment1
+ * @param apartment2
+ * @
+ *  positive if apartment1> apartment2
+ *  negative if apartment1< apartment2
+ *  0 if they are equal
+ */
+int apartmentCompeare(Apartment apartment1, Apartment apartment2);
 
 /**
  *   apartmentSetArnona         -change the arnona
@@ -133,11 +144,11 @@ Apartment apartmentCopy(Apartment apartment);
  *   apartmentGetNext           -the next one
  *   apartmentFilter            -filtersAccording to a crutiria
  *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
- * @param apartment1
- * @param apartment2
- * @return
+ * @param apartment
+ * @param arnona
+ * @return APARTMENT_SUCSESS, APARTMENT_NULL_ARGUMENT, APARTMENT_ERROR
  */
-int apartmentCompeare(Apartment apartment1, Apartment apartment2);
+ApartmentErrorCodes apartmentSetArnona(Apartment apartment, GetArnona arnona);
 
 
 #endif //APARTMENT_H
