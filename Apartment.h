@@ -60,6 +60,8 @@ typedef enum {
     APARTMENT_RESIDENT_EXIST,
     APARTMENT_RESIDENT_DOES_NOT_EXIST,
     APARTMENT_NULL_ARGUMENT,
+    APATMENT_NON_EXISTING_PERSON,
+    APARTMENT_NO_SHOPPING_LIST,
     APARTMENT_ERROR
 } ApartmentErrorCodes;
 
@@ -90,7 +92,6 @@ typedef Kernel(*Gasbil)(Apartment);
 typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill,Gasbil);
 
 typedef Kernel(*BillFilter)(AvarageSpending);
-
 
 typedef Kernel(*generalFilter)();
 
@@ -171,6 +172,7 @@ Person apartmentGetOwner(Apartment apartment);
  *      APARTMENT_SUCSESS -the owner has changed
  *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
  *      APARTMENT_ERROR -any error not related to the previous one
+ *      APATMENT_NON_EXISTING_PERSON -the person doesn't exist
  */
 ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
 
@@ -200,6 +202,14 @@ ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident
 
 /**
  *   apartmentGiveShoppingList   -gives the shopping list of the shopping list
+ * @param apartment
+ * @return
+ *      NULL -for any error that might accure
+ *      Kernel -otherwise
+ */
+Kernel apartmentGiveShoppingList(Apartment apartment);
+
+/**
  *   apartmentCreateShoppingList -creates the shopping list of the residents
  *   apartmentGetResidents       -gives the list of the residents
  *   apartmentAddFurniture       -adds furniture to the apartment
@@ -217,9 +227,11 @@ ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  * @param apartment
  * @return
- *      NULL -for any error that might accure
- *      Kernel -otherwise
+ *      APARTMENT_SUCSESS -the creation was sucsessful
+ *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ *      APARTMENT_NO_SHOPPING_LIST -there was an error in the process
+ *      APARTMENT_ERROR -other errors
  */
-Kernel apartmentGiveShoppingList(Apartment apartment);
+ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
 
 #endif //APARTMENT_H
