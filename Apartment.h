@@ -44,6 +44,7 @@
  *   apartmentGetfirst          -gives the first resident in the list
  *   apartmentGetNext           -the next one
  *   apartmentFilter            -filtersAccording to a crutiria
+ *   apartmentDayCycle          -for cycle work
  *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
  */
 
@@ -158,7 +159,28 @@ Person apartmentGetOwner(Apartment apartment);
 
 /**
  *   apartmentSetOwner          -changes the owner
+ * @param apartment
+ * @param newOwner
+ * @return
+ *      APARTMENT_SUCSESS -the owner has changed
+ *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ *      APARTMENT_ERROR -any error not related to the previous one
+ */
+ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
+
+/**
  *   apartmentAddResident       -adds new resident
+ * @param apartment
+ * @param newResident
+ * @return
+ *      APARTMENT_SUCSESS -the resident was added sucsessfuly
+ *      APARTMENT_RESIDENT_EXIST -the resident already exist
+ *      APARTMENT_NULL_ARGUMENT - a NULL argument was passed
+ *      APARTMENT_ERROR  -any error not listed above
+ */
+ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident);
+
+/**
  *   apartmentRemoveResident    -remove resident from the apartment
  *   apartmentGiveShoppingList  -gives the shopping list of the shopping list
  *   apartmentGetResidents      -gives the list of the residents
@@ -171,15 +193,16 @@ Person apartmentGetOwner(Apartment apartment);
  *   apartmentGetfirst          -gives the first resident in the list
  *   apartmentGetNext           -the next one
  *   apartmentFilter            -filtersAccording to a crutiria
+ *   apartmentDayCycle          -for cycle work
  *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
  * @param apartment
- * @param newOwner
+ * @param resident
  * @return
- *      APARTMENT_SUCSESS -the owner has changed
- *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- *      APARTMENT_ERROR -any error not related to the previous one
+ * APARTMENT_SUCSESS -the resident was removed
+ * APARTMENT_RESIDENT_DOES_NOT_EXIST -the resident you requested does'nt exist
+ * APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ * APARTMENT_ERROR  -any error not listed above
  */
-ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
-
+ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident);
 
 #endif //APARTMENT_H
