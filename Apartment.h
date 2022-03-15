@@ -23,29 +23,30 @@
  * and please don't use float in the bills
  *
  * The following functions are available:
- *   apartmentCreate            - Creates a new apartment
- *   apartmentDestroy           - Deletes an existing apartment and frees all resources
- *   apartmentCopy              - Copies an existing apartment
- *   apartmentCompeare          -compares between apartments
- *   apartmentSetArnona         -change the arnona
- *   apartmentGetArnona         -gives back the arnona calculation
- *   apartmentGetOwner          -get the owner
- *   apartmentSetOwner          -changes the owner
- *   apartmentAddResident       -adds new resident
- *   apartmentRemoveResident    -remove resident from the apartment
- *   apartmentGiveShoppingList  -gives the shopping list of the shopping list
- *   apartmentGetResidents      -gives the list of the residents
- *   apartmentAddFurniture      -adds furniture to the apartment
- *   appaertmentRemoveFurniture -removes furniture
- *   appartmentGetArnona        -gives the cost of the estate
- *   appartmentGetType          -gives the type of the appartment
- *   apartmentGetBills          -gives the bills of the apartment
- *   partmentMerge              -merges two same apartments
- *   apartmentGetfirst          -gives the first resident in the list
- *   apartmentGetNext           -the next one
- *   apartmentFilter            -filtersAccording to a crutiria
- *   apartmentDayCycle          -for cycle work
- *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
+ *   apartmentCreate             - Creates a new apartment
+ *   apartmentDestroy            - Deletes an existing apartment and frees all resources
+ *   apartmentCopy               - Copies an existing apartment
+ *   apartmentCompeare           -compares between apartments
+ *   apartmentSetArnona          -change the arnona
+ *   apartmentGetArnona          -gives back the arnona calculation
+ *   apartmentGetOwner           -get the owner
+ *   apartmentSetOwner           -changes the owner
+ *   apartmentAddResident        -adds new resident
+ *   apartmentRemoveResident     -remove resident from the apartment
+ *   apartmentGiveShoppingList   -gives the shopping list of the shopping list
+ *   apartmentCreateShoppingList -creates the shopping list of the residents
+ *   apartmentGetResidents       -gives the list of the residents
+ *   apartmentAddFurniture       -adds furniture to the apartment
+ *   appaertmentRemoveFurniture  -removes furniture
+ *   appartmentGetArnona         -gives the cost of the estate
+ *   appartmentGetType           -gives the type of the appartment
+ *   apartmentGetBills           -gives the bills of the apartment
+ *   partmentMerge               -merges two same apartments
+ *   apartmentGetfirst           -gives the first resident in the list
+ *   apartmentGetNext            -the next one
+ *   apartmentFilter             -filtersAccording to a crutiria
+ *   apartmentDayCycle           -for cycle work
+ *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  */
 
 //the data type
@@ -181,20 +182,7 @@ ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
 ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident);
 
 /**
- *   apartmentRemoveResident    -remove resident from the apartment
- *   apartmentGiveShoppingList  -gives the shopping list of the shopping list
- *   apartmentGetResidents      -gives the list of the residents
- *   apartmentAddFurniture      -adds furniture to the apartment
- *   appaertmentRemoveFurniture -removes furniture
- *   appartmentGetArnona        -gives the cost of the estate
- *   appartmentGetType          -gives the type of the appartment
- *   apartmentGetBills          -gives the bills of the apartment
- *   partmentMerge              -merges two same apartments
- *   apartmentGetfirst          -gives the first resident in the list
- *   apartmentGetNext           -the next one
- *   apartmentFilter            -filtersAccording to a crutiria
- *   apartmentDayCycle          -for cycle work
- *   APARTMENT_FOREACH          -iterator for passing on the residents or the furniture
+ *   apartmentRemoveResident     -remove resident from the apartment
  * @param apartment
  * @param resident
  * @return
@@ -204,5 +192,27 @@ ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident)
  * APARTMENT_ERROR  -any error not listed above
  */
 ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident);
+
+/**
+ *   apartmentGiveShoppingList   -gives the shopping list of the shopping list
+ *   apartmentCreateShoppingList -creates the shopping list of the residents
+ *   apartmentGetResidents       -gives the list of the residents
+ *   apartmentAddFurniture       -adds furniture to the apartment
+ *   appaertmentRemoveFurniture  -removes furniture
+ *   appartmentGetArnona         -gives the cost of the estate
+ *   appartmentGetType           -gives the type of the appartment
+ *   apartmentGetBills           -gives the bills of the apartment
+ *   partmentMerge               -merges two same apartments
+ *   apartmentGetfirst           -gives the first resident in the list
+ *   apartmentGetNext            -the next one
+ *   apartmentFilter             -filtersAccording to a crutiria
+ *   apartmentDayCycle           -for cycle work
+ *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
+ * @param apartment
+ * @return
+ *      NULL -for any error that might accure
+ *      Kernel -otherwise
+ */
+Kernel apartmentGiveShoppingList(Apartment apartment);
 
 #endif //APARTMENT_H
