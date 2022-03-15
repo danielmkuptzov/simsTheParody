@@ -39,6 +39,7 @@
  *   apartmentAddFurniture       -adds furniture to the apartment
  *   appaertmentRemoveFurniture  -removes furniture
  *   appartmentGetArnona         -gives the cost of the estate
+ *   apartmentGetGasBill         -gives the gas bill
  *   appartmentGetType           -gives the type of the appartment
  *   apartmentGetBills           -gives the bills of the apartment
  *   partmentMerge               -merges two same apartments
@@ -46,6 +47,7 @@
  *   apartmentGetNext            -the next one
  *   apartmentFilter             -filtersAccording to a crutiria
  *   apartmentDayCycle           -for cycle work
+ *   apartmentLogManager         -for log managment
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  */
 
@@ -83,7 +85,9 @@ typedef Kernel(*ElecBill)(Apartment);
 
 typedef Kernel(*FoodBill)(Kernel);
 
-typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill);
+typedef Kernel(*Gasbil)(Apartment);
+
+typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill,Gasbil);
 
 typedef Kernel(*BillFilter)(AvarageSpending);
 
@@ -101,7 +105,8 @@ typedef Kernel(*generalFilter)();
  */
 Apartment apartmentCreate(ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
                           PostalCodeDestroy destructor,PostalCodeCompear compare, Person owner,
-                          GetArnona arnona,ElecBill electricity, FoodBill food);
+                          GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
+                          Gasbil gasbil,FoodBill food);
 
 /**
  *   apartmentDestroy           - Deletes an existing apartment and frees all resources
@@ -200,6 +205,7 @@ ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident
  *   apartmentAddFurniture       -adds furniture to the apartment
  *   appaertmentRemoveFurniture  -removes furniture
  *   appartmentGetArnona         -gives the cost of the estate
+ *   apartmentGetGasBill         -gives the gas bill
  *   appartmentGetType           -gives the type of the appartment
  *   apartmentGetBills           -gives the bills of the apartment
  *   partmentMerge               -merges two same apartments
@@ -207,6 +213,7 @@ ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident
  *   apartmentGetNext            -the next one
  *   apartmentFilter             -filtersAccording to a crutiria
  *   apartmentDayCycle           -for cycle work
+ *   apartmentLogManager         -for log managment
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  * @param apartment
  * @return
