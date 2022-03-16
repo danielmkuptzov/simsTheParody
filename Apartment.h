@@ -62,6 +62,8 @@ typedef enum {
     APARTMENT_NULL_ARGUMENT,
     APATMENT_NON_EXISTING_PERSON,
     APARTMENT_NO_SHOPPING_LIST,
+    APARTMENT_NOT_ENOTH_SPACE,
+    APARTMENT_FURNITURE_DOES_NOT_EXIST,
     APARTMENT_ERROR
 } ApartmentErrorCodes;
 
@@ -222,7 +224,24 @@ ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
 
 /**
  *   apartmentGetResidents       -gives the list of the residents
+ * @param apartment
+ * @return
+ */
+Kernel apartmentGetResidents(Apartment apartment);
+
+/**
  *   apartmentAddFurniture       -adds furniture to the apartment
+ * @param apartment
+ * @param furniture
+ * @return
+ *      APARTMENT_SUCSESS -the opreration terminated with sucsess
+ *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ *      APARTMENT_NOT_ENOTH_SPACE -we can't add this
+ *      APARTMENT_ERROR -any error not listed above
+ */
+ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture);
+
+/**
  *   appaertmentRemoveFurniture  -removes furniture
  *   appartmentGetArnona         -gives the cost of the estate
  *   apartmentGetGasBill         -gives the gas bill
@@ -236,8 +255,13 @@ ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
  *   apartmentLogManager         -for log managment
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  * @param apartment
+ * @param removedFurniture
  * @return
+ * APARTMENT_SUCSESS -the removle was sucsessful
+ * APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ * APARTMENT_FURNITURE_DOES_NOT_EXIST -the object you requested does not exist
+ * APARTMENT_ERROR -any error not listed above
  */
-Kernel apartmentGetResidents(Apartment apartment);
+ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel removedFurniture);
 
 #endif //APARTMENT_H
