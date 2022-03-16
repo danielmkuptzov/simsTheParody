@@ -211,6 +211,16 @@ Kernel apartmentGiveShoppingList(Apartment apartment);
 
 /**
  *   apartmentCreateShoppingList -creates the shopping list of the residents
+ * @param apartment
+ * @return
+ *      APARTMENT_SUCSESS -the creation was sucsessful
+ *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ *      APARTMENT_NO_SHOPPING_LIST -there was an error in the process
+ *      APARTMENT_ERROR -other errors
+ */
+ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
+
+/**
  *   apartmentGetResidents       -gives the list of the residents
  *   apartmentAddFurniture       -adds furniture to the apartment
  *   appaertmentRemoveFurniture  -removes furniture
@@ -227,11 +237,7 @@ Kernel apartmentGiveShoppingList(Apartment apartment);
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  * @param apartment
  * @return
- *      APARTMENT_SUCSESS -the creation was sucsessful
- *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- *      APARTMENT_NO_SHOPPING_LIST -there was an error in the process
- *      APARTMENT_ERROR -other errors
  */
-ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
+Kernel apartmentGetResidents(Apartment apartment);
 
 #endif //APARTMENT_H
