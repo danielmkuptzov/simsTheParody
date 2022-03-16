@@ -243,7 +243,26 @@ ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
 
 /**
  *   appaertmentRemoveFurniture  -removes furniture
+ * @param apartment
+ * @param removedFurniture
+ * @return
+ * APARTMENT_SUCSESS -the removle was sucsessful
+ * APARTMENT_NULL_ARGUMENT -a NULL argument was passed
+ * APARTMENT_FURNITURE_DOES_NOT_EXIST -the object you requested does not exist
+ * APARTMENT_ERROR -any error not listed above
+ */
+ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel removedFurniture);
+
+/**
  *   appartmentGetArnona         -gives the cost of the estate
+ * @param apartment
+ * @return
+ *  NULL if any error acures
+ *  Kernel otherwise
+ */
+Kernel appartmentGetArnona(Apartment apartment);
+
+/**
  *   apartmentGetGasBill         -gives the gas bill
  *   appartmentGetType           -gives the type of the appartment
  *   apartmentGetBills           -gives the bills of the apartment
@@ -255,13 +274,10 @@ ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
  *   apartmentLogManager         -for log managment
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  * @param apartment
- * @param removedFurniture
  * @return
- * APARTMENT_SUCSESS -the removle was sucsessful
- * APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- * APARTMENT_FURNITURE_DOES_NOT_EXIST -the object you requested does not exist
- * APARTMENT_ERROR -any error not listed above
+ *
  */
-ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel removedFurniture);
+Kernel apartmentGetGasBill(Apartment apartment);
 
+ApartmentType appartmentGetType(Apartment apartment);
 #endif //APARTMENT_H
