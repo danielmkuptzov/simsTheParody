@@ -45,7 +45,7 @@
  *   partmentMerge               -merges two same apartments
  *   apartmentGetfirst           -gives the first resident in the list
  *   apartmentGetNext            -the next one
- *   apartmentFilter             -filtersAccording to a crutiria
+ *   apartmentFilter             -filters According to a crutiria
  *   apartmentDayCycle           -for cycle work
  *   apartmentLogManager         -for log managment
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
@@ -53,6 +53,8 @@
 
 //the data type
 typedef struct apartment_t* Apartment;
+
+//enum section begins
 
 //error codes
 typedef enum {
@@ -72,8 +74,34 @@ typedef enum {
     FLAT,
     VILA,
     SEMI_HOUSE,
-    PANTHOUSE
+    PANTHOUSE,
+    NONE
 } ApartmentType;
+
+//for the foreach loop
+typedef enum {
+    RESIDENT,
+    OBJECTS
+} DataType;
+
+typedef enum{
+    ADD_RESIDENT,
+    REMOVE_RESIDENT,
+    REDECORATE,
+    DESTROY_APARTMENT
+} ApartmentCycleErrorCodes;
+
+typedef enum{
+   CREATE,
+   DESTROY_LOG,
+   COPY,
+   ADD_LINE
+} ApartmentLogActions;
+
+//enum section ends
+
+
+typedef void* Data;
 
 typedef void* PostalCode;
 
@@ -95,7 +123,7 @@ typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill,Gasbil);
 
 typedef Kernel(*BillFilter)(AvarageSpending);
 
-typedef Kernel(*generalFilter)();
+typedef bool(*GeneralFilter)(Apartment);
 
 /**
  *   apartmentCreate            - Creates a new apartment
@@ -264,20 +292,95 @@ Kernel appartmentGetArnona(Apartment apartment);
 
 /**
  *   apartmentGetGasBill         -gives the gas bill
+ * @param apartment
+ * @return
+ *  NULL for any error
+ *  Kernel otherwise
+ */
+Kernel apartmentGetGasBill(Apartment apartment);
+
+/**
  *   appartmentGetType           -gives the type of the appartment
+ * @param apartment
+ * @return
+ *   NONE -if there is any error
+ *   type otherwise
+ */
+ApartmentType appartmentGetType(Apartment apartment);
+
+/**
  *   apartmentGetBills           -gives the bills of the apartment
+ * @param apartment
+ * @return
+ *   NULL if any error acures
+ *   Kernel otherwise
+ */
+Kernel apartmentGetBills(Apartment apartment);
+
+/**
  *   partmentMerge               -merges two same apartments
+ * @param apartment1
+ * @param apartment2
+ * @return
+ *   NULL for any error
+ *   Apartment otherwise
+ */
+Apartment partmentMerge(Apartment apartment1, Apartment apartment2);
+
+/**
  *   apartmentGetfirst           -gives the first resident in the list
+ * @param apartment
+ * @param type
+ * @return
+ *   NULL if there was any error or shor list
+ *   Data otherwise
+ */
+Data apartmentGetfirst(Apartment apartment, DataType type);
+
+/**
  *   apartmentGetNext            -the next one
- *   apartmentFilter             -filtersAccording to a crutiria
+ * @param apartment
+ * @param type
+ * @return
+ *   NULL any problem or we reached the end of the list
+ *   Data otherwise
+ */
+Data apartmentGetNext(Apartment apartment, DataType type);
+
+/**
+ *   apartmentFilter             -filters According to a crutiria
+ * @param apartment
+ * @param filterFunc
+ * @return
+ *   NULL if any problem accured
+ *   Kernel otherwise
+ */
+Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc);
+
+/**
  *   apartmentDayCycle           -for cycle work
+ * @param apartment
+ * @param action
+ * @param object
+ * @return
+ *    the standart one
+ */
+ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCodes action, Data object);
+
+/**
  *   apartmentLogManager         -for log managment
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  * @param apartment
  * @return
- *
+ *    the standat one
  */
-Kernel apartmentGetGasBill(Apartment apartment);
+ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action);
 
-ApartmentType appartmentGetType(Apartment apartment);
+
+#define APARTMENT_FOREACH(type, iterator,apartment,dataType)          \
+    for(type iterator = apartmentGetfirst(apartment,dataTypes); \
+        iterator ;                               \
+        iterator =apartmentGetNext(apartment,dataType))
+
+
 #endif //APARTMENT_H
