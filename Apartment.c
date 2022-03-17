@@ -1,5 +1,13 @@
 #include "Apartment.h"
 
+
+struct apartment_t{
+    PostalCode code;
+
+};
+
+
+
 /**
  *   apartmentCreate            - Creates a new apartment
  * @param type
