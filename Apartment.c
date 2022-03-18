@@ -57,7 +57,37 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
     newapartment->foodBill=food;
     if(creorcp)
     {
-        newapartment->residents= kernelCreate(AMOUNT_SET,true,);
+        int id=3;
+        void* elem[1]={&id};
+        CopyFunc copy[1]={/*personCopy*/};
+        DestFunc destruct[1]={/*personDestroy*/};
+        CompFunc compFunc[1]={/*personCompeare*/};
+        newapartment->objects= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
+                                              destruct,1,compFunc,1);
+        if(!newapartment->residents)
+        {
+            apartmentDestroy(newapartment);
+            return NULL;
+        }
+        id=3;
+        elem[0]=&id;
+        copy[0]=kernelCopy;
+        destruct[0]=kernelDestroy;
+        compFunc[0]=kernelCompeare;
+        newapartment->objects= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
+                                            destruct,1,compFunc,1);
+        if(!newapartment->objects)
+        {
+            free(newapartment);
+            return NULL;
+        }
+        newapartment->food= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
+                                            destruct,1,compFunc,1);
+        if(!newapartment->food)
+        {
+            free(newapartment);
+            return NULL;
+        }
     }
     return newapartment;
 }
