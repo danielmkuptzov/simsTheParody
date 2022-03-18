@@ -134,7 +134,7 @@ typedef bool(*GeneralFilter)(Apartment);
  *   NULL for any error
  *   Apartment otherwise
  */
-Apartment apartmentCreate(ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
+Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
                           PostalCodeDestroy destructor,PostalCodeCompear compare, Person owner,
                           GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
                           Gasbil gasbil,FoodBill food);

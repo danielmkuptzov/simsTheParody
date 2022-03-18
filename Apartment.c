@@ -1,5 +1,6 @@
-#include "Apartment.h"
+#include <stdlib.h>
 
+#include "Apartment.h"
 
 struct apartment_t{
     PostalCode id;
@@ -28,10 +29,23 @@ struct apartment_t{
  *   NULL for any error
  *   Apartment otherwise
  */
-Apartment apartmentCreate(ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
+Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
                           PostalCodeDestroy destructor,PostalCodeCompear compare, Person owner,
                           GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
-                          Gasbil gasbil,FoodBill food);
+                          Gasbil gasbil,FoodBill food)
+{
+    if(type==NONE||!postalCode||!postalCodeCopy||!destructor||!compare||
+    !owner||!arnona||!electricity||!avgFunc||!gasbil||!food)
+    {
+        return NULL;
+    }
+    Apartment newapartment= malloc(sizeof(struct apartment_t));
+    if(!newapartment)
+    {
+        return NULL;
+    }
+
+}
 
 /**
  *   apartmentDestroy           - Deletes an existing apartment and frees all resources
