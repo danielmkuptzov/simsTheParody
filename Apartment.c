@@ -3,6 +3,7 @@
 #include "Apartment.h"
 
 struct apartment_t{
+    ApartmentType typeofapar;
     PostalCode id;
     PostalCodeCopy postalCodeCopy;
     PostalCodeDestroy destroyer;
@@ -44,7 +45,14 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
     {
         return NULL;
     }
-
+    newapartment->typeofapar=type;
+    newapartment->postalCodeCopy=postalCodeCopy;
+    newapartment->id=newapartment->postalCodeCopy(postalCode);
+    if(!newapartment->id)
+    {
+        free(newapartment);
+        return NULL;
+    }
 }
 
 /**
