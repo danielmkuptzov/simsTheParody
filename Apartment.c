@@ -19,6 +19,31 @@ struct apartment_t{
     FoodBill foodBill;
 };
 
+static void* residentCopy(void* resident)
+{
+    if(!resident)
+    {
+        return NULL;
+    }
+    return personCopy(resident);
+}
+
+static void residentDestroy(void* resident)
+{
+    if(!resident)
+    {
+        return;
+    }
+    personDestroy(resident);
+}
+
+
+static int residentcomp(void* resident1, void* resident2)
+{
+    return personCompeare(resident1,resident2);
+}
+
+
 Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
                           PostalCodeDestroy destructor,PostalCodeCompear compare, Person owner,
                           GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
@@ -59,9 +84,9 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
     {
         int id=3;
         void* elem[1]={&id};
-        CopyFunc copy[1]={/*personCopy*/};
-        DestFunc destruct[1]={/*personDestroy*/};
-        CompFunc compFunc[1]={/*personCompeare*/};
+        CopyFunc copy[1]={residentCopy};
+        DestFunc destruct[1]={residentDestroy};
+        CompFunc compFunc[1]={residentcomp};
         newapartment->objects= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
                                               destruct,1,compFunc,1);
         if(!newapartment->residents)
