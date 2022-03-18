@@ -2,8 +2,19 @@
 
 
 struct apartment_t{
-    PostalCode code;
-
+    PostalCode id;
+    PostalCodeCopy postalCodeCopy;
+    PostalCodeDestroy destroyer;
+    PostalCodeCompear postComp;
+    Person owner;
+    Kernel residents;
+    Kernel objects;
+    Kernel food;
+    GetArnona arnona;
+    ElecBill elecBill;
+    Gasbil gasbil;
+    AvarageSpending avarageSpending;
+    FoodBill foodBill;
 };
 
 
