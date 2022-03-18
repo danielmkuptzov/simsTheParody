@@ -19,17 +19,6 @@ struct apartment_t{
     FoodBill foodBill;
 };
 
-
-
-/**
- *   apartmentCreate            - Creates a new apartment
- * @param type
- * @param postalCode
- * @param owner
- * @return
- *   NULL for any error
- *   Apartment otherwise
- */
 Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
                           PostalCodeDestroy destructor,PostalCodeCompear compare, Person owner,
                           GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
@@ -53,6 +42,24 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
         free(newapartment);
         return NULL;
     }
+    newapartment->destroyer=destructor;
+    newapartment->postComp=compare;
+    newapartment->owner= personCopy(owner);
+    if(!newapartment->owner)
+    {
+        apartmentDestroy(newapartment);
+        return NULL;
+    }
+    newapartment->arnona=arnona;
+    newapartment->elecBill=electricity;
+    newapartment->avarageSpending=avgFunc;
+    newapartment->gasbil=gasbil;
+    newapartment->foodBill=food;
+    if(creorcp)
+    {
+        newapartment->residents= kernelCreate(AMOUNT_SET,true,);
+    }
+    return newapartment;
 }
 
 /**
