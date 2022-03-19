@@ -117,11 +117,19 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
     return newapartment;
 }
 
-/**
- *   apartmentDestroy           - Deletes an existing apartment and frees all resources
- * @param apartment
- */
-void apartmentDestroy(Apartment apartment);
+void apartmentDestroy(Apartment apartment)
+{
+    if(!apartment)
+    {
+        return;
+    }
+    kernelDestroy(apartment->residents);
+    kernelDestroy(apartment->food);
+    kernelDestroy(apartment->objects);
+    apartment->destroyer(apartment->id);
+    personDestroy(apartment->owner);
+    free(apartment);
+}
 
 /**
  *   apartmentCopy              - Copies an existing apartment
