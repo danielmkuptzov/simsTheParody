@@ -131,14 +131,41 @@ void apartmentDestroy(Apartment apartment)
     free(apartment);
 }
 
-/**
- *   apartmentCopy              - Copies an existing apartment
- * @param apartment
- * @return
- *   NULL if there was any error
- *   apartment otherwise
- */
-Apartment apartmentCopy(Apartment apartment);
+Apartment apartmentCopy(Apartment apartment)
+{
+    if(!apartment)
+    {
+        return NULL;
+    }
+    Apartment copyApar= apartmentCreate(false,apartment->typeofapar,apartment->id,
+                                        apartment->postalCodeCopy,apartment->destroyer,
+                                        apartment->postComp,apartment->owner,apartment->arnona,
+                                        apartment->elecBill,apartment->avarageSpending,
+                                        apartment->gasbil,apartment->foodBill);
+    if(!copyApar)
+    {
+        return NULL;
+    }
+    copyApar->residents= kernelCopy(apartment->residents);
+    if(!copyApar->residents)
+    {
+        apartmentDestroy(copyApar);
+        return NULL;
+    }
+    copyApar->objects= kernelCopy(apartment->objects);
+    if(!copyApar->objects)
+    {
+        apartmentDestroy(copyApar);
+        return NULL;
+    }
+    copyApar->food= kernelCopy(apartment->food);
+    if(!copyApar->food)
+    {
+        apartmentDestroy(copyApar);
+        return NULL;
+    }
+    return copyApar;
+}
 
 /**
  *   apartmentCompeare          -compares between apartments
