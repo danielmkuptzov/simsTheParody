@@ -167,27 +167,10 @@ Apartment apartmentCopy(Apartment apartment)
     return copyApar;
 }
 
-/**
- *   apartmentCompeare          -compares between apartments
- * @param apartment1
- * @param apartment2
- * @
- *  positive if apartment1> apartment2
- *  negative if apartment1< apartment2
- *  0 if they are equal
- */
-int apartmentCompeare(Apartment apartment1, Apartment apartment2);
-
-/**
- *   apartmentSetArnona         -change the arnona
- * @param apartment
- * @param arnona
- * @return
- *      APARTMENT_SUCSESS -the change was sucsessful
- *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- *      APARTMENT_ERROR
- */
-ApartmentErrorCodes apartmentSetArnona(Apartment apartment, GetArnona arnona);
+int apartmentCompeare(Apartment apartment1, Apartment apartment2)
+{
+    return apartment1->postComp(apartment1->id,apartment2->id);
+}
 
 /**
  *   apartmentGetArnona         -gives back the arnona calculation

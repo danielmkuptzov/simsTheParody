@@ -27,7 +27,6 @@
  *   apartmentDestroy            - Deletes an existing apartment and frees all resources
  *   apartmentCopy               - Copies an existing apartment
  *   apartmentCompeare           -compares between apartments
- *   apartmentSetArnona          -change the arnona
  *   apartmentGetArnona          -gives back the arnona calculation
  *   apartmentGetOwner           -get the owner
  *   apartmentSetOwner           -changes the owner
@@ -121,8 +120,6 @@ typedef Kernel(*Gasbil)(Apartment);
 
 typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill,Gasbil);
 
-typedef Kernel(*BillFilter)(AvarageSpending);
-
 typedef bool(*GeneralFilter)(Apartment);
 
 /**
@@ -164,17 +161,6 @@ Apartment apartmentCopy(Apartment apartment);
  *  0 if they are equal
  */
 int apartmentCompeare(Apartment apartment1, Apartment apartment2);
-
-/**
- *   apartmentSetArnona         -change the arnona
- * @param apartment
- * @param arnona
- * @return
- *      APARTMENT_SUCSESS -the change was sucsessful
- *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- *      APARTMENT_ERROR
- */
-ApartmentErrorCodes apartmentSetArnona(Apartment apartment, GetArnona arnona);
 
 /**
  *   apartmentGetArnona         -gives back the arnona calculation
