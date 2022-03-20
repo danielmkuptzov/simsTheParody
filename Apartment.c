@@ -172,23 +172,15 @@ int apartmentCompeare(Apartment apartment1, Apartment apartment2)
     return apartment1->postComp(apartment1->id,apartment2->id);
 }
 
-/**
- *   apartmentGetArnona         -gives back the arnona calculation
- * @param apartment
- * @return
- *      NULL- for any error
- *      Kernel otherwise
- */
-Kernel apartmentGetArnona(Apartment apartment);
+Kernel apartmentGetArnona(Apartment apartment)
+{
+    return apartment->arnona(apartment);
+}
 
-/**
- *   apartmentGetOwner          -get the owner
- * @param apartment
- * @return
- *      NULL for any error
- *      Person otherwise
- */
-Person apartmentGetOwner(Apartment apartment);
+Person apartmentGetOwner(Apartment apartment)
+{
+    return apartment->owner;
+}
 
 /**
  *   apartmentSetOwner          -changes the owner
