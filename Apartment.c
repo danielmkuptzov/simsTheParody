@@ -182,17 +182,20 @@ Person apartmentGetOwner(Apartment apartment)
     return apartment->owner;
 }
 
-/**
- *   apartmentSetOwner          -changes the owner
- * @param apartment
- * @param newOwner
- * @return
- *      APARTMENT_SUCSESS -the owner has changed
- *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- *      APARTMENT_ERROR -any error not related to the previous one
- *      APATMENT_NON_EXISTING_PERSON -the person doesn't exist
- */
-ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
+ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner)
+{
+    if(!apartment||!newOwner)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    personDestroy(apartment->owner);
+    apartment->owner= personCopy(newOwner);
+    if(!apartment->owner)
+    {
+        return APARTMENT_ERROR;
+    }
+    return APARTMENT_SUCSESS;
+}
 
 /**
  *   apartmentAddResident       -adds new resident
