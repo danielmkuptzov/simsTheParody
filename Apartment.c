@@ -209,11 +209,12 @@ ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner)
  */
 ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident)
 {
-    if(!apartment||!newResident)
+    if(!apartment||!apartment->residents||!newResident)
     {
         return APARTMENT_NULL_ARGUMENT;
     }
-
+    KernelErrors resalt= kernelInsert(apartment->residents,1,newResident);
+    if(resalt==)
 }
 
 /**
