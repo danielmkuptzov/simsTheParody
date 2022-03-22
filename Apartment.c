@@ -207,7 +207,14 @@ ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner)
  *      APARTMENT_NULL_ARGUMENT - a NULL argument was passed
  *      APARTMENT_ERROR  -any error not listed above
  */
-ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident);
+ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident)
+{
+    if(!apartment||!newResident)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+
+}
 
 /**
  *   apartmentRemoveResident     -remove resident from the apartment
