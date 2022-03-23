@@ -197,24 +197,24 @@ ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner)
     return APARTMENT_SUCSESS;
 }
 
-/**
- *   apartmentAddResident       -adds new resident
- * @param apartment
- * @param newResident
- * @return
- *      APARTMENT_SUCSESS -the resident was added sucsessfuly
- *      APARTMENT_RESIDENT_EXIST -the resident already exist
- *      APARTMENT_NULL_ARGUMENT - a NULL argument was passed
- *      APARTMENT_ERROR  -any error not listed above
- */
-ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident)
-{
-    if(!apartment||!apartment->residents||!newResident)
+ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident) {
+    if (!apartment || !apartment->residents || !newResident) {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    KernelErrors resalt = kernelInsert(apartment->residents, 1, newResident);
+    if (resalt == KERNEL_NULL_ARGUMENT)
     {
         return APARTMENT_NULL_ARGUMENT;
     }
-    KernelErrors resalt= kernelInsert(apartment->residents,1,newResident);
-    if(resalt==)
+    if(resalt==KERNEL_MEMORY_PROBLEM||resalt==KERNEL_ERROR)
+    {
+        return APARTMENT_ERROR;
+    }
+    if(resalt==KERNEL_ELEMENT_EXIST)
+    {
+        return APARTMENT_RESIDENT_EXIST;
+    }
+    return APARTMENT_SUCSESS;
 }
 
 /**
