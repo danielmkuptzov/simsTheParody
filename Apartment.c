@@ -217,17 +217,27 @@ ApartmentErrorCodes apartmentAddResident(Apartment apartment,Person newResident)
     return APARTMENT_SUCSESS;
 }
 
-/**
- *   apartmentRemoveResident     -remove resident from the apartment
- * @param apartment
- * @param resident
- * @return
- * APARTMENT_SUCSESS -the resident was removed
- * APARTMENT_RESIDENT_DOES_NOT_EXIST -the resident you requested does'nt exist
- * APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- * APARTMENT_ERROR  -any error not listed above
- */
-ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident);
+ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident)
+{
+    if(!apartment||!apartment->residents||!resident)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    KernelErrors resalt= kernelRemove(apartment->residents,1,resident);
+    if(resalt==KERNEL_NULL_ARGUMENT)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    if(resalt==KERNEL_ELEMENT_DOES_NOT_EXIST)
+    {
+        return APARTMENT_RESIDENT_DOES_NOT_EXIST;
+    }
+    if(resalt==KERNEL_ERROR||resalt==KERNEL_MEMORY_PROBLEM)
+    {
+        return APARTMENT_ERROR;
+    }
+    return APARTMENT_SUCSESS;
+}
 
 /**
  *   apartmentGiveShoppingList   -gives the shopping list of the shopping list
