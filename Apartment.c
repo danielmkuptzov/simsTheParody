@@ -246,7 +246,14 @@ ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident
  *      NULL -for any error that might accure
  *      Kernel -otherwise
  */
-Kernel apartmentGiveShoppingList(Apartment apartment);
+Kernel apartmentGiveShoppingList(Apartment apartment)
+{
+    if(!apartment||!apartment->residents)
+    {
+        return NULL;
+    }
+    Kernel dummy= kernelCreate();
+}
 
 /**
  *   apartmentCreateShoppingList -creates the shopping list of the residents
