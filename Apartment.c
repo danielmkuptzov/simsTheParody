@@ -17,6 +17,7 @@ struct apartment_t{
     Gasbil gasbil;
     AvarageSpending avarageSpending;
     FoodBill foodBill;
+    Kernel shoppingList;
 };
 
 static void* residentCopy(void* resident)
@@ -248,11 +249,11 @@ ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident
  */
 Kernel apartmentGiveShoppingList(Apartment apartment)
 {
-    if(!apartment||!apartment->residents)
+    if(!apartment||!apartment->shoppingList)
     {
         return NULL;
     }
-    Kernel dummy= kernelCreate(AMOUNT_SET,true,);
+    Kernel toSend= kernelCreate();
 }
 
 /**
