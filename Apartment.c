@@ -252,7 +252,7 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     {
         return NULL;
     }
-    Kernel dummy= kernelCreate();
+    Kernel dummy= kernelCreate(AMOUNT_SET,true,);
 }
 
 /**
