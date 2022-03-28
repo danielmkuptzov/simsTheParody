@@ -2,6 +2,10 @@
 
 #include "Apartment.h"
 
+static struct apar_elem_t{
+
+}* ApapShoppingBlock;
+
 struct apartment_t{
     ApartmentType typeofapar;
     PostalCode id;
