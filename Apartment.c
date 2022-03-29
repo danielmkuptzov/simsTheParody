@@ -3,8 +3,11 @@
 #include "Apartment.h"
 
 static struct apar_elem_t{
-
+    Kernel requestors;
+    Kernel object;
 }* ApapShoppingBlock;
+
+
 
 struct apartment_t{
     ApartmentType typeofapar;
