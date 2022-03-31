@@ -2,12 +2,30 @@
 
 #include "Apartment.h"
 
-static struct apar_elem_t{
+typedef struct apar_elem_t{
     Kernel requestors;
     Kernel object;
 }* ApapShoppingBlock;
 
 
+static ApapShoppingBlock elementCreate(Person first, Kernel product)
+{
+    if(!first||!product)
+    {
+        return NULL;
+    }
+    ApapShoppingBlock new_elem= malloc(sizeof(struct apar_elem_t));
+    if(!new_elem)
+    {
+        return NULL;
+    }
+}
+
+static AparPointer elemCopy(void* original);
+
+static AparPointer elemDestroy(void* elem);
+
+static int elemComp(void* elem1, void* elem2);
 
 struct apartment_t{
     ApartmentType typeofapar;
