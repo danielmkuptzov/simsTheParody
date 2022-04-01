@@ -34,22 +34,32 @@ typedef struct apar_elem_t{
 
 static ApapShoppingBlock elementCreate(bool creorcp, Person first, Kernel product)
 {
-    if(!first||!product)
-    {
-        return NULL;
-    }
     ApapShoppingBlock new_elem= malloc(sizeof(struct apar_elem_t));
     if(!new_elem)
     {
         return NULL;
     }
-    int id=3;
-    void* elem[1]={&id};
-    CopyFunc copy[1]={residentCopy};
-    DestFunc destruct[1]={residentDestroy};
-    CompFunc compFunc[1]={residentcomp};
-    new_elem->requestors= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
-                                        destruct,1,compFunc,1);
+    if(creorcp)
+    {
+        if(!first||!product)
+        {
+            free(new_elem);
+            return NULL;
+        }
+        int id=3;
+        void* elem[1]={&id};
+        CopyFunc copy[1]={residentCopy};
+        DestFunc destruct[1]={residentDestroy};
+        CompFunc compFunc[1]={residentcomp};
+        new_elem->requestors= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
+                                           destruct,1,compFunc,1);
+        if (!new_elem->requestors)
+        {
+            free(new_elem);
+            return NULL;
+        }
+    }
+    return new_elem;
 }
 
 static ApapShoppingBlock elemCopy(void* original);
