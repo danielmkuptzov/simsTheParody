@@ -2,49 +2,6 @@
 
 #include "Apartment.h"
 
-typedef struct apar_elem_t{
-    Kernel requestors;
-    Kernel object;
-}* ApapShoppingBlock;
-
-
-static ApapShoppingBlock elementCreate(Person first, Kernel product)
-{
-    if(!first||!product)
-    {
-        return NULL;
-    }
-    ApapShoppingBlock new_elem= malloc(sizeof(struct apar_elem_t));
-    if(!new_elem)
-    {
-        return NULL;
-    }
-}
-
-static AparPointer elemCopy(void* original);
-
-static AparPointer elemDestroy(void* elem);
-
-static int elemComp(void* elem1, void* elem2);
-
-struct apartment_t{
-    ApartmentType typeofapar;
-    PostalCode id;
-    PostalCodeCopy postalCodeCopy;
-    PostalCodeDestroy destroyer;
-    PostalCodeCompear postComp;
-    Person owner;
-    Kernel residents;
-    Kernel objects;
-    Kernel food;
-    GetArnona arnona;
-    ElecBill elecBill;
-    Gasbil gasbil;
-    AvarageSpending avarageSpending;
-    FoodBill foodBill;
-    Kernel shoppingList;
-};
-
 static void* residentCopy(void* resident)
 {
     if(!resident)
@@ -68,6 +25,56 @@ static int residentcomp(void* resident1, void* resident2)
 {
     return personCompeare(resident1,resident2);
 }
+
+typedef struct apar_elem_t{
+    Kernel requestors;
+    Kernel object;
+}* ApapShoppingBlock;
+
+
+static ApapShoppingBlock elementCreate(bool creorcp, Person first, Kernel product)
+{
+    if(!first||!product)
+    {
+        return NULL;
+    }
+    ApapShoppingBlock new_elem= malloc(sizeof(struct apar_elem_t));
+    if(!new_elem)
+    {
+        return NULL;
+    }
+    int id=3;
+    void* elem[1]={&id};
+    CopyFunc copy[1]={residentCopy};
+    DestFunc destruct[1]={residentDestroy};
+    CompFunc compFunc[1]={residentcomp};
+    new_elem->requestors= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
+                                        destruct,1,compFunc,1);
+}
+
+static ApapShoppingBlock elemCopy(void* original);
+
+static ApapShoppingBlock elemDestroy(void* elem);
+
+static int elemComp(void* elem1, void* elem2);
+
+struct apartment_t{
+    ApartmentType typeofapar;
+    PostalCode id;
+    PostalCodeCopy postalCodeCopy;
+    PostalCodeDestroy destroyer;
+    PostalCodeCompear postComp;
+    Person owner;
+    Kernel residents;
+    Kernel objects;
+    Kernel food;
+    GetArnona arnona;
+    ElecBill elecBill;
+    Gasbil gasbil;
+    AvarageSpending avarageSpending;
+    FoodBill foodBill;
+    Kernel shoppingList;
+};
 
 
 Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
@@ -113,7 +120,7 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
         CopyFunc copy[1]={residentCopy};
         DestFunc destruct[1]={residentDestroy};
         CompFunc compFunc[1]={residentcomp};
-        newapartment->objects= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
+        newapartment->residents= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
                                               destruct,1,compFunc,1);
         if(!newapartment->residents)
         {
