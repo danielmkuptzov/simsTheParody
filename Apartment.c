@@ -58,13 +58,30 @@ static ApapShoppingBlock elementCreate(bool creorcp, Person first, Kernel produc
             free(new_elem);
             return NULL;
         }
+        KernelErrors resalt= kernelInsert(new_elem->requestors,0,first);
+        if(resalt!=KERNEL_SUCSESS)
+        {
+            kernelDestroy(new_elem->requestors);
+            free(new_elem);
+            return NULL;
+        }
+        new_elem->object= kernelCopy(product);
+        if(!new_elem->object)
+        {
+            kernelDestroy(new_elem->requestors);
+            free(new_elem);
+            return NULL;
+        }
     }
     return new_elem;
 }
 
-static ApapShoppingBlock elemCopy(void* original);
+static void elemDestroy(void* elem)
+{
 
-static ApapShoppingBlock elemDestroy(void* elem);
+}
+
+static ApapShoppingBlock elemCopy(void* original);
 
 static int elemComp(void* elem1, void* elem2);
 
