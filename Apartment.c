@@ -26,6 +26,17 @@ static int residentcomp(void* resident1, void* resident2)
     return personCompeare(resident1,resident2);
 }
 
+static Kernel createSetOfPeople()
+{
+    int id=3;
+    void* elem[1]={&id};
+    CopyFunc copy[1]={residentCopy};
+    DestFunc destruct[1]={residentDestroy};
+    CompFunc compFunc[1]={residentcomp};
+    return kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
+                                       destruct,1,compFunc,1);
+}
+
 typedef struct apar_elem_t{
     Kernel requestors;
     Kernel object;
@@ -46,13 +57,7 @@ static ApapShoppingBlock elementCreate(bool creorcp, Person first, Kernel produc
             free(new_elem);
             return NULL;
         }
-        int id=3;
-        void* elem[1]={&id};
-        CopyFunc copy[1]={residentCopy};
-        DestFunc destruct[1]={residentDestroy};
-        CompFunc compFunc[1]={residentcomp};
-        new_elem->requestors= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
-                                           destruct,1,compFunc,1);
+        new_elem->requestors=createSetOfPeople();
         if (!new_elem->requestors)
         {
             free(new_elem);
@@ -143,18 +148,16 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
     if(creorcp)
     {
         int id=3;
-        void* elem[1]={&id};
-        CopyFunc copy[1]={residentCopy};
-        DestFunc destruct[1]={residentDestroy};
-        CompFunc compFunc[1]={residentcomp};
-        newapartment->residents= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
-                                              destruct,1,compFunc,1);
+        void* elem[1];
+        CopyFunc copy[1];
+        DestFunc destruct[1];
+        CompFunc compFunc[1];
+        newapartment->residents= createSetOfPeople();
         if(!newapartment->residents)
         {
             apartmentDestroy(newapartment);
             return NULL;
         }
-        id=3;
         elem[0]=&id;
         copy[0]=kernelCopy;
         destruct[0]=kernelDestroy;
