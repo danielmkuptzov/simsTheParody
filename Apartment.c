@@ -83,10 +83,15 @@ static ApapShoppingBlock elementCreate(bool creorcp, Person first, Kernel produc
 
 static void elemDestroy(void* elem)
 {
-
+    ApapShoppingBlock toDestroy=elem;
+    kernelDestroy(toDestroy->requestors);
+    kernelDestroy(toDestroy->object);
 }
 
-static ApapShoppingBlock elemCopy(void* original);
+static ApapShoppingBlock elemCopy(void* original)
+{
+
+}
 
 static int elemComp(void* elem1, void* elem2);
 
