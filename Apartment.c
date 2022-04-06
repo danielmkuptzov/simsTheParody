@@ -90,6 +90,7 @@ static void elemDestroy(void* elem)
 
 static ApapShoppingBlock elemCopy(void* original)
 {
+    ApapShoppingBlock org=original;
 
 }
 
