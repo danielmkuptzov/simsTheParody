@@ -91,7 +91,25 @@ static void elemDestroy(void* elem)
 static ApapShoppingBlock elemCopy(void* original)
 {
     ApapShoppingBlock org=original;
-
+    ApapShoppingBlock copy= malloc(sizeof(struct apar_elem_t));
+    if(!copy)
+    {
+        return NULL;
+    }
+    copy->requestors= kernelCopy(org->requestors);
+    if(!copy->requestors)
+    {
+        free(copy);
+        return NULL;
+    }
+    copy->object= kernelCopy(org->object);
+    if(!copy->object)
+    {
+        kernelDestroy(copy->requestors);
+        free(copy);
+        return NULL;
+    }
+    return NULL;
 }
 
 static int elemComp(void* elem1, void* elem2);
