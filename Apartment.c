@@ -88,7 +88,7 @@ static void elemDestroy(void* elem)
     kernelDestroy(toDestroy->object);
 }
 
-static ApapShoppingBlock elemCopy(void* original)
+static void* elemCopy(void* original)
 {
     ApapShoppingBlock org=original;
     ApapShoppingBlock copy= malloc(sizeof(struct apar_elem_t));
@@ -342,6 +342,10 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     {
         return NULL;
     }
+    int id=9;
+    CreatorUnit unit[]={&id};
+    CopyFunc ctours[]={elemCopy};
+    DestFunc dtours[]={};
     Kernel toSend= kernelCreate();
 }
 

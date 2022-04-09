@@ -7,6 +7,7 @@ a very important note: the numbers that refere to the types:
 6.person
 7.classification
 8.id
+9.shoppping list
 
 a template for every adt
 /**
