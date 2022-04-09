@@ -112,7 +112,10 @@ static ApapShoppingBlock elemCopy(void* original)
     return NULL;
 }
 
-static int elemComp(void* elem1, void* elem2);
+static int elemComp(void* elem1, void* elem2)
+{
+    return(kernelCompeare(((ApapShoppingBlock)elem1)->object,((ApapShoppingBlock)elem2)->object));
+}
 
 struct apartment_t{
     ApartmentType typeofapar;
