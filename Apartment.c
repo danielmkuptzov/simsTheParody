@@ -345,8 +345,14 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     int id=9;
     CreatorUnit unit[]={&id};
     CopyFunc ctours[]={elemCopy};
-    DestFunc dtours[]={};
-    Kernel toSend= kernelCreate();
+    DestFunc dtours[]={elemDestroy};
+    CompFunc compFunc[]={elemComp};
+    Kernel toSend= kernelCreate(AMOUNT_SET,true,unit,1,ctours,
+                                1,dtours,1,compFunc,1);
+    if(!toSend)
+    {
+        return NULL;
+    }
 }
 
 /**
