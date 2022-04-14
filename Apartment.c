@@ -329,13 +329,6 @@ ApartmentErrorCodes apartmentRemoveResident(Apartment apartment, Person resident
     return APARTMENT_SUCSESS;
 }
 
-/**
- *   apartmentGiveShoppingList   -gives the shopping list of the shopping list
- * @param apartment
- * @return
- *      NULL -for any error that might accure
- *      Kernel -otherwise
- */
 Kernel apartmentGiveShoppingList(Apartment apartment)
 {
     if(!apartment||!apartment->shoppingList)
@@ -353,6 +346,18 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     {
         return NULL;
     }
+    Kernel toSendtmp=NULL;
+    KERNEL_FOREACH(Person,data,apartment->residents)
+    {
+        toSendtmp=kernelAddition(toSend, personGetWishList(data));
+        kernelDestroy(toSend);
+        if(!toSendtmp)
+        {
+            return NULL;
+        }
+        toSend=toSendtmp;
+    }
+    return toSend;
 }
 
 /**
