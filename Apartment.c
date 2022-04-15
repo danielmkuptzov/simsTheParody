@@ -360,16 +360,23 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     return toSend;
 }
 
-/**
- *   apartmentCreateShoppingList -creates the shopping list of the residents
- * @param apartment
- * @return
- *      APARTMENT_SUCSESS -the creation was sucsessful
- *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- *      APARTMENT_NO_SHOPPING_LIST -there was an error in the process
- *      APARTMENT_ERROR -other errors
- */
-ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
+ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment)
+{
+    if(!apartment)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    if(apartment->shoppingList)
+    {
+        kernelDestroy(apartment->shoppingList);
+    }
+    apartment->shoppingList=apartmentGiveShoppingList(apartment);
+    if(!apartment->shoppingList)
+    {
+        return APARTMENT_NO_SHOPPING_LIST;
+    }
+    return APARTMENT_SUCSESS;
+}
 
 /**
  *   apartmentGetResidents       -gives the list of the residents
