@@ -383,7 +383,8 @@ ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment)
  * @param apartment
  * @return
  */
-Kernel apartmentGetResidents(Apartment apartment);
+Kernel apartmentGetResidents(Apartment apartment)
+{}
 
 /**
  *   apartmentAddFurniture       -adds furniture to the apartment
