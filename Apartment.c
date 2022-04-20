@@ -397,7 +397,14 @@ Kernel apartmentGetResidents(Apartment apartment)
  *      APARTMENT_NOT_ENOTH_SPACE -we can't add this
  *      APARTMENT_ERROR -any error not listed above
  */
-ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture);
+ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
+{
+    if(!apartment||!furniture)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+
+}
 
 /**
  *   appaertmentRemoveFurniture  -removes furniture
