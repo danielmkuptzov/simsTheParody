@@ -378,13 +378,14 @@ ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment)
     return APARTMENT_SUCSESS;
 }
 
-/**
- *   apartmentGetResidents       -gives the list of the residents
- * @param apartment
- * @return
- */
 Kernel apartmentGetResidents(Apartment apartment)
-{}
+{
+    if(!apartment)
+    {
+        return NULL;
+    }
+    return apartment->residents;
+}
 
 /**
  *   apartmentAddFurniture       -adds furniture to the apartment
