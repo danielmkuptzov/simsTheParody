@@ -403,6 +403,15 @@ ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
     {
         return APARTMENT_NULL_ARGUMENT;
     }
+    KernelErrors resalt= kernelInsert(apartment->objects,0,furniture);
+    if(resalt==KERNEL_NULL_ARGUMENT)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    if(resalt==KERNEL_ELEMENT_EXIST)
+    {
+        return APARTMENT_FURNITURE_EXISTS;
+    }
 
 }
 
