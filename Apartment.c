@@ -387,16 +387,6 @@ Kernel apartmentGetResidents(Apartment apartment)
     return apartment->residents;
 }
 
-/**
- *   apartmentAddFurniture       -adds furniture to the apartment
- * @param apartment
- * @param furniture
- * @return
- *      APARTMENT_SUCSESS -the opreration terminated with sucsess
- *      APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- *      APARTMENT_NOT_ENOTH_SPACE -we can't add this
- *      APARTMENT_ERROR -any error not listed above
- */
 ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
 {
     if(!apartment||!furniture)
@@ -412,7 +402,11 @@ ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
     {
         return APARTMENT_FURNITURE_EXISTS;
     }
-
+    if(resalt==KERNEL_ERROR||resalt==KERNEL_MEMORY_PROBLEM)
+    {
+        return APARTMENT_ERROR;
+    }
+    return APARTMENT_SUCSESS;
 }
 
 /**
