@@ -409,17 +409,27 @@ ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
     return APARTMENT_SUCSESS;
 }
 
-/**
- *   appaertmentRemoveFurniture  -removes furniture
- * @param apartment
- * @param removedFurniture
- * @return
- * APARTMENT_SUCSESS -the removle was sucsessful
- * APARTMENT_NULL_ARGUMENT -a NULL argument was passed
- * APARTMENT_FURNITURE_DOES_NOT_EXIST -the object you requested does not exist
- * APARTMENT_ERROR -any error not listed above
- */
-ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel removedFurniture);
+ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel removedFurniture)
+{
+    if(!apartment||!apartment->objects||removedFurniture)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    KernelErrors resalt= kernelRemove(apartment->objects,0,removedFurniture);
+    if(resalt==KERNEL_NULL_ARGUMENT)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    if(resalt==KERNEL_ELEMENT_DOES_NOT_EXIST)
+    {
+        return APARTMENT_FURNITURE_DOES_NOT_EXIST;
+    }
+    if(resalt==KERNEL_MEMORY_PROBLEM||resalt==KERNEL_ERROR)
+    {
+        return APARTMENT_ERROR;
+    }
+    return APARTMENT_SUCSESS;
+}
 
 /**
  *   appartmentGetArnona         -gives the cost of the estate
