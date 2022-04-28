@@ -431,23 +431,23 @@ ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel remov
     return APARTMENT_SUCSESS;
 }
 
-/**
- *   appartmentGetArnona         -gives the cost of the estate
- * @param apartment
- * @return
- *  NULL if any error acures
- *  Kernel otherwise
- */
-Kernel appartmentGetArnona(Apartment apartment);
+Kernel appartmentGetArnona(Apartment apartment)
+{
+    if(!apartment||!apartment->arnona)
+    {
+        return NULL;
+    }
+    return apartment->arnona(apartment);
+}
 
-/**
- *   apartmentGetGasBill         -gives the gas bill
- * @param apartment
- * @return
- *  NULL for any error
- *  Kernel otherwise
- */
-Kernel apartmentGetGasBill(Apartment apartment);
+Kernel apartmentGetGasBill(Apartment apartment)
+{
+    if(!apartment||!apartment->gasbil)
+    {
+        return NULL;
+    }
+    return apartment->gasbil(apartment);
+}
 
 /**
  *   appartmentGetType           -gives the type of the appartment
