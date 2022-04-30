@@ -449,14 +449,14 @@ Kernel apartmentGetGasBill(Apartment apartment)
     return apartment->gasbil(apartment);
 }
 
-/**
- *   appartmentGetType           -gives the type of the appartment
- * @param apartment
- * @return
- *   NONE -if there is any error
- *   type otherwise
- */
-ApartmentType appartmentGetType(Apartment apartment);
+ApartmentType appartmentGetType(Apartment apartment)
+{
+    if(!apartment)
+    {
+        return NONE;
+    }
+    return (apartment->typeofapar);
+}
 
 /**
  *   apartmentGetBills           -gives the bills of the apartment
@@ -465,7 +465,10 @@ ApartmentType appartmentGetType(Apartment apartment);
  *   NULL if any error acures
  *   Kernel otherwise
  */
-Kernel apartmentGetBills(Apartment apartment);
+Kernel apartmentGetBills(Apartment apartment)
+{
+    //to work on. dom't forget
+}
 
 /**
  *   partmentMerge               -merges two same apartments
