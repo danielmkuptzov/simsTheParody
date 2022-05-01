@@ -458,20 +458,13 @@ ApartmentType appartmentGetType(Apartment apartment)
     return (apartment->typeofapar);
 }
 
-/**
- *   apartmentGetBills           -gives the bills of the apartment
- * @param apartment
- * @return
- *   NULL if any error acures
- *   Kernel otherwise
- */
 Kernel apartmentGetBills(Apartment apartment)
 {
     if(!apartment)
     {
         return NULL;
     }
-    return
+    return apartment->avarageSpending(apartment->arnona,apartment->elecBill,apartment->foodBill,apartment->gasbil);
 }
 
 /**
