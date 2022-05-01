@@ -467,7 +467,11 @@ ApartmentType appartmentGetType(Apartment apartment)
  */
 Kernel apartmentGetBills(Apartment apartment)
 {
-    //to work on. dom't forget
+    if(!apartment)
+    {
+        return NULL;
+    }
+    return
 }
 
 /**
