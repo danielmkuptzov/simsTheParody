@@ -475,7 +475,14 @@ Kernel apartmentGetBills(Apartment apartment)
  *   NULL for any error
  *   Apartment otherwise
  */
-Apartment partmentMerge(Apartment apartment1, Apartment apartment2);
+Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
+{
+    if(!apartment1||!apartment2)
+    {
+        return NULL;
+    }
+}
+
 
 /**
  *   apartmentGetfirst           -gives the first resident in the list
