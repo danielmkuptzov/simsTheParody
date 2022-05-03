@@ -477,10 +477,19 @@ Kernel apartmentGetBills(Apartment apartment)
  */
 Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
 {
-    if(!apartment1||!apartment2)
+    if((!apartment1)&&(!apartment2))
     {
         return NULL;
     }
+    if(!apartment1)
+    {
+        return apartmentCopy(apartment2);
+    }
+    if(!apartment2)
+    {
+        return apartmentCopy(apartment1);
+    }
+
 }
 
 
