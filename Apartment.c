@@ -489,7 +489,10 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
     {
         return apartmentCopy(apartment1);
     }
-
+    if(apartment1->typeofapar!=apartment2->typeofapar)
+    {
+        return NULL;
+    }
 }
 
 
