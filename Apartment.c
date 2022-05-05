@@ -493,6 +493,7 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
     {
         return NULL;
     }
+    Apartment uniapar= apartmentCreate();
 }
 
 
