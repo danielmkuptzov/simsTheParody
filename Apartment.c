@@ -494,6 +494,11 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
         return NULL;
     }
     Apartment uniapar= apartmentCopy(apartment1);
+    if(!uniapar)
+    {
+        return NULL;
+    }
+
 }
 
 
