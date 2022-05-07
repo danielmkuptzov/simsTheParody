@@ -498,7 +498,12 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
     {
         return NULL;
     }
-
+    KERNEL_FOREACH(Person,iter,apartment2->residents)
+    {}
+    KERNEL_FOREACH(Kernel ,iter,apartment2->objects)
+    {}
+    KERNEL_FOREACH(Kernel,iter,apartment2->food)
+    {}
 }
 
 
