@@ -498,8 +498,16 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
     {
         return NULL;
     }
+    KernelErrors resalt=KERNEL_SUCSESS;
     KERNEL_FOREACH(Person,iter,apartment2->residents)
-    {}
+    {
+        resalt= kernelInsert(uniapar->residents,0,iter);
+        if(resalt!=KERNEL_SUCSESS)
+        {
+            apartmentCopy(uniapar);
+            return NULL;
+        }
+    }
     KERNEL_FOREACH(Kernel ,iter,apartment2->objects)
     {}
     KERNEL_FOREACH(Kernel,iter,apartment2->food)
