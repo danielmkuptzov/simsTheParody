@@ -262,11 +262,6 @@ int apartmentCompeare(Apartment apartment1, Apartment apartment2)
     return apartment1->postComp(apartment1->id,apartment2->id);
 }
 
-Kernel apartmentGetArnona(Apartment apartment)
-{
-    return apartment->arnona(apartment);
-}
-
 Person apartmentGetOwner(Apartment apartment)
 {
     return apartment->owner;
@@ -387,6 +382,15 @@ Kernel apartmentGetResidents(Apartment apartment)
     return apartment->residents;
 }
 
+Kernel appartmentGetArnona(Apartment apartment)
+{
+    if(!apartment||!apartment->arnona)
+    {
+        return NULL;
+    }
+    return apartment->arnona(apartment);
+}
+
 ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
 {
     if(!apartment||!furniture)
@@ -431,14 +435,15 @@ ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel remov
     return APARTMENT_SUCSESS;
 }
 
-Kernel appartmentGetArnona(Apartment apartment)
-{
-    if(!apartment||!apartment->arnona)
-    {
-        return NULL;
-    }
-    return apartment->arnona(apartment);
-}
+/**
+ *   appartmentSetArnona         -changes the cost of the estate
+ * @param apartment
+ * @return
+ *      APARTMENT_SUCSESS           -the change was sucsessful
+ *      APARTMENT_NULL_ARGUMENT,    -null argument was passed
+ *      APARTMENT_ERROR             -errors not listed above
+ */
+ApartmentErrorCodes appartmentSetArnona(Apartment apartment, GetArnona newArnona);
 
 Kernel apartmentGetGasBill(Apartment apartment)
 {
@@ -448,6 +453,16 @@ Kernel apartmentGetGasBill(Apartment apartment)
     }
     return apartment->gasbil(apartment);
 }
+
+/**
+*   apartmentSetGasBill         -changes the gas bill
+* @param apartment
+* @return
+*      APARTMENT_SUCSESS           -the change was sucsessful
+*      APARTMENT_NULL_ARGUMENT,    -null argument was passed
+*      APARTMENT_ERROR             -errors not listed above
+*/
+ApartmentErrorCodes appartmentSetGasBill(Apartment apartment, GetArnona newArnona);
 
 ApartmentType appartmentGetType(Apartment apartment)
 {
@@ -509,9 +524,24 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
         }
     }
     KERNEL_FOREACH(Kernel ,iter,apartment2->objects)
-    {}
+    {
+        resalt= kernelInsert(uniapar->objects,0,iter);
+        if(resalt!=KERNEL_SUCSESS)
+        {
+            apartmentDestroy(uniapar);
+            return NULL;
+        }
+    }
     KERNEL_FOREACH(Kernel,iter,apartment2->food)
-    {}
+    {
+        resalt= kernelInsert(uniapar->food,0,iter);
+        if(resalt!=KERNEL_SUCSESS)
+        {
+            apartmentDestroy(uniapar);
+            return NULL;
+        }
+    }
+    return uniapar;
 }
 
 

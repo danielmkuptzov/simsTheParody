@@ -37,9 +37,11 @@
  *   apartmentGetResidents       -gives the list of the residents
  *   apartmentAddFurniture       -adds furniture to the apartment
  *   appaertmentRemoveFurniture  -removes furniture
- *   appartmentGetArnona         -gives the cost of the estate
+ *   appartmentSetArnona         -changes the cost of the estate
  *   apartmentGetGasBill         -gives the gas bill
+ *   apartmentSetGasBill         -changes the gas bill
  *   appartmentGetType           -gives the type of the appartment
+ *   appartmentSetType           -changes the type of the appartment
  *   apartmentGetBills           -gives the bills of the apartment
  *   partmentMerge               -merges two same apartments
  *   apartmentGetfirst           -gives the first resident in the list
@@ -241,6 +243,8 @@ ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
  *   apartmentGetResidents       -gives the list of the residents
  * @param apartment
  * @return
+ *  NULL if any error
+ *  list of residents otherwise
  */
 Kernel apartmentGetResidents(Apartment apartment);
 
@@ -269,13 +273,15 @@ ApartmentErrorCodes apartmentAddFurniture(Apartment apartment, Kernel furniture)
 ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel removedFurniture);
 
 /**
- *   appartmentGetArnona         -gives the cost of the estate
+ *   appartmentSetArnona         -changes the cost of the estate
  * @param apartment
  * @return
- *  NULL if any error acures
- *  Kernel otherwise
+ *      APARTMENT_SUCSESS           -the change was sucsessful
+ *      APARTMENT_NULL_ARGUMENT,    -null argument was passed
+ *      APARTMENT_ERROR             -errors not listed above
  */
-Kernel appartmentGetArnona(Apartment apartment);
+ApartmentErrorCodes appartmentSetArnona(Apartment apartment, GetArnona newArnona);
+
 
 /**
  *   apartmentGetGasBill         -gives the gas bill
@@ -285,6 +291,17 @@ Kernel appartmentGetArnona(Apartment apartment);
  *  Kernel otherwise
  */
 Kernel apartmentGetGasBill(Apartment apartment);
+
+/**
+*   apartmentSetGasBill         -changes the gas bill
+* @param apartment
+* @return
+*      APARTMENT_SUCSESS           -the change was sucsessful
+*      APARTMENT_NULL_ARGUMENT,    -null argument was passed
+*      APARTMENT_ERROR             -errors not listed above
+*/
+ApartmentErrorCodes appartmentSetGasBill(Apartment apartment, GetArnona newArnona);
+
 
 /**
  *   appartmentGetType           -gives the type of the appartment
