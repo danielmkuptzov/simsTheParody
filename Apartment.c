@@ -435,15 +435,15 @@ ApartmentErrorCodes appaertmentRemoveFurniture(Apartment apartment, Kernel remov
     return APARTMENT_SUCSESS;
 }
 
-/**
- *   appartmentSetArnona         -changes the cost of the estate
- * @param apartment
- * @return
- *      APARTMENT_SUCSESS           -the change was sucsessful
- *      APARTMENT_NULL_ARGUMENT,    -null argument was passed
- *      APARTMENT_ERROR             -errors not listed above
- */
-ApartmentErrorCodes appartmentSetArnona(Apartment apartment, GetArnona newArnona);
+ApartmentErrorCodes appartmentSetArnona(Apartment apartment, GetArnona newArnona)
+{
+    if(!apartment||!newArnona)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    apartment->arnona=newArnona;
+    return APARTMENT_SUCSESS;
+}
 
 Kernel apartmentGetGasBill(Apartment apartment)
 {
