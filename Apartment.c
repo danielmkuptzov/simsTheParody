@@ -454,15 +454,15 @@ Kernel apartmentGetGasBill(Apartment apartment)
     return apartment->gasbil(apartment);
 }
 
-/**
-*   apartmentSetGasBill         -changes the gas bill
-* @param apartment
-* @return
-*      APARTMENT_SUCSESS           -the change was sucsessful
-*      APARTMENT_NULL_ARGUMENT,    -null argument was passed
-*      APARTMENT_ERROR             -errors not listed above
-*/
-ApartmentErrorCodes appartmentSetGasBill(Apartment apartment, GetArnona newArnona);
+ApartmentErrorCodes appartmentSetGasBill(Apartment apartment, Gasbil newgas)
+{
+    if(!apartment||!newgas)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+    apartment->gasbil=newgas;
+    return APARTMENT_SUCSESS;
+}
 
 ApartmentType appartmentGetType(Apartment apartment)
 {

@@ -300,7 +300,7 @@ Kernel apartmentGetGasBill(Apartment apartment);
 *      APARTMENT_NULL_ARGUMENT,    -null argument was passed
 *      APARTMENT_ERROR             -errors not listed above
 */
-ApartmentErrorCodes appartmentSetGasBill(Apartment apartment, GetArnona newArnona);
+ApartmentErrorCodes appartmentSetGasBill(Apartment apartment, Gasbil newgas);
 
 
 /**
