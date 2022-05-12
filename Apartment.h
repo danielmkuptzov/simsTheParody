@@ -83,7 +83,8 @@ typedef enum {
 //for the foreach loop
 typedef enum {
     RESIDENT,
-    OBJECTS
+    FURNITURE,
+    FOOD
 } DataType;
 
 typedef enum{

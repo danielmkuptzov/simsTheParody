@@ -482,14 +482,6 @@ Kernel apartmentGetBills(Apartment apartment)
     return apartment->avarageSpending(apartment->arnona,apartment->elecBill,apartment->foodBill,apartment->gasbil);
 }
 
-/**
- *   partmentMerge               -merges two same apartments
- * @param apartment1
- * @param apartment2
- * @return
- *   NULL for any error
- *   Apartment otherwise
- */
 Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
 {
     if((!apartment1)&&(!apartment2))
@@ -544,16 +536,26 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
     return uniapar;
 }
 
-
-/**
- *   apartmentGetfirst           -gives the first resident in the list
- * @param apartment
- * @param type
- * @return
- *   NULL if there was any error or shor list
- *   Data otherwise
- */
-Data apartmentGetfirst(Apartment apartment, DataType type);
+Data apartmentGetfirst(Apartment apartment, DataType type)
+{
+    if(!apartment)
+    {
+        return NULL;
+    }
+    if(type==RESIDENT)
+    {
+        return kernelGetFirst(apartment->residents);
+    }
+    else if(type==FURNITURE)
+    {
+        return kernelGetFirst(apartment->objects);
+    }
+    else if(type==FOOD)
+    {
+        return kernelGetFirst(apartment->food);
+    }
+    return NULL;
+}
 
 /**
  *   apartmentGetNext            -the next one
