@@ -557,15 +557,26 @@ Data apartmentGetfirst(Apartment apartment, DataType type)
     return NULL;
 }
 
-/**
- *   apartmentGetNext            -the next one
- * @param apartment
- * @param type
- * @return
- *   NULL any problem or we reached the end of the list
- *   Data otherwise
- */
-Data apartmentGetNext(Apartment apartment, DataType type);
+Data apartmentGetNext(Apartment apartment, DataType type)
+{
+    if(!apartment)
+    {
+        return NULL;
+    }
+    if(type==RESIDENT)
+    {
+        return kernelGetNext(apartment->residents);
+    }
+    else if(type==FURNITURE)
+    {
+        return kernelGetNext(apartment->objects);
+    }
+    else if(type==FOOD)
+    {
+        return kernelGetNext(apartment->food);
+    }
+    return NULL;
+}
 
 /**
  *   apartmentFilter             -filters According to a crutiria
