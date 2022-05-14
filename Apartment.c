@@ -586,7 +586,20 @@ Data apartmentGetNext(Apartment apartment, DataType type)
  *   NULL if any problem accured
  *   Kernel otherwise
  */
-Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc);
+Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType type)
+{
+    if(!apartment||!filterFunc)
+    {
+        return NULL;
+    }
+    if(type==RESIDENT)
+    {
+        KERNEL_FOREACH(Person,iter,apartment->residents)
+        {
+            //filterFunc(apartment->residents);
+        }
+    }
+}
 
 /**
  *   apartmentDayCycle           -for cycle work

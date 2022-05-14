@@ -124,7 +124,7 @@ typedef Kernel(*Gasbil)(Apartment);
 
 typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill,Gasbil);
 
-typedef bool(*GeneralFilter)(Apartment);
+typedef bool(*GeneralFilter)(Kernel);
 
 /**
  *   apartmentCreate            - Creates a new apartment
@@ -356,11 +356,12 @@ Data apartmentGetNext(Apartment apartment, DataType type);
  *   apartmentFilter             -filters According to a crutiria
  * @param apartment
  * @param filterFunc
+ * @param type
  * @return
  *   NULL if any problem accured
  *   Kernel otherwise
  */
-Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc);
+Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType type);
 
 /**
  *   apartmentDayCycle           -for cycle work
