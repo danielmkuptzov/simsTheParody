@@ -594,6 +594,7 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
     }
     if(type==RESIDENT)
     {
+        Kernel tosend= kernelCreate();
         KERNEL_FOREACH(Person,iter,apartment->residents)
         {
             //filterFunc(apartment->residents);
