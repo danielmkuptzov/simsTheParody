@@ -592,21 +592,24 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
     {
         return NULL;
     }
-    int id;
-    CreatorUnit elem[]={&id};
-    CopyFunc copyFunc[2];
-    DestFunc destFunc[2];
-    CompFunc compFunc[2];
     if(type==RESIDENT)
     {
-        id=7;
-
-        Kernel tosend= kernelCreate(AMOUNT_SET,true,elem,1,copyFunc
-                                    ,1,destFunc,1,compFunc,1);
+        Kernel tosend=createSetOfPeople();
         KERNEL_FOREACH(Person,iter,apartment->residents)
         {
             //filterFunc(apartment->residents);
         }
+    }
+    else
+    {
+        int id=8;
+        CreatorUnit elem[]={&id};
+        CopyFunc copyFunc[1];
+        DestFunc destFunc[1];
+        CompFunc compFunc[1];
+        Kernel tosend= kernelCreate(AMOUNT_SET,true,elem,1,copyFunc
+                ,1,destFunc,1,compFunc,1);
+        if()
     }
 }
 
