@@ -592,11 +592,17 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
     {
         return NULL;
     }
+    KernelErrors resalt=KERNEL_ERROR;
     if(type==RESIDENT)
     {
         Kernel tosend=createSetOfPeople();
         KERNEL_FOREACH(Person,iter,apartment->residents)
         {
+            if(filterFunc(iter))
+            {
+                resalt=kernelInsert(tosend,0,iter);
+
+            }
             //filterFunc(apartment->residents);
         }
     }

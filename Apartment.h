@@ -124,7 +124,7 @@ typedef Kernel(*Gasbil)(Apartment);
 
 typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill,Gasbil);
 
-typedef bool(*GeneralFilter)(Kernel);
+typedef bool(*GeneralFilter)(void*);
 
 /**
  *   apartmentCreate            - Creates a new apartment
