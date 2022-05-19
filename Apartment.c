@@ -578,14 +578,7 @@ Data apartmentGetNext(Apartment apartment, DataType type)
     return NULL;
 }
 
-/**
- *   apartmentFilter             -filters According to a crutiria
- * @param apartment
- * @param filterFunc
- * @return
- *   NULL if any problem accured
- *   Kernel otherwise
- */
+
 Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType type)
 {
     if(!apartment||!filterFunc)
@@ -593,30 +586,64 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
         return NULL;
     }
     KernelErrors resalt=KERNEL_ERROR;
+    Kernel tosend=NULL;
     if(type==RESIDENT)
     {
-        Kernel tosend=createSetOfPeople();
+        tosend=createSetOfPeople();
         KERNEL_FOREACH(Person,iter,apartment->residents)
         {
             if(filterFunc(iter))
             {
                 resalt=kernelInsert(tosend,0,iter);
-
+                if (resalt!=KERNEL_SUCSESS)
+                {
+                    kernelDestroy(tosend);
+                    return NULL;
+                }
             }
-            //filterFunc(apartment->residents);
         }
     }
     else
     {
         int id=8;
         CreatorUnit elem[]={&id};
-        CopyFunc copyFunc[1];
-        DestFunc destFunc[1];
-        CompFunc compFunc[1];
-        Kernel tosend= kernelCreate(AMOUNT_SET,true,elem,1,copyFunc
+        CopyFunc copyFunc[1]={kernelCopy};
+        DestFunc destFunc[1]={kernelDestroy};
+        CompFunc compFunc[1]={kernelCompeare};
+        tosend= kernelCreate(AMOUNT_SET,true,elem,1,copyFunc
                 ,1,destFunc,1,compFunc,1);
-        if()
+        if(type==FURNITURE)
+        {
+            KERNEL_FOREACH(Kernel ,iter,apartment->objects)
+            {
+                if(filterFunc(iter))
+                {
+                    resalt=kernelInsert(tosend,0,iter);
+                    if (resalt!=KERNEL_SUCSESS)
+                    {
+                        kernelDestroy(tosend);
+                        return NULL;
+                    }
+                }
+            }
+        }
+        else
+        {
+            KERNEL_FOREACH(Kernel ,iter,apartment->food)
+            {
+                if(filterFunc(iter))
+                {
+                    resalt=kernelInsert(tosend,0,iter);
+                    if (resalt!=KERNEL_SUCSESS)
+                    {
+                        kernelDestroy(tosend);
+                        return NULL;
+                    }
+                }
+            }
+        }
     }
+    return tosend;
 }
 
 /**
