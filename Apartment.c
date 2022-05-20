@@ -654,7 +654,14 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
  * @return
  *    the standart one
  */
-ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCodes action, Data object);
+ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCodes action, Data object)
+{
+    if(!apartment)
+    {
+        return APARTMENT_NULL_ARGUMENT;
+    }
+
+}
 
 /**
  *   apartmentLogManager         -for log managment
