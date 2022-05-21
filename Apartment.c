@@ -578,7 +578,6 @@ Data apartmentGetNext(Apartment apartment, DataType type)
     return NULL;
 }
 
-
 Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType type)
 {
     if(!apartment||!filterFunc)
@@ -660,7 +659,13 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
     {
         return APARTMENT_NULL_ARGUMENT;
     }
-
+    if (action==ADD_RESIDENT)
+    {
+        return apartmentAddResident(apartment,object);
+    }
+    if(action==REDECORATE)
+    {
+    }
 }
 
 /**
