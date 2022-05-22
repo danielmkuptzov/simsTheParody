@@ -665,6 +665,18 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
     }
     if(action==REDECORATE)
     {
+        ApartmentErrorCodes resalt=APARTMENT_SUCSESS;
+        KERNEL_FOREACH(Kernel,iter,object)
+        {
+            if(kernelGetType(iter)==FURNITURE)
+            {
+                resalt=apartmentAddFurniture(apartment,iter);
+            }
+            if(resalt!=APARTMENT_SUCSESS)
+            {
+                return APARTMENT_ERROR;
+            }
+        }
     }
 }
 
