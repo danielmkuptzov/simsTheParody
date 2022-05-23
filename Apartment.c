@@ -678,6 +678,11 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
             }
         }
     }
+    if(action==REMOVE_RESIDENT)
+    {
+        Person toRemove= personCreate(object,);
+        return apartmentRemoveResident(apartment,toRemove);
+    }
 }
 
 /**

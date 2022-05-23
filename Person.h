@@ -35,6 +35,9 @@
  *   personGetCv                   -getter
  *   personGetId                   -getter
  *   personGetName                 -getter
+ *   personGetCopyId               -getter
+ *   personGetDestroyId            -getter
+ *   personGetComp                 -getter
  *   personMakeDayCycle            -function that simulate a day
  */
 
@@ -353,12 +356,31 @@ Id personGetId(Person person);
 
 /**
  *   personGetName                -getter
+ *   personGetCopyId               -getter
+ *   personGetDestroyId            -getter
  * @param person
  * @return
  * NULL if any problem accures
  * pointer to name otherwise
  */
 char* personGetName(Person person);
+
+/**
+ *   personGetCopyId               -getter
+ * @param person
+ * @return
+ * NULL if any error acures
+ * copy id in return
+ */
+IdCopy personGetCopyId(Person person);
+
+/**
+ *   personGetDestroyId            -getter
+ *   personGetComp                 -getter
+ * @param person
+ * @return
+ */
+IdDestroy personGetDestroyId(Person person);
 
 /**
  *   personMakeDayCycle           -function that simulate a day

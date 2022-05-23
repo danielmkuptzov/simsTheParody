@@ -159,7 +159,7 @@ Person personCreate(void* id, IdCopy copyId, IdDestroy destroyId, IdComp idComp,
                     void* dateOfBirth,char* name, SkillCopy copySkill, SkillDestroy skillDestroy,
                     SkillComp skillComp, int SkillType)
 {
-    if(!name||name[0]==' '||!idComp||!destroyId)
+    if(!name||name[0]==' '||!idComp||!destroyId||!idComp)
     {
         return NULL;
     }
