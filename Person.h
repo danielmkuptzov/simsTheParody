@@ -376,11 +376,19 @@ IdCopy personGetCopyId(Person person);
 
 /**
  *   personGetDestroyId            -getter
+ * @param person
+ * @return
+ * NULL if any error acures
+ */
+IdDestroy personGetDestroyId(Person person);
+
+/**
  *   personGetComp                 -getter
  * @param person
  * @return
+ * NULL if any error acures
  */
-IdDestroy personGetDestroyId(Person person);
+IdComp personGetComp(Person person);
 
 /**
  *   personMakeDayCycle           -function that simulate a day

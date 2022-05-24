@@ -507,6 +507,32 @@ char* personGetName(Person person)
     return person->name;
 }
 
+IdCopy personGetCopyId(Person person)
+{
+    if(!person)
+    {
+        return NULL;
+    }
+    return person->copyId;
+}
+
+IdDestroy personGetDestroyId(Person person)
+{
+    if(!person)
+    {
+        return NULL;
+    }
+    return person->destroyId;
+}
+
+/**
+ *   personGetComp                 -getter
+ * @param person
+ * @return
+ * NULL if any error acures
+ */
+IdComp personGetComp(Person person);
+
 static bool cvFilter(void* cvunit, void* key)
 {
     if(nameComparison(((CVdata)cvunit)->cvName,(char*)key)==0)
