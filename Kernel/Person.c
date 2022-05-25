@@ -525,13 +525,14 @@ IdDestroy personGetDestroyId(Person person)
     return person->destroyId;
 }
 
-/**
- *   personGetComp                 -getter
- * @param person
- * @return
- * NULL if any error acures
- */
-IdComp personGetComp(Person person);
+IdComp personGetComp(Person person)
+{
+    if(!person)
+    {
+        return NULL;
+    }
+    return person->idComp;
+}
 
 static bool cvFilter(void* cvunit, void* key)
 {

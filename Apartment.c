@@ -680,7 +680,9 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
     }
     if(action==REMOVE_RESIDENT)
     {
-        Person toRemove= personCreate(object,);
+        Person toRemove= personCreate(object,personGetCopyId(kernelGetFirst(apartment->residents)),
+                                      personGetDestroyId(kernelGetFirst(apartment->residents)),
+                                      );
         return apartmentRemoveResident(apartment,toRemove);
     }
 }
