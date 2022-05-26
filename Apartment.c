@@ -645,14 +645,6 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
     return tosend;
 }
 
-/**
- *   apartmentDayCycle           -for cycle work
- * @param apartment
- * @param action
- * @param object
- * @return
- *    the standart one
- */
 ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCodes action, Data object)
 {
     if(!apartment)
@@ -682,9 +674,16 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
     {
         Person toRemove= personCreate(object,personGetCopyId(kernelGetFirst(apartment->residents)),
                                       personGetDestroyId(kernelGetFirst(apartment->residents)),
-                                      );
+                                      personGetComp(kernelGetFirst(apartment->residents)),
+                                      NULL,"yossi",NULL,NULL,NULL,0);
         return apartmentRemoveResident(apartment,toRemove);
     }
+    if(action==DESTROY_APARTMENT)
+    {
+        apartmentDestroy(apartment);
+        return APARTMENT_SUCSESS;
+    }
+    return APARTMENT_ERROR;
 }
 
 /**

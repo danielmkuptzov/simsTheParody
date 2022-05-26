@@ -197,11 +197,14 @@ Person personCreate(void* id, IdCopy copyId, IdDestroy destroyId, IdComp idComp,
         personDestroy(newPer);
         return NULL;
     }
-    newPer->dateOfBirth= coreCopy((CoreUnit)dateOfBirth);
-    if(!newPer->dateOfBirth)
+    if(dateOfBirth)
     {
-        personDestroy(newPer);
-        return NULL;
+        newPer->dateOfBirth= coreCopy((CoreUnit)dateOfBirth);
+        if(!newPer->dateOfBirth)
+        {
+            personDestroy(newPer);
+            return NULL;
+        }
     }
     newPer->CV=coreCreate(1,cVdataCopy,cvDataDestroy,cvDataComp,5);
     if(!newPer->CV)
