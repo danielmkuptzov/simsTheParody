@@ -133,6 +133,7 @@ struct apartment_t{
     AvarageSpending avarageSpending;
     FoodBill foodBill;
     Kernel shoppingList;
+    Kernel log;
 };
 
 
