@@ -694,4 +694,14 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
  * @return
  *    the standat one
  */
-ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action);
+ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action)
+{
+    if(!apartment||(!apartment->log&&action!=CREATE))
+    {
+        return APARTMENT_ERROR;
+    }
+    if(action==CREATE)
+    {
+
+    }
+}
