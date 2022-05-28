@@ -702,6 +702,6 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     }
     if(action==CREATE)
     {
-
+        apartment->log=;
     }
 }
