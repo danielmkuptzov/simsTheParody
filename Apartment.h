@@ -98,7 +98,8 @@ typedef enum{
    CREATE,
    DESTROY_LOG,
    COPY,
-   ADD_LINE
+   ADD_LINE,
+   PRINT_LOGS
 } ApartmentLogActions;
 
 //enum section ends
