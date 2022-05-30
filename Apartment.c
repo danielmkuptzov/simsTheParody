@@ -694,7 +694,7 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
  * @return
  *    the standat one
  */
-ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action)
+ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action, char* description)
 {
     if(!apartment||(!apartment->log&&action!=CREATE))
     {
@@ -702,6 +702,7 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     }
     if(action==CREATE)
     {
-        apartment->log=;
+
+        apartment->log= kernelCreate();
     }
 }
