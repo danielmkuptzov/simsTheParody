@@ -702,7 +702,7 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     }
     if(action==CREATE)
     {
-
+        void* elements[]={};
         apartment->log= kernelCreate();
     }
 }
