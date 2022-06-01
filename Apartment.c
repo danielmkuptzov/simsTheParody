@@ -703,6 +703,9 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     if(action==CREATE)
     {
         void* elements[]={};
-        apartment->log= kernelCreate();
+        CopyFunc ctours[]={};
+        DestFunc dtours[]={};
+        CompFunc compFunc[]={};
+        apartment->log= kernelCreate(AMOUNT_SET,true,elements,,ctours,);
     }
 }
