@@ -687,6 +687,18 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
     return APARTMENT_ERROR;
 }
 
+void* logCopy(void* log)
+{
+    return stringCopy(log);
+}
+
+void logDestroy(void* log)
+{
+
+}
+
+
+
 /**
  *   apartmentLogManager         -for log managment
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
