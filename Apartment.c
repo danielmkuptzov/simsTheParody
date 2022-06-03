@@ -718,9 +718,10 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     if(action==CREATE)
     {
         void* elements[]={};
-        CopyFunc ctours[]={};
-        DestFunc dtours[]={};
-        CompFunc compFunc[]={};
-        apartment->log= kernelCreate(AMOUNT_SET,true,elements,,ctours,);
+        CopyFunc ctours[]={logCopy};
+        DestFunc dtours[]={logDestroy};
+        CompFunc compFunc[]={logComp};
+        apartment->log= kernelCreate(AMOUNT_SET,true,elements,1,ctours,
+                                     1,dtours,1,compFunc,1);
     }
 }
