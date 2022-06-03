@@ -697,7 +697,10 @@ void logDestroy(void* log)
 
 }
 
+int logComp(void* firstLog, void* secondLog)
+{
 
+}
 
 /**
  *   apartmentLogManager         -for log managment
