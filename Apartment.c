@@ -194,14 +194,19 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
                                             destruct,1,compFunc,1);
         if(!newapartment->objects)
         {
-            free(newapartment);
+            apartmentDestroy(newapartment);
             return NULL;
         }
         newapartment->food= kernelCreate(AMOUNT_SET,true,elem,1,copy,1,
                                             destruct,1,compFunc,1);
         if(!newapartment->food)
         {
-            free(newapartment);
+            apartmentDestroy(newapartment);
+            return NULL;
+        }
+        if(apartmentLogManager(newapartment,CREATE,NULL)!=APARTMENT_SUCSESS)
+        {
+            apartmentDestroy(newapartment);
             return NULL;
         }
     }
@@ -219,6 +224,7 @@ void apartmentDestroy(Apartment apartment)
     kernelDestroy(apartment->objects);
     apartment->destroyer(apartment->id);
     personDestroy(apartment->owner);
+    kernelDestroy(apartment->log);
     free(apartment);
 }
 
@@ -251,6 +257,12 @@ Apartment apartmentCopy(Apartment apartment)
     }
     copyApar->food= kernelCopy(apartment->food);
     if(!copyApar->food)
+    {
+        apartmentDestroy(copyApar);
+        return NULL;
+    }
+    copyApar->log= kernelCopy(apartment->log);
+    if(!copyApar->log)
     {
         apartmentDestroy(copyApar);
         return NULL;
@@ -534,6 +546,15 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
             return NULL;
         }
     }
+    KERNEL_FOREACH(char*,iter,apartment2->log)
+    {
+        resalt= kernelInsert(uniapar->log,0,iter);
+        if(resalt!=KERNEL_SUCSESS)
+        {
+            apartmentDestroy(uniapar);
+            return NULL;
+        }
+    }
     return uniapar;
 }
 
@@ -699,7 +720,7 @@ void logDestroy(void* log)
 
 int logComp(void* firstLog, void* secondLog)
 {
-
+    return stringComp(firstLog,secondLog);
 }
 
 /**
@@ -723,5 +744,10 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         CompFunc compFunc[]={logComp};
         apartment->log= kernelCreate(AMOUNT_SET,true,elements,1,ctours,
                                      1,dtours,1,compFunc,1);
+        if(!apartment->log)
+        {
+            return APARTMENT_ERROR;
+        }
+        return APARTMENT_SUCSESS;
     }
 }
