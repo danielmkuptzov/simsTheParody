@@ -355,8 +355,9 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
         return NULL;
     }
     Kernel toSendtmp=NULL;
-    KERNEL_FOREACH(Person,data,apartment->residents)
-    {
+    KERNEL_FOREACH(Person,data,apartment->residents) {
+        KERNEL_FOREACH(ApapShoppingBlock,iter,toSendtmp)
+        {}
         toSendtmp=kernelAddition(toSend, personGetWishList(data));
         kernelDestroy(toSend);
         if(!toSendtmp)
