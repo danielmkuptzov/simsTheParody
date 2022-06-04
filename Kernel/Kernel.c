@@ -98,6 +98,11 @@ char*  stringCopy(char* org)
     return stringDup(org);
 }
 
+void stringDestroy(char* str)
+{
+    free(str);
+}
+
 char*  casingFixer(bool upper, char* org)
 {
     if(!org)

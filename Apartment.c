@@ -694,7 +694,7 @@ void* logCopy(void* log)
 
 void logDestroy(void* log)
 {
-
+    stringDestroy(log);
 }
 
 int logComp(void* firstLog, void* secondLog)

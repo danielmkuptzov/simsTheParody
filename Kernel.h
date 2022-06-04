@@ -10,6 +10,7 @@
  *
  * The following functions are available:
  *   stringCopy              -to copy strings
+ *   stringDestroy           -to destroy strings
  *   casingFixer             -to lower or upper the word
  *   stringComp              -compare between strings
  *   kernelBeginner          -the function that you use to begin the date function
@@ -131,6 +132,12 @@ typedef struct Kernel_t* Kernel;
  *   char* otherwise
  */
 char*  stringCopy(char* org);
+
+/**
+ *   stringDestroy              -to destroy strings
+ * @param str
+ */
+void stringDestroy(char* str);
 
 /**
  *   casingFixer             -to lower or upper the word
