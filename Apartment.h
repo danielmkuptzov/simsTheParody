@@ -24,6 +24,9 @@
  * and please don't use float in the bills
  *
  * The following functions are available:
+ *   logCopy                     -copies an existing log
+ *   logDestroy                  -destroys the log
+ *   logComp                     -compeares between logs
  *   apartmentCreate             - Creates a new apartment
  *   apartmentDestroy            - Deletes an existing apartment and frees all resources
  *   apartmentCopy               - Copies an existing apartment
@@ -127,6 +130,30 @@ typedef Kernel(*Gasbil)(Apartment);
 typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill,Gasbil);
 
 typedef bool(*GeneralFilter)(void*);
+
+/**
+ *   logCopy                     -copies an existing log
+ *   @param log
+ *   @return
+ *    NULL  if any error acures
+ *    char* otherwise
+ */
+void* logCopy(void* log);
+
+/**
+ *   logDestroy                  -destroys the log
+ * @param log
+ */
+void logDestroy(void* log);
+
+/**
+ *   logComp                     -compeares between logs
+ * @param firstLog
+ * @param secondLog
+ * @return
+ *  standart comparison
+ */
+int logComp(void* firstLog, void* secondLog);
 
 /**
  *   apartmentCreate            - Creates a new apartment

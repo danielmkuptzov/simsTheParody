@@ -117,6 +117,22 @@ static int elemComp(void* elem1, void* elem2)
     return(kernelCompeare(((ApapShoppingBlock)elem1)->object,((ApapShoppingBlock)elem2)->object));
 }
 
+void* logCopy(void* log)
+{
+    return stringCopy(log);
+}
+
+void logDestroy(void* log)
+{
+    stringDestroy(log);
+}
+
+int logComp(void* firstLog, void* secondLog)
+{
+    return stringComp(firstLog,secondLog);
+}
+
+
 struct apartment_t{
     ApartmentType typeofapar;
     PostalCode id;
@@ -727,21 +743,6 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
     return APARTMENT_ERROR;
 }
 
-void* logCopy(void* log)
-{
-    return stringCopy(log);
-}
-
-void logDestroy(void* log)
-{
-    stringDestroy(log);
-}
-
-int logComp(void* firstLog, void* secondLog)
-{
-    return stringComp(firstLog,secondLog);
-}
-
 /**
  *   apartmentLogManager         -for log managment
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
@@ -770,5 +771,8 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         }
         return APARTMENT_SUCSESS;
     }
-
+    else if(action==DESTROY_LOG)
+    {
+        kernelDestroy(apartment->log);
+    }
 }
