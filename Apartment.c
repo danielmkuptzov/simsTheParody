@@ -757,7 +757,8 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     }
     if(action==CREATE)
     {
-        void* elements[]={};
+        int type=NLOG;
+        void* elements[]={&type};
         CopyFunc ctours[]={logCopy};
         DestFunc dtours[]={logDestroy};
         CompFunc compFunc[]={logComp};
