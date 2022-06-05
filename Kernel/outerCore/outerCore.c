@@ -20,7 +20,7 @@ void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
 CoreUnit coreCreate(int type, CopyCOREElement copyfunc, FreeCOREElement freefunc,
                     CompareCOREElements compfunc, int asType)
 {
-    if(type<1||type>2)
+    if(type<NAMOUNT_SET||type>NDATE)
     {
         return NULL;
     }
@@ -32,7 +32,7 @@ CoreUnit coreCreate(int type, CopyCOREElement copyfunc, FreeCOREElement freefunc
 
     switch (type)
     {
-        case 1:
+        case NAMOUNT_SET:
         {
             CopyASElement copy= copyfunc;
             FreeASElement freePointer=freefunc;
@@ -41,7 +41,7 @@ CoreUnit coreCreate(int type, CopyCOREElement copyfunc, FreeCOREElement freefunc
             newCore->element= asCreate(copy,freePointer,comparison,asType);
             break;
         }
-        case 2:
+        case NDATE:
         {
             newCore->type=2;
             newCore->element= dateCopy(dateGenerate());
@@ -74,14 +74,14 @@ void* coreCopy(void* orgUnit)
     {
         return NULL;
     }
-    CoreUnit copy= coreCreate(1,NULL,NULL,NULL,1);
+    CoreUnit copy= coreCreate(NAMOUNT_SET,NULL,NULL,NULL,1);
     if(!copy)
     {
         return NULL;
     }
     copy->type=((CoreUnit)orgUnit)->type;
     asDestroy((AmountSet)copy->element);
-    if(copy->type==1)
+    if(copy->type==NAMOUNT_SET)
     {
         AmountSet toCopy=((CoreUnit)orgUnit)->element;
         copy->element= asCopy(toCopy);
@@ -106,11 +106,11 @@ int coreCompeare(void* first, void* second)
         return -1024;
     }
     switch (((CoreUnit)first)->type) {
-        case 1:
+        case NAMOUNT_SET:
         {
             return asCompare(((CoreUnit)first)->element,((CoreUnit)second)->element);
         }
-        case 2:
+        case NDATE:
         {
             return dateCompeare(((CoreUnit)first)->element,((CoreUnit)second)->element);
         }
@@ -127,14 +127,14 @@ CoreUnit coreAddition(CoreUnit unit1, CoreUnit unit2)
     {
         return NULL;
     }
-    CoreUnit sum= coreCreate(1, NULL,NULL,NULL,1);
+    CoreUnit sum= coreCreate(NAMOUNT_SET, NULL,NULL,NULL,NAMOUNT_SET);
     if(!sum)
     {
         return NULL;
     }
     sum->type=((CoreUnit)unit1)->type;
     asDestroy((AmountSet)sum->element);
-    if(sum->type==1)
+    if(sum->type==NAMOUNT_SET)
     {
         sum->element= asUnite(((CoreUnit)unit1)->element,((CoreUnit)unit2)->element);
         if(!sum->element)
@@ -205,7 +205,7 @@ CoreUnit coreFilter(CoreUnit core, FilterCOREElement filter, CoreFilterKey key)
     {
         return NULL;
     }
-    if(core->type!=1)
+    if(core->type!=NAMOUNT_SET)
     {
         return NULL;
     }
@@ -230,7 +230,7 @@ COREElement coreFind(CoreUnit unit, COREElement element)
     {
         return NULL;
     }
-    if(unit->type!=1)
+    if(unit->type!=NAMOUNT_SET)
     {
         return NULL;
     }
@@ -250,7 +250,7 @@ int coreSize(CoreUnit unit)
     {
         return -2;
     }
-    if(unit->type!=1)
+    if(unit->type!=NAMOUNT_SET)
     {
         return -1;
     }
@@ -279,12 +279,12 @@ OuterCoreErrors coreSetElement(CoreUnit unit, COREElement element, int type)
     }
     switch (unit->type)
     {
-        case 1:
+        case NAMOUNT_SET:
         {
             asDestroy((AmountSet)unit->element);
             break;
         }
-        case 2:
+        case NDATE:
         {
             dateDestroy((Date)unit->element);
             break;
@@ -322,7 +322,7 @@ void* coreGetFirst(CoreUnit unit)
     {
         return NULL;
     }
-    if(unit->type!=1)
+    if(unit->type!=NAMOUNT_SET)
     {
         return NULL;
     }
@@ -331,7 +331,7 @@ void* coreGetFirst(CoreUnit unit)
 
 void* coreGetNext(CoreUnit unit)
 {
-    if(!unit||unit->type!=1)
+    if(!unit||unit->type!=NAMOUNT_SET)
     {
         return NULL;
     }
@@ -340,7 +340,7 @@ void* coreGetNext(CoreUnit unit)
 
 CompareCOREElements coreGetCompare(CoreUnit unit)
 {
-    if(!unit||unit->type!=0)
+    if(!unit||unit->type!=DEFALT)
     {
         return NULL;
     }

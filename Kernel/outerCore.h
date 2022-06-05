@@ -1,10 +1,11 @@
-//
-// Created by danie on 26/12/2021.
-//
-
 #ifndef OUTERCORE_H
 #define OUTERCORE_H
+
+//external libreries
 #include <stdbool.h>
+
+//internal libreries
+#include "../consrtants.h"
 
 /**
  * Outer core switch unit

@@ -38,23 +38,23 @@ static int convertTypeToInt(CreatingType type)
 {
     if(type==AMOUNT_SET)
     {
-        return 1;
+        return NAMOUNT_SET;
     }
     else if(type==DATE)
     {
-        return 2;
+        return NDATE;
     }
     else if(type==PRODUCT)
     {
-        return 3;
+        return NPRODUCT;
     }
     else if(type==RATIONAL)
     {
-        return 4;
+        return NRATIONAL;
     }
     else if(type==ORDER_PRODUCT)
     {
-        return 5;
+        return NORDERPROD;
     }
     return -1;
 }
@@ -167,12 +167,12 @@ Kernel kernelCreate(CreatingType block,bool creOrCp,
                 free(newKer);
                 return NULL;
             }
-            newKer->data= coreCreate(1,copyFunctions[0],destructors[0],
+            newKer->data= coreCreate(NAMOUNT_SET,copyFunctions[0],destructors[0],
                                   comparison[0],*((int*)elements[0]));
         }
         else if (block==DATE)
         {
-            newKer->data= coreCreate(2,NULL,NULL,NULL,-1);
+            newKer->data= coreCreate(NDATE,NULL,NULL,NULL,-1);
         }
         else if (block==PRODUCT)
         {

@@ -769,4 +769,5 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         }
         return APARTMENT_SUCSESS;
     }
+
 }

@@ -49,6 +49,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+//internal libreries
+#include "consrtants.h"
+
 //the enums to the creator
 typedef enum {
     AMOUNT_SET,
