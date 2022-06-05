@@ -357,8 +357,15 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     Kernel toSendtmp=NULL;
     KERNEL_FOREACH(Person,data,apartment->residents) {
         KERNEL_FOREACH(ApapShoppingBlock,iter,toSendtmp)
-        {}
-        toSendtmp=kernelAddition(toSend, personGetWishList(data));
+        {
+            KERNEL_FOREACH(Kernel,prod, personGetWishList(data))
+            {
+                if(kernelCompeare(iter->object,prod)==0)
+                {
+
+                }
+            }
+        }
         kernelDestroy(toSend);
         if(!toSendtmp)
         {
