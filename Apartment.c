@@ -354,24 +354,35 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     {
         return NULL;
     }
-    Kernel toSendtmp=NULL;
     KERNEL_FOREACH(Person,data,apartment->residents) {
-        KERNEL_FOREACH(ApapShoppingBlock,iter,toSendtmp)
+        KERNEL_FOREACH(ApapShoppingBlock,iter,toSend)
         {
             KERNEL_FOREACH(Kernel,prod, personGetWishList(data))
             {
                 if(kernelCompeare(iter->object,prod)==0)
                 {
-
+                    if(kernelInsert(iter->requestors,0,data)!=KERNEL_SUCSESS)
+                    {
+                        kernelDestroy(toSend);
+                        return NULL;
+                    }
+                }
+                else
+                {
+                    ApapShoppingBlock temp= elementCreate(true,data,prod);
+                    if(!temp)
+                    {
+                        kernelDestroy(toSend);
+                        return NULL;
+                    }
+                    if(kernelInsert(toSend,0,temp)!=KERNEL_SUCSESS)
+                    {
+                        kernelDestroy(toSend);
+                        return NULL;
+                    }
                 }
             }
         }
-        kernelDestroy(toSend);
-        if(!toSendtmp)
-        {
-            return NULL;
-        }
-        toSend=toSendtmp;
     }
     return toSend;
 }
