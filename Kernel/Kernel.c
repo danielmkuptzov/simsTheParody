@@ -199,7 +199,8 @@ Kernel kernelCreate(CreatingType block,bool creOrCp,
                                      copyFunctions[1],destructors[1],
                                         elements[1],
                                      copyFunctions[2],destructors[2],
-                                     comparison[1],elements[4],*((int*)elements[5]),tmp);
+                                     comparison[1],elements[4],*((int*)elements[5]),
+                                     tmp);
         }
         else if (block==RATIONAL)
         {
@@ -405,7 +406,7 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
     {
         return KERNEL_NULL_ARGUMENT;
     }
-    if(insertType==0&&kernel->type==ORDER_PRODUCT)
+    if(insertType==DEFALT&&kernel->type==ORDER_PRODUCT)
     {
         if(productUnitChangeAmount(kernel->data,unit)==ORDER_UNIT_SUCSESS)
         {
@@ -435,7 +436,7 @@ KernelErrors kernelInsert(Kernel kernel,int insertType, void* unit)
         else if(kernel->type==PRODUCT)
         {
             ProductErrorCode resalt;
-            if(insertType==7)
+            if(insertType==NCLASSIFICATION)
             {
                 TypeOfProduct tmp= stringToTypeConvert(unit);
                 resalt= productSetType(kernel->data,tmp);
@@ -498,7 +499,7 @@ KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit)
     else if(kernel->type==PRODUCT)
     {
         ProductErrorCode resalt;
-        if(insertType==7)
+        if(insertType==NCLASSIFICATION)
         {
             TypeOfProduct tmp= stringToTypeConvert(unit);
             resalt= productRemoveType(kernel->data,tmp);
@@ -519,7 +520,6 @@ KernelErrors kernelRemove(Kernel kernel,int insertType, void* unit)
     }
     return KERNEL_ERROR;
 }
-
 
 Kernel kernelFilter(Kernel kernel, KernelFilter filter, KerFilKey filKey)
 {
@@ -928,7 +928,6 @@ Kernel  kernelEpsilonGetter()
     toSend->data= rationalCopy(productGetEpsilon());
     return toSend;
 }
-
 
 void kernelDestroyer()
 {
