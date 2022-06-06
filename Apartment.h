@@ -409,7 +409,7 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
  * @return
  *    the standat one
  */
-ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action, char* description);
+ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action, void* description);
 
 
 #define APARTMENT_FOREACH(type, iterator,apartment,dataType)          \

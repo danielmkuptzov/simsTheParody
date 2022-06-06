@@ -132,7 +132,6 @@ int logComp(void* firstLog, void* secondLog)
     return stringComp(firstLog,secondLog);
 }
 
-
 struct apartment_t{
     ApartmentType typeofapar;
     PostalCode id;
@@ -750,7 +749,7 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
  * @return
  *    the standat one
  */
-ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action, char* description)
+ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action, void* description)
 {
     if(!apartment||(!apartment->log&&action!=CREATE))
     {
@@ -771,8 +770,11 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         }
         return APARTMENT_SUCSESS;
     }
-    else if(action==DESTROY_LOG)
-    {
+    else if(action==DESTROY_LOG){
         kernelDestroy(apartment->log);
+    }
+    else if(action==COPY)
+    {
+
     }
 }
