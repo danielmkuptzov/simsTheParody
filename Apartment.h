@@ -53,6 +53,7 @@
  *   apartmentFilter             -filters According to a crutiria
  *   apartmentDayCycle           -for cycle work
  *   apartmentLogManager         -for log managment
+ *   apartmentProductFinder      -for working with shopping list
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  */
 
@@ -404,14 +405,22 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
 
 /**
  *   apartmentLogManager         -for log managment
- *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  * @param apartment
  * @return
  *    the standat one
  */
 ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action, void* description);
 
+/**
+ *   apartmentProductFinder      -for working with shopping list
+ * @param shopingList
+ * @return
+ */
+bool apartmentProductFinder(Kernel shopingList);
 
+/**
+ *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
+ */
 #define APARTMENT_FOREACH(type, iterator,apartment,dataType)          \
     for(type iterator = apartmentGetfirst(apartment,dataTypes); \
         iterator ;                               \

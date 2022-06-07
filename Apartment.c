@@ -669,7 +669,7 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
                 ,1,destFunc,1,compFunc,1);
         if(type==FURNITURE)
         {
-            KERNEL_FOREACH(Kernel ,iter,apartment->objects)
+            APARTMENT_FOREACH(Kernel ,iter,apartment,FURNITURE)
             {
                 if(filterFunc(iter))
                 {
@@ -778,3 +778,10 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
 
     }
 }
+
+/**
+ *   apartmentProductFinder      -for working with shopping list
+ * @param shopingList
+ * @return
+ */
+bool apartmentProductFinder(Kernel shopingList);
