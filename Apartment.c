@@ -358,7 +358,7 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     {
         return NULL;
     }
-    int id=9;
+    int id=NSHOPLIST;
     CreatorUnit unit[]={&id};
     CopyFunc ctours[]={elemCopy};
     DestFunc dtours[]={elemDestroy};
@@ -369,6 +369,7 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     {
         return NULL;
     }
+    //apartment foreach
     KERNEL_FOREACH(Person,data,apartment->residents) {
         KERNEL_FOREACH(ApapShoppingBlock,iter,toSend)
         {
@@ -553,6 +554,7 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
         return NULL;
     }
     KernelErrors resalt=KERNEL_SUCSESS;
+    //apartment foreach
     KERNEL_FOREACH(Person,iter,apartment2->residents)
     {
         resalt= kernelInsert(uniapar->residents,0,iter);
@@ -645,6 +647,7 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
     if(type==RESIDENT)
     {
         tosend=createSetOfPeople();
+        //apartment foreach
         KERNEL_FOREACH(Person,iter,apartment->residents)
         {
             if(filterFunc(iter))
@@ -669,7 +672,8 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
                 ,1,destFunc,1,compFunc,1);
         if(type==FURNITURE)
         {
-            APARTMENT_FOREACH(Kernel ,iter,apartment,FURNITURE)
+            //apartment foreach
+            KERNEL_FOREACH(Kernel ,iter,apartment->objects)
             {
                 if(filterFunc(iter))
                 {
@@ -684,6 +688,7 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
         }
         else
         {
+            //apartment foreach
             KERNEL_FOREACH(Kernel ,iter,apartment->food)
             {
                 if(filterFunc(iter))
