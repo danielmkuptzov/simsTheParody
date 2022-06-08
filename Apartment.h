@@ -89,7 +89,8 @@ typedef enum {
 typedef enum {
     RESIDENT,
     FURNITURE,
-    FOOD
+    FOOD,
+    LOG
 } DataType;
 
 typedef enum{

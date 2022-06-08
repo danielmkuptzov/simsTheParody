@@ -554,8 +554,7 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
         return NULL;
     }
     KernelErrors resalt=KERNEL_SUCSESS;
-    //apartment foreach
-    KERNEL_FOREACH(Person,iter,apartment2->residents)
+    APARTMENT_FOREACH(Person,iter,apartment2,RESIDENT)
     {
         resalt= kernelInsert(uniapar->residents,0,iter);
         if(resalt!=KERNEL_SUCSESS)
@@ -564,7 +563,7 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
             return NULL;
         }
     }
-    KERNEL_FOREACH(Kernel ,iter,apartment2->objects)
+    APARTMENT_FOREACH(Person,iter,apartment2,FURNITURE)
     {
         resalt= kernelInsert(uniapar->objects,0,iter);
         if(resalt!=KERNEL_SUCSESS)
@@ -573,7 +572,7 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
             return NULL;
         }
     }
-    KERNEL_FOREACH(Kernel,iter,apartment2->food)
+    APARTMENT_FOREACH(Person,iter,apartment2,FOOD)
     {
         resalt= kernelInsert(uniapar->food,0,iter);
         if(resalt!=KERNEL_SUCSESS)
@@ -582,7 +581,7 @@ Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
             return NULL;
         }
     }
-    KERNEL_FOREACH(char*,iter,apartment2->log)
+    APARTMENT_FOREACH(Person,iter,apartment2,LOG)
     {
         resalt= kernelInsert(uniapar->log,0,iter);
         if(resalt!=KERNEL_SUCSESS)
@@ -612,6 +611,10 @@ Data apartmentGetfirst(Apartment apartment, DataType type)
     {
         return kernelGetFirst(apartment->food);
     }
+    else if(type==LOG)
+    {
+        return kernelGetFirst(apartment->log);
+    }
     return NULL;
 }
 
@@ -633,6 +636,10 @@ Data apartmentGetNext(Apartment apartment, DataType type)
     {
         return kernelGetNext(apartment->food);
     }
+    else if (type==LOG)
+    {
+        return kernelGetNext(apartment->log);
+    }
     return NULL;
 }
 
@@ -648,6 +655,7 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
     {
         tosend=createSetOfPeople();
         //apartment foreach
+
         KERNEL_FOREACH(Person,iter,apartment->residents)
         {
             if(filterFunc(iter))
