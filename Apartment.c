@@ -654,9 +654,7 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
     if(type==RESIDENT)
     {
         tosend=createSetOfPeople();
-        //apartment foreach
-
-        KERNEL_FOREACH(Person,iter,apartment->residents)
+        APARTMENT_FOREACH(Person,iter,apartment,RESIDENT)
         {
             if(filterFunc(iter))
             {
@@ -680,8 +678,7 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
                 ,1,destFunc,1,compFunc,1);
         if(type==FURNITURE)
         {
-            //apartment foreach
-            KERNEL_FOREACH(Kernel ,iter,apartment->objects)
+            APARTMENT_FOREACH(Kernel ,iter,apartment,FURNITURE)
             {
                 if(filterFunc(iter))
                 {
@@ -696,8 +693,7 @@ Kernel apartmentFilter(Apartment apartment, GeneralFilter filterFunc, DataType t
         }
         else
         {
-            //apartment foreach
-            KERNEL_FOREACH(Kernel ,iter,apartment->food)
+            APARTMENT_FOREACH(Kernel ,iter,apartment,FOOD)
             {
                 if(filterFunc(iter))
                 {
@@ -788,7 +784,6 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     }
     else if(action==COPY)
     {
-
     }
 }
 
