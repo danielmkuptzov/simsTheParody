@@ -369,8 +369,8 @@ Kernel apartmentGiveShoppingList(Apartment apartment)
     {
         return NULL;
     }
-    //apartment foreach
-    KERNEL_FOREACH(Person,data,apartment->residents) {
+    APARTMENT_FOREACH(Person,data,apartment,RESIDENT)
+    {
         KERNEL_FOREACH(ApapShoppingBlock,iter,toSend)
         {
             KERNEL_FOREACH(Kernel,prod, personGetWishList(data))

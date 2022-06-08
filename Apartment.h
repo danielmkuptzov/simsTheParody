@@ -422,7 +422,7 @@ bool apartmentProductFinder(Kernel shopingList);
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
  */
 #define APARTMENT_FOREACH(type, iterator,apartment,dataType)          \
-    for(type iterator = apartmentGetfirst(apartment,dataTypes); \
+    for(type iterator = apartmentGetfirst(apartment,dataType); \
         iterator ;                               \
         iterator =apartmentGetNext(apartment,dataType))
 
