@@ -784,6 +784,11 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     }
     else if(action==COPY)
     {
+        ((Apartment)description)->log= kernelCopy(apartment->log);
+        if(!((Apartment)description)->log)
+        {
+            return APARTMENT_ERROR;
+        }
     }
 }
 
