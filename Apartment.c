@@ -790,6 +790,8 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
             return APARTMENT_ERROR;
         }
     }
+    else if(action==ADD_LINE)
+    {}
 }
 
 /**
