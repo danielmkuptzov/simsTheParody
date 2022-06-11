@@ -784,6 +784,10 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     }
     else if(action==COPY)
     {
+        if(!description)
+        {
+            return APARTMENT_ERROR;
+        }
         ((Apartment)description)->log= kernelCopy(apartment->log);
         if(!((Apartment)description)->log)
         {
@@ -791,7 +795,12 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         }
     }
     else if(action==ADD_LINE)
-    {}
+    {
+        if(!description)
+        {
+            return APARTMENT_ERROR;
+        }
+    }
 }
 
 /**
