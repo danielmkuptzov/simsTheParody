@@ -800,6 +800,10 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         {
             return APARTMENT_ERROR;
         }
+        if(kernelInsert(apartment->log,0,description)!=KERNEL_SUCSESS)
+        {
+            return APARTMENT_ERROR;
+        }
     }
 }
 
