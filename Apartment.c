@@ -806,7 +806,10 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         }
     }
     else if(action==PRINT_LOGS)
-    {}
+    {
+        APARTMENT_FOREACH(char*,iter,apartment,LOG)
+        {}
+    }
 }
 
 /**
