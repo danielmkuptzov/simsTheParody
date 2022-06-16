@@ -751,13 +751,6 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
     return APARTMENT_ERROR;
 }
 
-/**
- *   apartmentLogManager         -for log managment
- *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture
- * @param apartment
- * @return
- *    the standat one
- */
 ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions action, void* description)
 {
     if(!apartment||(!apartment->log&&action!=CREATE))
@@ -781,6 +774,7 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     }
     else if(action==DESTROY_LOG){
         kernelDestroy(apartment->log);
+        return APARTMENT_SUCSESS;
     }
     else if(action==COPY)
     {
@@ -789,9 +783,9 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
             return APARTMENT_ERROR;
         }
         ((Apartment)description)->log= kernelCopy(apartment->log);
-        if(!((Apartment)description)->log)
+        if(((Apartment)description)->log)
         {
-            return APARTMENT_ERROR;
+            return APARTMENT_SUCSESS;
         }
     }
     else if(action==ADD_LINE)
@@ -800,9 +794,9 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         {
             return APARTMENT_ERROR;
         }
-        if(kernelInsert(apartment->log,0,description)!=KERNEL_SUCSESS)
+        if(kernelInsert(apartment->log,0,description)==KERNEL_SUCSESS)
         {
-            return APARTMENT_ERROR;
+            return APARTMENT_SUCSESS;
         }
     }
     else if(action==PRINT_LOGS)
@@ -811,7 +805,9 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
         {
             printf("%s\n",iter);
         }
+        return APARTMENT_SUCSESS;
     }
+    return APARTMENT_ERROR;
 }
 
 /**
@@ -819,4 +815,4 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
  * @param shopingList
  * @return
  */
-bool apartmentProductFinder(Kernel shopingList);
+bool apartmentProductFinder(Kernel shopingList,void* prod);
