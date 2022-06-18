@@ -417,7 +417,7 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
  * @param shopingList
  * @return
  */
-bool apartmentProductFinder(Kernel shopingList,void* prod);
+void* apartmentProductFinder(Kernel shopingList,void* prod);
 
 /**
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture

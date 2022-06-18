@@ -815,10 +815,11 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
  * @param shopingList
  * @return
  */
-bool apartmentProductFinder(Kernel shopingList,void* prod)
+void* apartmentProductFinder(Kernel shopingList,void* prod)
 {
     if(!shopingList||!prod)
     {
-        return false;
+        return NULL;
     }
+
 }
