@@ -821,5 +821,8 @@ void* apartmentProductFinder(Kernel shopingList,void* prod)
     {
         return NULL;
     }
+    KERNEL_FOREACH(ApapShoppingBlock,iter,shopingList)
+    {
 
+    }
 }
