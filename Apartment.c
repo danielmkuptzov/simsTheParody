@@ -823,6 +823,10 @@ void* apartmentProductFinder(Kernel shopingList,void* prod)
     }
     KERNEL_FOREACH(ApapShoppingBlock,iter,shopingList)
     {
-
+        if(kernelCompeare(iter->object,prod))
+        {
+            return iter->object;
+        }
     }
+    return NULL;
 }
