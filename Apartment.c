@@ -824,7 +824,8 @@ void* apartmentProductFinder(Kernel shopingList,void* prod)
     KERNEL_FOREACH(ApapShoppingBlock,iter,shopingList)
     {
         //to check what is in the shipping list
-        if(kernelCompeare(iter->object,prod))
+        Kernel tmp=kernelGetInternalData(iter->object,PRODUCT_PART);
+        if(kernelCompeare(tmp,prod))
         {
             return iter->object;
         }
