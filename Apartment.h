@@ -416,8 +416,9 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
  *   apartmentProductFinder      -for working with shopping list
  * @param shopingList
  * @return
+ *  the amount of the product we need
  */
-void* apartmentProductFinder(Kernel shopingList,void* prod);
+const void* apartmentProductFinder(Kernel shopingList,void* prod);
 
 /**
  *   APARTMENT_FOREACH           -iterator for passing on the residents or the furniture

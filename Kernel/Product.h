@@ -290,7 +290,7 @@ const ProductAmountType productGetType(Product product);
  * NULL- if the product doesn't have a components or wrong format
  * amount set othewise
  */
-const void* productGetComponent(Product product);
+void* productGetComponent(Product product);
 
 /**
  *   productAddComponent      -for adding to components
@@ -321,7 +321,7 @@ ProductErrorCode productRemoveComponent(Product product, ProductComp component);
  * @param product -the product we want to get the additional information
  * @return
  */
-const ProductData productGetAdditionalData(Product product);
+ProductData productGetAdditionalData(Product product);
 
 /**
  *   productSetAdditionalData -for changing the additional data
@@ -341,7 +341,7 @@ ProductErrorCode productSetAdditionalData(Product product, ProductData data);
  * NULL -wrong format or problems
  * name otherwise
  */
-const char*  productGetName(Product product);
+char*  productGetName(Product product);
 
 /**
  * productComponentFilter   -for filtering purposes

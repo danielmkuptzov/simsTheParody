@@ -406,6 +406,8 @@ void* kernelGetNext(Kernel kernel);
  */
 const void* kernelGetInternalData(Kernel kernel, InternalDataPart data);
 
+void* kernelGetInternalDataNonConst(Kernel kernel, InternalDataPart data);
+
 /**
  *   kernelALU               -aritmetical functions to rational and to orderProduct
  * @param kernel1

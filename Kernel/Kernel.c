@@ -697,6 +697,12 @@ void* kernelGetNext(Kernel kernel)
 
 const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
 {
+    return kernelGetInternalDataNonConst(kernel,data);
+}
+
+
+void* kernelGetInternalDataNonConst(Kernel kernel, InternalDataPart data)
+{
     if(!kernel)
     {
         return NULL;
@@ -717,7 +723,7 @@ const void* kernelGetInternalData(Kernel kernel, InternalDataPart data)
     {
         if(data==ID)
         {
-            return  productGetId(kernel->data);
+            return productGetId(kernel->data);
         }
         else if(data==DATE_OF_CREATION)
         {

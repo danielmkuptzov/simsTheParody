@@ -272,7 +272,7 @@ const ProductAmountType productGetType(Product product)
     return product->amount_type;
 }
 
-const void* productGetComponent(Product product)
+void* productGetComponent(Product product)
 {
     if(!product)
     {
@@ -317,7 +317,7 @@ ProductErrorCode productRemoveComponent(Product product, ProductComp component)
     return PRODUCT_ERROR;
 }
 
-const ProductData productGetAdditionalData(Product product)
+ProductData productGetAdditionalData(Product product)
 {
     if(!product)
     {
@@ -341,7 +341,7 @@ ProductErrorCode productSetAdditionalData(Product product, ProductData data)
     return PRODUCT_SUCSESS;
 }
 
-const char*  productGetName(Product product)
+char*  productGetName(Product product)
 {
     if(!product)
     {

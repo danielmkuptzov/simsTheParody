@@ -815,7 +815,7 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
  * @param shopingList
  * @return
  */
-void* apartmentProductFinder(Kernel shopingList,void* prod)
+const void* apartmentProductFinder(Kernel shopingList,void* prod)
 {
     if(!shopingList||!prod)
     {
@@ -823,11 +823,9 @@ void* apartmentProductFinder(Kernel shopingList,void* prod)
     }
     KERNEL_FOREACH(ApapShoppingBlock,iter,shopingList)
     {
-        //to check what is in the shipping list
-        Kernel tmp=kernelGetInternalData(iter->object,PRODUCT_PART);
-        if(kernelCompeare(tmp,prod))
+        if(kernelCompeare(kernelGetInternalDataNonConst(iter->object,PRODUCT_PART),prod))
         {
-            return iter->object;
+            return kernelGetInternalData(iter->object,AMOUNT);
         }
     }
     return NULL;
