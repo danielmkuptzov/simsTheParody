@@ -48,6 +48,11 @@ int refDate()
     return 3;
 }
 
+Person createPerson(char* name)
+{
+
+}
+
 int main()
 {
     int j=7;
