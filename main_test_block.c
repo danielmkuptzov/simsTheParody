@@ -50,19 +50,6 @@ int refDate()
 
 Person createPerson(char* name)
 {
-
-}
-
-int main()
-{
-    int j=7;
-    kernelEpsilonSetter(3);
-    char* names[]={"apple","banana","coconout","pinacolada","vine",
-                   "laptop","tablet","screen","cigarets","tea"};
-    kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
-    Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
-                           0,NULL,0,NULL,0);
-    int* idp=&j;
     Person test=personCreate(idp,intCopy,intDest,intCompare, kernelGetElement(t),"daniel",intCopy,
                              intDest,intCompare,4);
     if(!test)
@@ -86,7 +73,7 @@ int main()
         int o=k+1;
         void* elem[]={&o,pden};
         Kernel amount= kernelCreate(RATIONAL,true,elem,2,NULL,0
-                                    ,NULL,0,NULL,0);
+                ,NULL,0,NULL,0);
         void* prodUniElem[]={kernelGetElement(product), kernelGetElement(amount)};
         Kernel productunit= kernelCreate(ORDER_PRODUCT,true,prodUniElem,2,
                                          NULL,0,NULL,
@@ -105,7 +92,18 @@ int main()
         }
         kernelDestroy(productunit);
     }
-    personDestroy(test);
+}
+
+int main()
+{
+    int j=7;
+    kernelEpsilonSetter(3);
+    char* names[]={"apple","banana","coconout","pinacolada","vine",
+                   "laptop","tablet","screen","cigarets","tea"};
+    kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
+    Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
+                           0,NULL,0,NULL,0);
+    int* idp=&j;
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
