@@ -48,7 +48,7 @@ int refDate()
     return 3;
 }
 
-Person createPerson(char* name)
+Person createPerson(char* name, Kernel t, char** names, )
 {
     Person test=personCreate(idp,intCopy,intDest,intCompare, kernelGetElement(t),"daniel",intCopy,
                              intDest,intCompare,4);
