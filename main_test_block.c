@@ -48,7 +48,7 @@ int refDate()
     return 3;
 }
 
-Person createPerson(char* name, Kernel t, char** names,Id idp,int j)
+Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prodamount, char** type)
 {
     Person test=personCreate(idp,intCopy,intDest,intCompare, kernelGetElement(t),"daniel",intCopy,
                              intDest,intCompare,4);
@@ -61,8 +61,8 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j)
         j=5;
         Kernel tmp= kernelCopy(t);
         int* id=&k;
-        void* elements[]={id, kernelGetElement(tmp),names[k],"half int amount",&k,
-                          id,&k, "medicine"};
+        void* elements[]={id, kernelGetElement(tmp),names[k],prodamount[k],&k,
+                          id,&k, type[k]};
         CopyFunc copyArr[]={intCopy, intCopy, intCopy};
         DestFunc dtours[]={intDest, intDest, intDest};
         CompFunc compFunc[]={intCompare, intCompare};
