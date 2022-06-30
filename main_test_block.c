@@ -5,6 +5,7 @@
 //teh files we are testing
 #include "Kernel.h"
 #include "Person.h"
+#include "Apartment.h"
 
 void* intCopy(void* org)
 {
@@ -92,6 +93,7 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
         }
         kernelDestroy(productunit);
     }
+    return test;
 }
 
 int main()
@@ -104,7 +106,8 @@ int main()
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
-    kernelDestroyer();
+    Apartment test= apartmentCreate();
+    kernelDestroyer(t);
     kernelEpsilonDestroyer();
     return 0;
 }
