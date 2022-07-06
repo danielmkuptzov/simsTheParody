@@ -100,6 +100,8 @@ int main()
 {
     int j=7;
     kernelEpsilonSetter(3);
+    char* resNames[]={"alexander","betty","charly","daniel","evgeny",
+                      "fridrich","guliver","hilbert","isic","jonatan"};
     char* names[]={"apple","banana","coconout","pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
