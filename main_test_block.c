@@ -101,14 +101,15 @@ int main()
     int j=7;
     kernelEpsilonSetter(3);
     char* resNames[]={"alexander","betty","charly","daniel","evgeny",
-                      "fridrich","guliver","hilbert","isic","jonatan"};
+                      "fridrich","guliver","hilbert","isic","jonatan",
+                      "kolin"};
     char* names[]={"apple","banana","coconout","pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
-    Person owner= createPerson();
+    Person owner= createPerson(resNames[0],);
     Apartment test= apartmentCreate(true,VILA,idp,intCopy,intDest,intCompare,);
     kernelDestroyer(t);
     kernelEpsilonDestroyer();
