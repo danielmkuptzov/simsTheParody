@@ -109,7 +109,7 @@ int main()
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
-    Person owner= createPerson(resNames[0],);
+    Person owner= createPerson(resNames[0],t,);
     Apartment test= apartmentCreate(true,VILA,idp,intCopy,intDest,intCompare,);
     kernelDestroyer(t);
     kernelEpsilonDestroyer();

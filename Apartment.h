@@ -166,9 +166,9 @@ int logComp(void* firstLog, void* secondLog);
  *   NULL for any error
  *   Apartment otherwise
  */
-Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
-                          PostalCodeDestroy destructor,PostalCodeCompear compare, Person owner,
-                          GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
+Apartment apartmentCreate(bool creorcp,Kernel creationDate, ApartmentType type, PostalCode postalCode,
+                          PostalCodeCopy postalCodeCopy, PostalCodeDestroy destructor,PostalCodeCompear compare,
+                          Person owner, GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
                           Gasbil gasbil,FoodBill food);
 
 /**

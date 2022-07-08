@@ -42,7 +42,6 @@ typedef struct apar_elem_t{
     Kernel object;
 }* ApapShoppingBlock;
 
-
 static ApapShoppingBlock elementCreate(bool creorcp, Person first, Kernel product)
 {
     ApapShoppingBlock new_elem= malloc(sizeof(struct apar_elem_t));
@@ -133,6 +132,7 @@ int logComp(void* firstLog, void* secondLog)
 }
 
 struct apartment_t{
+    Kernel creationDate;
     ApartmentType typeofapar;
     PostalCode id;
     PostalCodeCopy postalCodeCopy;
@@ -152,13 +152,13 @@ struct apartment_t{
 };
 
 
-Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode,PostalCodeCopy postalCodeCopy,
-                          PostalCodeDestroy destructor,PostalCodeCompear compare, Person owner,
-                          GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
+Apartment apartmentCreate(bool creorcp,Kernel creationDate, ApartmentType type, PostalCode postalCode,
+                          PostalCodeCopy postalCodeCopy, PostalCodeDestroy destructor,PostalCodeCompear compare,
+                          Person owner, GetArnona arnona,ElecBill electricity,AvarageSpending avgFunc,
                           Gasbil gasbil,FoodBill food)
 {
     if(type==NONE||!postalCode||!postalCodeCopy||!destructor||!compare||
-    !owner||!arnona||!electricity||!avgFunc||!gasbil||!food)
+    !owner||!arnona||!electricity||!avgFunc||!gasbil||!food||!creationDate)
     {
         return NULL;
     }
@@ -167,6 +167,7 @@ Apartment apartmentCreate(bool creorcp,ApartmentType type, PostalCode postalCode
     {
         return NULL;
     }
+    newapartment->creationDate=creationDate;
     newapartment->typeofapar=type;
     newapartment->postalCodeCopy=postalCodeCopy;
     newapartment->id=newapartment->postalCodeCopy(postalCode);
@@ -249,11 +250,12 @@ Apartment apartmentCopy(Apartment apartment)
     {
         return NULL;
     }
-    Apartment copyApar= apartmentCreate(false,apartment->typeofapar,apartment->id,
-                                        apartment->postalCodeCopy,apartment->destroyer,
-                                        apartment->postComp,apartment->owner,apartment->arnona,
-                                        apartment->elecBill,apartment->avarageSpending,
-                                        apartment->gasbil,apartment->foodBill);
+    Apartment copyApar= apartmentCreate(false,apartment->creationDate,apartment->typeofapar,
+                                        apartment->id,apartment->postalCodeCopy,
+                                        apartment->destroyer,apartment->postComp,
+                                        apartment->owner,apartment->arnona,apartment->elecBill,
+                                        apartment->avarageSpending,apartment->gasbil,
+                                        apartment->foodBill);
     if(!copyApar)
     {
         return NULL;
