@@ -110,8 +110,11 @@ int main()
                            0,NULL,0,NULL,0);
     int* idp=&j;
     Person owner= createPerson(resNames[0],t,);
-    Apartment test= apartmentCreate(true,VILA,idp,intCopy,intDest,intCompare,);
-    kernelDestroyer(t);
+    kernelDestroy(t);
+    Kernel time=kernelCreate(DATE,true,NULL,0,NULL,
+                          0,NULL,0,NULL,0);
+    Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,intDest,intCompare,);
+    kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
 }
