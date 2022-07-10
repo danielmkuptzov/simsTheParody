@@ -109,7 +109,7 @@ int main()
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
-    Person owner= createPerson(resNames[0],t,);
+    Person owner= createPerson(resNames[0],t,names,);
     kernelDestroy(t);
     Kernel time=kernelCreate(DATE,true,NULL,0,NULL,
                           0,NULL,0,NULL,0);
