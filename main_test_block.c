@@ -105,6 +105,7 @@ int main()
                       "kolin"};
     char* names[]={"apple","banana","coconout","pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
+    char* prodamount={};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
