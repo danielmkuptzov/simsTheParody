@@ -106,7 +106,7 @@ int main()
     char* names[]={"apple","banana","coconout","pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
     char* prodamount[]={""};
-    char* prodtypes[]={};
+    char* prodtypes[]={""};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
