@@ -104,8 +104,13 @@ int main()
                       "fridrich","guliver","hilbert","isic","jonatan",
                       "kolin"};
     char* names[]={"apple","banana","coconout","pinacolada","vine",
-                   "laptop","tablet","screen","cigarets","tea"};
-    char* prodamount[]={""};
+                   "laptop","tablet","screen","cigarets","tea",""};
+    char* prodamount[]={"any amount","any amount","any amount","any amount","any amount",
+                        "any amount","any amount","any amount","any amount","any amount",
+                        "any amount","any amount","any amount","any amount","any amount",
+                        "any amount","any amount","any amount","any amount","any amount",
+                        "any amount","any amount","any amount","any amount","any amount",
+                        "any amount","any amount","any amount","any amount","any amount",};
     char* prodtypes[]={""};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
