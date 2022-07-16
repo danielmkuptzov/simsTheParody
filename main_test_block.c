@@ -103,8 +103,10 @@ int main()
     char* resNames[]={"alexander","betty","charly","daniel","evgeny",
                       "fridrich","guliver","hilbert","isic","jonatan",
                       "kolin"};
-    char* names[]={"apple","banana","coconout","pinacolada","vine",
-                   "laptop","tablet","screen","cigarets","tea",""};
+    char* names[]={"apple","banana","coconout","desk","elicsir","figure","globus",
+                   "",
+                   "pinacolada","vine",
+                   "laptop","tablet","screen","cigarets","tea"};
     char* prodamount[]={"any amount","any amount","any amount","any amount","any amount",
                         "any amount","any amount","any amount","any amount","any amount",
                         "any amount","any amount","any amount","any amount","any amount",
