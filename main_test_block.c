@@ -104,7 +104,8 @@ int main()
                       "fridrich","guliver","hilbert","isic","jonatan",
                       "kolin"};
     char* names[]={"apple","banana","coconout","desk","elicsir","figure","globus",
-                   "horn","ink","jumpsuit","kola","lamburgini",
+                   "horn","ink","jumpsuit","kola","lamburgini","mazda","neckless",
+                   "organ",
                    "pinacolada","vine",
                    "laptop","tablet","screen","cigarets","tea"};
     char* prodamount[]={"any amount","any amount","any amount","any amount","any amount",
