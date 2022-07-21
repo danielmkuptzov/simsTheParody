@@ -113,8 +113,12 @@ int main()
                         "any amount","any amount","any amount","any amount","any amount",
                         "any amount","any amount","any amount","any amount","any amount",
                         "any amount","any amount","any amount","any amount","any amount",
-                        "any amount","any amount","any amount","any amount","any amount",};
-    char* prodtypes[]={""};
+                        "any amount","any amount","any amount","any amount","any amount"};
+    char* prodtypes[]={"FURNITURE","FURNITURE","FURNITURE","FURNITURE","FURNITURE",
+                       "FURNITURE","FOOD","FOOD","FOOD","FOOD","FOOD","FOOD","BOOK",
+                       "BOOK","BOOK","BOOK","BOOK","BOOK","MEDICINE","MEDICINE",
+                       "MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE",
+                       "MEDICINE","MEDICINE","MEDICINE","MEDICINE"};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
