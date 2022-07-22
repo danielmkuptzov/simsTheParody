@@ -96,6 +96,8 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
     return test;
 }
 
+int* arnonaCalc();
+
 int main()
 {
     int j=7;
@@ -127,7 +129,7 @@ int main()
     kernelDestroy(t);
     Kernel time=kernelCreate(DATE,true,NULL,0,NULL,
                           0,NULL,0,NULL,0);
-    Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,intDest,intCompare,);
+    Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,intDest,intCompare,owner,);
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
