@@ -96,7 +96,10 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
     return test;
 }
 
-int* arnonaCalc();
+Kernel arnonaCalc(Apartment theEstate)
+{
+
+}
 
 int main()
 {
