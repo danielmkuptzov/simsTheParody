@@ -98,7 +98,11 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
 
 Kernel arnonaCalc(Apartment theEstate)
 {
-
+    if(!theEstate)
+    {
+        return NULL;
+    }
+    ApartmentType type= appartmentGetType(theEstate);
 }
 
 int main()
