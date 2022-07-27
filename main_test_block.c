@@ -103,15 +103,16 @@ Kernel arnonaCalc(Apartment theEstate)
         return NULL;
     }
     ApartmentType type= appartmentGetType(theEstate);
+    int nominator=1;
+    int denominator=1;
     if(type==VILA)
     {
-        int nominator=1000;
-        int denominator=1;
-        void* elem[]={&nominator,&denominator};
-        return kernelCreate(RATIONAL,true,elem,2,NULL,0,
-                            NULL,0,NULL,0);
+        nominator=1000;
+        denominator=1;
     }
-
+    void* elem[]={&nominator,&denominator};
+    return kernelCreate(RATIONAL,true,elem,2,NULL,0,
+                        NULL,0,NULL,0);
 }
 
 int main()
