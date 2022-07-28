@@ -110,6 +110,8 @@ Kernel arnonaCalc(Apartment theEstate)
         nominator=1000;
         denominator=1;
     }
+    if(type==FLAT)
+    {}
     void* elem[]={&nominator,&denominator};
     return kernelCreate(RATIONAL,true,elem,2,NULL,0,
                         NULL,0,NULL,0);
