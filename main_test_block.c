@@ -40,11 +40,11 @@ void intAdvance(void* org)
 {
     (*(int*)org)++;
 }
-int diffCulc()
+int diffCulc(void)
 {
    return -2;
 }
-int refDate()
+int refDate(void)
 {
     return 3;
 }
@@ -111,13 +111,14 @@ Kernel arnonaCalc(Apartment theEstate)
         denominator=1;
     }
     if(type==FLAT)
-    {}
+    {
+    }
     void* elem[]={&nominator,&denominator};
     return kernelCreate(RATIONAL,true,elem,2,NULL,0,
                         NULL,0,NULL,0);
 }
 
-int main()
+int main(void)
 {
     int j=7;
     kernelEpsilonSetter(3);
