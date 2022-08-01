@@ -108,10 +108,14 @@ Kernel arnonaCalc(Apartment theEstate)
     if(type==VILA)
     {
         nominator=1000;
-        denominator=1;
     }
     if(type==FLAT)
     {
+        nominator=70000;
+    }
+    if(type==SEMI_HOUSE)
+    {
+        nominator=9000;
     }
     void* elem[]={&nominator,&denominator};
     return kernelCreate(RATIONAL,true,elem,2,NULL,0,
