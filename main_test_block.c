@@ -122,6 +122,9 @@ Kernel arnonaCalc(Apartment theEstate)
                         NULL,0,NULL,0);
 }
 
+Kernel calcElec(Apartment apartment)
+{}
+
 int main(void)
 {
     int j=7;
