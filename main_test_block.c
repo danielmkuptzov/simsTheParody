@@ -123,7 +123,12 @@ Kernel arnonaCalc(Apartment theEstate)
 }
 
 Kernel calcElec(Apartment apartment)
-{}
+{
+
+    void* elem[]={&nominator,&denominator};
+    return kernelCreate(RATIONAL,true,elem,2,NULL,0,
+                        NULL,0,NULL,0);
+}
 
 int main(void)
 {
