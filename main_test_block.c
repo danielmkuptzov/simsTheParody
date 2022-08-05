@@ -124,7 +124,8 @@ Kernel arnonaCalc(Apartment theEstate)
 
 Kernel calcElec(Apartment apartment)
 {
-
+    int nominator=32;
+    int denominator=1;
     void* elem[]={&nominator,&denominator};
     return kernelCreate(RATIONAL,true,elem,2,NULL,0,
                         NULL,0,NULL,0);
@@ -162,7 +163,7 @@ int main(void)
     Kernel time=kernelCreate(DATE,true,NULL,0,NULL,
                           0,NULL,0,NULL,0);
     Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,intDest,intCompare,owner,arnonaCalc,
-                                    );
+                                    calcElec,);
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
