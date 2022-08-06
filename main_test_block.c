@@ -131,6 +131,10 @@ Kernel calcElec(Apartment apartment)
                         NULL,0,NULL,0);
 }
 
+Kernel avgSpend(Apartment apartment)
+{
+}
+
 int main(void)
 {
     int j=7;
