@@ -134,7 +134,7 @@ Kernel calcElec(Apartment apartment)
 Kernel avgSpend(Apartment apartment)
 {
     Kernel avg= apartmentGetArnona(apartment);
-    if(kernelALU())
+    if(kernelALU(avg, apartmentGetArnona(apartment),))
 }
 
 int main(void)
