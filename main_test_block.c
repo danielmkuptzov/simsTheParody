@@ -131,10 +131,11 @@ Kernel calcElec(Apartment apartment)
                         NULL,0,NULL,0);
 }
 
-Kernel avgSpend(Apartment apartment)
-{
-    Kernel avg= apartmentGetArnona(apartment);
-    if(kernelALU(avg, apartmentGetArnona(apartment),0)==)
+Kernel avgSpend(Apartment apartment) {
+    Kernel avg = apartmentGetArnona(apartment);
+    if (kernelALU(avg, apartmentGetArnona(apartment), 0) != KERNEL_SUCSESS)
+    {
+    }
 }
 
 int main(void)
