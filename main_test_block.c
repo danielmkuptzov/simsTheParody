@@ -135,6 +135,8 @@ Kernel avgSpend(Apartment apartment) {
     Kernel avg = apartmentGetArnona(apartment);
     if (kernelALU(avg, apartmentGetArnona(apartment), 0) != KERNEL_SUCSESS)
     {
+        kernelDestroy(avg);
+        return NULL;
     }
 }
 
