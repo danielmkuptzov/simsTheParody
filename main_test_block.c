@@ -138,7 +138,7 @@ Kernel avgSpend(Apartment apartment) {
         kernelDestroy(avg);
         return NULL;
     }
-    Kernel div=;
+    Kernel div= kernelCreate();
     if(kernelALU(avg,))
 }
 
