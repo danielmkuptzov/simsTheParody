@@ -138,6 +138,8 @@ Kernel avgSpend(Apartment apartment) {
         kernelDestroy(avg);
         return NULL;
     }
+
+    void* element[]={};
     Kernel div= kernelCreate();
     if(kernelALU(avg,))
 }
