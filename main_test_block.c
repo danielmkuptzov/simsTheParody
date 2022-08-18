@@ -141,7 +141,7 @@ Kernel avgSpend(Apartment apartment) {
     int amount=3;
     int base=1;
     void* element[]={&amount,&base};
-    Kernel div= kernelCreate(RATIONAL,);
+    Kernel div= kernelCreate(RATIONAL,true,element,);
     if(kernelALU(avg,))
 }
 
