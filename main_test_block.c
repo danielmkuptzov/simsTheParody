@@ -142,6 +142,8 @@ Kernel avgSpend(Apartment apartment) {
     int base=1;
     void* element[]={&amount,&base};
     CopyFunc ctours[]={intCopy};
+    DestFunc dtours[]={intDest};
+    CompFunc comp[]={intCompare};
     Kernel div= kernelCreate(RATIONAL,true,element,2,);
     if(kernelALU(avg,))
 }
