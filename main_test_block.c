@@ -151,7 +151,7 @@ Kernel avgSpend(Apartment apartment) {
         kernelDestroy(avg);
         return NULL;
     }
-    if(kernelALU(avg,))
+    if(kernelALU(avg,div,3))
 }
 
 int main(void)
