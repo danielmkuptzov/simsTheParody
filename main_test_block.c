@@ -151,7 +151,10 @@ Kernel avgSpend(Apartment apartment) {
         kernelDestroy(avg);
         return NULL;
     }
-    if(kernelALU(avg,div,3))
+    if(kernelALU(avg,div,3)!=KERNEL_SUCSESS)
+    {
+        //to destroy all code
+    }
 }
 
 int main(void)
