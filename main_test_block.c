@@ -151,9 +151,12 @@ Kernel avgSpend(Apartment apartment) {
         kernelDestroy(avg);
         return NULL;
     }
-    if(kernelALU(avg,div,3)!=KERNEL_SUCSESS)
+    KernelErrors res=kernelALU(avg,div,3);
+    kernelDestroy(div);
+    if(res!=KERNEL_SUCSESS)
     {
-        //to destroy all code
+        kernelDestroy(avg);
+        return NULL;
     }
 }
 
