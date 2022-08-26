@@ -158,6 +158,7 @@ Kernel avgSpend(Apartment apartment) {
         kernelDestroy(avg);
         return NULL;
     }
+    return avg;
 }
 
 int main(void)
@@ -192,7 +193,7 @@ int main(void)
     Kernel time=kernelCreate(DATE,true,NULL,0,NULL,
                           0,NULL,0,NULL,0);
     Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,intDest,intCompare,owner,arnonaCalc,
-                                    calcElec,);
+                                    calcElec,avgSpend,);
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
