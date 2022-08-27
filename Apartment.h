@@ -129,7 +129,7 @@ typedef Kernel(*FoodBill)(Kernel);
 
 typedef Kernel(*Gasbil)(Apartment);
 
-typedef Kernel(*AvarageSpending)(GetArnona,ElecBill,FoodBill,Gasbil);
+typedef Kernel(*AvarageSpending)(Apartment);
 
 typedef bool(*GeneralFilter)(void*);
 

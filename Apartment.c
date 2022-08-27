@@ -26,7 +26,7 @@ static int residentcomp(void* resident1, void* resident2)
     return personCompeare(resident1,resident2);
 }
 
-static Kernel createSetOfPeople()
+static Kernel createSetOfPeople(void)
 {
     int id=3;
     void* elem[1]={&id};
@@ -529,7 +529,7 @@ Kernel apartmentGetBills(Apartment apartment)
     {
         return NULL;
     }
-    return apartment->avarageSpending(apartment->arnona,apartment->elecBill,apartment->foodBill,apartment->gasbil);
+    return apartment->avarageSpending(apartment);
 }
 
 Apartment partmentMerge(Apartment apartment1, Apartment apartment2)
