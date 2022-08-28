@@ -161,7 +161,13 @@ Kernel avgSpend(Apartment apartment) {
     return avg;
 }
 
-Kernel foodCheck(Kernel shoppingList);
+Kernel foodCheck(Kernel shoppingList)
+{
+    if(shoppingList==NULL)
+    {
+        return NULL;
+    }
+}
 
 int main(void)
 {
