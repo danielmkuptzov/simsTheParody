@@ -101,11 +101,11 @@ typedef void (*DestExternal)(ExternalDate);
 typedef void (*AdvanceExternal)(ExternalDate);
 
 //this is for giving the difference between the calendars
-typedef int(*DifferenceForCync)();
+typedef int(*DifferenceForCync)(void);
 
 
 //this is for the begining date
-typedef int (*CyncFunc)();
+typedef int (*CyncFunc)(void);
 
 //our base element
 typedef void* CreatorUnit;
@@ -467,18 +467,18 @@ KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element);
 /**
  *   kernelEpsilonDestroyer  -to destroy the epsilon
  */
-void kernelEpsilonDestroyer();
+void kernelEpsilonDestroyer(void);
 
 /**
  *   kernelEpsilonGetter     -gives the epsilon
  * @return
  */
-Kernel  kernelEpsilonGetter();
+Kernel  kernelEpsilonGetter(void);
 
 /**
  *   kernelDestroyer         -use it to end the code
  */
-void kernelDestroyer();
+void kernelDestroyer(void);
 
 /**
  *   kernelCheckType         -for elements that has type

@@ -167,7 +167,8 @@ Kernel foodCheck(Kernel shoppingList)
     {
         return NULL;
     }
-    Kernel sum;
+    Kernel sum=NULL;
+    KERNEL_FOREACH()
 }
 
 int main(void)
