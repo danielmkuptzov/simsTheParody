@@ -812,11 +812,6 @@ ApartmentErrorCodes apartmentLogManager(Apartment apartment, ApartmentLogActions
     return APARTMENT_ERROR;
 }
 
-/**
- *   apartmentProductFinder      -for working with shopping list
- * @param shopingList
- * @return
- */
 const void* apartmentProductFinder(Kernel shopingList,void* prod)
 {
     if(!shopingList||!prod)
