@@ -170,7 +170,7 @@ Kernel foodCheck(Kernel shoppingList)
     int nom=1000;
     int denom=1;
     void* elem[]={&nom,&denom};
-    return kernelCreate();
+    return kernelCreate(RATIONAL,true,elem,2,);
 }
 
 int main(void)
