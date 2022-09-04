@@ -172,8 +172,9 @@ Kernel foodCheck(Kernel shoppingList)
     void* elem[]={&nom,&denom};
     CopyFunc ctours[]={intCopy};
     DestFunc dtours[]={intDest};
-    return kernelCreate(RATIONAL,true,elem,2,ctours,1,dtours
-                        ,1,);
+    CompFunc compare[]={intCompare};
+    return kernelCreate(RATIONAL,true,elem,2,ctours,1,
+                        dtours,1,compare,1);
 }
 
 int main(void)
