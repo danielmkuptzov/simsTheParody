@@ -211,6 +211,7 @@ int main(void)
     Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,
                                     intDest,intCompare,owner,arnonaCalc,calcElec,
                                     avgSpend, calcElec,foodCheck);
+    for () {}
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
