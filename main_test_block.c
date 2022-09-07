@@ -211,7 +211,8 @@ int main(void)
     Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,
                                     intDest,intCompare,owner,arnonaCalc,calcElec,
                                     avgSpend, calcElec,foodCheck);
-    for () {}
+    APARTMENT_FOREACH(Person,iter,test,RESIDENT)
+    {}
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
