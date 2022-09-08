@@ -212,7 +212,12 @@ int main(void)
                                     intDest,intCompare,owner,arnonaCalc,calcElec,
                                     avgSpend, calcElec,foodCheck);
     APARTMENT_FOREACH(Person,iter,test,RESIDENT)
-    {}
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            PersonErrorCodes resalt= personAddToWishList(iter,);
+        }
+    }
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
