@@ -211,12 +211,10 @@ int main(void)
     Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,
                                     intDest,intCompare,owner,arnonaCalc,calcElec,
                                     avgSpend, calcElec,foodCheck);
-    APARTMENT_FOREACH(Person,iter,test,RESIDENT)
+    for (int i = 0; i < 10; ++i)
     {
-        for (int i = 0; i < 3; ++i)
-        {
-            PersonErrorCodes resalt= personAddToWishList(iter,);
-        }
+        Person resident= personCreate();
+        ApartmentErrorCodes resalt= apartmentAddResident()
     }
     kernelDestroyer();
     kernelEpsilonDestroyer();
