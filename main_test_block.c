@@ -213,7 +213,8 @@ int main(void)
                                     avgSpend, calcElec,foodCheck);
     for (int i = 0; i < 10; ++i)
     {
-        Person resident= personCreate();
+        int k= i*10* sizeof(char*);
+        Person resident= personCreate(resNames[i],names+k,idp,);
         ApartmentErrorCodes resalt= apartmentAddResident()
     }
     kernelDestroyer();
