@@ -217,7 +217,7 @@ int main(void)
         int k= i*10* sizeof(char*);
         Person resident= createPerson(resNames[i],t,names+k,idp,j,prodamount+k,
                                       prodtypes+k);
-        ApartmentErrorCodes resalt= apartmentAddResident()
+        ApartmentErrorCodes resalt= apartmentAddResident(test,resident);
     }
     kernelDestroyer();
     kernelEpsilonDestroyer();
