@@ -256,6 +256,10 @@ int main(void)
         Person resident= createPerson(resNames[i],t,names+k,idp,j,prodamount+k,
                                       prodtypes+k);
         ApartmentErrorCodes resalt= apartmentAddResident(test,resident);
+        if(resalt!=APARTMENT_SUCSESS)
+        {
+            return NULL;
+        }
     }
     kernelDestroyer();
     kernelEpsilonDestroyer();
