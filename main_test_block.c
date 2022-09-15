@@ -258,7 +258,9 @@ int main(void)
         ApartmentErrorCodes resalt= apartmentAddResident(test,resident);
         if(resalt!=APARTMENT_SUCSESS)
         {
-            return NULL;
+            personDestroy(resident);
+            apartmentDestroy(test);
+            return 0;
         }
     }
     kernelDestroyer();
