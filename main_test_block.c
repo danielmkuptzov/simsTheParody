@@ -262,6 +262,11 @@ int main(void)
             apartmentDestroy(test);
             return 0;
         }
+        bool exist=false;
+        APARTMENT_FOREACH(Person,iter,test,RESIDENT)
+        {
+
+        }
     }
     kernelDestroyer();
     kernelEpsilonDestroyer();
