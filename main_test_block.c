@@ -265,7 +265,14 @@ int main(void)
         bool exist=false;
         APARTMENT_FOREACH(Person,iter,test,RESIDENT)
         {
-
+            if(personCompeare(iter,resident)==0)
+            {
+                exist=true;
+                break;
+            }
+        }
+        if(exist==false)
+        {
         }
     }
     kernelDestroyer();
