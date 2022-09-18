@@ -273,6 +273,7 @@ int main(void)
         }
         if(exist==false)
         {
+            apartmentDestroy();
         }
     }
     kernelDestroyer();
