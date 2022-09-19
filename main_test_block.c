@@ -271,9 +271,10 @@ int main(void)
                 break;
             }
         }
+        personDestroy(resident);
         if(exist==false)
         {
-            apartmentDestroy();
+            apartmentDestroy(test);
         }
     }
     kernelDestroyer();
