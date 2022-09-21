@@ -277,7 +277,8 @@ int main(void)
             apartmentDestroy(test);
         }
     }
-    Apartment tounite= apartmentCreate();
+    Apartment tounite= apartmentCopy(test);
+
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
