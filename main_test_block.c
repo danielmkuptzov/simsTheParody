@@ -278,6 +278,7 @@ int main(void)
         }
     }
     Apartment tounite= apartmentCopy(test);
+    Person newres= personCopy();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
     kernelDestroyer();
     kernelEpsilonDestroyer();
