@@ -278,7 +278,8 @@ int main(void)
         }
     }
     Apartment tounite= apartmentCopy(test);
-    Person newres= personCopy();
+    Person newres= personCopy(owner);
+    PersonErrorCodes resalt= personAddToWishList();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
     kernelDestroyer();
     kernelEpsilonDestroyer();
