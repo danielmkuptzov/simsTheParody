@@ -279,6 +279,7 @@ int main(void)
     }
     Apartment tounite= apartmentCopy(test);
     Person newres= personCopy(owner);
+    void* elem[]={};
     Kernel tempProd= kernelCreate();
     PersonErrorCodes resalt= personAddToWishList();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
