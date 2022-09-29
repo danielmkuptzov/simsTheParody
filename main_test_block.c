@@ -281,7 +281,7 @@ int main(void)
     Person newres= personCopy(owner);
     int id=1;
     int* pid=&id;
-
+    Kernel creDate= kernelCreate();
     void* elem[]={};
     Kernel tempProd= kernelCreate();
     PersonErrorCodes resalt= personAddToWishList();
