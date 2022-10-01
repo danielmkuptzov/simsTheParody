@@ -283,6 +283,7 @@ int main(void)
     int* pid=&id;
     Kernel creDate= kernelCreate(DATE,creDate,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
+    char* type="any amount";
     void* elem[]={};
     Kernel tempProd= kernelCreate();
     PersonErrorCodes resalt= personAddToWishList();
