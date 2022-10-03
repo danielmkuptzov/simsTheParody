@@ -280,10 +280,10 @@ int main(void)
     Apartment tounite= apartmentCopy(test);
     Person newres= personCopy(owner);
     int id=1;
-    Kernel creDate= kernelCreate(DATE,creDate,NULL,0,NULL,0,
+    Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
     char* type="any amount";
-    void* elem[]={&id,creDate};
+    void* elem[]={&id,creDate,"temp",};
     Kernel tempProd= kernelCreate();
     PersonErrorCodes resalt= personAddToWishList();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
