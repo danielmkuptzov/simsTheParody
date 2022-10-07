@@ -283,8 +283,8 @@ int main(void)
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
     char* type="any amount";
-    void* elem[]={&id,creDate,"temp",};
-    Kernel tempProd= kernelCreate();
+    void* elem[]={&id,creDate,"temp"};
+    Kernel tempProd= kernelCreate(PRODUCT,true,elem,);
     PersonErrorCodes resalt= personAddToWishList();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
     kernelDestroyer();
