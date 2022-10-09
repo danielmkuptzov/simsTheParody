@@ -284,7 +284,8 @@ int main(void)
                                  NULL,0,NULL,0);
     char* type="any amount";
     void* elem[]={&id,creDate,"temp"};
-    CompFunc ctours[]={};
+    CopyFunc ctours[]={intCopy};
+    DestFunc dtours[]={};
     Kernel tempProd= kernelCreate(PRODUCT,true,elem,);
     PersonErrorCodes resalt= personAddToWishList();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
