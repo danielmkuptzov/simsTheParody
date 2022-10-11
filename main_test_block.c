@@ -286,8 +286,8 @@ int main(void)
     void* elem[]={&id,creDate,"temp"};
     CopyFunc ctours[]={intCopy};
     DestFunc dtours[]={intDest};
-    CompFunc compeare[]={};
-    Kernel tempProd= kernelCreate(PRODUCT,true,elem,);
+    CompFunc compeare[]={intCompare};
+    Kernel tempProd= kernelCreate(PRODUCT,true,elem,3,ctours,1,);
     PersonErrorCodes resalt= personAddToWishList();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
     kernelDestroyer();
