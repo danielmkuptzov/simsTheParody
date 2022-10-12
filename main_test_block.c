@@ -287,7 +287,12 @@ int main(void)
     CopyFunc ctours[]={intCopy};
     DestFunc dtours[]={intDest};
     CompFunc compeare[]={intCompare};
-    Kernel tempProd= kernelCreate(PRODUCT,true,elem,3,ctours,1,);
+    Kernel tempProd= kernelCreate(PRODUCT,true,elem,3,ctours,
+                                  1,dtours,1,compeare,1);
+    if(tempProd==NULL)
+    {
+        //abort and clean
+    }
     PersonErrorCodes resalt= personAddToWishList();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
     kernelDestroyer();
