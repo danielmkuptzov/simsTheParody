@@ -278,6 +278,10 @@ int main(void)
         }
     }
     Apartment tounite= apartmentCopy(test);
+    if(tounite==NULL)
+    {
+
+    }
     Person newres= personCopy(owner);
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
@@ -291,7 +295,7 @@ int main(void)
                                   1,dtours,1,compeare,1);
     if(tempProd==NULL)
     {
-        //abort and clean
+        apartmentDestroy(tounite);
     }
     PersonErrorCodes resalt= personAddToWishList();
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
