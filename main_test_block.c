@@ -280,7 +280,7 @@ int main(void)
     Apartment tounite= apartmentCopy(test);
     if(tounite==NULL)
     {
-
+        apartmentDestroy(test);
     }
     Person newres= personCopy(owner);
     int id=1;
