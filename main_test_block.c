@@ -298,9 +298,9 @@ int main(void)
         apartmentDestroy(tounite);
     }
     PersonErrorCodes resalt= personAddToWishList(newres,tempProd);
+    kernelDestroy(tempProd);
     if(resalt!=PERSON_SUCSESS)
     {
-
     }
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
     kernelDestroyer();
