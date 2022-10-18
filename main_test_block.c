@@ -301,6 +301,9 @@ int main(void)
     kernelDestroy(tempProd);
     if(resalt!=PERSON_SUCSESS)
     {
+        personDestroy(newres);
+        apartmentDestroy(tounite);
+        apartmentDestroy(test);
     }
     ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
     kernelDestroyer();
