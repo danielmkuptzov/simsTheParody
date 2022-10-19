@@ -305,7 +305,11 @@ int main(void)
         apartmentDestroy(tounite);
         apartmentDestroy(test);
     }
-    ApartmentErrorCodes resalt= apartmentAddResident(tounite,);
+    ApartmentErrorCodes resaltApar= apartmentAddResident(tounite,newres);
+    if(resaltApar!=APARTMENT_SUCSESS)
+    {
+        return 0;
+    }
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
