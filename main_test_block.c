@@ -304,6 +304,7 @@ int main(void)
         personDestroy(newres);
         apartmentDestroy(tounite);
         apartmentDestroy(test);
+        return 0;
     }
     ApartmentErrorCodes resaltApar= apartmentAddResident(tounite,newres);
     if(resaltApar!=APARTMENT_SUCSESS)
