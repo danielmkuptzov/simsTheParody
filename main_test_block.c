@@ -307,10 +307,14 @@ int main(void)
         return 0;
     }
     ApartmentErrorCodes resaltApar= apartmentAddResident(tounite,newres);
+    personDestroy(newres);
     if(resaltApar!=APARTMENT_SUCSESS)
     {
+        apartmentDestroy(tounite);
+        apartmentDestroy(test);
         return 0;
     }
+    Apartment aparuni = partmentMerge(test,tounite);
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
