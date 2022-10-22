@@ -315,6 +315,12 @@ int main(void)
         return 0;
     }
     Apartment aparuni = partmentMerge(test,tounite);
+    apartmentDestroy(test);
+    apartmentDestroy(tounite);
+    if(aparuni==NULL)
+    {
+        return 0;
+    }
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
