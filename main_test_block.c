@@ -321,6 +321,7 @@ int main(void)
     {
         return 0;
     }
+    apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
     return 0;
