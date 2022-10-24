@@ -26,6 +26,8 @@ static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
 
 typedef enum months{ JAN=1,FEB=2,MAR=3,APR=4,MAY=5,JUN=6,JUL=7,AUG=8,SEP=9,OCT=10,NOV=11,DEC=12} Months;
 
+typedef void* yearnum;
+
 struct Date_t{
     int day;
     Months month;
