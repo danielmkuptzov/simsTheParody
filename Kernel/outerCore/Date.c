@@ -9,6 +9,7 @@ typedef void* Yearnum;
 typedef void(*YearAdvance)(Yearnum);
 typedef int(*YearDivide)(Yearnum);
 typedef Yearnum(*MaximalYear)(void);
+typedef int (*YearComp)(Yearnum,Yearnum);
 
 typedef struct counter_t* Counter;
 
@@ -18,10 +19,10 @@ typedef struct ReferenceDate_t{
 }*Refdate;
 
 struct  counter_t{
-    int lowest;
-    int  middle;
-    int hightest;
-    int longest;
+    Yearnum lowestc;
+    Yearnum middlec;
+    Yearnum hightestc;
+    Yearnum longest;
 };
 
 static Refdate first= NULL;
