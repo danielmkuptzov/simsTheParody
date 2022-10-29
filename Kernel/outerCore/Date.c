@@ -23,6 +23,9 @@ struct  counter_t{
     Yearnum middlec;
     Yearnum hightestc;
     Yearnum longest;
+    YearAdvance advancer;
+    YearComp comparator;
+    MaximalYear maximum;
 };
 
 static Refdate first= NULL;
@@ -36,9 +39,12 @@ struct Date_t{
     int day;
     Months month;
     int year;
-    Yearnum milenia;
-    Yearnum hanoyYear;
+    Yearnum milenial;
+    Yearnum hanoyYearl;
     YearAdvance advance;
+    YearComp comparator;
+    MaximalYear maximum;
+    YearDivide divider;
     ReferanceDate outerDate;
     CopyRefDate copyFunc;
     FreeRefDate freeRefDate;
