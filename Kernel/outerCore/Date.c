@@ -54,9 +54,9 @@ struct Date_t{
 
 static int counterAdvance(Counter counter)
 {
-    if(counter->lowest==999999999)
+    if(counter->comparator(counter->lowestc,counter->maximum())==0)
     {
-        if(counter->middle==999999999)
+        if(counter->comparator(counter->middlec,counter->maximum())==0)
         {
             if(counter->hightest==999999999)
             {
