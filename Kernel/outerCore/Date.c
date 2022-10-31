@@ -58,7 +58,7 @@ static int counterAdvance(Counter counter)
     {
         if(counter->comparator(counter->middlec,counter->maximum())==0)
         {
-            if(counter->hightest==999999999)
+            if(counter->comparator(counter->hightestc,counter->maximum())==0)
             {
                 if(counter->longest==999999999)
                 {
