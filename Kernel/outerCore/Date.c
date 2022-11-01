@@ -10,6 +10,7 @@ typedef void(*YearAdvance)(Yearnum);
 typedef int(*YearDivide)(Yearnum);
 typedef Yearnum(*MaximalYear)(void);
 typedef int (*YearComp)(Yearnum,Yearnum);
+typedef void(*Yearinit)(Yearnum);
 
 typedef struct counter_t* Counter;
 
@@ -60,13 +61,14 @@ static int counterAdvance(Counter counter)
         {
             if(counter->comparator(counter->hightestc,counter->maximum())==0)
             {
-                if(counter->longest==999999999)
+                if(counter->comparator(counter->longest,counter->maximum())==0)
                 {
+                    printf("end of time");
                     return -1;
                 }
                 else
                 {
-                    counter->longest++;
+                    counter->advancer(counter->longest);
                 }
                 counter->hightest=0;
             }
