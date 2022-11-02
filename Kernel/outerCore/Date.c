@@ -11,7 +11,6 @@ typedef int(*YearDivide)(Yearnum);
 typedef Yearnum(*MaximalYear)(void);
 typedef int (*YearComp)(Yearnum,Yearnum);
 typedef void(*Yearinit)(Yearnum);
-
 typedef struct counter_t* Counter;
 
 typedef struct ReferenceDate_t{
@@ -27,6 +26,7 @@ struct  counter_t{
     YearAdvance advancer;
     YearComp comparator;
     MaximalYear maximum;
+    Yearinit init;
 };
 
 static Refdate first= NULL;
@@ -46,6 +46,7 @@ struct Date_t{
     YearComp comparator;
     MaximalYear maximum;
     YearDivide divider;
+    Yearinit yearinit;
     ReferanceDate outerDate;
     CopyRefDate copyFunc;
     FreeRefDate freeRefDate;
@@ -70,7 +71,7 @@ static int counterAdvance(Counter counter)
                 {
                     counter->advancer(counter->longest);
                 }
-                counter->hightest=0;
+                counter->init(counter->hightestc);
             }
             else
             {
