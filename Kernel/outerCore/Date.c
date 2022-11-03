@@ -12,6 +12,9 @@ typedef Yearnum(*MaximalYear)(void);
 typedef int (*YearComp)(Yearnum,Yearnum);
 typedef void(*Yearinit)(Yearnum);
 typedef struct counter_t* Counter;
+typedef Yearnum (*YearZero)(void);
+typedef void (*Yearbackadvance)(Yearnum);
+typedef Yearnum (*Yearlowestposs)(void);
 
 typedef struct ReferenceDate_t{
     Date initialisationDate;
@@ -43,6 +46,8 @@ struct Date_t{
     Yearnum milenial;
     Yearnum hanoyYearl;
     YearAdvance advance;
+    Yearbackadvance conteradvance;
+    Yearlowestposs lowestyear;
     YearComp comparator;
     MaximalYear maximum;
     YearDivide divider;
@@ -75,19 +80,19 @@ static int counterAdvance(Counter counter)
             }
             else
             {
-                counter->hightest++;
+                counter->advancer(counter->hightestc);
             }
-            counter->middle=0;
+            counter->init(counter->middlec);
         }
         else
         {
-            counter->middle++;
+            counter->advancer(counter->middlec);
         }
-        counter->lowest=0;
+        counter->init(counter->lowestc);
     }
     else
     {
-        counter->lowest++;
+        counter->advancer(counter->lowestc);
     }
     return 0;
 }
