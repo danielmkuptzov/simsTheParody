@@ -47,6 +47,7 @@ struct Date_t{
     Yearnum hanoyYearl;
     YearAdvance advance;
     Yearbackadvance conteradvance;
+    YearZero zero;
     Yearlowestposs lowestyear;
     YearComp comparator;
     MaximalYear maximum;
@@ -204,7 +205,13 @@ static void intDateReturn(Date date, int back)
                 {
                     if(tmpDate->milenia==0||tmpDate->milenia==-999999999)
                     {
-                        tmpDate->hanoyYear--;
+                        tmpDate->conteradvance(tmpDate->hanoyYearl);
+                        if(tmpDate->comparator(tmpDate->milenial,tmpDate->lowestyear())==0)
+                        {
+                            tmpDate->yearinit(tmpDate->milenial);
+                        }
+                        else
+                        {}
                     }
                     tmpDate->milenia--;
                 }
