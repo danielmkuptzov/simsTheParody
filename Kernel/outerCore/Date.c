@@ -203,7 +203,8 @@ static void intDateReturn(Date date, int back)
             {
                 if(tmpDate->year==0||tmpDate->year==-999999999)
                 {
-                    if(tmpDate->milenia==0||tmpDate->milenia==-999999999)
+                    if(tmpDate->comparator(tmpDate->milenial,tmpDate->zero())==0||
+                        tmpDate->comparator(tmpDate->milenial,tmpDate->lowestyear())==0)
                     {
                         tmpDate->conteradvance(tmpDate->hanoyYearl);
                         if(tmpDate->comparator(tmpDate->milenial,tmpDate->lowestyear())==0)
@@ -211,7 +212,9 @@ static void intDateReturn(Date date, int back)
                             tmpDate->yearinit(tmpDate->milenial);
                         }
                         else
-                        {}
+                        {
+                            while(tmpDate->comparator())
+                        }
                     }
                     tmpDate->milenia--;
                 }
