@@ -213,7 +213,10 @@ static void intDateReturn(Date date, int back)
                         }
                         else
                         {
-                            while(tmpDate->comparator())
+                            while(tmpDate->comparator(tmpDate->milenial,tmpDate->lowestyear())!=0)
+                            {
+                                tmpDate->conteradvance(tmpDate->milenial);
+                            }
                         }
                     }
                     tmpDate->milenia--;
