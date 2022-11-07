@@ -219,7 +219,10 @@ static void intDateReturn(Date date, int back)
                             }
                         }
                     }
-                    tmpDate->milenia--;
+                    else
+                    {
+                        tmpDate->conteradvance();
+                    }
                 }
                 tmpDate->year--;
                 tmpDate->month=DEC;
