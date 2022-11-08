@@ -6,6 +6,7 @@
 #define MIN_DAY 1
 
 typedef void* Yearnum;
+typedef Yearnum(*YearCopy)(Yearnum);
 typedef void(*YearAdvance)(Yearnum);
 typedef int(*YearDivide)(Yearnum);
 typedef Yearnum(*MaximalYear)(void);
@@ -201,7 +202,7 @@ static void intDateReturn(Date date, int back)
         {
             if(tmpDate->month==JAN)
             {
-                if(tmpDate->year==0||tmpDate->year==-999999999)
+                if(tmpDate->year==0||tmpDate->year==-999)
                 {
                     if(tmpDate->comparator(tmpDate->milenial,tmpDate->zero())==0||
                         tmpDate->comparator(tmpDate->milenial,tmpDate->lowestyear())==0)
@@ -221,7 +222,7 @@ static void intDateReturn(Date date, int back)
                     }
                     else
                     {
-                        tmpDate->conteradvance();
+                        tmpDate->conteradvance(tmpDate->milenial);
                     }
                 }
                 tmpDate->year--;
