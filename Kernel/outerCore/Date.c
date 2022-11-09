@@ -27,6 +27,7 @@ struct  counter_t{
     Yearnum middlec;
     Yearnum hightestc;
     Yearnum longest;
+    YearCopy ctour;
     YearAdvance advancer;
     YearComp comparator;
     MaximalYear maximum;
@@ -46,6 +47,7 @@ struct Date_t{
     int year;
     Yearnum milenial;
     Yearnum hanoyYearl;
+    YearCopy ctour;
     YearAdvance advance;
     Yearbackadvance conteradvance;
     YearZero zero;
@@ -241,7 +243,7 @@ static void intDateReturn(Date date, int back)
             tmpDate->day--;
         }
     }
-    date->hanoyYear=tmpDate->hanoyYear;
+    date->hanoyYearl=tmpDate->ctour(tmpDate->hanoyYearl);
     date->milenia=tmpDate->milenia;
     date->year=tmpDate->year;
     date->month=tmpDate->month;
