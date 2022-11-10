@@ -244,7 +244,7 @@ static void intDateReturn(Date date, int back)
         }
     }
     date->hanoyYearl=tmpDate->ctour(tmpDate->hanoyYearl);
-    date->milenia=tmpDate->milenia;
+    date->milenial=tmpDate->ctour(tmpDate->milenial);
     date->year=tmpDate->year;
     date->month=tmpDate->month;
     date->day=tmpDate->day;
