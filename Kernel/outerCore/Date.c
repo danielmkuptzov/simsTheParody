@@ -5,18 +5,6 @@
 
 #define MIN_DAY 1
 
-typedef void* Yearnum;
-typedef Yearnum(*YearCopy)(Yearnum);
-typedef void(*YearAdvance)(Yearnum);
-typedef int(*YearDivide)(Yearnum);
-typedef Yearnum(*MaximalYear)(void);
-typedef int (*YearComp)(Yearnum,Yearnum);
-typedef void(*Yearinit)(Yearnum);
-typedef struct counter_t* Counter;
-typedef Yearnum (*YearZero)(void);
-typedef void (*Yearbackadvance)(Yearnum);
-typedef Yearnum (*Yearlowestposs)(void);
-
 typedef struct ReferenceDate_t{
     Date initialisationDate;
     Counter times;
@@ -32,6 +20,7 @@ struct  counter_t{
     YearComp comparator;
     MaximalYear maximum;
     Yearinit init;
+    YearDestroy dtour;
 };
 
 static Refdate first= NULL;
@@ -253,7 +242,7 @@ static void intDateReturn(Date date, int back)
 static Date dateCreate(int day, int month, int year, int milenia, int hanoyYear,
                 CopyRefDate copyFunc, FreeRefDate freeFunc,
                 RefDateAdvance advanceFunc, DifferenceCalculator diffFunc,
-                ReferanceDate refDate)
+                ReferanceDate refDate,YearCopy ctour,)
 {
     if(month<JAN||month>DEC||year<diffFunc()||!copyFunc||!freeFunc
         ||!advanceFunc||!diffFunc)

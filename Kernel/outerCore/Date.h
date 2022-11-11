@@ -58,6 +58,23 @@ typedef int (*DayOne)();
 typedef struct Date_t *Date;
 
 /**
+ * functions for years
+ */
+typedef void* Yearnum;
+typedef Yearnum(*YearCopy)(Yearnum);
+typedef Yearnum (*YearDestroy)(Yearnum);
+typedef void(*YearAdvance)(Yearnum);
+typedef int(*YearDivide)(Yearnum);
+typedef Yearnum(*MaximalYear)(void);
+typedef int (*YearComp)(Yearnum,Yearnum);
+typedef void(*Yearinit)(Yearnum);
+typedef struct counter_t* Counter;
+typedef Yearnum (*YearZero)(void);
+typedef void (*Yearbackadvance)(Yearnum);
+typedef Yearnum (*Yearlowestposs)(void);
+
+
+/**
  *   dateInitialiser    -create a point of referance to calculate
  * @param copyFunc- for the calendar we syncronise with
  * @param freeFunc- for the calendar we syncronise with
