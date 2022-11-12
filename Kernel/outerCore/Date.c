@@ -242,7 +242,8 @@ static void intDateReturn(Date date, int back)
 static Date dateCreate(int day, int month, int year, int milenia, int hanoyYear,
                 CopyRefDate copyFunc, FreeRefDate freeFunc,
                 RefDateAdvance advanceFunc, DifferenceCalculator diffFunc,
-                ReferanceDate refDate,YearCopy ctour,)
+                ReferanceDate refDate,YearCopy ctour,YearDestroy dtour,
+                YearZero zero, Yearlowestposs lowest,)
 {
     if(month<JAN||month>DEC||year<diffFunc()||!copyFunc||!freeFunc
         ||!advanceFunc||!diffFunc)
