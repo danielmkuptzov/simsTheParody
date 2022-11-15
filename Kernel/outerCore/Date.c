@@ -244,7 +244,7 @@ static Date dateCreate(int day, int month, int year, int milenia, int hanoyYear,
                 RefDateAdvance advanceFunc, DifferenceCalculator diffFunc,
                 ReferanceDate refDate,YearCopy ctour,YearDestroy dtour,
                 YearZero zero, Yearlowestposs lowest,YearAdvance advance, MaximalYear max,
-                YearComp compare, Yearinit init)
+                YearComp compare, Yearinit init, Yearbackadvance contercounter)
 {
     if(month<JAN||month>DEC||year<diffFunc()||!copyFunc||!freeFunc
         ||!advanceFunc||!diffFunc)
