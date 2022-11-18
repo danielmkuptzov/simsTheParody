@@ -239,7 +239,7 @@ static void intDateReturn(Date date, int back)
     date->day=tmpDate->day;
 }
 
-static Date dateCreate(int day, int month, int year, int milenia, int hanoyYear,
+static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum hanoyYear,
                 CopyRefDate copyFunc, FreeRefDate freeFunc,
                 RefDateAdvance advanceFunc, DifferenceCalculator diffFunc,
                 ReferanceDate refDate,YearCopy ctour,YearDestroy dtour,
@@ -278,7 +278,7 @@ static Date dateCreate(int day, int month, int year, int milenia, int hanoyYear,
     new_date->day=day;
     new_date->month=month;
     new_date->year=year;
-    new_date->milenia=milenia;
+    new_date->milenial=ctour(milenia);
     new_date->hanoyYear=hanoyYear;
     return new_date;
 }
