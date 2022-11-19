@@ -278,6 +278,8 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     new_date->day=day;
     new_date->month=month;
     new_date->year=year;
+    new_date->ctour=ctour;
+    new_date->conteradvance=contercounter;
     new_date->milenial=ctour(milenia);
     new_date->hanoyYear=hanoyYear;
     return new_date;
