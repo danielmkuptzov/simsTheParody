@@ -37,6 +37,7 @@ struct Date_t{
     Yearnum milenial;
     Yearnum hanoyYearl;
     YearCopy ctour;
+    YearDestroy dtour;
     YearAdvance advance;
     Yearbackadvance conteradvance;
     YearZero zero;
