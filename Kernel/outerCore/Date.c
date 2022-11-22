@@ -283,6 +283,7 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     new_date->dtour=dtour;
     new_date->conteradvance=contercounter;
     new_date->milenial=ctour(milenia);
+    new_date->zero=zero;
     new_date->hanoyYear=hanoyYear;
     return new_date;
 }
