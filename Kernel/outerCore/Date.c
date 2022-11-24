@@ -287,6 +287,17 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     new_date->comparator=compare;
     new_date->hanoyYear=hanoyYear;
     return new_date;
+    //to add
+    //    YearAdvance advance;
+    //    Yearlowestposs lowestyear;
+    //    MaximalYear maximum;
+    //    YearDivide divider;
+    //    Yearinit yearinit;
+    //    ReferanceDate outerDate;
+    //    CopyRefDate copyFunc;
+    //    FreeRefDate freeRefDate;
+    //    RefDateAdvance refDateAdvance;
+    //    DifferenceCalculator diffFunc;
 }
 
 void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
