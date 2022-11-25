@@ -285,11 +285,11 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     new_date->milenial=ctour(milenia);
     new_date->zero=zero;
     new_date->comparator=compare;
+    new_date->advance=advance;
+    new_date->lowestyear=lowest;
     new_date->hanoyYear=hanoyYear;
     return new_date;
     //to add
-    //    YearAdvance advance;
-    //    Yearlowestposs lowestyear;
     //    MaximalYear maximum;
     //    YearDivide divider;
     //    Yearinit yearinit;
