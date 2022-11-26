@@ -287,10 +287,11 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     new_date->comparator=compare;
     new_date->advance=advance;
     new_date->lowestyear=lowest;
+    new_date->maximum=max;
+    new_date->divider=
     new_date->hanoyYear=hanoyYear;
     return new_date;
     //to add
-    //    MaximalYear maximum;
     //    YearDivide divider;
     //    Yearinit yearinit;
     //    ReferanceDate outerDate;
