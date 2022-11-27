@@ -245,7 +245,7 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
                 RefDateAdvance advanceFunc, DifferenceCalculator diffFunc,
                 ReferanceDate refDate,YearCopy ctour,YearDestroy dtour,
                 YearZero zero, Yearlowestposs lowest,YearAdvance advance, MaximalYear max,
-                YearComp compare, Yearinit init, Yearbackadvance contercounter)
+                YearComp compare, Yearinit init, Yearbackadvance contercounter, YearDivide div)
 {
     if(month<JAN||month>DEC||year<diffFunc()||!copyFunc||!freeFunc
         ||!advanceFunc||!diffFunc||!ctour||!dtour||!zero||!lowest
@@ -288,17 +288,11 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     new_date->advance=advance;
     new_date->lowestyear=lowest;
     new_date->maximum=max;
-    new_date->divider=
+    new_date->divider=div;
     new_date->hanoyYear=hanoyYear;
     return new_date;
     //to add
-    //    YearDivide divider;
-    //    Yearinit yearinit;
-    //    ReferanceDate outerDate;
-    //    CopyRefDate copyFunc;
-    //    FreeRefDate freeRefDate;
-    //    RefDateAdvance refDateAdvance;
-    //    DifferenceCalculator diffFunc;
+    //    Yearinit yearinit
 }
 
 void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
