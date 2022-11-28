@@ -289,10 +289,9 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     new_date->lowestyear=lowest;
     new_date->maximum=max;
     new_date->divider=div;
-    new_date->hanoyYear=hanoyYear;
+    new_date->yearinit=init;
+    new_date->hanoyYearl=hanoyYear;
     return new_date;
-    //to add
-    //    Yearinit yearinit
 }
 
 void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
