@@ -296,7 +296,9 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
 
 void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                      RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
-                     ReferanceDate date,DayOne firstDay)
+                     ReferanceDate date,DayOne firstDay,YearCopy ctour,YearDestroy dtour,
+                     YearZero zero, Yearlowestposs lowest,YearAdvance advance, MaximalYear max,
+                     YearComp compare, Yearinit init, Yearbackadvance contercounter, YearDivide div)
 {
     first= malloc(sizeof(struct Date_t));
     if(!first)
