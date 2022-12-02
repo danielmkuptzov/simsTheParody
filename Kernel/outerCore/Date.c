@@ -307,7 +307,7 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
     }
     Date dateOne=dateCreate(1,1,0,0,0,
                             copyFunc,freeFunc,advanceFunc,diffFunc,date,ctour,dtour,zero,
-                            lowest,advance,max,);
+                            lowest,advance,max,compare,init,);
     if(!dateOne)
     {
         free(first);
