@@ -397,7 +397,7 @@ Date dateCopy(Date date)
     return dateCreate(date->day,date->month,date->year,date->milenia,
                       date->hanoyYear,date->copyFunc,
                       date->freeRefDate,date->refDateAdvance,
-                      date->diffFunc,date->outerDate);
+                      date->diffFunc,date->outerDate,date->ctour,);
 }
 
 static int dateDifference(Date date1, Date date2)
