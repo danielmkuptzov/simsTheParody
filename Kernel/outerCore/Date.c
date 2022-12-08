@@ -394,13 +394,12 @@ Date dateCopy(Date date)
     {
         return NULL;
     }
-    //YearAdvance advance, MaximalYear max,
-    //YearComp compare, Yearinit init, Yearbackadvance contercounter, YearDivide div)
     return dateCreate(date->day,date->month,date->year,date->milenia,
                       date->hanoyYear,date->copyFunc,
                       date->freeRefDate,date->refDateAdvance,
                       date->diffFunc,date->outerDate,date->ctour,date->dtour,date->dtour,
-                      date->zero,date->lowestyear,);
+                      date->zero,date->lowestyear,date->advance,date->comparator,
+                      date->yearinit,date->conteradvance,date->divider);
 }
 
 static int dateDifference(Date date1, Date date2)
