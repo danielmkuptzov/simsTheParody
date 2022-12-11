@@ -422,7 +422,7 @@ static int dateToDays(Date date)
     {
         for (Yearnum i =date->milenial; date->comparator(i,date->yearinit)==0;)
         {
-
+            days+=100*365.25;
         }
     }
     else
