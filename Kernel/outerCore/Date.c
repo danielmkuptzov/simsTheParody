@@ -420,14 +420,28 @@ static int dateToDays(Date date)
     int days=0;
     if(date->comparator(date->milenial,date->yearinit)<0)
     {
-        for (Yearnum i =date->milenial; date->comparator(i,date->yearinit)==0;)
+        for (Yearnum i =date->milenial; date->comparator(i,date->yearinit)==0;date->advance(i))
         {
             days+=100*365.25;
         }
     }
     else
     {
-        for (Yearnum i = date->yearinit; date->comparator(i,date->milenial)==0;)
+        for (Yearnum i = date->yearinit; date->comparator(i,date->milenial)==0;date->advance(i))
+        {
+            days+=100*365.25;
+        }
+    }
+    if(date->year<0)
+    {
+        for ()
+        {
+
+        }
+    }
+    else
+    {
+        for ()
         {
 
         }
