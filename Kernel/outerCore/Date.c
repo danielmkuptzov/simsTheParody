@@ -290,7 +290,8 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     new_date->maximum=max;
     new_date->divider=div;
     new_date->yearinit=init;
-    new_date->hanoyYearl=hanoyYear;
+    new_date->ctour=ctour;
+    new_date->hanoyYearl=new_date->ctour(hanoyYear);
     return new_date;
 }
 
@@ -434,7 +435,7 @@ static int dateToDays(Date date)
     }
     if(date->year<0)
     {
-        for ()
+        for (int i= )
         {
 
         }
