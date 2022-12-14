@@ -435,21 +435,17 @@ static int dateToDays(Date date)
     }
     if(date->year<0)
     {
-        for (int i= )
+        for (int i=date->year;i<=0;i++)
         {
-
+            days+=earCalculator(i);
         }
     }
     else
     {
-        for ()
+        for (int i=date->year;i>0;i--)
         {
-
+            days+=earCalculator(i);
         }
-    }
-    for (int i = 0; i < (date->year)+(date->diffFunc()); ++i)
-    {
-        days+= yearCalculator(i);
     }
     yearFixer(date->year);
     for (int i = 0; i < monthToInt(date->month); ++i)
