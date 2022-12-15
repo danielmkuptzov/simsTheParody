@@ -419,7 +419,9 @@ static int dateDifference(Date date1, Date date2)
 static int dateToDays(Date date)
 {
     int days=0;
-    if(date->comparator(date->milenial,date->yearinit)<0)
+    if(date->comparator(date->hanoyYearl,date->zero)<0)
+    {}
+    if(date->comparator(date->milenial,date->zero)<0)
     {
         for (Yearnum i =date->milenial; date->comparator(i,date->yearinit)==0;date->advance(i))
         {
