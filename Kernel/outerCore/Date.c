@@ -428,7 +428,7 @@ static int dateToDays(Date date)
     }
     else
     {
-        for (Yearnum i =date->hanoyYearl ;date->comparator(i,date->maximum)==0 ;date->advance(i))
+        for (Yearnum i =date->hanoyYearl ;date->comparator(i,date->zero)==0 ;date->advance(i))
         {
             days+=365.25*100*1000;
         }
