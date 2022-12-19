@@ -456,7 +456,7 @@ static int dateToDays(Date date)
     }
     else
     {
-        for (int i=date->year;i>0;i--)
+        for (int i=0;i<date->year;i++)
         {
             days+=earCalculator(i);
         }
