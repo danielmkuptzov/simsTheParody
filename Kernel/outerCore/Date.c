@@ -433,7 +433,7 @@ static int dateToDays(Date date)
             days+=365.25*100*1000;
         }
     }
-    if(date->comparator(date->milenial,date->zero)>0)
+    if(date->comparator(date->milenial,date->zero)<0)
     {
         for (Yearnum i =date->milenial; date->comparator(i,date->maximum)==0;date->advance(i))
         {
