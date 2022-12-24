@@ -45,6 +45,7 @@ struct Date_t{
     YearComp comparator;
     MaximalYear maximum;
     YearDivide divider;
+    Diffcalc diffcalc;
     Yearinit yearinit;
     ReferanceDate outerDate;
     CopyRefDate copyFunc;
