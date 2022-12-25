@@ -72,7 +72,7 @@ typedef struct counter_t* Counter;
 typedef Yearnum (*YearZero)(void);
 typedef void (*Yearbackadvance)(Yearnum);
 typedef Yearnum (*Yearlowestposs)(void);
-typedef Yearnum (*Diffcalc)(Yearnum,Yearnum);
+typedef int (*Diffcalc)(Yearnum,Yearnum);
 
 /**
  *   dateInitialiser    -create a point of referance to calculate
