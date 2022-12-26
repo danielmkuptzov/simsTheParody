@@ -408,7 +408,7 @@ static int dateDifference(Date date1, Date date2)
 {
     if(date1->comparator(date1->milenial,date2->milenial)!=0)
     {
-        return
+        return date1->diffFunc(date1->milenial,date2->milenial);
     }
     if(date1->year!=date2->year)
     {
