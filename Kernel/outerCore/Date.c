@@ -406,6 +406,10 @@ Date dateCopy(Date date)
 
 static int dateDifference(Date date1, Date date2)
 {
+    if(date1->comparator(date1->hanoyYearl,date2->hanoyYearl)!=0)
+    {
+        return date1->diffFunc(date1->hanoyYearl,date2->hanoyYearl);
+    }
     if(date1->comparator(date1->milenial,date2->milenial)!=0)
     {
         return date1->diffFunc(date1->milenial,date2->milenial);
