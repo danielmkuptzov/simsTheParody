@@ -324,10 +324,10 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
         free(first);
         return;
     }
-    first->times->lowest=0;
-    first->times->middle=0;
-    first->times->hightest=0;
-    first->times->longest=0;
+    first->times->lowestc=zero();
+    first->times->middlec=zero();
+    first->times->hightestc=zero();
+    first->times->longest=zero();
 }
 
 void dateDestroy(Date date)
