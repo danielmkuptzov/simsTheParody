@@ -396,11 +396,11 @@ Date dateCopy(Date date)
     {
         return NULL;
     }
-    return dateCreate(date->day,date->month,date->year,date->milenia,
-                      date->hanoyYear,date->copyFunc,
+    return dateCreate(date->day,date->month,date->year,date->milenial,
+                      date->hanoyYearl,date->copyFunc,
                       date->freeRefDate,date->refDateAdvance,
-                      date->diffFunc,date->outerDate,date->ctour,date->dtour,date->dtour,
-                      date->zero,date->lowestyear,date->advance,date->comparator,
+                      date->diffFunc,date->outerDate,date->ctour,date->dtour,
+                      date->zero,date->advance,date->maximum,date->comparator,
                       date->yearinit,date->conteradvance,date->divider);
 }
 
