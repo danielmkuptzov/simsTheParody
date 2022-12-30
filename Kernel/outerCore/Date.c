@@ -51,7 +51,7 @@ struct Date_t{
     CopyRefDate copyFunc;
     FreeRefDate freeRefDate;
     RefDateAdvance refDateAdvance;
-    DifferenceCalculator diffFunc;
+    Diffcalc diffFunc;
 };
 
 static int counterAdvance(Counter counter)
@@ -400,7 +400,7 @@ Date dateCopy(Date date)
                       date->hanoyYearl,date->copyFunc,
                       date->freeRefDate,date->refDateAdvance,
                       date->diffFunc,date->outerDate,date->ctour,date->dtour,
-                      date->zero,date->advance,date->maximum,date->comparator,
+                      date->zero,date->lowestyear,date->advance,date->maximum,date->comparator,
                       date->yearinit,date->conteradvance,date->divider);
 }
 
