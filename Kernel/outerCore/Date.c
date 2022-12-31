@@ -428,16 +428,16 @@ static int dateDifference(Date date1, Date date2)
 static int dateToDays(Date date)
 {
     int days=0;
-    if(date->comparator(date->hanoyYearl,date->zero)<0)
+    if(date->comparator(date->hanoyYearl,date->zero())<0)
     {
-        for (Yearnum i =date->hanoyYearl ;date->comparator(i,date->maximum)==0 ;date->advance(i))
+        for (Yearnum i =date->hanoyYearl ;date->comparator(i,date->maximum())==0 ;date->advance(i))
         {
             days+=365.25*100*1000;
         }
     }
     else
     {
-        for (Yearnum i =date->yearinit ;date->comparator(i,date->hanoyYearl)==0 ;date->advance(i))
+        for (Yearnum i =date->;date->comparator(i,date->hanoyYearl)==0 ;date->advance(i))
         {
             days+=365.25*100*1000;
         }
