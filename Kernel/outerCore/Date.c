@@ -437,14 +437,14 @@ static int dateToDays(Date date)
     }
     else
     {
-        for (Yearnum i =date->;date->comparator(i,date->hanoyYearl)==0 ;date->advance(i))
+        for (Yearnum i =date->zero();date->comparator(i,date->hanoyYearl)==0 ;date->advance(i))
         {
             days+=365.25*100*1000;
         }
     }
-    if(date->comparator(date->milenial,date->zero)<0)
+    if(date->comparator(date->milenial,date->zero())<0)
     {
-        for (Yearnum i =date->milenial; date->comparator(i,date->maximum)==0;date->advance(i))
+        for (Yearnum i =date->milenial; date->comparator(i,date->maximum())==0;date->advance(i))
         {
             days+=100*365.25;
         }
