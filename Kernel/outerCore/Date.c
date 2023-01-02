@@ -451,7 +451,7 @@ static int dateToDays(Date date)
     }
     else
     {
-        for (Yearnum i = date->yearinit; date->comparator(i,date->milenial)==0;date->advance(i))
+        for (Yearnum i = date->zero(); date->comparator(i,date->milenial)==0;date->advance(i))
         {
             days+=100*365.25;
         }
@@ -460,7 +460,7 @@ static int dateToDays(Date date)
     {
         for (int i=date->year;i<=0;i++)
         {
-            days+=earCalculator(i);
+            days+=yearCalculator(i);
         }
     }
     else
