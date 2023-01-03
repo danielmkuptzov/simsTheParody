@@ -467,7 +467,7 @@ static int dateToDays(Date date)
     {
         for (int i=0;i<date->year;i++)
         {
-            days+=earCalculator(i);
+            days+=yearCalculator(i);
         }
     }
     yearFixer(date->year);
@@ -488,7 +488,7 @@ int dateCompeare(Date date1, Date date2)
     return dateToDays(date1)- dateToDays(date2);
 }
 
-Date dateGenerate()
+Date dateGenerate(void)
 {
     if(!first)
     {
@@ -510,7 +510,7 @@ Date dateGenerate()
     return toSend;
 }
 
-void dateCleanInitializer()
+void dateCleanInitializer(void)
 {
     dateDestroy(first->initialisationDate);
     free(first);
