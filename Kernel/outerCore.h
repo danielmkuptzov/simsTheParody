@@ -8,6 +8,23 @@
 #include "../consrtants.h"
 
 /**
+ * functions for years
+ */
+typedef void* Yearnum;
+typedef Yearnum(*YearCopy)(Yearnum);
+typedef Yearnum (*YearDestroy)(Yearnum);
+typedef void(*YearAdvance)(Yearnum);
+typedef int(*YearDivide)(Yearnum);
+typedef Yearnum(*MaximalYear)(void);
+typedef int (*YearComp)(Yearnum,Yearnum);
+typedef void(*Yearinit)(Yearnum);
+typedef struct counter_t* Counter;
+typedef Yearnum (*YearZero)(void);
+typedef void (*Yearbackadvance)(Yearnum);
+typedef Yearnum (*Yearlowestposs)(void);
+typedef int (*Diffcalc)(Yearnum,Yearnum);
+
+/**
  * Outer core switch unit
  *
  * This function implement the generic copy constructor, comparison operator and destructors needed for the amount set.
