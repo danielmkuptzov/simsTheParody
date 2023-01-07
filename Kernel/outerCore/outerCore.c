@@ -14,7 +14,7 @@ void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
                   ReferanceDate date, DayOne firstDay)
 {
     dateInitialiser(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay,ctour,dtour,zero,
-                    lowest,copyYear,destYear,);
+                    lowest,copyYear,destYear,yearzero,);
 }
 
 
