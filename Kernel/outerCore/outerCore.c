@@ -12,10 +12,10 @@ struct CoreUnit_t{
 void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
                   RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
                   ReferanceDate date, DayOne firstDay,YearComp ctour,YearDestroy dtour,YearZero zero,
-                  )
+                  Yearlowestposs lowest,YearAdvance advance,MaximalYear max,)
 {
     dateInitialiser(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay,ctour,dtour,zero,
-                    lowest,copyYear,destYear,yearzero,);
+                    lowest,advance,max,);
 }
 
 
