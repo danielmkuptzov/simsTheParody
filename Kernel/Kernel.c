@@ -124,7 +124,7 @@ struct Kernel_t{
 
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
-                    ExternalDate date, CyncFunc firstDay)
+                    ExternalDate date, CyncFunc firstDay,)
 {
     coreBeginner(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay);
 }
