@@ -52,6 +52,24 @@
 //internal libreries
 #include "consrtants.h"
 
+/**
+ * functions for years
+ */
+typedef void* Yearnum;
+typedef Yearnum(*YearCopy)(Yearnum);
+typedef Yearnum (*YearDestroy)(Yearnum);
+typedef void(*YearAdvance)(Yearnum);
+typedef int(*YearDivide)(Yearnum);
+typedef Yearnum(*MaximalYear)(void);
+typedef int (*YearComp)(Yearnum,Yearnum);
+typedef void(*Yearinit)(Yearnum);
+typedef struct counter_t* Counter;
+typedef Yearnum (*YearZero)(void);
+typedef void (*Yearbackadvance)(Yearnum);
+typedef Yearnum (*Yearlowestposs)(void);
+typedef int (*Diffcalc)(Yearnum,Yearnum);
+
+
 //the enums to the creator
 typedef enum {
     AMOUNT_SET,
@@ -176,7 +194,9 @@ int  stringComp(char* first, char* second);
  */
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
-                    ExternalDate date, CyncFunc firstDay);
+                    ExternalDate date, CyncFunc firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
+                    Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
+                    Yearinit init, Yearbackadvance backadv, YearDivide div);
 
 /**
  *   kernelEpsilonSetter     -to set the epsilon we would work on
