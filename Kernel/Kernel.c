@@ -128,7 +128,7 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
                     Yearinit init, Yearbackadvance backadv, YearDivide div)
 {
-    coreBeginner(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay,ctour,dtour,);
+    coreBeginner(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay,ctour,dtour,zero,);
 }
 
 void kernelEpsilonSetter(int base)
