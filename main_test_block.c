@@ -239,7 +239,7 @@ int main(void)
                        "MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE",
                        "MEDICINE","MEDICINE"};
     int zero=0;
-    kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate,intCopy,intDest,&zero,);
+    kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate,intCopy,intDest,&zero,&zero,);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
