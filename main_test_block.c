@@ -177,6 +177,9 @@ Kernel foodCheck(Kernel shoppingList)
                         dtours,1,compare,1);
 }
 
+int* max()
+{}
+
 int main(void)
 {
     int j=7;
