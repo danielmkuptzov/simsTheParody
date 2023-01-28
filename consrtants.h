@@ -13,4 +13,6 @@
 #define NSHOPLIST        9
 #define NLOG             10
 
+#define INTMAX           999999999
+
 #endif //DANIELCITY_CONSRTANTS_H

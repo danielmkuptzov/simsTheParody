@@ -7,6 +7,8 @@
 #include "Person.h"
 #include "Apartment.h"
 
+int max=;
+
 void* intCopy(void* org)
 {
     int *copy= malloc(sizeof (int*));
@@ -48,7 +50,6 @@ int refDate(void)
 {
     return 3;
 }
-
 Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prodamount, char** type)
 {
     Person test=personCreate(idp,intCopy,intDest,intCompare, kernelGetElement(t),"daniel",intCopy,
@@ -95,7 +96,6 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
     }
     return test;
 }
-
 Kernel arnonaCalc(Apartment theEstate)
 {
     if(!theEstate)
@@ -121,7 +121,6 @@ Kernel arnonaCalc(Apartment theEstate)
     return kernelCreate(RATIONAL,true,elem,2,NULL,0,
                         NULL,0,NULL,0);
 }
-
 Kernel calcElec(Apartment apartment)
 {
     int nominator=32;
@@ -130,7 +129,6 @@ Kernel calcElec(Apartment apartment)
     return kernelCreate(RATIONAL,true,elem,2,NULL,0,
                         NULL,0,NULL,0);
 }
-
 Kernel avgSpend(Apartment apartment) {
     Kernel avg = apartmentGetArnona(apartment);
     if (kernelALU(avg, apartmentGetArnona(apartment), 0) != KERNEL_SUCSESS)
@@ -160,7 +158,6 @@ Kernel avgSpend(Apartment apartment) {
     }
     return avg;
 }
-
 Kernel foodCheck(Kernel shoppingList)
 {
     if(shoppingList==NULL)
@@ -176,9 +173,10 @@ Kernel foodCheck(Kernel shoppingList)
     return kernelCreate(RATIONAL,true,elem,2,ctours,1,
                         dtours,1,compare,1);
 }
-
 int* max()
-{}
+{
+
+}
 
 int main(void)
 {
