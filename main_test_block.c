@@ -6,8 +6,9 @@
 #include "Kernel.h"
 #include "Person.h"
 #include "Apartment.h"
+#include "consrtants.h"
 
-int max=;
+int max=INTMAX;
 
 void* intCopy(void* org)
 {
@@ -173,9 +174,9 @@ Kernel foodCheck(Kernel shoppingList)
     return kernelCreate(RATIONAL,true,elem,2,ctours,1,
                         dtours,1,compare,1);
 }
-int* max()
+int* maximum(void)
 {
-
+    return &max;
 }
 
 int main(void)
