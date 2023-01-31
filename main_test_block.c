@@ -178,6 +178,7 @@ int* maximum(void)
 {
     return &max;
 }
+int* init()
 
 int main(void)
 {
