@@ -179,7 +179,7 @@ int* maximum(void)
     return &max;
 }
 int* init()
-
+{}
 int main(void)
 {
     int j=7;
