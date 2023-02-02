@@ -178,8 +178,11 @@ int* maximum(void)
 {
     return &max;
 }
-int* init()
-{}
+int* init(int* year)
+{
+    *year=0;
+}
+
 int main(void)
 {
     int j=7;
