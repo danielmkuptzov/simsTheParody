@@ -178,7 +178,7 @@ int* maximum(void)
 {
     return &max;
 }
-int* init(int* year)
+void init(int* year)
 {
     *year=0;
 }
@@ -246,7 +246,7 @@ int main(void)
                        "MEDICINE","MEDICINE"};
     int zero=0;
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate,intCopy,intDest,&zero,&zero,
-                   intAdvance,maximum, intCompare,);
+                   intAdvance,maximum, intCompare,init,);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
