@@ -182,6 +182,8 @@ void init(int* year)
 {
     *year=0;
 }
+void back(int* year)
+
 
 int main(void)
 {
