@@ -338,6 +338,7 @@ void dateDestroy(Date date)
     }
     if((date->freeRefDate)&&(date->outerDate))
     {
+        //to create counter dest
         date->freeRefDate(date->outerDate);
     }
     free(date);
