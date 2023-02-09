@@ -23,6 +23,10 @@ struct  counter_t{
     YearDestroy dtour;
 };
 
+Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, YearCopy ctour, YearAdvance advancer,
+                 YearComp comparator, MaximalYear maximum, Yearinit init,YearDestroy dtour)
+{}
+
 static Refdate first= NULL;
 
 static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
