@@ -25,7 +25,9 @@ struct  counter_t{
 
 Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, YearCopy ctour, YearAdvance advancer,
                  YearComp comparator, MaximalYear maximum, Yearinit init,YearDestroy dtour)
-{}
+{
+    Counter counter= malloc(sizeof(struct counter_t));
+}
 
 static Refdate first= NULL;
 
