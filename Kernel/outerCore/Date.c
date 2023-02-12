@@ -28,7 +28,8 @@ Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, YearCopy c
 {
     Counter counter= malloc(sizeof(struct counter_t));
     counter->lowestc=ctour(lowestc);
-    counter->middlec=ctour();
+    counter->middlec=ctour(middlec);
+    counter->hightestc=ctour(hightestc);
 }
 
 static Refdate first= NULL;
