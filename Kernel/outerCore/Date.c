@@ -30,6 +30,9 @@ Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, YearCopy c
     counter->lowestc=ctour(lowestc);
     counter->middlec=ctour(middlec);
     counter->hightestc=ctour(hightestc);
+    counter->ctour=ctour;
+    counter->advancer=advancer;
+
 }
 
 static Refdate first= NULL;
