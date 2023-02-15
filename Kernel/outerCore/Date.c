@@ -23,17 +23,30 @@ struct  counter_t{
     YearDestroy dtour;
 };
 
-Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, YearCopy ctour, YearAdvance advancer,
-                 YearComp comparator, MaximalYear maximum, Yearinit init,YearDestroy dtour)
+Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, Yearnum longest,
+                 YearCopy ctour, YearAdvance advancer,YearComp comparator, MaximalYear maximum,
+                 Yearinit init,YearDestroy dtour)
 {
     Counter counter= malloc(sizeof(struct counter_t));
     counter->lowestc=ctour(lowestc);
+    if(comparator(lowestc,counter->lowestc)!=0)
+    {
+        free(counter);
+        return NULL;
+    }
     counter->middlec=ctour(middlec);
+    if(comparator(middlec,counter->middlec)!=0)
+    {
+        dtour(counter->lowestc);
+        free(counter);
+        return NULL;
+    }
     counter->hightestc=ctour(hightestc);
     counter->ctour=ctour;
     counter->advancer=advancer;
     counter->comparator=comparator;
     counter->maximum=maximum;
+    counter->init=init;
 }
 
 static Refdate first= NULL;
