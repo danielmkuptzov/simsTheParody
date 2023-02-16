@@ -5,11 +5,6 @@
 
 #define MIN_DAY 1
 
-typedef struct ReferenceDate_t{
-    Date initialisationDate;
-    Counter times;
-}*Refdate;
-
 struct  counter_t{
     Yearnum lowestc;
     Yearnum middlec;
@@ -22,8 +17,14 @@ struct  counter_t{
     Yearinit init;
     YearDestroy dtour;
 };
+typedef struct  counter_t* Counter;
 
-Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, Yearnum longest,
+typedef struct ReferenceDate_t{
+    Date initialisationDate;
+    Counter times;
+}*Refdate;
+
+static Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, Yearnum longest,
                  YearCopy ctour, YearAdvance advancer,YearComp comparator, MaximalYear maximum,
                  Yearinit init,YearDestroy dtour)
 {
@@ -42,43 +43,36 @@ Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, Yearnum lo
         return NULL;
     }
     counter->hightestc=ctour(hightestc);
+    if(comparator(hightestc,counter->hightestc)!=0)
+    {
+        dtour(counter->middlec);
+        dtour(counter->lowestc);
+        free(counter);
+        return NULL;
+    }
+    counter->longest=ctour(longest);
+    if(comparator(longest,counter->longest)!=0)
+    {
+        dtour(counter->hightestc);
+        dtour(counter->middlec);
+        dtour(counter->lowestc);
+        free(counter);
+        return NULL;
+    }
     counter->ctour=ctour;
     counter->advancer=advancer;
     counter->comparator=comparator;
     counter->maximum=maximum;
     counter->init=init;
+    counter->dtour=dtour;
+    return counter;
 }
 
-static Refdate first= NULL;
+static Counter countCopy(Counter counter)
+{}
 
-static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
-                           30, 31, 30, 31};
-
-typedef enum months{ JAN=1,FEB=2,MAR=3,APR=4,MAY=5,JUN=6,JUL=7,AUG=8,SEP=9,OCT=10,NOV=11,DEC=12} Months;
-
-struct Date_t{
-    int day;
-    Months month;
-    int year;
-    Yearnum milenial;
-    Yearnum hanoyYearl;
-    YearCopy ctour;
-    YearDestroy dtour;
-    YearAdvance advance;
-    Yearbackadvance conteradvance;
-    YearZero zero;
-    Yearlowestposs lowestyear;
-    YearComp comparator;
-    MaximalYear maximum;
-    YearDivide divider;
-    Diffcalc diffcalc;
-    Yearinit yearinit;
-    ReferanceDate outerDate;
-    CopyRefDate copyFunc;
-    FreeRefDate freeRefDate;
-    RefDateAdvance refDateAdvance;
-    Diffcalc diffFunc;
-};
+static void countDest(Counter counter)
+{}
 
 static int counterAdvance(Counter counter)
 {
@@ -117,6 +111,39 @@ static int counterAdvance(Counter counter)
     }
     return 0;
 }
+
+
+
+static Refdate first= NULL;
+
+static int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31,
+                           30, 31, 30, 31};
+
+typedef enum months{ JAN=1,FEB=2,MAR=3,APR=4,MAY=5,JUN=6,JUL=7,AUG=8,SEP=9,OCT=10,NOV=11,DEC=12} Months;
+
+struct Date_t{
+    int day;
+    Months month;
+    int year;
+    Yearnum milenial;
+    Yearnum hanoyYearl;
+    YearCopy ctour;
+    YearDestroy dtour;
+    YearAdvance advance;
+    Yearbackadvance conteradvance;
+    YearZero zero;
+    Yearlowestposs lowestyear;
+    YearComp comparator;
+    MaximalYear maximum;
+    YearDivide divider;
+    Diffcalc diffcalc;
+    Yearinit yearinit;
+    ReferanceDate outerDate;
+    CopyRefDate copyFunc;
+    FreeRefDate freeRefDate;
+    RefDateAdvance refDateAdvance;
+    Diffcalc diffFunc;
+};
 
 static int monthToInt(Months month)
 {

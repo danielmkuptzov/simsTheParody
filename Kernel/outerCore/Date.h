@@ -68,7 +68,6 @@ typedef int(*YearDivide)(Yearnum);
 typedef Yearnum(*MaximalYear)(void);
 typedef int (*YearComp)(Yearnum,Yearnum);
 typedef void(*Yearinit)(Yearnum);
-typedef struct counter_t* Counter;
 typedef Yearnum (*YearZero)(void);
 typedef void (*Yearbackadvance)(Yearnum);
 typedef Yearnum (*Yearlowestposs)(void);
