@@ -69,7 +69,15 @@ static Counter countCre(Yearnum lowestc, Yearnum middlec, Yearnum hightestc, Yea
 }
 
 static Counter countCopy(Counter counter)
-{}
+{
+    if (counter==NULL)
+    {
+        return NULL;
+    }
+    return countCre(counter->lowestc,counter->middlec,counter->lowestc,counter->longest,
+                    counter->ctour,counter->advancer,counter->comparator,counter->maximum,counter->init,
+                    counter->dtour);
+}
 
 static void countDest(Counter counter)
 {}
