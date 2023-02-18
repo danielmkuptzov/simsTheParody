@@ -80,7 +80,15 @@ static Counter countCopy(Counter counter)
 }
 
 static void countDest(Counter counter)
-{}
+{
+    if(counter==NULL)
+    {
+        return;
+    }
+    counter->dtour(counter->lowestc);
+    counter->dtour(counter->middlec);
+
+}
 
 static int counterAdvance(Counter counter)
 {
