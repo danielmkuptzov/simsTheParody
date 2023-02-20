@@ -88,7 +88,7 @@ static void countDest(Counter counter)
     counter->dtour(counter->lowestc);
     counter->dtour(counter->middlec);
     counter->dtour(counter->hightestc);
-
+    counter->dtour(counter->longest);
 }
 
 static int counterAdvance(Counter counter)
