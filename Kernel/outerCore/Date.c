@@ -387,17 +387,7 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
     }
     intDateReturn(dateOne,firstDay());
     first->initialisationDate=dateOne;
-    first->times= malloc(sizeof(struct counter_t));
-    if(!first->times)
-    {
-        dateDestroy(first->initialisationDate);
-        free(first);
-        return;
-    }
-    first->times->lowestc=zero();
-    first->times->middlec=zero();
-    first->times->hightestc=zero();
-    first->times->longest=zero();
+    first->times= countCre();
 }
 
 void dateDestroy(Date date)
