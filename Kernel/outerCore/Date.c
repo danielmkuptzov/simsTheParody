@@ -387,7 +387,9 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
     }
     intDateReturn(dateOne,firstDay());
     first->initialisationDate=dateOne;
-    first->times= countCre();
+    init(date);
+    first->times= countCre(date,date,date,date,ctour,
+                           advance,compare,max,init,dtour);
 }
 
 void dateDestroy(Date date)
