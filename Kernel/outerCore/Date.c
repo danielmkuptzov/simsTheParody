@@ -390,6 +390,10 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
     init(date);
     first->times= countCre(date,date,date,date,ctour,
                            advance,compare,max,init,dtour);
+    if(!first->times)
+    {
+        dateDestroy(first->initialisationDate);
+    }
 }
 
 void dateDestroy(Date date)
