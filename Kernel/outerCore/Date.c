@@ -404,7 +404,6 @@ void dateDestroy(Date date)
     }
     if((date->freeRefDate)&&(date->outerDate))
     {
-        //to create counter dest
         date->freeRefDate(date->outerDate);
     }
     free(date);
@@ -580,6 +579,7 @@ Date dateGenerate(void)
 void dateCleanInitializer(void)
 {
     dateDestroy(first->initialisationDate);
+    countDest(first->times);
     free(first);
 }
 
