@@ -260,7 +260,7 @@ int coreSize(CoreUnit unit)
     return asGetSize((AmountSet)unit->element);
 }
 
-void coreDestroyer()
+void coreDestroyer(void)
 {
     dateCleanInitializer();
 }
