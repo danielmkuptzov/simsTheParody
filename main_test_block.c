@@ -184,9 +184,9 @@ void init(int* year)
 }
 void back(int* year)
 {
-    *year--;
+    (*year)--;
 }
-int divider(int* year)
+int divider(int* year,int no)
 {
     //maybe to add more param
 }

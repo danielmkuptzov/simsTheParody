@@ -48,12 +48,12 @@ typedef void(*RefDateAdvance)(ReferanceDate);
 /**
  * year difference calculator for standatisation
  */
-typedef int (*DifferenceCalculator)();
+typedef int (*DifferenceCalculator)(void );
 
 /**
  * function for moving the clock back
  */
-typedef int (*DayOne)();
+typedef int (*DayOne)(void);
 
 typedef struct Date_t *Date;
 
@@ -90,7 +90,7 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
  *   dateGenerate       -for standartisation in creating objects
  * @return date generated according to the
  */
-Date dateGenerate();
+Date dateGenerate(void );
 
 /**
  *   dateDestroy        - Deletes an existing date and frees all resources
@@ -118,7 +118,7 @@ int dateCompeare(Date date1, Date date2);
 /**
  *   dateCleanInitializer -destroys the initialization date
  */
-void dateCleanInitializer();
+void dateCleanInitializer(void);
 
 /**
  * dateSum              -adds two dates
