@@ -153,12 +153,14 @@ struct Date_t{
     YearComp comparator;
     MaximalYear maximum;
     YearDivide divider;
+    //again what is this?
     Diffcalc diffcalc;
     Yearinit yearinit;
     ReferanceDate outerDate;
     CopyRefDate copyFunc;
     FreeRefDate freeRefDate;
     RefDateAdvance refDateAdvance;
+    //calculate differecce between years
     Diffcalc diffFunc;
 };
 
@@ -346,7 +348,6 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
     }
     new_date->freeRefDate=freeFunc;
     new_date->refDateAdvance=advanceFunc;
-    //what did I try to create here?
     new_date->diffFunc=diffFunc;
     new_date->day=day;
     new_date->month=month;
