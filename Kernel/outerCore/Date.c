@@ -153,15 +153,13 @@ struct Date_t{
     YearComp comparator;
     MaximalYear maximum;
     YearDivide divider;
-    //again what is this?
-    Diffcalc diffcalc;
     Yearinit yearinit;
     ReferanceDate outerDate;
     CopyRefDate copyFunc;
     FreeRefDate freeRefDate;
     RefDateAdvance refDateAdvance;
-    //calculate differecce between years
     Diffcalc diffFunc;
+    DifferenceCalculator diffcalc;
 };
 
 static int monthToInt(Months month)
@@ -318,7 +316,8 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
                 RefDateAdvance advanceFunc, DifferenceCalculator diffFunc,
                 ReferanceDate refDate,YearCopy ctour,YearDestroy dtour,
                 YearZero zero, Yearlowestposs lowest,YearAdvance advance, MaximalYear max,
-                YearComp compare, Yearinit init, Yearbackadvance contercounter, YearDivide div)
+                YearComp compare, Yearinit init, Yearbackadvance contercounter, YearDivide div,
+                Diffcalc diffcalc)
 {
     if(month<JAN||month>DEC||year<diffFunc()||!copyFunc||!freeFunc
         ||!advanceFunc||!diffFunc||!ctour||!dtour||!zero||!lowest
@@ -346,9 +345,10 @@ static Date dateCreate(int day, int month, int year,Yearnum milenia, Yearnum han
             return NULL;
         }
     }
+    new_date->diffcalc=diffFunc;
     new_date->freeRefDate=freeFunc;
     new_date->refDateAdvance=advanceFunc;
-    new_date->diffFunc=diffFunc;
+    new_date->diffFunc=diffcalc;
     new_date->day=day;
     new_date->month=month;
     new_date->year=year;
@@ -372,7 +372,8 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                      RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
                      ReferanceDate date,DayOne firstDay,YearCopy ctour,YearDestroy dtour,
                      YearZero zero, Yearlowestposs lowest,YearAdvance advance, MaximalYear max,
-                     YearComp compare, Yearinit init, Yearbackadvance contercounter, YearDivide div)
+                     YearComp compare, Yearinit init, Yearbackadvance contercounter, YearDivide div,
+                     Diffcalc negative)
 {
     first= malloc(sizeof(struct Date_t));
     if(!first)
@@ -381,7 +382,7 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
     }
     Date dateOne=dateCreate(1,1,0,0,0,
                             copyFunc,freeFunc,advanceFunc,diffFunc,date,ctour,dtour,zero,
-                            lowest,advance,max,compare,init,contercounter,div);
+                            lowest,advance,max,compare,init,contercounter,div,negative);
     if(!dateOne)
     {
         free(first);
@@ -467,9 +468,9 @@ Date dateCopy(Date date)
     return dateCreate(date->day,date->month,date->year,date->milenial,
                       date->hanoyYearl,date->copyFunc,
                       date->freeRefDate,date->refDateAdvance,
-                      date->diffFunc,date->outerDate,date->ctour,date->dtour,
+                      date->diffcalc,date->outerDate,date->ctour,date->dtour,
                       date->zero,date->lowestyear,date->advance,date->maximum,date->comparator,
-                      date->yearinit,date->conteradvance,date->divider);
+                      date->yearinit,date->conteradvance,date->divider,date->diffFunc);
 }
 
 static int dateDifference(Date date1, Date date2)

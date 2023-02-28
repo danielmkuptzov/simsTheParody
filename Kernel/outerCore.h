@@ -88,7 +88,7 @@ typedef void(*RefDateExAdvance)(ReferanceDateEx);
 /**
  * year difference calculator for standatisation
  */
-typedef int (*DifferenceCalculatorEx)();
+typedef int (*DifferenceCalculatorEx)(void);
 
 /**
  * function for moving the clock back
@@ -145,9 +145,9 @@ typedef struct CoreUnit_t* CoreUnit;
  */
 void coreBeginner(CopyRefDateEx copyFunc, FreeRefDateEx freeFunc,
                   RefDateExAdvance advanceFunc,DifferenceCalculatorEx diffFunc,
-                  ReferanceDateEx date, DayOneEx firstDay,YearCopy ctour,YearDestroy dtour,
-                  YearZero zero,Yearlowestposs lowest,YearAdvance advance,MaximalYear max,
-                  YearComp compeare,Yearinit init, Yearbackadvance backadv, YearDivide div);
+                  ReferanceDateEx date, DayOneEx firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
+                  Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
+                  Yearinit init, Yearbackadvance backadv, YearDivide div,Diffcalc diffcalc);
 
 /**
  *   coreCreate         -Creates the unit.
@@ -257,7 +257,7 @@ int coreSize(CoreUnit unit);
 /**
  *   coreDestroyer      -use it to end the code
  */
-void coreDestroyer();
+void coreDestroyer(void );
 
 /**
  * coreGetElement     -return the data of the element

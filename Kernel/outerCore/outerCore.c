@@ -13,10 +13,10 @@ void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
                   RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
                   ReferanceDate date, DayOne firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
                   Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
-                  Yearinit init, Yearbackadvance backadv, YearDivide div)
+                  Yearinit init, Yearbackadvance backadv, YearDivide div,Diffcalc diffcalc)
 {
     dateInitialiser(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay,ctour,dtour,zero,
-                    lowest,advance,max,compeare,init,backadv,div);
+                    lowest,advance,max,compeare,init,backadv,div,diffcalc);
 }
 
 
