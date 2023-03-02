@@ -921,12 +921,12 @@ KernelErrors kernelSetter(Kernel kernel,InternalDataPart data, void* element)
     return KERNEL_ERROR;
 }
 
-void kernelEpsilonDestroyer()
+void kernelEpsilonDestroyer(void )
 {
     productDestroyEpsilon();
 }
 
-Kernel  kernelEpsilonGetter()
+Kernel  kernelEpsilonGetter(void)
 {
     Kernel toSend=kernelCreate(RATIONAL,false,NULL,0,NULL,
                                0,NULL,0,NULL,0);
@@ -938,7 +938,7 @@ Kernel  kernelEpsilonGetter()
     return toSend;
 }
 
-void kernelDestroyer()
+void kernelDestroyer(void)
 {
     coreDestroyer();
 }
