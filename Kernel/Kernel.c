@@ -953,7 +953,8 @@ bool kernelCheckType(Kernel kernel,char* name)
     {
         return false;
     }
-    if(kernelGetInternalData(kernel,CATEGORY)== stringToTypeConvert(name))
+    //think about how to compare arrays
+    if(kernelGetInternalDataNonConst(kernel,CATEGORY)== stringToTypeConvert(name))
     {
         return true;
     }
