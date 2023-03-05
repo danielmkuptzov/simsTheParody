@@ -953,10 +953,9 @@ bool kernelCheckType(Kernel kernel,char* name)
     {
         return false;
     }
-    //think about how to compare arrays
     TypeOfProduct tofind=stringToTypeConvert(name);
     TypeOfProduct* elem=&tofind;
-    if(kernelFind(kernelGetInternalDataNonConst(kernel,CATEGORY),elem)==)
+    if(kernelFind(kernelGetInternalDataNonConst(kernel,CATEGORY),elem)==elem)
     {
         return true;
     }
