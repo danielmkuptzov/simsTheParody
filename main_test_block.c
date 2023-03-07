@@ -190,6 +190,8 @@ int divider(int* year,int no)
 {
     return *year/no;
 }
+int difference(int* a, int* b)
+{}
 
 int main(void)
 {
