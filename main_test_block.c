@@ -191,7 +191,9 @@ int divider(int* year,int no)
     return *year/no;
 }
 int difference(int* a, int* b)
-{}
+{
+    return b-a;
+}
 
 int main(void)
 {
@@ -256,7 +258,7 @@ int main(void)
                        "MEDICINE","MEDICINE"};
     int zero=0;
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate,intCopy,intDest,&zero,&zero,
-                   intAdvance,maximum, intCompare,init, back,);
+                   intAdvance,maximum, intCompare,init, back, divider, difference);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
