@@ -195,6 +195,7 @@ int difference(int* a, int* b)
 {
     return b-a;
 }
+void* zero()
 
 int main(void)
 {

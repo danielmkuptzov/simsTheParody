@@ -12,7 +12,7 @@
  */
 typedef void* Yearnum;
 typedef Yearnum(*YearCopy)(Yearnum);
-typedef Yearnum (*YearDestroy)(Yearnum);
+typedef void (*YearDestroy)(Yearnum);
 typedef void(*YearAdvance)(Yearnum);
 typedef int(*YearDivide)(Yearnum);
 typedef Yearnum(*MaximalYear)(void);
