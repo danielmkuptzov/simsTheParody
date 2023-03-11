@@ -10,6 +10,7 @@
 
 int max=INTMAX;
 
+int zero=0;
 void* intCopy(void* org)
 {
     int *copy= malloc(sizeof (int*));
@@ -195,7 +196,10 @@ int difference(int* a, int* b)
 {
     return b-a;
 }
-void* zero()
+void* zerofunk()
+{
+    return &zero;
+}
 
 int main(void)
 {
@@ -258,9 +262,8 @@ int main(void)
                        "MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE",
                        "MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE",
                        "MEDICINE","MEDICINE"};
-    int zero=0;
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate,
-                   intCopy,intDest,&zero,&zero,intAdvance,maximum, intCompare,
+                   intCopy,intDest,zerofunk,&zero,intAdvance,maximum, intCompare,
                    init,back, divider, difference);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
