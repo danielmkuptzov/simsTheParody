@@ -263,8 +263,8 @@ int main(void)
                        "MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE","MEDICINE",
                        "MEDICINE","MEDICINE"};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate,
-                   intCopy,intDest,zerofunk,&zero,intAdvance,maximum, intCompare,
-                   init,back, divider, difference);
+                   intCopy,intDest,zerofunk,zerofunk,intAdvance,maximum,
+                   intCompare,init,back, divider, difference);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
