@@ -196,7 +196,7 @@ int difference(int* a, int* b)
 {
     return b-a;
 }
-void* zerofunk()
+void* zerofunk(void)
 {
     return &zero;
 }
