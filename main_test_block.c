@@ -175,13 +175,14 @@ Kernel foodCheck(Kernel shoppingList)
     return kernelCreate(RATIONAL,true,elem,2,ctours,1,
                         dtours,1,compare,1);
 }
-int* maximum(void)
+void* maximum(void)
 {
     return &max;
 }
-void init(int* year)
+void init(void* year)
 {
-    *year=0;
+    int* yearto=year;
+    *yearto=0;
 }
 void back(int* year)
 {
