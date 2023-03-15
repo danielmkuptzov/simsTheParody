@@ -184,18 +184,21 @@ void init(void* year)
     int* yearto=year;
     *yearto=0;
 }
-void back(int* year)
+void back(void* year)
 {
-    (*year)--;
+    int* yearba=year;
+    (*yearba)--;
 }
 int divider(void* year,int no)
 {
     int* yearin=year;
     return *yearin/no;
 }
-int difference(int* a, int* b)
+int difference(void* a, void* b)
 {
-    return b-a;
+    int* first=a;
+    int* second=b;
+    return (*first-*second);
 }
 void* zerofunk(void)
 {
