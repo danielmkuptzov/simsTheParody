@@ -64,7 +64,6 @@ typedef void* Yearnum;
 typedef Yearnum(*YearCopy)(Yearnum);
 typedef Yearnum (*YearDestroy)(Yearnum);
 typedef void(*YearAdvance)(Yearnum);
-typedef int(*YearDivide)(Yearnum,int);
 typedef Yearnum(*MaximalYear)(void);
 typedef int (*YearComp)(Yearnum,Yearnum);
 typedef void(*Yearinit)(Yearnum);
@@ -84,8 +83,7 @@ void dateInitialiser(CopyRefDate copyFunc, FreeRefDate freeFunc,
                      RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
                      ReferanceDate date,DayOne firstDay,YearCopy ctour,YearDestroy dtour,
                      YearZero zero, Yearlowestposs lowest,YearAdvance advance, MaximalYear max,
-                     YearComp compare, Yearinit init, Yearbackadvance contercounter, YearDivide div,
-                     Diffcalc negative);
+                     YearComp compare, Yearinit init, Yearbackadvance contercounter, Diffcalc negative);
 
 /**
  *   dateGenerate       -for standartisation in creating objects

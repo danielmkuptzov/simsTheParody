@@ -15,7 +15,6 @@ typedef Yearnum(*YearCopy)(Yearnum);
 //strange problem
 typedef void (*YearDestroy)(Yearnum);
 typedef void(*YearAdvance)(Yearnum);
-typedef int(*YearDivide)(Yearnum,int);
 typedef Yearnum(*MaximalYear)(void);
 typedef int (*YearComp)(Yearnum,Yearnum);
 typedef void(*Yearinit)(Yearnum);
@@ -148,7 +147,7 @@ void coreBeginner(CopyRefDateEx copyFunc, FreeRefDateEx freeFunc,
                   RefDateExAdvance advanceFunc,DifferenceCalculatorEx diffFunc,
                   ReferanceDateEx date, DayOneEx firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
                   Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
-                  Yearinit init, Yearbackadvance backadv, YearDivide div,Diffcalc diffcalc);
+                  Yearinit init, Yearbackadvance backadv,Diffcalc diffcalc);
 
 /**
  *   coreCreate         -Creates the unit.

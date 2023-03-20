@@ -805,6 +805,7 @@ KernelErrors kernelALU(Kernel kernel1, Kernel kernel2, int action)
             kernel1=tmpKern;
             return KERNEL_MEMORY_PROBLEM;
         }
+        kernel1=tmpKern;
         kernelDestroy(tmpKern);
         return KERNEL_SUCSESS;
     }
