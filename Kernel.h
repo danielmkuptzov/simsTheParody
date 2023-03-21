@@ -59,7 +59,6 @@ typedef void* Yearnum;
 typedef Yearnum(*YearCopy)(Yearnum);
 typedef void (*YearDestroy)(Yearnum);
 typedef void(*YearAdvance)(Yearnum);
-typedef int (*YearDivide)(Yearnum,int);
 typedef Yearnum(*MaximalYear)(void);
 typedef int (*YearComp)(Yearnum,Yearnum);
 typedef void(*Yearinit)(Yearnum);
@@ -196,7 +195,7 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
                     Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
-                    Yearinit init, Yearbackadvance backadv, YearDivide div, Diffcalc diffcalc);
+                    Yearinit init, Yearbackadvance backadv, Diffcalc diffcalc);
 
 /**
  *   kernelEpsilonSetter     -to set the epsilon we would work on

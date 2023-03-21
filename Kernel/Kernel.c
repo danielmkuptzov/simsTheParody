@@ -126,10 +126,10 @@ void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
                     Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
-                    Yearinit init, Yearbackadvance backadv, YearDivide div, Diffcalc diffcalc)
+                    Yearinit init, Yearbackadvance backadv, Diffcalc diffcalc)
 {
     coreBeginner(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay,ctour,dtour,zero,lowest,
-                 advance,max,compeare,init,backadv,div,diffcalc);
+                 advance,max,compeare,init,backadv,diffcalc);
 }
 
 void kernelEpsilonSetter(int base)
