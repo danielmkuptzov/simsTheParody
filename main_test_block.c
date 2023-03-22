@@ -189,11 +189,6 @@ void back(void* year)
     int* yearba=year;
     (*yearba)--;
 }
-int divider(void* year,int no)
-{
-    int* yearin=year;
-    return *yearin/no;
-}
 int difference(void* a, void* b)
 {
     int* first=a;
@@ -268,7 +263,7 @@ int main(void)
                        "MEDICINE","MEDICINE"};
     kernelBeginner(intCopy,intDest,intAdvance,diffCulc,&j,refDate,
                    intCopy,intDest,zerofunk,zerofunk,intAdvance,maximum,
-                   intCompare,init,back, divider, difference);
+                   intCompare,init,back, difference);
     Kernel t= kernelCreate(DATE,true,NULL,0,NULL,
                            0,NULL,0,NULL,0);
     int* idp=&j;
