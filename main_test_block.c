@@ -9,7 +9,6 @@
 #include "consrtants.h"
 
 int max=INTMAX;
-
 int zero=0;
 void* intCopy(void* org)
 {
@@ -342,6 +341,27 @@ int main(void)
     Apartment aparuni = partmentMerge(test,tounite);
     apartmentDestroy(test);
     apartmentDestroy(tounite);
+    for (int i = 0; i < 10; ++i)
+    {
+        bool exist=false;
+        j++;
+        int k= i*10* sizeof(char*);
+        Person resident= createPerson(resNames[i],t,names+k,idp,j,prodamount+k,
+                                      prodtypes+k);
+        APARTMENT_FOREACH(Person,iter,test,RESIDENT)
+        {
+            if(personCompeare(iter,resident)==0)
+            {
+                exist=true;
+                break;
+            }
+        }
+        personDestroy(resident);
+        if(exist==false)
+        {
+            apartmentDestroy(test);
+        }
+    }
     if(aparuni==NULL)
     {
         return 0;
