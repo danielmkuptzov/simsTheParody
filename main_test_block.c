@@ -330,6 +330,9 @@ int main(void)
         apartmentDestroy(test);
         return 0;
     }
+    int res= apartmentCompeare(test,tounite);
+    if(res!=0)
+    {}
     ApartmentErrorCodes resaltApar= apartmentAddResident(tounite,newres);
     personDestroy(newres);
     if(resaltApar!=APARTMENT_SUCSESS)
