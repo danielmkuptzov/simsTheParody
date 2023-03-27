@@ -307,6 +307,7 @@ int main(void)
         apartmentDestroy(test);
     }
     Person newres= personCopy(owner);
+    if(){}
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
