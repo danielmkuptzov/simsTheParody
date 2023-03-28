@@ -307,7 +307,7 @@ int main(void)
         apartmentDestroy(test);
     }
     Person newres= personCopy(owner);
-    if(){}
+    if(personCompeare(newres,owner)!=0){}
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
