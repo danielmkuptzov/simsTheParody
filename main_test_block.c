@@ -314,6 +314,7 @@ int main(void)
         apartmentDestroy(tounite);
         apartmentDestroy(test);
     }
+    //to implement the remove furniture
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
