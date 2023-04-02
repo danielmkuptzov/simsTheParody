@@ -314,7 +314,7 @@ int main(void)
         apartmentDestroy(tounite);
         apartmentDestroy(test);
     }
-    Kernel chair=NULL/*how to get un object from wish list? and why suddenly we lost the stdlib?*/;
+    Kernel chair=NULL/*how to get un object from wish list? still no idea*/;
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
