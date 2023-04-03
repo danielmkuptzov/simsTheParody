@@ -314,7 +314,7 @@ int main(void)
         apartmentDestroy(tounite);
         apartmentDestroy(test);
     }
-    Kernel chair=NULL/*how to get un object from wish list? still no idea*/;
+    Kernel chair=NULL/*still not sure*/;
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
