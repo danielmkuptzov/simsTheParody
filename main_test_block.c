@@ -314,7 +314,15 @@ int main(void)
         apartmentDestroy(tounite);
         apartmentDestroy(test);
     }
-    Kernel chair=NULL/*still not sure*/;
+    Kernel tmp= kernelCopy(t);
+    int* id=&k;
+    void* elements[]={id, kernelGetElement(tmp),names[k],prodamount[k],&k,
+                      id,&k, type[k]};
+    CopyFunc copyArr[]={intCopy, intCopy, intCopy};
+    DestFunc dtours[]={intDest, intDest, intDest};
+    CompFunc compFunc[]={intCompare, intCompare};
+    Kernel product= kernelCreate(PRODUCT,true,elements,8,copyArr,
+                                 2,dtours,2,compFunc,2);
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
