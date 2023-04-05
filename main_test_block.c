@@ -315,7 +315,8 @@ int main(void)
         apartmentDestroy(test);
     }
     Kernel tmp= kernelCopy(t);
-    int* id=&k;
+    int j=5;
+    int* id=j;
     void* elements[]={id, kernelGetElement(tmp),names[k],prodamount[k],&k,
                       id,&k, type[k]};
     CopyFunc copyArr[]={intCopy, intCopy, intCopy};
