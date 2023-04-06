@@ -316,7 +316,7 @@ int main(void)
     }
     Kernel tmp= kernelCopy(t);
     int j=5;
-    int* id=j;
+    int* id=&j;
     void* elements[]={id, kernelGetElement(tmp),names[k],prodamount[k],&k,
                       id,&k, type[k]};
     CopyFunc copyArr[]={intCopy, intCopy, intCopy};
