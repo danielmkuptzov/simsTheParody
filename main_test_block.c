@@ -315,7 +315,7 @@ int main(void)
         apartmentDestroy(test);
     }
     Kernel tmp= kernelCopy(t);
-    int j=5;
+    j=5;
     int* id=&j;
     void* elements[]={id, kernelGetElement(tmp),"yossi",prodamount[k],&k,
                       id,&k, type[k]};
