@@ -317,14 +317,14 @@ int main(void)
     Kernel tmp= kernelCopy(t);
     j=5;
     int* id=&j;
-    void* elements[]={id, kernelGetElement(tmp),"yossi","any amount",&k,
+    void* elements[]={id, kernelGetElement(tmp),"yossi","any amount",id,
                       id,&k, type[k]};
     CopyFunc copyArr[]={intCopy, intCopy, intCopy};
     DestFunc dtours[]={intDest, intDest, intDest};
     CompFunc compFunc[]={intCompare, intCompare};
     Kernel product= kernelCreate(PRODUCT,true,elements,8,copyArr,
                                  2,dtours,2,compFunc,2);
-    int id=1;
+    int idn=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
     char* type="any amount";
