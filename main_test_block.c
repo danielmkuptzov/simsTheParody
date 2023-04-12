@@ -318,7 +318,7 @@ int main(void)
     j=5;
     int* idp=&j;
     void* elements[]={idp, kernelGetElement(tmp),"yossi","any amount",idp,
-                      idp,&k, type[k]};
+                      idp,idp, type[k]};
     CopyFunc copyArr[]={intCopy, intCopy, intCopy};
     DestFunc dtours[]={intDest, intDest, intDest};
     CompFunc compFunc[]={intCompare, intCompare};
