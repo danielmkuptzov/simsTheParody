@@ -319,7 +319,7 @@ int main(void)
     int* idp=&j;
     //do better documentation relly better
     void* elements[]={idp, kernelGetElement(tmp),"yossi","any amount",idp,
-                      idp,idp, type[k]};
+                      idp,idp, "MEDICINE"};
     CopyFunc copyArr[]={intCopy, intCopy, intCopy};
     DestFunc dtours[]={intDest, intDest, intDest};
     CompFunc compFunc[]={intCompare, intCompare};
