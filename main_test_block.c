@@ -316,9 +316,9 @@ int main(void)
     }
     Kernel tmp= kernelCopy(t);
     j=5;
-    int* idp=&j;
-    void* elements[]={idp, kernelGetElement(tmp),"yossi","any amount",idp,
-                      idp,idp, "MEDICINE"};
+    int* idpt=&j;
+    void* elements[]={idpt, kernelGetElement(tmp),"yossi","any amount",idpt,
+                      idpt,idpt, "MEDICINE"};
     CopyFunc copyArr[]={intCopy, intCopy, intCopy};
     DestFunc dtours[]={intDest, intDest, intDest};
     CompFunc compFunc[]={intCompare, intCompare};
