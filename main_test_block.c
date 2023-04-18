@@ -316,6 +316,7 @@ int main(void)
     }
     Kernel tmp= kernelCopy(t);
     j=5;
+    //ocumentation
     int* idpt=&j;
     void* elements[]={idpt, kernelGetElement(tmp),"yossi","any amount",idpt,
                       idpt,idpt, "MEDICINE"};
