@@ -316,7 +316,7 @@ int main(void)
     }
     Kernel tmp= kernelCopy(t);
     j=5;
-    //documentation and to find
+    //documentation and to find the funcs
     int* idpt=&j;
     void* elements[]={idpt, kernelGetElement(tmp),"yossi","any amount",idpt,
                       idpt,idpt, "MEDICINE"};
