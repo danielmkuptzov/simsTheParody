@@ -331,7 +331,7 @@ int main(void)
     char* type="any amount";
     void* elem[]={&id,creDate,"temp"};
     CopyFunc ctours[]={intCopy};
-    dtours={intDest};
+    dtours[0]=intDest;
     CompFunc compeare[]={intCompare};
     Kernel tempProd= kernelCreate(PRODUCT,true,elem,3,ctours,
                                   1,dtours,1,compeare,1);
