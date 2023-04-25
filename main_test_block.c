@@ -316,7 +316,6 @@ int main(void)
     }
     Kernel tmp= kernelCopy(t);
     j=5;
-    //documentation and to find the funcs and find the matam testing files
     int* idpt=&j;
     void* elements[]={idpt, kernelGetElement(tmp),"yossi","any amount",idpt,
                       idpt,idpt, "MEDICINE"};
@@ -370,6 +369,7 @@ int main(void)
     {
         return 0;
     }
+    //find use for Person apartmentGetOwner(Apartment apartment);
     apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
