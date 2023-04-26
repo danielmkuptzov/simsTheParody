@@ -369,7 +369,7 @@ int main(void)
     {
         return 0;
     }
-    //find use for Person apartmentGetOwner(Apartment apartment);
+    //find use for Person apartmentGetOwner(Apartment apartment); but stil dont know how
     apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
