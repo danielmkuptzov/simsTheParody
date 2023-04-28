@@ -370,6 +370,7 @@ int main(void)
         return 0;
     }
     //find use for Person apartmentGetOwner(Apartment apartment); but stil dont know how, maybe to  just test
+    //and to analize ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
     apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
