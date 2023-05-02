@@ -371,7 +371,8 @@ int main(void)
     }
     //find use for Person apartmentGetOwner(Apartment apartment); but stil dont know how, maybe to  just test
     int* idq;
-    &idq=7;
+    id=7;
+    idq=&id;
     Person newowner= personCreate();
     //and to analize ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
     apartmentDestroy(aparuni);
