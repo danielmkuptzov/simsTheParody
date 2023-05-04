@@ -373,7 +373,7 @@ int main(void)
     int* idq;
     id=7;
     idq=&id;
-    Person newowner= personCreate(idq,);
+    Person newowner= personCreate(idq,intCopy,);
     //and to analize ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
     apartmentDestroy(aparuni);
     kernelDestroyer();
