@@ -370,7 +370,7 @@ int main(void)
         return 0;
     }
     //find use for Person apartmentGetOwner(Apartment apartment); but stil dont know how, maybe to  just test
-    Kernel date= kernelCreate(DATE,true,);
+    Kernel date= kernelCreate(DATE,true,NULL,0);
     int* idq;
     id=7;
     idq=&id;
