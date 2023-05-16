@@ -378,7 +378,11 @@ int main(void)
     Person newowner= personCreate(idq,intCopy,intDest,intCompare,date,"yossi",
                                   intCopy,intDest,intCompare, 1);
     if(apartmentSetOwner(tounite,newowner)!=APARTMENT_SUCSESS)
-    {}
+    {
+        personDestroy(newowner);
+        apartmentDestroy(tounite);
+
+    }
     //and to analize ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
     apartmentDestroy(aparuni);
     kernelDestroyer();
