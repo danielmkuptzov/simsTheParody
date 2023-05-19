@@ -383,7 +383,7 @@ int main(void)
         apartmentDestroy(tounite);
         return 0;
     }
-    if(personCompeare(apartmentGetOwner(tounite),)!=0)
+    if(personCompeare(apartmentGetOwner(tounite),newowner)!=0)
     //and to analize ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
     apartmentDestroy(aparuni);
     kernelDestroyer();
