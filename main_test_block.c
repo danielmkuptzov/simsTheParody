@@ -387,6 +387,7 @@ int main(void)
     {
         personDestroy(newowner);
         apartmentDestroy(tounite);
+        return 0;
     }
     //and to analize ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
     apartmentDestroy(aparuni);
