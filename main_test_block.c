@@ -389,7 +389,7 @@ int main(void)
         apartmentDestroy(tounite);
         return 0;
     }
-    //and to analize ApartmentErrorCodes apartmentSetOwner(Apartment apartment, Person newOwner);
+    //implement ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
     apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
