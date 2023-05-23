@@ -390,6 +390,7 @@ int main(void)
         return 0;
     }
     //implement ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
+    //find normal objects
     apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
