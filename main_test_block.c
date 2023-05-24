@@ -389,7 +389,8 @@ int main(void)
         apartmentDestroy(tounite);
         return 0;
     }
-    //implement ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
+    //thing about shooping list
+    // implement ApartmentErrorCodes apartmentCreateShoppingList(Apartment apartment);
     //find normal objects
     apartmentDestroy(aparuni);
     kernelDestroyer();
