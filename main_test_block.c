@@ -392,6 +392,7 @@ int main(void)
     if(apartmentCreateShoppingList(tounite)!=APARTMENT_SUCSESS)
     {
         personDestroy(newowner);
+        apartmentDestroy(tounite);
     }
     //find normal objects
     apartmentDestroy(aparuni);
