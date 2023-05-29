@@ -394,7 +394,7 @@ int main(void)
         personDestroy(newowner);
         apartmentDestroy(tounite);
     }
-    //find normal objects
+    //comparison, and to find the generate shopping list
     apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
