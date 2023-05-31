@@ -394,7 +394,8 @@ int main(void)
         personDestroy(newowner);
         apartmentDestroy(tounite);
     }
-    APARTMENT_FOREACH(Kernel,iter,tounite,)
+    APARTMENT_FOREACH(Kernel,iter,tounite,FURNITURE)
+    {}
     //comparison, and to find the generate shopping list
     apartmentDestroy(aparuni);
     kernelDestroyer();
