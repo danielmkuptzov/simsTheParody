@@ -198,6 +198,8 @@ void* zerofunk(void)
 {
     return &zero;
 }
+Kernel* createprodarr(char** prod)
+{}
 
 int main(void)
 {
