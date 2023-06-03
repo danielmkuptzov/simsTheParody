@@ -199,7 +199,7 @@ void* zerofunk(void)
     return &zero;
 }
 Kernel* createprodarr(char** prod)
-{}
+{//better to make a funk or array}
 
 int main(void)
 {
