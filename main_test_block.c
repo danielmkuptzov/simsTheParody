@@ -8,6 +8,7 @@
 #include "Apartment.h"
 #include "consrtants.h"
 
+Kernel* prodarr=NULL;
 int max=INTMAX;
 int zero=0;
 void* intCopy(void* org)
@@ -198,8 +199,6 @@ void* zerofunk(void)
 {
     return &zero;
 }
-Kernel* createprodarr(char** prod)
-{//better to make a funk or array}
 
 int main(void)
 {
