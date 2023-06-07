@@ -204,6 +204,7 @@ void* zerofunk(void)
 int main(void)
 {
     int j=7;
+    prodarr= kernelCreate();
     kernelEpsilonSetter(3);
     char* resNames[]={"alexander","betty","charly","daniel","evgeny",
                       "fridrich","guliver","hilbert","isic","jonatan",
