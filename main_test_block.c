@@ -8,7 +8,7 @@
 #include "Apartment.h"
 #include "consrtants.h"
 
-Kernel* prodarr=NULL;
+Kernel prodarr=NULL;
 int max=INTMAX;
 int zero=0;
 void* intCopy(void* org)
@@ -204,7 +204,8 @@ void* zerofunk(void)
 int main(void)
 {
     int j=7;
-    prodarr= kernelCreate();
+    prodarr= kernelCreate(AMOUNT_SET,true,NULL,0,NULL,0,
+                          NULL,0,NULL,0);
     kernelEpsilonSetter(3);
     char* resNames[]={"alexander","betty","charly","daniel","evgeny",
                       "fridrich","guliver","hilbert","isic","jonatan",
