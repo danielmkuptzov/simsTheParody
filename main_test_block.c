@@ -206,7 +206,7 @@ int main(void)
     int j=7;
     prodarr= kernelCreate(AMOUNT_SET,true,NULL,0,NULL,0,
                           NULL,0,NULL,0);
-    //test for emptyness
+    if(prodarr==NULL)
     kernelEpsilonSetter(3);
     char* resNames[]={"alexander","betty","charly","daniel","evgeny",
                       "fridrich","guliver","hilbert","isic","jonatan",
