@@ -207,6 +207,9 @@ int main(void)
     prodarr= kernelCreate(AMOUNT_SET,true,NULL,0,NULL,0,
                           NULL,0,NULL,0);
     if(prodarr==NULL)
+    {
+        return 0;
+    }
     kernelEpsilonSetter(3);
     char* resNames[]={"alexander","betty","charly","daniel","evgeny",
                       "fridrich","guliver","hilbert","isic","jonatan",
