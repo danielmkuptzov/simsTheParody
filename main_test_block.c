@@ -89,7 +89,8 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
             kernelDestroy(product);
             return 0;
         }
-        if(kernelInsert(prodarr,)!=KERNEL_SUCSESS)
+        if(kernelInsert(prodarr,productunit)!=KERNEL_SUCSESS)
+        {}
         kernelDestroy(amount);
         if(personAddToWishList(test,productunit)!=PERSON_SUCSESS)
         {
