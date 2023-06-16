@@ -90,7 +90,9 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
             return 0;
         }
         if(kernelInsert(prodarr,0,productunit)!=KERNEL_SUCSESS)
-        {}
+        {
+            return NULL;
+        }
         kernelDestroy(amount);
         if(personAddToWishList(test,productunit)!=PERSON_SUCSESS)
         {
