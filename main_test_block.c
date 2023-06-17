@@ -91,6 +91,7 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
         }
         if(kernelInsert(prodarr,0,productunit)!=KERNEL_SUCSESS)
         {
+            //clean and destroy
             return NULL;
         }
         kernelDestroy(amount);
