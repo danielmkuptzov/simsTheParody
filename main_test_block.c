@@ -62,7 +62,6 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
     }
     for (int k = 0; k < 10; ++k)
     {
-        //carefully add to the array to compare
         j=5;
         Kernel tmp= kernelCopy(t);
         int* id=&k;
