@@ -90,7 +90,6 @@ Person createPerson(char* name, Kernel t, char** names,Id idp,int j, char** prod
         }
         if(kernelInsert(prodarr,0,productunit)!=KERNEL_SUCSESS)
         {
-            //clean and destroy
             kernelDestroy(product);
             personDestroy(test);
             return NULL;
@@ -409,7 +408,7 @@ int main(void)
     }
     APARTMENT_FOREACH(Kernel,iter,tounite,FURNITURE)
     {
-        if(//comparison)
+        if(//comparison and still dont know how)
     }
     //comparison, and to find the generate shopping list
     apartmentDestroy(aparuni);
