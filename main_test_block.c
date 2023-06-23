@@ -408,7 +408,7 @@ int main(void)
     }
     APARTMENT_FOREACH(Kernel,iter,tounite,FURNITURE)
     {
-        if(kernelFind())
+        if(kernelFind(prodarr,iter))
     }
     //comparison, and to find the generate shopping list
     apartmentDestroy(aparuni);
