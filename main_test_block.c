@@ -411,6 +411,8 @@ int main(void)
         if(kernelFind(prodarr,iter)==NULL)
         {
             //dont forget to clean
+            personDestroy(newowner);
+            apartmentDestroy(tounite);
             return 0;
         }
     }
