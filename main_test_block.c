@@ -413,6 +413,7 @@ int main(void)
             //dont forget to clean
             personDestroy(newowner);
             apartmentDestroy(tounite);
+            kernelDestroy(prodarr);
             return 0;
         }
     }
