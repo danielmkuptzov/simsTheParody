@@ -414,6 +414,7 @@ int main(void)
             personDestroy(newowner);
             apartmentDestroy(tounite);
             kernelDestroy(prodarr);
+            kernelDestroyer();
             return 0;
         }
     }
