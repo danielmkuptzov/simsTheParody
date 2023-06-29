@@ -418,7 +418,7 @@ int main(void)
             return 0;
         }
     }
-    //comparison, and to find the generate shopping list
+    //comparison, and to find the generate shopping list and some beauty
     apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
