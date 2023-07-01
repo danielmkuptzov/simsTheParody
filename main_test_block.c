@@ -408,7 +408,7 @@ int main(void)
     }
     APARTMENT_FOREACH(Kernel,iter,tounite,FURNITURE)
     {
-        if(kernelFind(prodarr,iter)==NULL)
+        if(!kernelFind(prodarr,iter))
         {
             //dont forget to clean
             personDestroy(newowner);
