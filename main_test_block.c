@@ -418,7 +418,7 @@ int main(void)
             return 0;
         }
     }
-    //comparison, and so on
+    //check if ezerithing is tested
     apartmentDestroy(aparuni);
     kernelDestroyer();
     kernelEpsilonDestroyer();
