@@ -410,7 +410,6 @@ int main(void)
     {
         if(!kernelFind(prodarr,iter))
         {
-            //dont forget to clean
             personDestroy(newowner);
             apartmentDestroy(tounite);
             kernelDestroy(prodarr);
