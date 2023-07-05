@@ -280,6 +280,7 @@ int main(void)
     int* idp=&j;
     Person owner= createPerson(resNames[0],t,names,idp,j,prodamount,prodtypes);
     kernelDestroy(t);
+    //first testing sequence
     Kernel time=kernelCreate(DATE,true,NULL,0,NULL,
                           0,NULL,0,NULL,0);
     Apartment test= apartmentCreate(true,time,VILA,idp,intCopy,
