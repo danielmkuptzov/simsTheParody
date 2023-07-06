@@ -55,6 +55,7 @@
 /**
  * functions for years
  */
+//change to outer year
 typedef void* Yearnum;
 typedef Yearnum(*YearCopy)(Yearnum);
 typedef void (*YearDestroy)(Yearnum);
