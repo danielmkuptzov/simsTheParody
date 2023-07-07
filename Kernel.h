@@ -56,18 +56,18 @@
  * functions for years
  */
 //change to outer year
-typedef void* Yearnum;
-typedef Yearnum(*YearCopy)(Yearnum);
-typedef void (*YearDestroy)(Yearnum);
-typedef void(*YearAdvance)(Yearnum);
-typedef Yearnum(*MaximalYear)(void);
-typedef int (*YearComp)(Yearnum,Yearnum);
-typedef void(*Yearinit)(Yearnum);
+typedef void* Yearnumext;
+typedef Yearnum(*YearCopy)(Yearnumext);
+typedef void (*YearDestroy)(Yearnumext);
+typedef void(*YearAdvance)(Yearnumext);
+typedef Yearnumext(*MaximalYear)(void);
+typedef int (*YearComp)(Yearnumext,Yearnumext);
+typedef void(*Yearinit)(Yearnumext);
 typedef struct counter_t* Counter;
-typedef Yearnum (*YearZero)(void);
+typedef Yearnumext (*YearZero)(void);
 typedef void (*Yearbackadvance)(Yearnum);
-typedef Yearnum (*Yearlowestposs)(void);
-typedef int (*Diffcalc)(Yearnum,Yearnum);
+typedef Yearnumext(*Yearlowestposs)(void);
+typedef int (*Diffcalc)(Yearnumext,Yearnumext);
 
 
 //the enums to the creator
