@@ -57,6 +57,7 @@
  */
 //change to outer year
 typedef void* Yearnumext;
+//didnt understand the error
 typedef Yearnum(*YearCopy)(Yearnumext);
 typedef void (*YearDestroy)(Yearnumext);
 typedef void(*YearAdvance)(Yearnumext);
