@@ -340,7 +340,7 @@ int main(void)
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
-    char* type="any amount";
+    //char* type="any amount";
     void* elem[]={&id,creDate,"temp"};
     CopyFunc ctours[]={intCopy};
     dtours[0]=intDest;

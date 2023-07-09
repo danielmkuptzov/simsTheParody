@@ -57,8 +57,8 @@
  */
 //change to outer year
 typedef void* Yearnumext;
-//didnt understand the error
-typedef Yearnum(*YearCopy)(Yearnumext);
+//change names
+typedef Yearnumext(*YearCopy)(Yearnumext);
 typedef void (*YearDestroy)(Yearnumext);
 typedef void(*YearAdvance)(Yearnumext);
 typedef Yearnumext(*MaximalYear)(void);
@@ -66,7 +66,7 @@ typedef int (*YearComp)(Yearnumext,Yearnumext);
 typedef void(*Yearinit)(Yearnumext);
 typedef struct counter_t* Counter;
 typedef Yearnumext (*YearZero)(void);
-typedef void (*Yearbackadvance)(Yearnum);
+typedef void (*Yearbackadvance)(Yearnumext);
 typedef Yearnumext(*Yearlowestposs)(void);
 typedef int (*Diffcalc)(Yearnumext,Yearnumext);
 
