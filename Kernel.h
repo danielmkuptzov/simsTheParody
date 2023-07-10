@@ -58,7 +58,7 @@
 //change to outer year
 typedef void* Yearnumext;
 //change names
-typedef Yearnumext(*YearCopy)(Yearnumext);
+typedef Yearnumext(*YearCp)(Yearnumext);
 typedef void (*YearDestroy)(Yearnumext);
 typedef void(*YearAdvance)(Yearnumext);
 typedef Yearnumext(*MaximalYear)(void);
@@ -195,7 +195,7 @@ int  stringComp(char* first, char* second);
  */
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
-                    ExternalDate date, CyncFunc firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
+                    ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDestroy dtour,YearZero zero,
                     Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
                     Yearinit init, Yearbackadvance backadv, Diffcalc diffcalc);
 
