@@ -59,7 +59,8 @@
 typedef void* Yearnumext;
 //change names
 typedef Yearnumext(*YearCp)(Yearnumext);
-typedef void (*YearDestroy)(Yearnumext);
+typedef void (*YearDest)(Yearnumext);
+//fix overriting
 typedef void(*YearAdvance)(Yearnumext);
 typedef Yearnumext(*MaximalYear)(void);
 typedef int (*YearComp)(Yearnumext,Yearnumext);
