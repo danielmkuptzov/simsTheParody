@@ -60,10 +60,10 @@ typedef void* Yearnumext;
 //change names
 typedef Yearnumext(*YearCp)(Yearnumext);
 typedef void (*YearDest)(Yearnumext);
-//fix overriting
-typedef void(*YearAdvance)(Yearnumext);
-typedef Yearnumext(*MaximalYear)(void);
-typedef int (*YearComp)(Yearnumext,Yearnumext);
+typedef void(*YearAdv)(Yearnumext);
+typedef Yearnumext(*MaxYear)(void);
+typedef int (*YearCmp)(Yearnumext,Yearnumext);
+//fix overriding
 typedef void(*Yearinit)(Yearnumext);
 typedef struct counter_t* Counter;
 typedef Yearnumext (*YearZero)(void);
@@ -197,7 +197,7 @@ int  stringComp(char* first, char* second);
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDestroy dtour,YearZero zero,
-                    Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
+                    Yearlowestposs lowest,YearAdv advance,MaxYear max,YearCmp compeare,
                     Yearinit init, Yearbackadvance backadv, Diffcalc diffcalc);
 
 /**
