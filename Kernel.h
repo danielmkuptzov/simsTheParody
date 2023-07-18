@@ -196,9 +196,9 @@ int  stringComp(char* first, char* second);
  */
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
-                    ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDestroy dtour,YearZero zero,
-                    Yearlowestposs lowest,YearAdv advance,MaxYear max,YearCmp compeare,
-                    Yearinit init, Yearbackadvance backadv, Diffcalc diffcalc);
+                    ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDestroy dtour,YearZeroext zero,
+                    Yearlowestpossext lowest,YearAdv advance,MaxYear max,YearCmp compeare,
+                    Yearinitext init, Yearbackadvanceext backadv, Diffcalc diffcalc);
 
 /**
  *   kernelEpsilonSetter     -to set the epsilon we would work on
