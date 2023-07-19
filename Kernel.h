@@ -196,7 +196,7 @@ int  stringComp(char* first, char* second);
  */
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
-                    ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDestroy dtour,YearZeroext zero,
+                    ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDest dtour,YearZeroext zero,
                     Yearlowestpossext lowest,YearAdv advance,MaxYear max,YearCmp compeare,
                     Yearinitext init, Yearbackadvanceext backadv, Diffcalc diffcalc);
 
