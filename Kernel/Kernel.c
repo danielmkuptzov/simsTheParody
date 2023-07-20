@@ -124,9 +124,9 @@ struct Kernel_t{
 
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
-                    ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDest dtour,YearZero zero,
-                    Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
-                    Yearinit init, Yearbackadvance backadv, Diffcalc diffcalc)
+                    ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDest dtour,YearZeroext zero,
+                    Yearlowestpossext lowest,YearAdv advance,MaxYear max,YearCmp compeare,
+                    Yearinitext init, Yearbackadvanceext backadv, Diffcalc diffcalc)
 {
     coreBeginner(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay,ctour,dtour,zero,lowest,
                  advance,max,compeare,init,backadv,diffcalc);
