@@ -335,7 +335,7 @@ int main(void)
     CopyFunc copyArr[]={intCopy, intCopy, intCopy};
     DestFunc dtours[]={intDest, intDest, intDest};
     CompFunc compFunc[]={intCompare, intCompare};
-    //not used? dont know strange
+    //not used? dont know strange why this?
     Kernel product= kernelCreate(PRODUCT,true,elements,8,copyArr,
                                  2,dtours,2,compFunc,2);
     int id=1;
