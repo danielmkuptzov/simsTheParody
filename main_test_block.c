@@ -336,8 +336,7 @@ int main(void)
     DestFunc dtours[]={intDest, intDest, intDest};
     CompFunc compFunc[]={intCompare, intCompare};
     //not used? dont know strange why this?
-    Kernel product= kernelCreate(PRODUCT,true,elements,8,copyArr,
-                                 2,dtours,2,compFunc,2);
+    //Kernel product= kernelCreate(PRODUCT,true,elements,8,copyArr,2,dtours,2,compFunc,2);
     int id=1;
     Kernel creDate= kernelCreate(DATE,true,NULL,0,NULL,0,
                                  NULL,0,NULL,0);
