@@ -55,7 +55,7 @@
 /**
  * functions for years
  */
-//change to outer year
+//still a problem?
 typedef void* Yearnumext;
 //change names
 typedef Yearnumext(*YearCp)(Yearnumext);
