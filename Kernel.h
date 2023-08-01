@@ -65,6 +65,7 @@ typedef Yearnumext(*MaxYear)(void);
 typedef int (*YearCmp)(Yearnumext,Yearnumext);
 //fix overriding and find doubles
 typedef void(*Yearinitext)(Yearnumext);
+//is there a redef?
 typedef struct counter_t* Counter;
 typedef Yearnumext (*YearZeroext)(void);
 typedef void (*Yearbackadvanceext)(Yearnumext);
