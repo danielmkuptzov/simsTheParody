@@ -70,7 +70,7 @@ typedef void(*Yearinitext)(Yearnumext);
 typedef Yearnumext (*YearZeroext)(void);
 typedef void (*Yearbackadvanceext)(Yearnumext);
 typedef Yearnumext(*Yearlowestpossext)(void);
-typedef int (*Diffcalc)(Yearnumext,Yearnumext);
+typedef int (*Diffcalcex)(Yearnumext,Yearnumext);
 
 
 //the enums to the creator
