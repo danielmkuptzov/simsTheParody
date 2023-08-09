@@ -71,7 +71,7 @@ typedef Yearnumext (*YearZeroext)(void);
 typedef void (*Yearbackadvanceext)(Yearnumext);
 typedef Yearnumext(*Yearlowestpossext)(void);
 typedef int (*Diffcalcex)(Yearnumext,Yearnumext);
-
+//is there no doubles?
 
 //the enums to the creator
 typedef enum {
