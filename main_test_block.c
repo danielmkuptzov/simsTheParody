@@ -332,7 +332,7 @@ int main(void)
     int* idpt=&j;
     void* elements[]={idpt, kernelGetElement(tmp),"yossi","any amount",idpt,
                       idpt,idpt, "MEDICINE"};
-    CopyFunc copyArr[]={intCopy, intCopy, intCopy};
+    //CopyFunc copyArr[]={intCopy, intCopy, intCopy};
     DestFunc dtours[]={intDest, intDest, intDest};
     //why i dont use this? strange info needed ?
     //CompFunc compFunc[]={intCompare, intCompare};
