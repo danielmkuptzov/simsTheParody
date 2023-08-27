@@ -728,6 +728,7 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
         KERNEL_FOREACH(Kernel,iter,object)
         {
             //conversion problem? yep strange dont know
+
             if(kernelGetType(iter)==FURNITURE)
             {
                 resalt=apartmentAddFurniture(apartment,iter);
