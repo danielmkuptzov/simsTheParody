@@ -327,7 +327,7 @@ int main(void)
         apartmentDestroy(tounite);
         apartmentDestroy(test);
     }
-    //why?
+    //why? strange
     Kernel tmp= kernelCopy(t);
     j=5;
     //int* idpt=&j;
