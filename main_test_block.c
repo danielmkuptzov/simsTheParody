@@ -327,8 +327,7 @@ int main(void)
         apartmentDestroy(tounite);
         apartmentDestroy(test);
     }
-    //why? strange
-    Kernel tmp= kernelCopy(t);
+    //Kernel tmp= kernelCopy(t);
     j=5;
     //int* idpt=&j;
     //void* elements[]={idpt, kernelGetElement(tmp),"yossi","any amount",idpt,idpt,idpt, "MEDICINE"};
