@@ -727,7 +727,7 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
         ApartmentErrorCodes resalt=APARTMENT_SUCSESS;
         KERNEL_FOREACH(Kernel,iter,object)
         {
-            //conversion problem? intresting why?
+            //conversion problem? intresting why? realy
 
             if(kernelGetType(iter)==FURNITURE)
             {
