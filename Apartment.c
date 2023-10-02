@@ -729,7 +729,7 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
         {
             //conversion problem? try to find anew type? strange? why prob??? why??
 
-            if(kernelGetType(iter)==FURNITURE)//strange, yep why? realy?
+            if(kernelGetType(iter)==FURNITURE)//strange, yep why? realy??
             {
                 resalt=apartmentAddFurniture(apartment,iter);
             }
