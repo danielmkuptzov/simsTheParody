@@ -727,7 +727,7 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
         ApartmentErrorCodes resalt=APARTMENT_SUCSESS;
         KERNEL_FOREACH(Kernel,iter,object)
         {
-            //strange. test. not know how
+            //strange. test. not know how. sure??
             if(kernelGetType(iter)==FURNITURE)//strange, yep why? realy???
             {
                 resalt=apartmentAddFurniture(apartment,iter);
