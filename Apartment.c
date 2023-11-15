@@ -727,7 +727,7 @@ ApartmentErrorCodes apartmentDayCycle(Apartment apartment, ApartmentCycleErrorCo
         ApartmentErrorCodes resalt=APARTMENT_SUCSESS;
         KERNEL_FOREACH(Kernel,iter,object)
         {
-            if(kernelGetType(iter)==PRODUCT)//???????
+            if(kernelGetType(iter)==PRODUCT)//??????? work on cmake
             {
                 resalt=apartmentAddFurniture(apartment,iter);
             }
