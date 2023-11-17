@@ -10,18 +10,18 @@
 /**
  * functions for years
  */
-typedef void* Yearnum;
-typedef Yearnum(*YearCopy)(Yearnum);
-typedef void (*YearDestroy)(Yearnum);
-typedef void(*YearAdvance)(Yearnum);
-typedef Yearnum(*MaximalYear)(void);
-typedef int (*YearComp)(Yearnum,Yearnum);
-typedef void(*Yearinit)(Yearnum);
+typedef void* Yearnumex;
+typedef Yearnumex(*YearCopyex)(Yearnumex);
+typedef void (*YearDestroyex)(Yearnumex);
+typedef void(*YearAdvanceex)(Yearnumex);
+typedef Yearnumex(*MaximalYearex)(void);
+typedef int (*YearCompex)(Yearnumex,Yearnumex);
+typedef void(*Yearinitex)(Yearnumex);
 typedef struct counter_t* Counter;
-typedef Yearnum (*YearZero)(void);
-typedef void (*Yearbackadvance)(Yearnum);
-typedef Yearnum (*Yearlowestposs)(void);
-typedef int (*Diffcalc)(Yearnum,Yearnum);
+typedef Yearnumex (*YearZeroex)(void);
+typedef void (*Yearbackadvanceex)(Yearnumex);
+typedef Yearnumex (*Yearlowestpossex)(void);
+typedef int (*Diffcalcex)(Yearnumex,Yearnumex);
 
 /**
  * Outer core switch unit
@@ -144,9 +144,9 @@ typedef struct CoreUnit_t* CoreUnit;
  */
 void coreBeginner(CopyRefDateEx copyFunc, FreeRefDateEx freeFunc,
                   RefDateExAdvance advanceFunc,DifferenceCalculatorEx diffFunc,
-                  ReferanceDateEx date, DayOneEx firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
-                  Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
-                  Yearinit init, Yearbackadvance backadv,Diffcalc diffcalc);
+                  ReferanceDateEx date, DayOneEx firstDay,YearCopyex ctour,YearDestroyex dtour,YearZeroex zero,
+                  Yearlowestpossex lowest,YearAdvanceex advance,MaximalYearex max,YearCompex compeare,
+                  Yearinitex init, Yearbackadvanceex backadv,Diffcalcex diffcalc);
 
 /**
  *   coreCreate         -Creates the unit.

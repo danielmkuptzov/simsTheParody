@@ -9,11 +9,11 @@ struct CoreUnit_t{
     void* element;
 };
 
-void coreBeginner(CopyRefDate copyFunc, FreeRefDate freeFunc,
-                  RefDateAdvance advanceFunc,DifferenceCalculator diffFunc,
-                  ReferanceDate date, DayOne firstDay,YearCopy ctour,YearDestroy dtour,YearZero zero,
-                  Yearlowestposs lowest,YearAdvance advance,MaximalYear max,YearComp compeare,
-                  Yearinit init, Yearbackadvance backadv,Diffcalc diffcalc)
+void coreBeginner(CopyRefDateEx copyFunc, FreeRefDateEx freeFunc,
+                  RefDateExAdvance advanceFunc,DifferenceCalculatorEx diffFunc,
+                  ReferanceDateEx date, DayOneEx firstDay,YearCopyex ctour,YearDestroyex dtour,YearZeroex zero,
+                  Yearlowestpossex lowest,YearAdvanceex advance,MaximalYearex max,YearCompex compeare,
+                  Yearinitex init, Yearbackadvanceex backadv,Diffcalcex diffcalc)
 {
     dateInitialiser(copyFunc,freeFunc,advanceFunc,diffFunc,date,firstDay,ctour,dtour,zero,
                     lowest,advance,max,compeare,init,backadv,diffcalc);
