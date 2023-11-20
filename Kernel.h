@@ -56,9 +56,9 @@
  * functions for years
  */
 //still a problem?
-typedef void* Yearnumext;
+typedef void* Yearnumexter;
 //change names
-typedef Yearnumext(*YearCp)(Yearnumext);
+typedef Yearnumexter(*YearCp)(Yearnumexter);
 typedef void (*YearDest)(Yearnumext);
 typedef void(*YearAdv)(Yearnumext);
 typedef Yearnumext(*MaxYear)(void);
