@@ -61,8 +61,8 @@ typedef void* Yearnumexter;
 typedef Yearnumexter(*YearCp)(Yearnumexter);//why?
 typedef void (*YearDest)(Yearnumext);
 typedef void(*YearAdv)(Yearnumext);
-typedef Yearnumext(*MaxYear)(void);
-typedef int (*YearCmp)(Yearnumext,Yearnumext);
+typedef Yearnumexter(*MaxYear)(void);
+typedef int (*YearCmp)(Yearnumexter,Yearnumexter);
 //fix overriding and find doubles
 typedef void(*Yearinitext)(Yearnumext);
 //is there a redef? and where I use it? stil strange surly kidding
