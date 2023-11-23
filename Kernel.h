@@ -59,18 +59,18 @@
 typedef void* Yearnumexter;
 //change names
 typedef Yearnumexter(*YearCp)(Yearnumexter);//why?
-typedef void (*YearDest)(Yearnumext);
-typedef void(*YearAdv)(Yearnumext);
+typedef void (*YearDest)(Yearnumexter);
+typedef void(*YearAdv)(Yearnumexter);
 typedef Yearnumexter(*MaxYear)(void);
 typedef int (*YearCmp)(Yearnumexter,Yearnumexter);
 //fix overriding and find doubles
-typedef void(*Yearinitext)(Yearnumext);
+typedef void(*Yearinitexter)(Yearnumexter);
 //is there a redef? and where I use it? stil strange surly kidding
 //typedef struct counter_t* Counterex;
-typedef Yearnumext (*YearZeroext)(void);
-typedef void (*Yearbackadvanceext)(Yearnumext);
-typedef Yearnumext(*Yearlowestpossext)(void);
-typedef int (*Diffcalcex)(Yearnumext,Yearnumext);
+typedef Yearnumexter (*YearZeroexter)(void);
+typedef void (*Yearbackadvanceexter)(Yearnumexter);
+typedef Yearnumexter(*Yearlowestpossexter)(void);
+typedef int (*Diffcalcexer)(Yearnumexter,Yearnumexter);
 //is there no doubles? i think not
 
 //the enums to the creator
