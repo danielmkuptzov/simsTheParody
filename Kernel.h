@@ -194,7 +194,7 @@ int  stringComp(char* first, char* second);
  * @param date
  * @param firstDay
  */
- //that is ok or not? realy? realy? why help
+ //play with the defining
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDest dtour,YearZeroexter zero,
