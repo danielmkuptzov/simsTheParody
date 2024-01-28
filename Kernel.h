@@ -194,7 +194,7 @@ int  stringComp(char* first, char* second);
  * @param date
  * @param firstDay
  */
- //simple name change????? realy???? ??????? why
+ //simple name change????? realy???? ??????? why???????
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDest dtour,YearZeroexter zero,
