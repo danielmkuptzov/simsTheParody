@@ -194,7 +194,7 @@ int  stringComp(char* first, char* second);
  * @param date
  * @param firstDay
  */
- //dont forget to write hehe muhahah rework this realy
+ //dont forget to write hehe muhahah rework this realy and forgot what i need here
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDest dtour,YearZeroexter zero,
