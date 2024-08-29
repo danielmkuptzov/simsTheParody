@@ -194,7 +194,7 @@ int  stringComp(char* first, char* second);
  * @param date
  * @param firstDay
  */
- //dont forget to write constants, yep intresting why intresting and good luck to me
+ //dont forget to write constants, yep intresting why intresting and good luck to me i have test tomorow
 void kernelBeginner(CopyExternal copyFunc, DestExternal freeFunc,
                     AdvanceExternal advanceFunc,DifferenceForCync diffFunc,
                     ExternalDate date, CyncFunc firstDay,YearCp ctour,YearDest dtour,YearZeroexter zero,
